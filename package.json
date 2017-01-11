@@ -1,0 +1,23 @@
+{
+    "name": "Top_Training",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "stop": "taskkill /im node.exe /F"
+},
+    "dependencies": {
+        "body-parser": "~1.15.2",
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.2.0",
+        "ejs": "~2.5.2",
+        "express": "~4.14.0",
+        "express-jwt": "^5.1.0",
+        "jsonwebtoken": "^7.2.1",
+        "mongoose": "^4.7.6",
+        "morgan": "~1.7.0",
+        "passport": "^0.3.2",
+        "passport-local": "^1.0.0",
+        "serve-favicon": "~2.3.0"
+    }
+}
