@@ -8,7 +8,8 @@ var jwt = require('jsonwebtoken'); // Used for generating tokens
 var UserSchema = new mongoose.Schema({
     username: { type: String, unique: true, lowercase: true },
     hash: String,
-    salt: String
+    salt: String,
+    usertype: { type: String, lowercase: true }
 });
 
 // Set a hashed password using a crypto salt
@@ -33,6 +34,7 @@ UserSchema.methods.generateJWT = function() {
     return jwt.sign({
         _id: this._id,
         username: this.username,
+        usertype: this.usertype,
         exp: parseInt(exp.getTime() / 1000)
     }, 'SECRET');
     // CHANGE 'SECRET' TO REFERENCE AN ENVIRONMENT VARIABLE OUTSIDE OF CODEBASE

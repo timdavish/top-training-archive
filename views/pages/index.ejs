@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <!-- Include head -->
+        <%- include('../partials/head') %>
+    </head>
+    <body ng-app="main">
+        <!-- Include navigation bar -->
+        <%- include('../partials/nav') %>
+
+        <!-- Main view -->
+        <ui-view></ui-view>
+
+        <!-- Home template -->
+        <script type="text/ng-template" id="/home.html">
+            <!-- Header -->
+            <div class="intro-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="intro-message">
+                                <h1>Top Training</h1>
+                                <h3>Reach the top of your game with top training resources for athletes.</h3>
+                                <hr class="intro-divider">
+
+                                <ul class="list-inline intro-social-buttons">
+                                    <li>
+                                        <a class="btn btn-default btn-lg"><span class="header-button-text">I Need A Trainer</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-default btn-lg"><span class="header-button-text">I Am A Trainer</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /.intro-header -->
+
+            <!-- Posts -->
+            <div ng-repeat="post in posts | orderBy: '-upvotes'">
+                <span class="glyphicon glyphicon-thumbs-up"
+                    ng-click="incrementUpvotes(post)"></span>
+                {{ post.upvotes }}
+                <span style="font-size: 20px; margin-left: 10px;">
+                    <a ng-show="post.link" href="{{ post.link }}">
+                        {{ post.title }}
+                    </a>
+                    <span ng-hide="post.link">
+                        {{ post.title }}
+                    </span>
+                    <span ng-show="post.author">
+                        posted by <a>{{ post.author }}</a> |
+                    </span>
+                </span>
+                <span>
+                    <a href="#/posts/{{ post._id }}">Comments</a>
+                </span>
+            </div>
+
+            <!-- Add new post form (logged in) -->
+            <form ng-submit="addPost()" ng-show="isLoggedIn()"
+                style="margin-top: 30px;">
+                <h3>Add a new post</h3>
+
+                <div class="form-group">
+                    <input type="text"
+                        class="form-control"
+                        placeholder="Title"
+                        ng-model="title" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text"
+                        class="form-control"
+                        placeholder="Link"
+                        ng-model="link" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+
+            <!-- Add new post (not logged in) -->
+            <div ng-hide="isLoggedIn()">
+                <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
+            </div>
+        </script>
+
+        <!-- Registration template -->
+        <script type="text/ng-template" id="/register.html">
+            <!-- Header -->
+            <div class="page-header">
+                <h2>Register</h1>
+            </div>
+
+            <!-- Error pop-up -->
+            <div ng-show="error" class="alert alert-danger row">
+                <span>{{ error.message }}</span>
+            </div>
+
+            <!-- Registration form -->
+            <form ng-submit="register()"
+                style="margin-top: 30px;">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username"
+                        ng-model="user.username" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password"
+                        ng-model="user.password" />
+                </div>
+                <div class="form-group">
+                    <input type="radio" name="usertype" value="student" ng-model="user.usertype" checked /> I need a trainer </br>
+                    <input type="radio" name="usertype" value="trainer" ng-model="user.usertype" /> I am a trainer
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </script>
+
+        <!-- Login template -->
+        <script type="text/ng-template" id="/login.html">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>Header</h1>
+            </div>
+
+            <!-- Error pop-up -->
+            <div ng-show="error" class="alert alert-danger row">
+                <span>{{ error.message }}</span>
+            </div>
+
+            <!-- Registration form -->
+            <form ng-submit="logIn()" style="margin-top: 30px;">
+                <h3>Log In</h3>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username"
+                        ng-model="user.username" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password"
+                        ng-model="user.password" />
+                </div>
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </form>
+        </script>
+
+        <!-- Posts template -->
+        <script type="text/ng-template" id="/posts.html">
+            <!-- Header -->
+            <div class="page-header">
+                <h3>
+                    <a ng-show="post.link" href="{{ post.link }}">
+                        {{ post.title }}
+                    </a>
+                    <span ng-hide="post.link">
+                        {{ post.title }}
+                    </span>
+                </h3>
+            </div>
+
+            <div ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+                <span class="glyphicon glyphicon-thumbs-up"
+                    ng-click="incrementUpvotes(comment)"></span>
+                {{ comment.upvotes }} - by {{ comment.author }}
+                <span style="font-size: 20px; margin-left: 10px;">
+                    {{ comment.body }}
+                </span>
+            </div>
+
+            <!-- Add new comment (logged in) -->
+            <form ng-submit="addComment()" ng-show="isLoggedIn()"
+                style="margin-top: 30px;">
+                <h3>Add a new comment</h3>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Comment" ng-model="body" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+
+            <!-- Add new comment (not logged in) -->
+            <div ng-hide="isLoggedIn()">
+                <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a comment.</h3>
+            </div>
+        </script>
+
+        <!-- Include footer -->
+        <%- include('../partials/footer') %>
+    </body>
+</html>

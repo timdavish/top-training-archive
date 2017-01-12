@@ -19,7 +19,7 @@ var router = express.Router();
 
 // (GET) Render our home page
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('pages/index');
 });
 
 // (PARAM) Route for preloading post objects
@@ -117,7 +117,7 @@ router.put('/posts/:post/comments/:comment/upvote', auth, function(req, res, nex
 // (POST) User registration
 router.post('/register', function(req, res, next) {
     // Ensure all fields are filled out
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.username || !req.body.password || !req.body.usertype) {
         return res.status(400).json({ message: 'Please fill out all fields.' });
     }
 
@@ -125,6 +125,7 @@ router.post('/register', function(req, res, next) {
     var user = new User();
     user.username = req.body.username;
     user.setPassword(req.body.password);
+    user.usertype = req.body.usertype;
 
     // Save the user in the database
     user.save(function(err) {

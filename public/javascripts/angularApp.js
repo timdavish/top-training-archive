@@ -55,40 +55,7 @@ app.config([
 // Authentication factory
 app.factory('auth', ['$http', '$window', function($http, $window) {
     var authFactory = {};
-    var tokenName = 'flapper-news-token';
-
-    // Save the token into local storage
-    authFactory.saveToken = function(token) {
-        $window.localStorage[tokenName] = token;
-    };
-
-    // Retrieve the token from local storage
-    authFactory.getToken = function() {
-        return $window.localStorage[tokenName];
-    };
-
-    // Check if the user is logged in
-    authFactory.isLoggedIn = function() {
-        var token = authFactory.getToken();
-
-        if (token) {
-            var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-            return payload.exp > Date.now() / 1000;
-        } else {
-            return false;
-        }
-    };
-
-    // Return the username of the user that's logged in
-    authFactory.currentUser = function() {
-        if (authFactory.isLoggedIn()) {
-            var token = authFactory.getToken();
-            var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-            return payload.username;
-        }
-    };
+    var tokenName = 'top-training-token';
 
     // Register a new user
     authFactory.register = function(user) {
@@ -107,6 +74,56 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
     // Log out a user
     authFactory.logOut = function() {
         $window.localStorage.removeItem(tokenName);
+    };
+
+    // Check if the user is logged in
+    authFactory.isLoggedIn = function() {
+        var token = authFactory.getToken();
+
+        if (token) {
+            var payload = authFactory.getPayload(token);
+
+            return payload.exp > Date.now() / 1000;
+        } else {
+            return false;
+        }
+    };
+
+    // Retrieve the username of the user that's logged in
+    authFactory.getUserName = function() {
+        if (authFactory.isLoggedIn()) {
+            var token = authFactory.getToken();
+            var payload = authFactory.getPayload(token);
+
+            return payload.username;
+        }
+    };
+
+    // Retrieve the usertype of the user that's logged in
+    authFactory.getUserType = function() {
+        if (authFactory.isLoggedIn()) {
+            var token = authFactory.getToken();
+            var payload = authFactory.getPayload(token);
+
+            return payload.usertype;
+        } else {
+
+        }
+    };
+
+    // Save the token into local storage
+    authFactory.saveToken = function(token) {
+        $window.localStorage[tokenName] = token;
+    };
+
+    // Retrieve the token from local storage
+    authFactory.getToken = function() {
+        return $window.localStorage[tokenName];
+    };
+
+    // Retrieve the payload from the token
+    authFactory.getPayload = function(token) {
+        return JSON.parse($window.atob(token.split('.')[1]));
     };
 
     return authFactory;
@@ -196,6 +213,18 @@ app.controller('AuthCtrl', [
     }
 ]);
 
+// Navigation controller
+app.controller('NavCtrl', [
+    '$scope',
+    'auth',
+    function($scope, auth) {
+        $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.userName = auth.getUserName;
+        $scope.userType = auth.getUserType;
+        $scope.logOut = auth.logOut;
+    }
+]);
+
 // Main controller
 app.controller('MainCtrl', [
     '$scope',
@@ -223,16 +252,7 @@ app.controller('MainCtrl', [
     }
 ]);
 
-// Navigation controller
-app.controller('NavCtrl', [
-    '$scope',
-    'auth',
-    function($scope, auth) {
-        $scope.isLoggedIn = auth.isLoggedIn;
-        $scope.currentUser = auth.currentUser;
-        $scope.logOut = auth.logOut;
-    }
-]);
+
 
 // Posts controller
 app.controller('PostsCtrl', [
