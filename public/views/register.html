@@ -1,0 +1,31 @@
+
+<!-- Registration template -->
+
+<!-- Header -->
+<div class="page-header">
+    <h2>Register</h1>
+</div>
+
+<!-- Error pop-up -->
+<div ng-show="error" class="alert alert-danger row">
+    <span>{{ error.message }}</span>
+</div>
+
+<!-- Registration form -->
+<form ng-submit="register()"
+    style="margin-top: 30px;">
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username"
+            ng-model="user.username" />
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password"
+            ng-model="user.password" />
+    </div>
+    <div class="form-group">
+        <input type="radio" name="usertype" value="student" ng-model="user.usertype" checked="checked" /> I need a trainer </br>
+        <input type="radio" name="usertype" value="trainer" ng-model="user.usertype" /> I am a trainer
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>

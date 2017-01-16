@@ -9,9 +9,10 @@ var bodyParser = require('body-parser');
 
 // Database setup and connection
 var mongoose = require('mongoose');
-require('./models/Users'); // Users model
-require('./models/Posts'); // Posts model
-require('./models/Comments'); // Comments model
+require('./server/models/Users'); // Users model
+require('./server/models/Events'); // Events model
+require('./server/models/Posts'); // Posts model
+require('./server/models/Comments'); // Comments model
 mongoose.Promise = global.Promise; // Adjust mongoose promise
 mongoose.connect('mongodb://localhost/TT');
 
@@ -23,7 +24,7 @@ require('./config/passport'); // Passport configuration
 var app = express();
 
 // View engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'server/views'));
 app.set('view engine', 'ejs');
 
 // Other app setup
@@ -35,9 +36,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // Set our public folder
 app.use(passport.initialize()); // Use passport in our app
 
-// API route
-var index = require('./routes/index');
-app.use('/', index);
+// API routes
+app.use('/', require('./server/routes/index'));
+app.use('/users', require('./server/routes/users'));
+app.use('/events', require('./server/routes/events'));
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

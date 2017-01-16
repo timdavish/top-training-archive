@@ -1,11 +1,9 @@
 
 // Module dependencies
 var express = require('express');
-var passport = require('passport'); // Password authentication
 
 // Database interaction
 var mongoose = require('mongoose');
-var User = mongoose.model('User'); // Users model
 var Post = mongoose.model('Post'); // Posts model
 var Comment = mongoose.model('Comment'); // Comments model
 
@@ -114,43 +112,5 @@ router.put('/posts/:post/comments/:comment/upvote', auth, function(req, res, nex
     });
 });
 
-// (POST) User registration
-router.post('/register', function(req, res, next) {
-    // Ensure all fields are filled out
-    if (!req.body.username || !req.body.password || !req.body.usertype) {
-        return res.status(400).json({ message: 'Please fill out all fields.' });
-    }
-
-    // Create a new user and set their username and password
-    var user = new User();
-    user.username = req.body.username;
-    user.setPassword(req.body.password);
-    user.usertype = req.body.usertype;
-
-    // Save the user in the database
-    user.save(function(err) {
-        if (err) { return next(err); }
-
-        return res.json({ token: user.generateJWT() });
-    });
-});
-
-// (POST) User login
-router.post('/login', function(req, res, next) {
-    // Ensure all fields are filled out
-    if (!req.body.username || !req.body.password) {
-        return res.status(400).json({ message: 'Please fill out all fields.' });
-    }
-
-    // Authenticate user login
-    passport.authenticate('local', function(err, user, info) {
-        if (err) { return next(err); }
-        if (!user) {
-            return res.status(401).json(info);
-        } else {
-            return res.json({ token: user.generateJWT() });
-        }
-    })(req, res, next);
-});
-
+// Export the router
 module.exports = router;

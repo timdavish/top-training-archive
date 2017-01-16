@@ -1,0 +1,92 @@
+
+<!-- Events template -->
+
+<!-- Your Events -->
+<div class="content-section-b">
+    <div class="container">
+        <div class="row">
+
+            <h2>Your Events</h2>
+<!--
+            <div ng-repeat="event in events">
+                <span style="font-size: 20px; margin-left: 10px;">
+                    <span>
+                        {{ event.title }}
+                    </span>
+                </span>
+                <span>
+                    <a href="#/events/{{ event._id }}">View this event</a>
+                </span>
+            </div> -->
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-b -->
+
+<!-- All Events -->
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+
+            <h2>All Events</h2>
+
+            <div ng-repeat="event in events">
+                <span style="font-size: 20px; margin-left: 10px;">
+                    <span>
+                        {{ event.title }}
+                    </span>
+                </span>
+                <span>
+                    <a href="#/events/{{ event._id }}">View this event</a>
+                </span>
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-b -->
+
+<div class="content-section-b">
+    <div class="container">
+        <div class="row">
+
+            <h2>Add a new event</h2>
+
+            <!-- Add new post form (logged in) -->
+            <form ng-submit="addEvent()" ng-show="isLoggedIn()">
+
+                <div class="form-group">
+                    <input type="text"
+                        class="form-control"
+                        placeholder="Title"
+                        ng-model="title" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text"
+                        class="form-control"
+                        placeholder="Body"
+                        ng-model="body" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text"
+                        class="form-control"
+                        placeholder="Slots"
+                        ng-model="slots" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-a -->

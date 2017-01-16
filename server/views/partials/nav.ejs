@@ -16,8 +16,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="isLoggedIn()"><a>You are a {{ userType() }}</a></li>
                 <li ng-show="isLoggedIn()"><a>{{ userName() }}</a></li>
+                <li ng-show="isLoggedIn() && userType() == 'trainer'"><a href="/#/events">Events</a></li>
                 <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
                 <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
                 <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
