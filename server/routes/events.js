@@ -68,7 +68,26 @@ router.get('/getEvents', function(req, res, next) {
 
 // (GET) Get a single event by id
 router.get('/getEvent/:event', function(req, res) {
-    res.json(req.event);
+    req.event.populate('students', function(err, event) {
+        if (err) { return next(err); }
+
+        res.json(event);
+    });
+});
+
+// (PUT) Sign up a student for an event
+router.put('/signUpEvent/:event/:user', auth, function(req, res, next) {
+    req.event.students.push(req.user);
+    req.event.save(function(err, event) {
+        if (err) { return next(err); }
+
+        req.user.events.push(event);
+        req.user.save(function(err, user) {
+            if (err) { return next(err); }
+
+            res.json(user);
+        });
+    });
 });
 
 // Export the router

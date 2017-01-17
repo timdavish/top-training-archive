@@ -16,7 +16,8 @@
             events: [],
             addEvent: addEvent,
             getEvents: getEvents,
-            getEvent: getEvent
+            getEvent: getEvent,
+            signUpEvent: signUpEvent
         };
 
         return service;
@@ -40,9 +41,16 @@
         }
 
         // Get a single event by id
-        function getEvent(id) {
-            return $http.get('/events/getEvent/' + id).then(function(res) {
+        function getEvent(eventId) {
+            return $http.get('/events/getEvent/' + eventId).then(function(res) {
                 return res.data;
+            });
+        }
+
+        // Sign a student up for an event
+        function signUpEvent(userId, eventId) {
+            return $http.put('/events/signUpEvent/' + eventId + '/' + userId, null, {
+                headers: { Authorization: 'Bearer ' + auth.getToken() }
             });
         }
     }

@@ -6,11 +6,27 @@
     <div class="container">
         <div class="row">
 
+            <!-- Error pop-up -->
+            <div ng-show="error" class="alert alert-danger row">
+                <span>{{ error.message }}</span>
+            </div>
+
             <h2>{{ event.title }}</h2>
 
             <span>Trainer: {{ event.trainer }}</span><br />
             <span>Body: {{ event.body }}</span><br />
             <span>Slots: {{ event.slots }}</span><br />
+            <span>Slots taken: {{ event.slotsTaken }}</span><br />
+
+            <span>Signed up students:</span> <br />
+
+            <div ng-repeat="student in event.students">
+                <span>{{ student.username }}</span>
+            </div>
+
+            <form ng-submit="signUp()" ng-show="userType == 'student'">
+                <button type="submit">Sign up for this event!</button>
+            </form>
 
         </div>
         <!-- /.row -->

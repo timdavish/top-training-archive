@@ -24,7 +24,7 @@
     </div>
     <!-- /.container -->
 </div>
-<!-- /.content-section-b -->
+<!-- /Your Events.content-section-b -->
 
 <!-- All Events -->
 <div class="content-section-a">
@@ -49,9 +49,10 @@
     </div>
     <!-- /.container -->
 </div>
-<!-- /.content-section-b -->
+<!-- /All Events.content-section-a -->
 
-<div class="content-section-b">
+<!-- Add a new Event -->
+<div class="content-section-b" ng-show="userType == 'trainer'">
     <div class="container">
         <div class="row">
 
@@ -81,7 +82,7 @@
                         ng-model="slots" />
                 </div>
 
-                <button type="submit" class="btn btn-primary">Post</button>
+                <button type="submit" class="btn btn-primary">Add event</button>
             </form>
 
         </div>
@@ -89,4 +90,4 @@
     </div>
     <!-- /.container -->
 </div>
-<!-- /.content-section-a -->
+<!-- Add a new Event/.content-section-b -->

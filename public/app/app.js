@@ -8,7 +8,7 @@ angular.module('main', ['ui.router'])
         $stateProvider
             .state('login', {
                 url: '/login',
-                templateUrl: '/views/login.html',
+                templateUrl: '/app/common/login.html',
                 controller: 'AuthCtrl',
                 //controllerAs: 'vm',
                 onEnter: ['$state', 'auth', function($state, auth) {
@@ -19,7 +19,7 @@ angular.module('main', ['ui.router'])
             })
             .state('register', {
                 url: '/register',
-                templateUrl: '/views/register.html',
+                templateUrl: '/app/common/register.html',
                 controller: 'AuthCtrl',
                 onEnter: ['$state', 'auth', function($state, auth) {
                     if (auth.isLoggedIn()) {
@@ -29,7 +29,7 @@ angular.module('main', ['ui.router'])
             })
             .state('home', {
                 url: '/home',
-                templateUrl: '/views/home.html',
+                templateUrl: '/app/common/home.html',
                 controller: 'MainCtrl',
                 resolve: {
                     postPromise: ['posts', function(posts) {
@@ -39,7 +39,7 @@ angular.module('main', ['ui.router'])
             })
             .state('posts', {
                 url: '/posts/{id}',
-                templateUrl: '/views/posts.html',
+                templateUrl: '/app/common/posts.html',
                 controller: 'PostsCtrl',
                 resolve: {
                     post: ['$stateParams', 'posts', function($stateParams, posts) {
@@ -51,6 +51,11 @@ angular.module('main', ['ui.router'])
                 url: '/events',
                 templateUrl: '/app/event/events.html',
                 controller: 'EventsCtrl',
+                onEnter: ['$state', 'auth', function($state, auth) {
+                    if (!auth.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }],
                 resolve: {
                     eventPromise: ['events', function(events) {
                         return events.getEvents();
@@ -60,7 +65,12 @@ angular.module('main', ['ui.router'])
             .state('event', {
                 url: '/events/{id}',
                 templateUrl: '/app/event/eventdetail.html',
-                controller: 'EventCtrl',
+                controller: 'EventDetailCtrl',
+                onEnter: ['$state', 'auth', function($state, auth) {
+                    if (!auth.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }],
                 resolve: {
                     event: ['$stateParams', 'events', function($stateParams, events) {
                         return events.getEvent($stateParams.id);

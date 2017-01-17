@@ -14,6 +14,7 @@
     function EventsCtrl($scope, auth, events) {
         $scope.events = events.events;
         $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.userType = auth.getUserType();
 
         $scope.addEvent = function() {
             // Ensure form is properly filled out

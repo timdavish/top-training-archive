@@ -6,6 +6,7 @@ var EventSchema = new mongoose.Schema({
     body: String,
     date: Date,
     slots: { type: Number, default: 1 },
+    slotsTaken: { type: Number, default: 0 },
     trainer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
