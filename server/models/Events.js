@@ -8,7 +8,8 @@ var EventSchema = new mongoose.Schema({
     slots: { type: Number, default: 1 },
     slotsTaken: { type: Number, default: 0 },
     trainer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    archived: { type: Boolean, default: false }
 });
 
 // Set mongoose model

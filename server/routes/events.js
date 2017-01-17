@@ -77,7 +77,13 @@ router.get('/getEvent/:event', function(req, res) {
 
 // (PUT) Sign up a student for an event
 router.put('/signUpEvent/:event/:user', auth, function(req, res, next) {
+    // Ensure there is a slot left
+    if (req.event.slotsTaken >= req.event.slots) {
+        return res.status(400).json({ message: 'There are no slots available for this event.' });
+    }
+
     req.event.students.push(req.user);
+    req.event.slotsTaken++;
     req.event.save(function(err, event) {
         if (err) { return next(err); }
 
@@ -87,6 +93,16 @@ router.put('/signUpEvent/:event/:user', auth, function(req, res, next) {
 
             res.json(user);
         });
+    });
+});
+
+// (PUT) Archive or unarchive an event
+router.put('/archiveEvent/:event/', auth, function(req, res, next) {
+    req.event.archived = !req.event.archived;
+    req.event.save(function(err, event) {
+        if (err) { return next(err); }
+
+        res.json(event);
     });
 });
 

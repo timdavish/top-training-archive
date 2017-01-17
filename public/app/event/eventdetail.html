@@ -15,9 +15,8 @@
 
             <span>Trainer: {{ event.trainer }}</span><br />
             <span>Body: {{ event.body }}</span><br />
-            <span>Slots: {{ event.slots }}</span><br />
-            <span>Slots taken: {{ event.slotsTaken }}</span><br />
-
+            
+            <span>Slots left: {{ event.slots - event.slotsTaken }}</span><br />
             <span>Signed up students:</span> <br />
 
             <div ng-repeat="student in event.students">
