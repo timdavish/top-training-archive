@@ -32,18 +32,22 @@
 <script src="app/vendor/bootstrap/bootstrap.min.js"></script>
 
 <!-- My Javaapp -->
-<!-- First, modules -->
-<script src="app/app.js"></script>
+<!-- First, module -->
+<script src="app/app.module.js"></script>
 
-<!-- Second, services -->
+<!-- Second, config -->
+<script src="app/app.config.js"></script>
+
+<!-- Third, services -->
 <script src="app/services/authenticationFactory.js"></script>
-<script src="app/services/eventsFactory.js"></script>
+<script src="app/services/event.service.js"></script>
 <script src="app/services/postsFactory.js"></script>
 
-<!-- Third, controllers -->
-<script src="app/common/authenticationController.js"></script>
-<script src="app/event/eventdetail.js"></script>
-<script src="app/event/events.js"></script>
+<!-- Fourth, controllers -->
+<script src="app/user/login.controller.js"></script>
+<script src="app/user/register.controller.js"></script>
+<script src="app/event/eventdetail.controller.js"></script>
+<script src="app/event/events.controller.js"></script>
 <script src="app/common/mainController.js"></script>
 <script src="app/common/navigationController.js"></script>
 <script src="app/common/postsController.js"></script>

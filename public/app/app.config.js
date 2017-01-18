@@ -1,16 +1,28 @@
+/**
+ * Module config
+ * @namespace Configurations
+ */
+(function() { // IIFE structure
+    'use strict'; // Strict mode
 
-angular.module('main', ['ui.router'])
+    angular
+        .module('main')
+        .config(config);
 
-.config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+    /**
+     * @namespace config
+     * @desc Configuration for main module
+     * @memberof Configurations
+     */
+    function config($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
                 url: '/login',
-                templateUrl: '/app/common/login.html',
-                controller: 'AuthCtrl',
-                //controllerAs: 'vm',
+                templateUrl: '/app/user/login.html',
+                controller: 'LogInController',
+                controllerAs: 'vm',
                 onEnter: ['$state', 'auth', function($state, auth) {
                     if (auth.isLoggedIn()) {
                         $state.go('home');
@@ -19,8 +31,9 @@ angular.module('main', ['ui.router'])
             })
             .state('register', {
                 url: '/register',
-                templateUrl: '/app/common/register.html',
-                controller: 'AuthCtrl',
+                templateUrl: '/app/user/register.html',
+                controller: 'RegisterController',
+                controllerAs: 'vm',
                 onEnter: ['$state', 'auth', function($state, auth) {
                     if (auth.isLoggedIn()) {
                         $state.go('home');
@@ -50,34 +63,36 @@ angular.module('main', ['ui.router'])
             .state('events', {
                 url: '/events',
                 templateUrl: '/app/event/events.html',
-                controller: 'EventsCtrl',
+                controller: 'EventsController',
+                controllerAs: 'vm',
                 onEnter: ['$state', 'auth', function($state, auth) {
                     if (!auth.isLoggedIn()) {
                         $state.go('home');
                     }
                 }],
                 resolve: {
-                    eventPromise: ['events', function(events) {
-                        return events.getEvents();
+                    eventPromise: ['eventService', function(eventService) {
+                        return eventService.getEvents();
                     }]
                 }
             })
             .state('event', {
                 url: '/events/{id}',
                 templateUrl: '/app/event/eventdetail.html',
-                controller: 'EventDetailCtrl',
+                controller: 'EventDetailController',
+                controllerAs: 'vm',
                 onEnter: ['$state', 'auth', function($state, auth) {
                     if (!auth.isLoggedIn()) {
                         $state.go('home');
                     }
                 }],
                 resolve: {
-                    event: ['$stateParams', 'events', function($stateParams, events) {
-                        return events.getEvent($stateParams.id);
+                    event: ['$stateParams', 'eventService', function($stateParams, eventService) {
+                        return eventService.getEvent($stateParams.id);
                     }]
                 }
             });
 
         $urlRouterProvider.otherwise('home');
     }
-]);
+})();

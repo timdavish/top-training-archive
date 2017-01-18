@@ -9,9 +9,9 @@ var UserSchema = new mongoose.Schema({
     username: { type: String, unique: true, lowercase: true },
     hash: String,
     salt: String,
+    usertype: { type: String, lowercase: true },
     firstname: String,
     lastname: String,
-    usertype: { type: String, lowercase: true },
     events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
 });
 

@@ -1,5 +1,5 @@
 /**
- * Events Factory
+ * eventService Factory
  * @namespace Factories
  */
 (function() { // IIFE structure
@@ -7,11 +7,16 @@
 
     angular
         .module('main')
-        .factory('events', events);
+        .factory('eventService', eventService);
 
-    events.$inject = ['$http', 'auth'];
+    eventService.$inject = ['$http', 'auth'];
 
-    function events($http, auth) {
+    /**
+     * @namespace eventService
+     * @desc Service factory for events
+     * @memberof Factories
+     */
+    function eventService($http, auth) {
         var service = {
             events: [],
             addEvent: addEvent,
@@ -48,8 +53,17 @@
         }
 
         // Sign a student up for an event
-        function signUpEvent(userId, eventId) {
-            return $http.put('/events/signUpEvent/' + eventId + '/' + userId, null, {
+        function signUpEvent(event) {
+            var userId = auth.getUserId();
+            // Disallow duplicate event sign ups
+            for (var i = 0; i < event.students.length; i++) {
+                var student = event.students[i];
+                if (student._id === userId) {
+                    return new Error('You are already signed up for this event.');
+                }
+            }
+
+            return $http.put('/events/signUpEvent/' + event._id + '/' + userId, null, {
                 headers: { Authorization: 'Bearer ' + auth.getToken() }
             });
         }

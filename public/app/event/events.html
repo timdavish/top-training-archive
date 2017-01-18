@@ -33,7 +33,7 @@
 
             <h2>All Events</h2>
 
-            <div ng-repeat="event in events">
+            <div ng-repeat="event in vm.events">
                 <span style="font-size: 20px; margin-left: 10px;">
                     <span>
                         {{ event.title }}
@@ -52,34 +52,34 @@
 <!-- /All Events.content-section-a -->
 
 <!-- Add a new Event -->
-<div class="content-section-b" ng-show="userType == 'trainer'">
+<div class="content-section-b" ng-show="vm.userType() == 'trainer'">
     <div class="container">
         <div class="row">
 
             <h2>Add a new event</h2>
 
             <!-- Add new post form (logged in) -->
-            <form ng-submit="addEvent()" ng-show="isLoggedIn()">
+            <form ng-submit="vm.addEvent()" ng-show="vm.isLoggedIn()">
 
                 <div class="form-group">
                     <input type="text"
                         class="form-control"
                         placeholder="Title"
-                        ng-model="title" />
+                        ng-model="vm.title" />
                 </div>
 
                 <div class="form-group">
                     <input type="text"
                         class="form-control"
                         placeholder="Body"
-                        ng-model="body" />
+                        ng-model="vm.body" />
                 </div>
 
                 <div class="form-group">
                     <input type="text"
                         class="form-control"
                         placeholder="Slots"
-                        ng-model="slots" />
+                        ng-model="vm.slots" />
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add event</button>
