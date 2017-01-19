@@ -18,6 +18,10 @@
      */
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider
+            .state('home', {
+                url: '/home',
+                templateUrl: '/app/layout/home.ejs'
+            })
             .state('login', {
                 url: '/login',
                 templateUrl: '/app/user/login.ejs',
@@ -40,20 +44,22 @@
                     }
                 }]
             })
-            .state('home', {
-                url: '/home',
-                templateUrl: '/app/common/home.html',
-                controller: 'MainCtrl',
+            .state('posts', {
+                url: '/posts',
+                templateUrl: '/app/post/post-list.ejs',
+                controller: 'PostListController',
+                controllerAs: 'vm',
                 resolve: {
                     postPromise: ['posts', function(posts) {
                         return posts.getAllPosts();
                     }]
                 }
             })
-            .state('posts', {
+            .state('post', {
                 url: '/posts/{id}',
-                templateUrl: '/app/common/posts.html',
-                controller: 'PostsCtrl',
+                templateUrl: '/app/post/post-detail.ejs',
+                controller: 'PostDetailController',
+                controllerAs: 'vm',
                 resolve: {
                     post: ['$stateParams', 'posts', function($stateParams, posts) {
                         return posts.getPost($stateParams.id);
@@ -65,11 +71,6 @@
                 templateUrl: '/app/event/event-list.ejs',
                 controller: 'EventsController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'userService', function($state, userService) {
-                    if (!userService.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }],
                 resolve: {
                     eventPromise: ['eventService', function(eventService) {
                         return eventService.getEvents();
@@ -81,11 +82,6 @@
                 templateUrl: '/app/event/event-detail.ejs',
                 controller: 'EventDetailController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'userService', function($state, userService) {
-                    if (!userService.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }],
                 resolve: {
                     event: ['$stateParams', 'eventService', function($stateParams, eventService) {
                         return eventService.getEvent($stateParams.id);

@@ -48,7 +48,7 @@
 
         // Log current user out
         function logOut() {
-            auth.dropToken();
+            auth.removeToken();
         }
 
         // Check if the user is logged in

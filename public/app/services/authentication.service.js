@@ -15,7 +15,7 @@
         var service = {
             tokenName: 'top-training-token',
             saveToken: saveToken,
-            dropToken: dropToken,
+            removeToken: removeToken,
             getToken: getToken,
             getPayload: getPayload
         };
@@ -30,7 +30,7 @@
         }
 
         // Drop the token from local storage
-        function dropToken() {
+        function removeToken() {
             $window.localStorage.removeItem(service.tokenName);
         }
 

@@ -1,0 +1,50 @@
+
+<!-- Post list template -->
+
+<!-- All Posts -->
+<div ng-repeat="post in vm.posts | orderBy: '-upvotes'">
+    <span class="glyphicon glyphicon-thumbs-up"
+        ng-click="incrementUpvotes(post)"></span>
+    {{ post.upvotes }}
+    <span style="font-size: 20px; margin-left: 10px;">
+        <a ng-show="post.link" href="{{ post.link }}">
+            {{ post.title }}
+        </a>
+        <span ng-hide="post.link">
+            {{ post.title }}
+        </span>
+        <span ng-show="post.author">
+            posted by <a>{{ post.author }}</a> |
+        </span>
+    </span>
+    <span>
+        <a href="#/posts/{{ post._id }}">Comments</a>
+    </span>
+</div>
+
+<!-- Add new post form (logged in) -->
+<form ng-submit="vm.addPost()" ng-show="vm.isLoggedIn()"
+    style="margin-top: 30px;">
+    <h3>Add a new post</h3>
+
+    <div class="form-group">
+        <input type="text"
+            class="form-control"
+            placeholder="Title"
+            ng-model="vm.title" />
+    </div>
+
+    <div class="form-group">
+        <input type="text"
+            class="form-control"
+            placeholder="Link"
+            ng-model="vm.link" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Post</button>
+</form>
+
+<!-- Add new post (not logged in) -->
+<div ng-hide="vm.isLoggedIn()">
+    <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
+</div>
