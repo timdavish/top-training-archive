@@ -9,14 +9,14 @@
         .module('main')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$state', 'auth'];
+    RegisterController.$inject = ['$state', 'userService'];
 
     /**
      * @namespace RegisterController
      * @desc Register controller
      * @memberof Controllers
      */
-    function RegisterController($state, auth) {
+    function RegisterController($state, userService) {
         var vm = this;
         vm.register = register;
 
@@ -28,7 +28,7 @@
          * @memberof Controllers.RegisterController
          */
         function register() {
-            auth.register(vm.user).error(function(error) {
+            userService.register(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
                 $state.go('home');

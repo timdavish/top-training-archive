@@ -9,17 +9,17 @@
         .module('main')
         .controller('EventDetailController', EventDetailController);
 
-    EventDetailController.$inject = ['auth', 'eventService', 'event'];
+    EventDetailController.$inject = ['userService', 'eventService', 'event'];
 
     /**
      * @namespace EventDetailController
      * @desc Event detail controller
      * @memberof Controllers
      */
-    function EventDetailController(auth, eventService, event) {
+    function EventDetailController(userService, eventService, event) {
         var vm = this;
-        vm.isLoggedIn = auth.isLoggedIn;
-        vm.userType = auth.getUserType;
+        vm.isLoggedIn = userService.isLoggedIn;
+        vm.userType = userService.getUserType;
 
         vm.event = event;
         vm.signUpEvent = signUpEvent;
@@ -32,12 +32,12 @@
          * @memberof Controllers.EventDetailController
          */
         function signUpEvent() {
-            eventService.signUpEvent(event).error(function(error) {
+            eventService.signUpEvent(vm.event).error(function(error) {
                 vm.error = error;
             }).success(function(student) {
                 vm.event.students.push(student);
                 vm.event.slotsTaken++;
             });
-        };
+        }
     }
 })();

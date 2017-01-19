@@ -9,17 +9,17 @@
         .module('main')
         .controller('EventsController', EventsController);
 
-    EventsController.$inject = ['auth', 'eventService'];
+    EventsController.$inject = ['userService', 'eventService'];
 
     /**
      * @namespace EventsController
      * @desc Controller for the events list
      * @memberof Controllers
      */
-    function EventsController(auth, eventService) {
+    function EventsController(userService, eventService) {
         var vm = this;
-        vm.isLoggedIn = auth.isLoggedIn;
-        vm.userType = auth.getUserType;
+        vm.isLoggedIn = userService.isLoggedIn;
+        vm.userType = userService.getUserType;
 
         vm.events = eventService.events;
         vm.addEvent = addEvent;
@@ -37,11 +37,11 @@
                 !vm.body || vm.body === '' ||
                 !vm.slots || vm.slots === '') { return; }
 
-            var userId = auth.getUserId();
+            var userId = userService.getUserId();
             var event = {
                 title: vm.title,
                 body: vm.body,
-                slots: $scope.slots,
+                slots: vm.slots,
                 trainer: userId
             };
             eventService.addEvent(userId, event).error(function(error) {

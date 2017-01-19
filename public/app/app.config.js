@@ -20,22 +20,22 @@
         $stateProvider
             .state('login', {
                 url: '/login',
-                templateUrl: '/app/user/login.html',
+                templateUrl: '/app/user/login.ejs',
                 controller: 'LogInController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'auth', function($state, auth) {
-                    if (auth.isLoggedIn()) {
+                onEnter: ['$state', 'userService', function($state, userService) {
+                    if (userService.isLoggedIn()) {
                         $state.go('home');
                     }
                 }]
             })
             .state('register', {
                 url: '/register',
-                templateUrl: '/app/user/register.html',
+                templateUrl: '/app/user/register.ejs',
                 controller: 'RegisterController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'auth', function($state, auth) {
-                    if (auth.isLoggedIn()) {
+                onEnter: ['$state', 'userService', function($state, userService) {
+                    if (userService.isLoggedIn()) {
                         $state.go('home');
                     }
                 }]
@@ -62,11 +62,11 @@
             })
             .state('events', {
                 url: '/events',
-                templateUrl: '/app/event/events.html',
+                templateUrl: '/app/event/event-list.ejs',
                 controller: 'EventsController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'auth', function($state, auth) {
-                    if (!auth.isLoggedIn()) {
+                onEnter: ['$state', 'userService', function($state, userService) {
+                    if (!userService.isLoggedIn()) {
                         $state.go('home');
                     }
                 }],
@@ -78,11 +78,11 @@
             })
             .state('event', {
                 url: '/events/{id}',
-                templateUrl: '/app/event/eventdetail.html',
+                templateUrl: '/app/event/event-detail.ejs',
                 controller: 'EventDetailController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'auth', function($state, auth) {
-                    if (!auth.isLoggedIn()) {
+                onEnter: ['$state', 'userService', function($state, userService) {
+                    if (!userService.isLoggedIn()) {
                         $state.go('home');
                     }
                 }],

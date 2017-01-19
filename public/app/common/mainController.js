@@ -9,10 +9,10 @@
         .module('main')
         .controller('MainCtrl', MainCtrl);
 
-    MainCtrl.$inject = ['$scope', 'auth', 'posts'];
+    MainCtrl.$inject = ['$scope', 'userService', 'posts'];
 
-    function MainCtrl($scope, auth, posts) {
-        $scope.isLoggedIn = auth.isLoggedIn;
+    function MainCtrl($scope, userService, posts) {
+        $scope.isLoggedIn = userService.isLoggedIn;
         $scope.posts = posts.posts;
 
         $scope.addPost = function() {

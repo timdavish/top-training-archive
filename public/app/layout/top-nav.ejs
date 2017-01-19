@@ -1,6 +1,6 @@
 
 <!-- Navigation -->
-<nav ng-controller="NavCtrl" class="navbar navbar-default navbar-fixed-top topnav">
+<nav ng-controller="TopNavController as vm" class="navbar navbar-default navbar-fixed-top topnav">
     <div class="container topnav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -16,11 +16,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="isLoggedIn()"><a>{{ userName() }}</a></li>
-                <li ng-show="isLoggedIn()"><a href="/#/events">Events</a></li>
-                <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
-                <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
-                <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+                <li ng-show="vm.isLoggedIn()"><a>{{ vm.userName() }}</a></li>
+                <li ng-show="vm.isLoggedIn()"><a href="/#/events">Events</a></li>
+                <li ng-show="vm.isLoggedIn()"><a href="" ng-click="vm.logOut()">Log Out</a></li>
+                <li ng-hide="vm.isLoggedIn()"><a href="/#/login">Log In</a></li>
+                <li ng-hide="vm.isLoggedIn()"><a href="/#/register">Register</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

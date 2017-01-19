@@ -9,14 +9,14 @@
         .module('main')
         .factory('eventService', eventService);
 
-    eventService.$inject = ['$http', 'auth'];
+    eventService.$inject = ['$http', 'auth', 'userService'];
 
     /**
      * @namespace eventService
      * @desc Service factory for events
      * @memberof Factories
      */
-    function eventService($http, auth) {
+    function eventService($http, auth, userService) {
         var service = {
             events: [],
             addEvent: addEvent,
@@ -54,15 +54,7 @@
 
         // Sign a student up for an event
         function signUpEvent(event) {
-            var userId = auth.getUserId();
-            // Disallow duplicate event sign ups
-            for (var i = 0; i < event.students.length; i++) {
-                var student = event.students[i];
-                if (student._id === userId) {
-                    return new Error('You are already signed up for this event.');
-                }
-            }
-
+            var userId = userService.getUserId();
             return $http.put('/events/signUpEvent/' + event._id + '/' + userId, null, {
                 headers: { Authorization: 'Bearer ' + auth.getToken() }
             });

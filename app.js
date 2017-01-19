@@ -18,13 +18,13 @@ mongoose.connect('mongodb://localhost/TT');
 
 // Password authentication
 var passport = require('passport');
-require('./config/passport'); // Passport configuration
+require('./server/config/passport'); // Passport configuration
 
 // App initialization
 var app = express();
 
 // View engine setup
-app.set('views', path.join(__dirname, 'server/views'));
+app.set('views', path.join(__dirname, 'public/app/layout'));
 app.set('view engine', 'ejs');
 
 // Other app setup
@@ -56,7 +56,7 @@ app.use(function(err, req, res, next) {
 
   // Render the error page
   res.status(err.status || 500);
-  res.render('pages/error');
+  res.render('error');
 });
 
 module.exports = app;

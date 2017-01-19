@@ -15,9 +15,9 @@ var auth = jwt({ secret: 'SECRET', userProperty: 'payload' });
 // Router initialization
 var router = express.Router();
 
-// (GET) Render our home page
+// (GET) Render our shell with default home page
 router.get('/', function(req, res, next) {
-  res.render('pages/index');
+  res.render('shell.ejs');
 });
 
 // (PARAM) Route for preloading post objects

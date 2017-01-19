@@ -77,6 +77,11 @@ router.get('/getEvent/:event', function(req, res) {
 
 // (PUT) Sign up a student for an event
 router.put('/signUpEvent/:event/:user', auth, function(req, res, next) {
+    // Ensure the user hasn't already signed up for this event
+    if (req.event.students.indexOf(req.user._id) != -1) {
+        return res.status(400).json({ message: 'You are already signed up for this event.' });
+    }
+
     // Ensure there is a slot left
     if (req.event.slotsTaken >= req.event.slots) {
         return res.status(400).json({ message: 'There are no slots available for this event.' });
