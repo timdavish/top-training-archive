@@ -7,11 +7,11 @@
 
     angular
         .module('main')
-        .factory('auth', auth);
+        .factory('authService', authService);
 
-    auth.$inject = ['$http', '$window'];
+    authService.$inject = ['$http', '$window'];
 
-    function auth($http, $window) {
+    function authService($http, $window) {
         var service = {
             tokenName: 'top-training-token',
             saveToken: saveToken,

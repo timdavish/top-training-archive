@@ -50,8 +50,8 @@
                 controller: 'PostListController',
                 controllerAs: 'vm',
                 resolve: {
-                    postPromise: ['posts', function(posts) {
-                        return posts.getAllPosts();
+                    postPromise: ['postService', function(postService) {
+                        return postService.getPosts();
                     }]
                 }
             })
@@ -61,15 +61,15 @@
                 controller: 'PostDetailController',
                 controllerAs: 'vm',
                 resolve: {
-                    post: ['$stateParams', 'posts', function($stateParams, posts) {
-                        return posts.getPost($stateParams.id);
+                    post: ['$stateParams', 'postService', function($stateParams, postService) {
+                        return postService.getPost($stateParams.id);
                     }]
                 }
             })
             .state('events', {
                 url: '/events',
                 templateUrl: '/app/event/event-list.ejs',
-                controller: 'EventsController',
+                controller: 'EventListController',
                 controllerAs: 'vm',
                 resolve: {
                     eventPromise: ['eventService', function(eventService) {

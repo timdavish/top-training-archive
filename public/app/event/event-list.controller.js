@@ -7,16 +7,16 @@
 
     angular
         .module('main')
-        .controller('EventsController', EventsController);
+        .controller('EventListController', EventListController);
 
-    EventsController.$inject = ['userService', 'eventService'];
+    EventListController.$inject = ['userService', 'eventService'];
 
     /**
-     * @namespace EventsController
+     * @namespace EventListController
      * @desc Controller for the events list
      * @memberof Controllers
      */
-    function EventsController(userService, eventService) {
+    function EventListController(userService, eventService) {
         var vm = this;
         vm.isLoggedIn = userService.isLoggedIn;
         vm.userType = userService.getUserType;
@@ -29,7 +29,7 @@
         /**
          * @name addEvent
          * @desc Adds a new event
-         * @memberof Controllers.EventsController
+         * @memberof Controllers.EventListController
          */
         function addEvent() {
             // Ensure form is properly filled out

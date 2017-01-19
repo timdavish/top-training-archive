@@ -4,7 +4,7 @@
 <!-- All Posts -->
 <div ng-repeat="post in vm.posts | orderBy: '-upvotes'">
     <span class="glyphicon glyphicon-thumbs-up"
-        ng-click="incrementUpvotes(post)"></span>
+        ng-click="vm.incrementUpvotes(post)"></span>
     {{ post.upvotes }}
     <span style="font-size: 20px; margin-left: 10px;">
         <a ng-show="post.link" href="{{ post.link }}">

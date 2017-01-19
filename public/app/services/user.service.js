@@ -9,14 +9,14 @@
         .module('main')
         .factory('userService', userService);
 
-    userService.$inject = ['$http', 'auth'];
+    userService.$inject = ['$http', 'authService'];
 
     /**
      * @namespace userService
      * @desc Service factory for users
      * @memberof Factories
      */
-    function userService($http, auth) {
+    function userService($http, authService) {
         var service = {
             register: register,
             logIn: logIn,
@@ -35,28 +35,28 @@
         // Register a new user
         function register(user) {
             return $http.post('/users/register', user).success(function(data) {
-                auth.saveToken(data.token);
+                authService.saveToken(data.token);
             });
         }
 
         // Log in an existing user
         function logIn(user) {
             return $http.post('/users/login', user).success(function(data) {
-                auth.saveToken(data.token);
+                authService.saveToken(data.token);
             });
         }
 
         // Log current user out
         function logOut() {
-            auth.removeToken();
+            authService.removeToken();
         }
 
         // Check if the user is logged in
         function isLoggedIn() {
-            var token = auth.getToken();
+            var token = authService.getToken();
 
             if (token) {
-                var payload = auth.getPayload(token);
+                var payload = authService.getPayload(token);
 
                 return payload.exp > Date.now() / 1000;
             } else {
@@ -67,8 +67,8 @@
         // Retrieve the _id of the user that's logged in
         function getUserId() {
             if (service.isLoggedIn()) {
-                var token = auth.getToken();
-                var payload = auth.getPayload(token);
+                var token = authService.getToken();
+                var payload = authService.getPayload(token);
 
                 return payload._id;
             }
@@ -77,8 +77,8 @@
         // Retrieve the username of the user that's logged in
         function getUserName() {
             if (service.isLoggedIn()) {
-                var token = auth.getToken();
-                var payload = auth.getPayload(token);
+                var token = authService.getToken();
+                var payload = authService.getPayload(token);
 
                 return payload.username;
             }
@@ -94,8 +94,8 @@
         // Retrieve the usertype of the user that's logged in
         function getUserType() {
             if (service.isLoggedIn()) {
-                var token = auth.getToken();
-                var payload = auth.getPayload(token);
+                var token = authService.getToken();
+                var payload = authService.getPayload(token);
 
                 return payload.usertype;
             }

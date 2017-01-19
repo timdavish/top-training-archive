@@ -9,18 +9,19 @@
         .module('main')
         .controller('PostDetailController', PostDetailController);
 
-    PostDetailController.$inject = ['userService', 'posts', 'post'];
+    PostDetailController.$inject = ['userService', 'postService', 'post'];
 
-    function PostDetailController(userService, posts, post) {
+    function PostDetailController(userService, postService, post) {
         var vm = this;
         vm.isLoggedIn = userService.isLoggedIn;
+
         vm.post = post;
         vm.addComment = addComment;
         vm.incrementUpvotes = incrementUpvotes;
 
         function addComment() {
             if (vm.body === '') { return; }
-            posts.addComment(post._id, {
+            postService.addComment(post._id, {
                 body: vm.body
             }).success(function(comment) {
                 vm.post.comments.push(comment);
@@ -31,7 +32,7 @@
         };
 
         function incrementUpvotes(comment) {
-            posts.upvoteComment(post, comment);
+            postService.upvoteComment(post, comment);
         };
     }
 })();

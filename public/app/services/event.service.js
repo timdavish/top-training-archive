@@ -9,14 +9,14 @@
         .module('main')
         .factory('eventService', eventService);
 
-    eventService.$inject = ['$http', 'auth', 'userService'];
+    eventService.$inject = ['$http', 'authService', 'userService'];
 
     /**
      * @namespace eventService
      * @desc Service factory for events
      * @memberof Factories
      */
-    function eventService($http, auth, userService) {
+    function eventService($http, authService, userService) {
         var service = {
             events: [],
             addEvent: addEvent,
@@ -32,7 +32,7 @@
         // Create a new event
         function addEvent(userId, event) {
             return $http.post('/events/addEvent/' + userId, event, {
-                headers: { Authorization: 'Bearer ' + auth.getToken() }
+                headers: { Authorization: 'Bearer ' + authService.getToken() }
             }).success(function(data) {
                 service.events.push(data);
             });
@@ -56,7 +56,7 @@
         function signUpEvent(event) {
             var userId = userService.getUserId();
             return $http.put('/events/signUpEvent/' + event._id + '/' + userId, null, {
-                headers: { Authorization: 'Bearer ' + auth.getToken() }
+                headers: { Authorization: 'Bearer ' + authService.getToken() }
             });
         }
     }

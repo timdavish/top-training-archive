@@ -9,18 +9,19 @@
         .module('main')
         .controller('PostListController', PostListController);
 
-    PostListController.$inject = ['userService', 'posts'];
+    PostListController.$inject = ['userService', 'postService'];
 
-    function PostListController(userService, posts) {
+    function PostListController(userService, postService) {
         var vm = this;
         vm.isLoggedIn = userService.isLoggedIn;
-        vm.posts = posts.posts;
+
+        vm.posts = postService.posts;
         vm.addPost = addPost;
         vm.incrementUpvotes = incrementUpvotes;
 
         function addPost() {
             if (!vm.title || vm.title === '') { return; }
-            posts.addPost({
+            postService.addPost({
                 title: vm.title,
                 link: vm.link
             });
@@ -31,7 +32,7 @@
         };
 
         function incrementUpvotes(post) {
-            posts.upvotePost(post);
+            postService.upvotePost(post);
         };
     }
 })();
