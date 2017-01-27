@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('app')
+        .module('app.core')
         .factory('postService', postService);
 
     postService.$inject = ['$http', 'authService'];

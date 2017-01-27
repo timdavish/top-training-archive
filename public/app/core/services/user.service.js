@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('app')
+        .module('app.core')
         .factory('userService', userService);
 
     userService.$inject = ['$http', 'authService'];
@@ -23,8 +23,8 @@
             logOut: logOut,
             isLoggedIn: isLoggedIn,
             getUserId: getUserId,
-            getUserName: getUserName,
-            getUserNameById: getUserNameById,
+            getEmail: getEmail,
+            getEmailById: getEmailById,
             getUserType: getUserType
         };
 
@@ -74,20 +74,20 @@
             }
         }
 
-        // Retrieve the username of the user that's logged in
-        function getUserName() {
+        // Retrieve the email of the user that's logged in
+        function getEmail() {
             if (service.isLoggedIn()) {
                 var token = authService.getToken();
                 var payload = authService.getPayload(token);
 
-                return payload.username;
+                return payload.email;
             }
         }
 
-        // Retrieve the username of the user that's logged in
-        function getUserNameById(id) {
+        // Retrieve the email of the user that's logged in
+        function getEmailById(id) {
             return $http.get('/users/' + id).then(function(res) {
-                return res.username;
+                return res.email;
             });
         }
 

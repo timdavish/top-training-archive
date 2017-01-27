@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('app')
+        .module('app.core')
         .factory('eventService', eventService);
 
     eventService.$inject = ['$http', 'authService', 'userService'];

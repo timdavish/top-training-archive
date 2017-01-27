@@ -9,23 +9,49 @@
 <!-- Error pop-up -->
 <div ng-show="vm.error" class="alert alert-danger row">
     <span>{{ vm.error.message }}</span>
+    <span>{{ vm.error.email }}</span>
+    <span>{{ vm.error.password }}</span>
+    <span>{{ vm.error.usertype }}</span>
+</div>
+
+<!-- Email error pop-ups -->
+<div ng-show="registrationForm.email.$error.email" class="alert alert-danger row">
+    <span>Not valid email</span>
+</div>
+
+<div class='alert alert-danger row' ng-show='registrationForm.password.$error.equals'>
+    <span>
+        Passwords don't match.
+    </span>
 </div>
 
 <!-- Registration form -->
-<form ng-submit="vm.register()"
+<form name="registrationForm" ng-submit="vm.register()"
     style="margin-top: 30px;">
 
+    <!-- Email -->
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username"
-            ng-model="vm.user.username" />
+        <input type="email" name="email" class="form-control" placeholder="Email"
+            ng-model="vm.user.email" required />
     </div>
+    <!-- /Email -->
+
+    <!-- Password -->
     <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password"
-            ng-model="vm.user.password" />
+        <input type="password" name="password" class="form-control" placeholder="Password"
+            ng-model="vm.user.password" equals="{{vm.user.password_verify}}" required />
     </div>
+
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Re-enter password"
+            ng-model="vm.user.password_verify" equals="{{vm.user.password}}" required />
+    </div>
+    <!-- /Password -->
+
     <div class="form-group">
         <input type="radio" name="usertype" value="student" ng-model="vm.user.usertype" checked="checked" /> I need a trainer </br>
         <input type="radio" name="usertype" value="trainer" ng-model="vm.user.usertype" /> I am a trainer
     </div>
+    
     <button type="submit" class="btn btn-primary">Register</button>
 </form>

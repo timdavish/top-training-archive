@@ -26,13 +26,13 @@ router.param('user', function(req, res, next, id) {
 // (POST) User registration
 router.post('/register', function(req, res, next) {
     // Ensure all fields are filled out
-    if (!req.body.username || !req.body.password || !req.body.usertype) {
+    if (!req.body.email || !req.body.password || !req.body.usertype) {
         return res.status(400).json({ message: 'Please fill out all fields.' });
     }
 
-    // Create a new user and set their username and password
+    // Create a new user and set their email and password
     var user = new User();
-    user.username = req.body.username;
+    user.email = req.body.email;
     user.setPassword(req.body.password);
     user.usertype = req.body.usertype;
 
@@ -47,7 +47,7 @@ router.post('/register', function(req, res, next) {
 // (POST) User login
 router.post('/login', function(req, res, next) {
     // Ensure all fields are filled out
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
         return res.status(400).json({ message: 'Please fill out all fields.' });
     }
 

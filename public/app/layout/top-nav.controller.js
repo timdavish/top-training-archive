@@ -14,7 +14,7 @@
     function TopNavController(userService) {
         var vm = this;
         vm.isLoggedIn = userService.isLoggedIn;
-        vm.userName = userService.getUserName;
+        vm.getEmail = userService.getEmail;
         vm.userType = userService.getUserType;
         vm.logOut = userService.logOut;
     }

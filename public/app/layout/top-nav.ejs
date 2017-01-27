@@ -16,7 +16,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="vm.isLoggedIn()"><a>{{ vm.userName() }}</a></li>
+                <li ng-show="vm.isLoggedIn()"><a>{{ vm.getEmail() }}</a></li>
                 <li><a href="/#/events">Events</a></li>
                 <li><a href="/#/posts">Posts</a></li>
                 <li ng-show="vm.isLoggedIn()"><a href="" ng-click="vm.logOut()">Log Out</a></li>

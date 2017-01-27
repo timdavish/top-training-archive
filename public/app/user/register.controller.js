@@ -18,6 +18,7 @@
      */
     function RegisterController($state, userService) {
         var vm = this;
+        vm.emailFormat = "/[^@]+@[^@]+/";
         vm.register = register;
 
         /* Functions */
