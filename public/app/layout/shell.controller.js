@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('main')
+        .module('app.layout')
         .controller('ShellController', ShellController);
 
     ShellController.$inject = [];

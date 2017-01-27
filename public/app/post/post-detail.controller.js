@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('main')
+        .module('app.post')
         .controller('PostDetailController', PostDetailController);
 
     PostDetailController.$inject = ['userService', 'postService', 'post'];

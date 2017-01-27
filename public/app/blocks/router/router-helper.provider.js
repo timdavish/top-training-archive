@@ -9,12 +9,10 @@
         .module('blocks.router')
         .provider('routerHelper', routerHelper);
 
-    routerHelper.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
+    routerHelper.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function routerHelper($locationProvider, $stateProvider, $urlRouterProvider) {
+    function routerHelper($stateProvider, $urlRouterProvider) {
         this.$get = RouterHelper;
-
-        $locationProvider.html5Mode(true);
 
         RouterHelper.$inject = ['$state'];
 

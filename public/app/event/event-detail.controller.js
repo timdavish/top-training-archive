@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('main')
+        .module('app.event')
         .controller('EventDetailController', EventDetailController);
 
     EventDetailController.$inject = ['userService', 'eventService', 'event'];

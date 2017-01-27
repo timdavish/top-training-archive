@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('main')
+        .module('app.user')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];

@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('main')
+        .module('app')
         .factory('userService', userService);
 
     userService.$inject = ['$http', 'authService'];

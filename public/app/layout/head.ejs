@@ -31,26 +31,43 @@
 <!-- Bootstrap core JavaScript -->
 <script src="app/vendor/bootstrap/bootstrap.min.js"></script>
 
-<!-- My Javaapp -->
-<!-- First, module -->
+
+<!-- My JavaScripts -->
+<!-- Main app module -->
 <script src="app/app.module.js"></script>
 
-<!-- Second, config -->
-<script src="app/app.config.js"></script>
+<!-- Router Helper -->
+<script src="app/blocks/router/router.module.js"></script>
+<script src="app/blocks/router/router-helper.provider.js"></script>
 
-<!-- Third, services -->
+<!-- Services -->
 <script src="app/services/authentication.service.js"></script>
 <script src="app/services/user.service.js"></script>
 <script src="app/services/event.service.js"></script>
 <script src="app/services/posts.service.js"></script>
 
-<!-- Fourth, controllers -->
+<!-- Modules -->
+<!-- Layout -->
+<script src="app/layout/layout.module.js"></script>
+<script src="app/layout/layout.routes.js"></script>
 <script src="app/layout/shell.controller.js"></script>
 <script src="app/layout/top-nav.controller.js"></script>
+
+<!-- User -->
+<script src="app/user/user.module.js"></script>
+<script src="app/user/user.routes.js"></script>
 <script src="app/user/login.controller.js"></script>
 <script src="app/user/register.controller.js"></script>
+
+<!-- Event -->
+<script src="app/event/event.module.js"></script>
+<script src="app/event/event.routes.js"></script>
 <script src="app/event/event-detail.controller.js"></script>
 <script src="app/event/event-list.controller.js"></script>
+
+<!-- Post -->
+<script src="app/post/post.module.js"></script>
+<script src="app/post/post.routes.js"></script>
 <script src="app/post/post-detail.controller.js"></script>
 <script src="app/post/post-list.controller.js"></script>
 
