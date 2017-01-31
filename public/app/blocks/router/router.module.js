@@ -1,5 +1,5 @@
 /**
- * Module declarations
+ * Router Module
  * @namespace Modules
  */
 (function() { // IIFE structure

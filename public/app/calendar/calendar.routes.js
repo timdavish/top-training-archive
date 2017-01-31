@@ -2,8 +2,8 @@
  * Calendar routes
  * @namespace Configurations
  */
-(function() {
-    'use strict';
+(function() { // IIFE structure
+    'use strict'; // Strict mode
 
     angular
         .module('app.calendar')

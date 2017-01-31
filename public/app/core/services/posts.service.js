@@ -1,5 +1,5 @@
 /**
- * Posts Factory
+ * postService Factory
  * @namespace Factories
  */
 (function() { // IIFE structure
@@ -11,6 +11,11 @@
 
     postService.$inject = ['$http', 'authService'];
 
+    /**
+     * @namespace postservice
+     * @desc Service factory for posts
+     * @memberof Factories
+     */
     function postService($http, authService) {
         var service = {
             posts: [],

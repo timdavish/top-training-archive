@@ -11,5 +11,12 @@
 
     ShellController.$inject = [];
 
-    function ShellController() {}
+    /**
+     * @namespace ShellController
+     * @desc Shell controller
+     * @memberof Controllers
+     */
+    function ShellController() {
+        var vm = this;
+    }
 })();

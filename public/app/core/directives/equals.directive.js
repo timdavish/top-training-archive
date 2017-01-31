@@ -2,8 +2,8 @@
  * Equals Directive
  * @namespace Directives
  */
-(function() {
-    'use strict';
+(function() { // IIFE structure
+    'use strict'; // Strict mode
 
     angular
         .module('app.core')

@@ -18,6 +18,7 @@
      */
     function EventDetailController(userService, eventService, event) {
         var vm = this;
+        
         vm.isLoggedIn = userService.isLoggedIn;
         vm.userType = userService.getUserType;
 

@@ -11,14 +11,27 @@
 
     PostListController.$inject = ['userService', 'postService'];
 
+    /**
+     * @namespace PostListController
+     * @desc Post list controller
+     * @memberof Controllers
+     */
     function PostListController(userService, postService) {
         var vm = this;
+
         vm.isLoggedIn = userService.isLoggedIn;
 
         vm.posts = postService.posts;
         vm.addPost = addPost;
         vm.incrementUpvotes = incrementUpvotes;
 
+        /* Functions */
+
+        /**
+         * @name addPost
+         * @desc Adds a post
+         * @memberof Controllers.PostListController
+         */
         function addPost() {
             if (!vm.title || vm.title === '') { return; }
             postService.addPost({
@@ -31,6 +44,11 @@
             vm.link = '';
         };
 
+        /**
+         * @name incrementUpvotes
+         * @desc Increments the upvotes on a post
+         * @memberof Controllers.PostListController
+         */
         function incrementUpvotes(post) {
             postService.upvotePost(post);
         };

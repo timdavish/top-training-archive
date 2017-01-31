@@ -1,5 +1,5 @@
 /**
- * App core module declaration
+ * Core Module
  * @namespace Modules
  */
 (function() { // IIFE structure
@@ -10,6 +10,8 @@
         'ui.router',
 
         /* Blocks modules */
+        'blocks.exception',
+        'blocks.logger',
         'blocks.router',
 
         /* 3rd Party modules */

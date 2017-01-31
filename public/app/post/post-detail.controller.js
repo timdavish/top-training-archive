@@ -11,14 +11,27 @@
 
     PostDetailController.$inject = ['userService', 'postService', 'post'];
 
+    /**
+     * @namespace PostDetailController
+     * @desc Post detail controller
+     * @memberof Controllers
+     */
     function PostDetailController(userService, postService, post) {
         var vm = this;
+        
         vm.isLoggedIn = userService.isLoggedIn;
 
         vm.post = post;
         vm.addComment = addComment;
         vm.incrementUpvotes = incrementUpvotes;
 
+        /* Functions */
+
+        /**
+         * @name addComment
+         * @desc Adds a comment to a post
+         * @memberof Controllers.PostDetailController
+         */
         function addComment() {
             if (vm.body === '') { return; }
             postService.addComment(post._id, {
@@ -31,6 +44,11 @@
             vm.body = '';
         };
 
+        /**
+         * @name incrementUpvotes
+         * @desc Increments the upvotes on a comment
+         * @memberof Controllers.PostDetailController
+         */
         function incrementUpvotes(comment) {
             postService.upvoteComment(post, comment);
         };

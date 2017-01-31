@@ -18,6 +18,7 @@
      */
     function EventListController(userService, eventService) {
         var vm = this;
+        
         vm.isLoggedIn = userService.isLoggedIn;
         vm.userType = userService.getUserType;
 

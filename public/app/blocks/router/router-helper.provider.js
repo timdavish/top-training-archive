@@ -2,9 +2,8 @@
  * Router Helper Provider
  * @namespace Providers
  */
-(function() {
-    'use strict';
-
+(function() { // IIFE structure
+    'use strict'; // Strict mode
     angular
         .module('blocks.router')
         .provider('routerHelper', routerHelper);

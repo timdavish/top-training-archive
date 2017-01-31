@@ -18,6 +18,7 @@
      */
     function LogInController($state, userService) {
         var vm = this;
+        
         vm.logIn = logIn;
 
         /* Functions */

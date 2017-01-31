@@ -1,5 +1,5 @@
 /**
- * Post module declaration
+ * Post Module
  * @namespace Modules
  */
 (function() { // IIFE structure

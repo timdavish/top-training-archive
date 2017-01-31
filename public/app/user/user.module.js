@@ -1,5 +1,5 @@
 /**
- * User module declaration
+ * User Module
  * @namespace Modules
  */
 (function() { // IIFE structure

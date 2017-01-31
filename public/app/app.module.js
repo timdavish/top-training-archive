@@ -1,5 +1,5 @@
 /**
- * Module declarations
+ * Main App Module
  * @namespace Modules
  */
 (function() { // IIFE structure

@@ -1,5 +1,5 @@
 /**
- * Calendar module declaration
+ * Calendar Module
  * @namespace Modules
  */
 (function() { // IIFE structure

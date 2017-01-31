@@ -1,5 +1,5 @@
 /**
- * Event module declaration
+ * Event Module
  * @namespace Modules
  */
 (function() { // IIFE structure

@@ -11,6 +11,11 @@
 
     authService.$inject = ['$http', '$window'];
 
+    /**
+     * @namespace authService
+     * @desc Service factory for authentication
+     * @memberof Factories
+     */
     function authService($http, $window) {
         var service = {
             tokenName: 'top-training-token',
