@@ -3,10 +3,12 @@ var mongoose = require('mongoose');
 
 var EventSchema = new mongoose.Schema({
     title: String,
-    body: String,
-    date: Date,
+    sport: String,
+    description: String,
     slots: { type: Number, default: 1 },
     slotsTaken: { type: Number, default: 0 },
+    startsAt: Date,
+    endsAt: Date,
     trainer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     archived: { type: Boolean, default: false }

@@ -41,6 +41,11 @@
         // Get all events
         function getEvents() {
             return $http.get('/events/getEvents').success(function(data) {
+                // Translate JSON'd dates back to moment dates for the calendar's sake
+                data.forEach( function(event) {
+                    event.startsAt = new Date(event.startsAt);
+                    event.endsAt = new Date(event.endsAt);
+                });
                 angular.copy(data, service.events);
             });
         }
@@ -48,6 +53,9 @@
         // Get a single event by id
         function getEvent(eventId) {
             return $http.get('/events/getEvent/' + eventId).then(function(res) {
+                // Translate JSON'd moment date into readable format
+                res.data.startsAt = moment(res.data.startsAt).format('h:mm a, MMMM Do, YYYY');
+                res.data.endsAt = moment(res.data.endsAt).format('h:mm a, MMMM Do, YYYY');
                 return res.data;
             });
         }

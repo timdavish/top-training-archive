@@ -1,5 +1,5 @@
 /**
- * Module declarations
+ * App core module declaration
  * @namespace Modules
  */
 (function() { // IIFE structure
@@ -8,8 +8,13 @@
     angular.module('app.core', [
         /* Angular modules */
         'ui.router',
-        
+
         /* Blocks modules */
-        'blocks.router'
+        'blocks.router',
+
+        /* 3rd Party modules */
+        'mwl.calendar',
+        'ui.bootstrap',
+        'ngAnimate'
     ]);
 })();

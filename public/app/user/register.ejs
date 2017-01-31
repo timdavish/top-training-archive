@@ -4,54 +4,72 @@
 <!-- Header -->
 <div class="page-header">
     <h2>Register</h1>
+    <small>* indicates required field.</small>
 </div>
 
 <!-- Error pop-up -->
 <div ng-show="vm.error" class="alert alert-danger row">
     <span>{{ vm.error.message }}</span>
-    <span>{{ vm.error.email }}</span>
-    <span>{{ vm.error.password }}</span>
-    <span>{{ vm.error.usertype }}</span>
 </div>
 
 <!-- Email error pop-ups -->
 <div ng-show="registrationForm.email.$error.email" class="alert alert-danger row">
-    <span>Not valid email</span>
+    <span>Please enter a valid email.</span>
 </div>
 
+<!-- Password error pop-ups -->
 <div class='alert alert-danger row' ng-show='registrationForm.password.$error.equals'>
-    <span>
-        Passwords don't match.
-    </span>
+    <span>Passwords don't match.</span>
 </div>
 
 <!-- Registration form -->
 <form name="registrationForm" ng-submit="vm.register()"
     style="margin-top: 30px;">
 
+    <!-- First name -->
+    <div class="form-group">
+        <input type="text" name="firstname" class="form-control" placeholder="First name *"
+            ng-model="vm.user.firstname" required />
+    </div>
+    <!-- /First name -->
+
+    <!-- Last name -->
+    <div class="form-group">
+        <input type="text" name="lastname" class="form-control" placeholder="Last name *"
+            ng-model="vm.user.lastname" required />
+    </div>
+    <!-- /Last name -->
+
     <!-- Email -->
     <div class="form-group">
-        <input type="email" name="email" class="form-control" placeholder="Email"
+        <input type="email" name="email" class="form-control" placeholder="Email *"
             ng-model="vm.user.email" required />
     </div>
     <!-- /Email -->
 
     <!-- Password -->
     <div class="form-group">
-        <input type="password" name="password" class="form-control" placeholder="Password"
+        <input type="password" name="password" class="form-control" placeholder="Password *"
             ng-model="vm.user.password" equals="{{vm.user.password_verify}}" required />
     </div>
 
     <div class="form-group">
-        <input type="password" class="form-control" placeholder="Re-enter password"
+        <input type="password" class="form-control" placeholder="Re-enter password *"
             ng-model="vm.user.password_verify" equals="{{vm.user.password}}" required />
     </div>
     <!-- /Password -->
+
+    <!-- Zip code -->
+    <div class="form-group">
+        <input type="text" name="zipcode" class="form-control" placeholder="Zip code *"
+            ng-model="vm.user.zipcode" required />
+    </div>
+    <!-- /Zip code -->
 
     <div class="form-group">
         <input type="radio" name="usertype" value="student" ng-model="vm.user.usertype" checked="checked" /> I need a trainer </br>
         <input type="radio" name="usertype" value="trainer" ng-model="vm.user.usertype" /> I am a trainer
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Register</button>
 </form>

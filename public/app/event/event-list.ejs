@@ -1,31 +1,6 @@
 
 <!-- Event list template -->
 
-<!-- Your Events -->
-<div class="content-section-b">
-    <div class="container">
-        <div class="row">
-
-            <h2>Your Events</h2>
-<!--
-            <div ng-repeat="event in events">
-                <span style="font-size: 20px; margin-left: 10px;">
-                    <span>
-                        {{ event.title }}
-                    </span>
-                </span>
-                <span>
-                    <a href="#/events/{{ event._id }}">View this event</a>
-                </span>
-            </div> -->
-
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-</div>
-<!-- /Your Events.content-section-b -->
-
 <!-- All Events -->
 <div class="content-section-a">
     <div class="container">
@@ -52,37 +27,100 @@
 <!-- /All Events.content-section-a -->
 
 <!-- Add a new Event -->
-<div class="content-section-b" ng-show="vm.userType() == 'trainer'">
+<div class="content-section-b" ng-show="vm.isLoggedIn() && vm.userType() == 'trainer'">
     <div class="container">
         <div class="row">
 
-            <h2>Add a new event</h2>
+            <!-- Error pop-up -->
+            <div ng-show="vm.error" class="alert alert-danger row">
+                <span>{{ vm.error }}</span>
+            </div>
 
-            <!-- Add new post form (logged in) -->
+            <!-- Header -->
+            <h2>
+                Add a new event
+                <div class="clearfix"></div>
+            </h2>
+            <!-- /Header -->
+
+            <!-- Add new event form -->
             <form ng-submit="vm.addEvent()" ng-show="vm.isLoggedIn()">
 
+                <!-- Event Title -->
                 <div class="form-group">
                     <input type="text"
                         class="form-control"
-                        placeholder="Title"
+                        placeholder="Event Title"
                         ng-model="vm.title" />
                 </div>
+                <!-- /Event Title -->
 
+                <!-- Sport -->
                 <div class="form-group">
                     <input type="text"
                         class="form-control"
-                        placeholder="Body"
-                        ng-model="vm.body" />
+                        placeholder="Sport"
+                        ng-model="vm.sport" />
                 </div>
+                <!-- /Sport -->
 
+                <!-- Description -->
+                <div class="form-group">
+                    <input type="text"
+                        class="form-control"
+                        placeholder="Description"
+                        ng-model="vm.description" />
+                </div>
+                <!-- /Description -->
+
+                <!-- Slots -->
                 <div class="form-group">
                     <input type="text"
                         class="form-control"
                         placeholder="Slots"
                         ng-model="vm.slots" />
                 </div>
+                <!-- /Slots -->
 
+
+                <!-- Date -->
+                <div class="form-group">
+                    <p class="input-group" style="max-width: 250px">
+                        <input type="text" class="form-control" placeholder="Date"
+                            uib-datepicker-popup="MMMM dd yyyy" ng-model="vm.date"
+                            is-open="vm.datePickerOpen" close-text="Close" >
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.toggleDatePicker($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <!-- /Date -->
+
+                <!-- Starting Time -->
+                <div class="form-group">
+                    <p>
+                        Starting time
+                    </p>
+                    <div uib-timepicker ng-model="vm.startsAt" hour-step="1" minute-step="15" show-meridian="true"></div>
+                </div>
+                <!-- /Starting Time -->
+
+
+                <!-- Ending Time -->
+                <div class="form-group">
+                    <p>
+                        Ending time
+                    </p>
+                    <div uib-timepicker ng-model="vm.endsAt" value="2:00 PM" hour-step="1" minute-step="15" show-meridian="true"></div>
+                </div>
+                <!-- /Ending Time -->
+
+
+                <!-- Add this Event -->
                 <button type="submit" class="btn btn-primary">Add event</button>
+                <!-- /Add this Event -->
             </form>
 
         </div>

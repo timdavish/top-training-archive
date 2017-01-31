@@ -1,0 +1,108 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "angular-animate@1.5.7",
+        "scope": null,
+        "escapedName": "angular-animate",
+        "name": "angular-animate",
+        "rawSpec": "1.5.7",
+        "spec": "1.5.7",
+        "type": "version"
+      },
+      "C:\\Users\\Tim\\My Documents\\Files\\Dev\\Web\\Top_Training"
+    ]
+  ],
+  "_from": "angular-animate@1.5.7",
+  "_id": "angular-animate@1.5.7",
+  "_inCache": true,
+  "_location": "/angular-animate",
+  "_nodeVersion": "4.4.5",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/angular-animate-1.5.7.tgz_1466018790199_0.4276407649740577"
+  },
+  "_npmUser": {
+    "name": "angularcore",
+    "email": "angular-core+npm@google.com"
+  },
+  "_npmVersion": "2.15.5",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular-animate@1.5.7",
+    "scope": null,
+    "escapedName": "angular-animate",
+    "name": "angular-animate",
+    "rawSpec": "1.5.7",
+    "spec": "1.5.7",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-animate/-/angular-animate-1.5.7.tgz",
+  "_shasum": "04e5d657416ed5ea2ad2ffe33c20c5529aa3922e",
+  "_shrinkwrap": null,
+  "_spec": "angular-animate@1.5.7",
+  "_where": "C:\\Users\\Tim\\My Documents\\Files\\Dev\\Web\\Top_Training",
+  "author": {
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+  "dependencies": {},
+  "description": "AngularJS module for animations",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "04e5d657416ed5ea2ad2ffe33c20c5529aa3922e",
+    "tarball": "https://registry.npmjs.org/angular-animate/-/angular-animate-1.5.7.tgz"
+  },
+  "gitHead": "7421ebc488d35ec3bcfefda73a56e2623b380215",
+  "homepage": "http://angularjs.org",
+  "jspm": {
+    "shim": {
+      "angular-animate": {
+        "deps": [
+          "angular"
+        ]
+      }
+    }
+  },
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "animation",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "akalinovski",
+      "email": "a.kalinovski@gmail.com"
+    },
+    {
+      "name": "angularcore",
+      "email": "angular-core+npm@google.com"
+    },
+    {
+      "name": "petebd",
+      "email": "pete@bacondarwin.com"
+    }
+  ],
+  "name": "angular-animate",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.5.7"
+}

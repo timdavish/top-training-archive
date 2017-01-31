@@ -30,7 +30,7 @@
                 states.forEach(function(state) {
                     $stateProvider.state(state.state, state.config);
                 });
-                $urlRouterProvider.otherwise('home');
+                // $urlRouterProvider.otherwise('home');
             }
 
             function getStates() { return $state.get(); }

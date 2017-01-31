@@ -12,7 +12,9 @@ var UserSchema = new mongoose.Schema({
     usertype: { type: String, lowercase: true },
     firstname: String,
     lastname: String,
+    zipcode: Number,
     events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
+    // , profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
 });
 
 // Set a hashed password using a crypto salt
