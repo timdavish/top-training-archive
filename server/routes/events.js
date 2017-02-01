@@ -57,10 +57,32 @@ router.post('/addEvent/:user', auth, function(req, res, next) {
     });
 });
 
-// (GET) Get all events
+// (GET) Get all unarchived events
 router.get('/getEvents', function(req, res, next) {
     Event.find(function(err, events) {
         if (err) { return next(err); }
+
+        res.json(events);
+    });
+});
+
+// (GET) Get all events grouped and sorted high->low by sport
+router.get('/getEventsBySport', function(req, res, next) {
+    Event.aggregate([
+        { $match: { // Where
+            archived: false
+        }},
+        { $group : { // Group
+            _id: { $toLower: "$sport" },
+            count: { $sum: 1 },
+            events: { $push: "$$ROOT" }
+        }},
+        { $sort : { // Sort
+            count: -1, // Descending, count
+            _id: 1 // Alphabetically, sport
+        }}
+    ], function(err, events) {
+        if (err) return next(err);
 
         res.json(events);
     });

@@ -21,14 +21,53 @@
 
         vm.calendarView = 'month';
         vm.viewDate = new Date();
-        vm.events = eventService.events;
-        vm.cellIsOpen = true;
+        vm.events = [];
+        vm.eventsBySport = eventService.eventsBySport
+        vm.filter = { // move this to a service?
+            // Keep all filter keys lowercase
+            basketball: false,
+            baseball: false,
+            asdf: false
+        };
+        vm.updateFilter = updateFilter;
+        vm.filterEvents = filterEvents;
         vm.eventClicked = eventClicked;
         vm.eventEdited = eventEdited;
         vm.eventDeleted = eventDeleted;
+        vm.cellIsOpen = true;
         vm.timespanClicked = timespanClicked;
 
         /* Functions */
+
+        /**
+         * @name updateFilter
+         * @desc Updates the filter
+         * @memberof Controllers.CalendarController
+         */
+        function updateFilter(field) {
+            // Flip the filter
+            vm.filter[field] = !vm.filter[field];
+
+            // Refilter events
+            filterEvents();
+        }
+
+        /**
+         * @name filterEvents
+         * @desc Filters the calendar events based on what filters are selected
+         * @memberof Controllers.CalendarController
+         */
+        function filterEvents() {
+            var eventsFiltered = [];
+            vm.eventsBySport.forEach(function(sport) {
+                if (vm.filter[sport._id] === true) {
+                    sport.events.forEach(function(event) {
+                        eventsFiltered.push(event);
+                    });
+                }
+            });
+            vm.events = eventsFiltered;
+        }
 
         /**
          * @name eventClicked

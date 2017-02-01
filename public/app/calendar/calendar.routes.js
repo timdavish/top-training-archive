@@ -27,7 +27,7 @@
                     title: 'Calendar',
                     resolve: {
                         eventPromise: ['eventService', function(eventService) {
-                            return eventService.getEvents();
+                            return eventService.getEventsBySport();
                         }]
                     }
                 }

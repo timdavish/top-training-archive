@@ -19,8 +19,10 @@
     function eventService($http, authService, userService) {
         var service = {
             events: [],
+            eventsBySport: [],
             addEvent: addEvent,
             getEvents: getEvents,
+            getEventsBySport: getEventsBySport,
             getEvent: getEvent,
             signUpEvent: signUpEvent
         };
@@ -38,15 +40,29 @@
             });
         }
 
-        // Get all events
+        // Get all events regardless of archived status (unsorted)
         function getEvents() {
             return $http.get('/events/getEvents').success(function(data) {
                 // Translate JSON'd dates back to moment dates for the calendar's sake
-                data.forEach( function(event) {
+                data.forEach(function(event) {
                     event.startsAt = new Date(event.startsAt);
                     event.endsAt = new Date(event.endsAt);
                 });
                 angular.copy(data, service.events);
+            });
+        }
+
+        // Get all events grouped and sorted by sport
+        function getEventsBySport() {
+            return $http.get('/events/getEventsBySport').success(function(data) {
+                // Translate JSON'd dates back to moment dates for the calendar's sake
+                data.forEach(function(sport) {
+                    sport.events.forEach(function(event) {
+                        event.startsAt = new Date(event.startsAt);
+                        event.endsAt = new Date(event.endsAt);
+                    });
+                });
+                angular.copy(data, service.eventsBySport);
             });
         }
 
