@@ -6,9 +6,27 @@
 
  /* This helps the ng-show/ng-hide animations start at the right place. */
  /* Since Angular has this but needs to load, this gives us the class early. */
- .ng-hide {
-     display: none!important;
- }
+
+/* My CSS */
+.ng-hide {
+    display: none!important;
+}
+
+.filterImage {
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+}
+
+.filterActive {
+    opacity: 1;
+}
+
+.filterInactive {
+    opacity: .5;
+}
+
+/* /My CSS */
 
 .glyphicon-thumbs-up {
     cursor: pointer

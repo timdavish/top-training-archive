@@ -1,17 +1,20 @@
 
 <!-- Calendar template -->
 
-<div class="content-section-b">
+<div class="content-section-a">
     <div class="container">
         <div class="row">
             <span ng-repeat="(filterOption, value) in vm.filter">
-                <button ng-click="vm.updateFilter(filterOption)">{{ filterOption }}</button>
+                <img ng-src="public/images/filters/{{filterOption}}.svg"
+                     ng-click="vm.updateFilter(filterOption)"
+                     ng-class="vm.filter[filterOption] ? 'filterActive' : 'filterInactive'"
+                     class="filterImage">
             </span>
         </div>
     </div>
 </div>
 
-<div class="content-section-a">
+<div class="content-section-b">
     <div class="container">
         <div class="row">
               <h2 class="text-center">{{ vm.calendarTitle }}</h2>

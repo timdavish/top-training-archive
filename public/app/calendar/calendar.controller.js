@@ -26,8 +26,7 @@
         vm.filter = { // move this to a service?
             // Keep all filter keys lowercase
             basketball: false,
-            baseball: false,
-            asdf: false
+            baseball: false
         };
         vm.updateFilter = updateFilter;
         vm.filterEvents = filterEvents;
@@ -47,6 +46,13 @@
         function updateFilter(field) {
             // Flip the filter
             vm.filter[field] = !vm.filter[field];
+
+            // Flip the class
+            if (vm.filter[field]) {
+                vm.class = "filterActive";
+            } else {
+                vm.class = "filterInactive";
+            }
 
             // Refilter events
             filterEvents();
