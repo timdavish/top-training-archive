@@ -21,7 +21,7 @@
                 state: 'home',
                 config: {
                     url: '/home',
-                    templateUrl: 'app/layout/home.ejs'
+                    templateUrl: 'public/app/layout/home.ejs'
                 }
             }
         ];

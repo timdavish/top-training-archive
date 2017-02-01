@@ -33,7 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public'))); // Set our public folder
+app.use(express.static(path.join(__dirname, '/'))); // Set our public folder
 app.use(passport.initialize()); // Use passport in our app
 
 // API routes

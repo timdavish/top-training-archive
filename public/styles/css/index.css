@@ -4,6 +4,12 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+ /* This helps the ng-show/ng-hide animations start at the right place. */
+ /* Since Angular has this but needs to load, this gives us the class early. */
+ .ng-hide {
+     display: none!important;
+ }
+
 .glyphicon-thumbs-up {
     cursor: pointer
 }

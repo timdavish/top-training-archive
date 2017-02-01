@@ -21,7 +21,7 @@
                 state: 'calendar',
                 config: {
                     url: '/calendar',
-                    templateUrl: 'app/calendar/calendar.ejs',
+                    templateUrl: 'public/app/calendar/calendar.ejs',
                     controller: 'CalendarController',
                     controllerAs: 'vm',
                     title: 'Calendar',

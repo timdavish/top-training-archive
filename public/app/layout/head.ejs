@@ -8,106 +8,99 @@
 
 <title>Top Training</title>
 
-<!-- Style links -->
-<!-- Bootstrap core CSS -->
-<link href="styles/vendor/bootstrap/bootstrap.css" rel="stylesheet">
-
-<!-- Custom fonts -->
-<link href="styles/vendor/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-<!-- My CSS -->
-<link href="styles/css/index.css" rel="stylesheet">
-
-
-<!-- Script links -->
-<!-- Angular -->
-<script src="app/vendor/angular/angular.js"></script>
-<script src="app/vendor/angular-ui-router/release/angular-ui-router.js"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script> -->
-<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script> -->
+<!-- inject-vendor:css -->
+<!-- Bootstrap -->
+<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Angular Bootstrap Calendar -->
-<script src="https://unpkg.com/moment@2.17.1"></script>
-<script src="https://unpkg.com/interactjs@1"></script>
-<!-- <script src="https://unpkg.com/angular@1.6.1/angular.js"></script> -->
-<!-- <script src="https://unpkg.com/angular-animate@1.6.1/angular-animate.js"></script> -->
-<script src="https://unpkg.com/angular-ui-bootstrap@2/dist/ui-bootstrap-tpls.js"></script>
-<script src="https://unpkg.com/rrule@2"></script>
-<script src="https://unpkg.com/angular-bootstrap-colorpicker@3"></script>
-<script src="https://unpkg.com/angular-bootstrap-calendar"></script>
-<link href="https://unpkg.com/bootstrap@3/dist/css/bootstrap.css" rel="stylesheet">
-<link href="https://unpkg.com/angular-bootstrap-colorpicker@3/css/colorpicker.min.css" rel="stylesheet">
-<link href="https://unpkg.com/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+<link href="/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+<link href="/bower_components/angular-bootstrap-colorpicker/css/colorpicker.min.css" rel="stylesheet">
 
-<!-- <script src="app/vendor/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script> -->
-<!-- <script src="app/vendor/angular-ui-bootstrap/dist/ui-bootstrap.js"></script> -->
-<script src="app/vendor/angular-animate/angular-animate.js"></script>
-
-<!-- jQuery -->
-<script src="app/vendor/jquery/jquery.js"></script>
-
-<!-- Bootstrap core JavaScript -->
-<script src="app/vendor/bootstrap/bootstrap.min.js"></script>
-
-<!-- Moment -->
-<!-- <script src="app/vendor/moment/moment.js"></script> -->
+<!-- Custom fonts -->
+<link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<!-- endinject -->
 
 
-<!-- My JavaScripts -->
-<!-- Main app module -->
-<script src="app/app.module.js"></script>
+<!-- inject:css -->
+<link href="/public/styles/css/index.css" rel="stylesheet">
+<!-- endinject -->
 
-<!-- Core -->
-<script src="app/core/core.module.js"></script>
-<script src="app/core/core.constants.js"></script>
 
+<!-- inject-vendor:js -->
+<!-- Angular -->
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Angular Bootstrap Calendar -->
+<script src="/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="/bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+<script src="/bower_components/moment/min/moment.min.js"></script>
+<script src="/bower_components/interactjs/dist/interact.min.js"></script>
+<script src="/bower_components/rrule/lib/rrule.js"></script>
+<!-- endinject -->
+
+
+<!-- inject:js -->
+<!-- App module -->
+<script src="/public/app/app.module.js"></script>
+
+<!-- Core Module -->
+<script src="/public/app/core/core.module.js"></script>
+<script src="/public/app/core/core.constants.js"></script>
 <!-- Services -->
-<script src="app/core/services/authentication.service.js"></script>
-<script src="app/core/services/user.service.js"></script>
-<script src="app/core/services/event.service.js"></script>
-<script src="app/core/services/posts.service.js"></script>
+<script src="/public/app/core/services/authentication.service.js"></script>
+<script src="/public/app/core/services/user.service.js"></script>
+<script src="/public/app/core/services/event.service.js"></script>
+<script src="/public/app/core/services/posts.service.js"></script>
 <!-- Directives -->
-<script src="app/core/directives/equals.directive.js"></script>
+<script src="/public/app/core/directives/equals.directive.js"></script>
 
-<!-- Blocks -->
+<!-- Reusable Blocks/Modules -->
 <!-- Exception -->
-<script src="app/blocks/exception/exception.module.js"></script>
+<script src="/public/app/blocks/exception/exception.module.js"></script>
 <!-- Logger -->
-<script src="app/blocks/logger/logger.module.js"></script>
+<script src="/public/app/blocks/logger/logger.module.js"></script>
 <!-- Router -->
-<script src="app/blocks/router/router.module.js"></script>
-<script src="app/blocks/router/router-helper.provider.js"></script>
+<script src="/public/app/blocks/router/router.module.js"></script>
+<script src="/public/app/blocks/router/router-helper.provider.js"></script>
 
-<!-- Modules -->
-<!-- Layout -->
-<script src="app/layout/layout.module.js"></script>
-<script src="app/layout/layout.routes.js"></script>
-<script src="app/layout/shell.controller.js"></script>
-<script src="app/layout/top-nav.controller.js"></script>
+<!-- Other Modules -->
+<!-- Layout Module -->
+<script src="/public/app/layout/layout.module.js"></script>
+<script src="/public/app/layout/layout.routes.js"></script>
+<script src="/public/app/layout/shell.controller.js"></script>
+<script src="/public/app/layout/top-nav.controller.js"></script>
 
-<!-- User -->
-<script src="app/user/user.module.js"></script>
-<script src="app/user/user.routes.js"></script>
-<script src="app/user/login.controller.js"></script>
-<script src="app/user/register.controller.js"></script>
+<!-- User Module -->
+<script src="/public/app/user/user.module.js"></script>
+<script src="/public/app/user/user.routes.js"></script>
+<script src="/public/app/user/login.controller.js"></script>
+<script src="/public/app/user/register.controller.js"></script>
 
-<!-- Calendar -->
-<script src="app/calendar/calendar.module.js"></script>
-<script src="app/calendar/calendar.config.js"></script>
-<script src="app/calendar/calendar.routes.js"></script>
-<script src="app/calendar/calendar.controller.js"></script>
+<!-- Calendar Module -->
+<script src="/public/app/calendar/calendar.module.js"></script>
+<script src="/public/app/calendar/calendar.config.js"></script>
+<script src="/public/app/calendar/calendar.routes.js"></script>
+<script src="/public/app/calendar/calendar.controller.js"></script>
 
-<!-- Event -->
-<script src="app/event/event.module.js"></script>
-<script src="app/event/event.routes.js"></script>
-<script src="app/event/event-detail.controller.js"></script>
-<script src="app/event/event-list.controller.js"></script>
+<!-- Event Module -->
+<script src="/public/app/event/event.module.js"></script>
+<script src="/public/app/event/event.routes.js"></script>
+<script src="/public/app/event/event-detail.controller.js"></script>
+<script src="/public/app/event/event-list.controller.js"></script>
 
-<!-- Post -->
-<script src="app/post/post.module.js"></script>
-<script src="app/post/post.routes.js"></script>
-<script src="app/post/post-detail.controller.js"></script>
-<script src="app/post/post-list.controller.js"></script>
+<!-- Post Module -->
+<script src="/public/app/post/post.module.js"></script>
+<script src="/public/app/post/post.routes.js"></script>
+<script src="/public/app/post/post-detail.controller.js"></script>
+<script src="/public/app/post/post-list.controller.js"></script>
+<!-- endinject -->
 
 <!-- /Header -->

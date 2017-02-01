@@ -21,7 +21,7 @@
                 state: 'events',
                 config: {
                     url: '/events',
-                    templateUrl: 'app/event/event-list.ejs',
+                    templateUrl: 'public/app/event/event-list.ejs',
                     controller: 'EventListController',
                     controllerAs: 'vm',
                     title: 'Events',
@@ -36,7 +36,7 @@
                 state: 'event',
                 config: {
                     url: '/events/{id}',
-                    templateUrl: 'app/event/event-detail.ejs',
+                    templateUrl: 'public/app/event/event-detail.ejs',
                     controller: 'EventDetailController',
                     controllerAs: 'vm',
                     title: 'Event',

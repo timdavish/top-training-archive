@@ -1,0 +1,18 @@
+{
+  "name": "Top_Training",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.5.7",
+    "angular-animate": "1.5.7",
+    "angular-bootstrap": "^2.5.0",
+    "angular-bootstrap-calendar": "^0.27.5",
+    "angular-bootstrap-colorpicker": "3.0.25",
+    "angular-ui-router": "0.3.2",
+    "bootstrap": "3.3.7",
+    "font-awesome": "^4.7.0",
+    "interactjs": "1.2.8",
+    "jquery": "2.1.1",
+    "moment": "2.10.0",
+    "rrule": "2.1.0"
+  }
+}

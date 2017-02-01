@@ -21,7 +21,7 @@
                 state: 'login',
                 config: {
                     url: '/login',
-                    templateUrl: 'app/user/login.ejs',
+                    templateUrl: 'public/app/user/login.ejs',
                     controller: 'LogInController',
                     controllerAs: 'vm',
                     title: 'Login',
@@ -36,7 +36,7 @@
                 state: 'register',
                 config: {
                     url: '/register',
-                    templateUrl: 'app/user/register.ejs',
+                    templateUrl: 'public/app/user/register.ejs',
                     controller: 'RegisterController',
                     controllerAs: 'vm',
                     title: 'Register',

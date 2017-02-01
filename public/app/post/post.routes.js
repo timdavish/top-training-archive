@@ -21,7 +21,7 @@
                 state: 'posts',
                 config: {
                     url: '/posts',
-                    templateUrl: 'app/post/post-list.ejs',
+                    templateUrl: 'public/app/post/post-list.ejs',
                     controller: 'PostListController',
                     controllerAs: 'vm',
                     title: 'Posts',
@@ -36,7 +36,7 @@
                 state: 'post',
                 config: {
                     url: '/posts/{id}',
-                    templateUrl: 'app/post/post-detail.ejs',
+                    templateUrl: 'public/app/post/post-detail.ejs',
                     controller: 'PostDetailController',
                     controllerAs: 'vm',
                     title: 'Post',
