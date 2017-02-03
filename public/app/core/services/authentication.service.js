@@ -1,6 +1,6 @@
 /**
  * Authentication Factory
- * @namespace Factories
+ * @namespace Services
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
@@ -14,7 +14,7 @@
     /**
      * @namespace authService
      * @desc Service factory for authentication
-     * @memberof Factories
+     * @memberof Services
      */
     function authService($http, $window) {
         var service = {

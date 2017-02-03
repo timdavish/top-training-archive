@@ -1,6 +1,6 @@
 /**
  * eventService Factory
- * @namespace Factories
+ * @namespace Services
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
@@ -9,14 +9,14 @@
         .module('app.core')
         .factory('eventService', eventService);
 
-    eventService.$inject = ['$http', 'authService', 'userService'];
+    eventService.$inject = ['$http', 'moment', 'authService', 'userService'];
 
     /**
      * @namespace eventService
      * @desc Service factory for events
-     * @memberof Factories
+     * @memberof Services
      */
-    function eventService($http, authService, userService) {
+    function eventService($http, moment, authService, userService) {
         var service = {
             events: [],
             eventsBySport: [],
@@ -31,7 +31,14 @@
 
         /* Functions */
 
-        // Create a new event
+        /**
+         * @name addEvent
+         * @desc Create a new event
+         * @memberof Services.eventService
+         * @param {number} userId The id of the trainer who created the event
+         * @param {event} event The event data
+         * @return Success status
+         */
         function addEvent(userId, event) {
             return $http.post('/events/addEvent/' + userId, event, {
                 headers: { Authorization: 'Bearer ' + authService.getToken() }
@@ -40,33 +47,64 @@
             });
         }
 
-        // Get all events regardless of archived status (unsorted)
+        /**
+         * @name getEvents
+         * @desc Get all events regardless of archived status (unsorted)
+         * @memberof Services.eventService
+         * @return Success status
+         */
         function getEvents() {
             return $http.get('/events/getEvents').success(function(data) {
                 // Translate JSON'd dates back to moment dates for the calendar's sake
-                data.forEach(function(event) {
-                    event.startsAt = new Date(event.startsAt);
-                    event.endsAt = new Date(event.endsAt);
-                });
+                translateDates(data);
+
+                // Keep angular copy of data updated
                 angular.copy(data, service.events);
             });
         }
 
-        // Get all events grouped and sorted by sport
+        /**
+         * @name getEventsBySport
+         * @desc Get all events grouped and sorted by sport
+         * @memberof Services.eventService
+         * @return Success status
+         */
         function getEventsBySport() {
             return $http.get('/events/getEventsBySport').success(function(data) {
                 // Translate JSON'd dates back to moment dates for the calendar's sake
-                data.forEach(function(sport) {
-                    sport.events.forEach(function(event) {
-                        event.startsAt = new Date(event.startsAt);
-                        event.endsAt = new Date(event.endsAt);
-                    });
+                data[0].personal.forEach(function(sport) {
+                    translateDates(sport.events);
                 });
-                angular.copy(data, service.eventsBySport);
+                data[0].group.forEach(function(sport) {
+                    translateDates(sport.events);
+                });
+
+                // Keep angular copy of data updated
+                angular.copy(data[0], service.eventsBySport);
             });
         }
 
-        // Get a single event by id
+        /**
+         * @name translateDates
+         * @desc Translate JSON'd dates back to moment dates for the calendar's sake
+         * @memberof Services.eventService
+         * @param {events} events The events to translate dates for
+         * @return Success status
+         */
+        function translateDates(events) {
+            events.forEach(function(event) {
+                event.startsAt = new Date(event.startsAt);
+                event.endsAt = new Date(event.endsAt);
+            });
+        }
+
+        /**
+         * @name getEvent
+         * @desc Get a single event by id
+         * @memberof Services.eventService
+         * @param {number} eventId The id of the event to get
+         * @return Success status
+         */
         function getEvent(eventId) {
             return $http.get('/events/getEvent/' + eventId).then(function(res) {
                 // Translate JSON'd moment date into readable format
@@ -76,7 +114,13 @@
             });
         }
 
-        // Sign a student up for an event
+        /**
+         * @name signUpEvent
+         * @desc Sign a student up for an event
+         * @memberof Services.eventService
+         * @param {event} event The event being signed up for
+         * @return Success status
+         */
         function signUpEvent(event) {
             var userId = userService.getUserId();
             return $http.put('/events/signUpEvent/' + event._id + '/' + userId, null, {

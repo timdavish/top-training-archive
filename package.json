@@ -3,13 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node ./bin/start",
     "stop": "taskkill /im node.exe /F"
   },
   "dependencies": {
-    "angular": "^1.6.1",
-    "angular-bootstrap-calendar": "^0.27.5",
-    "angular-ui-bootstrap": "^2.5.0",
     "body-parser": "~1.15.2",
     "bootstrap": "^3.3.7",
     "cookie-parser": "~1.4.3",
@@ -18,7 +15,6 @@
     "express": "~4.14.0",
     "express-jwt": "^5.1.0",
     "jsonwebtoken": "^7.2.1",
-    "moment": "^2.17.1",
     "mongoose": "^4.7.6",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",

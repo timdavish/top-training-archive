@@ -1,6 +1,6 @@
 /**
  * userService Factory
- * @namespace Factories
+ * @namespace Services
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
@@ -14,7 +14,7 @@
     /**
      * @namespace userService
      * @desc Service factory for users
-     * @memberof Factories
+     * @memberof Services
      */
     function userService($http, authService) {
         var service = {

@@ -9,52 +9,85 @@
         .module('app.calendar')
         .controller('CalendarController', CalendarController);
 
-    CalendarController.$inject = ['calendarConfig', 'eventService'];
+    CalendarController.$inject = ['moment', 'calendarConfig', 'eventService'];
 
     /**
      * @namespace CalendarController
      * @desc Calendar controller
      * @memberof Controllers
      */
-    function CalendarController(calendarConfig, eventService) {
+    function CalendarController(moment, calendarConfig, eventService) {
         var vm = this;
 
+        vm.filter = {};
+        vm.events = [];
+        vm.eventsBySport = eventService.eventsBySport;
+
+        // Calendar variables
         vm.calendarView = 'month';
         vm.viewDate = new Date();
-        vm.events = [];
-        vm.eventsBySport = eventService.eventsBySport
-        vm.filter = { // move this to a service?
-            // Keep all filter keys lowercase
-            basketball: false,
-            baseball: false
-        };
+        vm.cellIsOpen = false;
+
         vm.updateFilter = updateFilter;
         vm.filterEvents = filterEvents;
         vm.eventClicked = eventClicked;
         vm.eventEdited = eventEdited;
         vm.eventDeleted = eventDeleted;
-        vm.cellIsOpen = true;
         vm.timespanClicked = timespanClicked;
 
+        activate();
+
         /* Functions */
+
+        /**
+         * @name activate
+         * @desc Activates the controller
+         * @memberof Controllers.CalendarController
+         */
+        function activate() {
+            vm.filter = {
+                personal: {
+                    active: true,
+                    count: 0
+                },
+                group: {
+                    active: true,
+                    count: 0
+                },
+                basketball: {
+                    active: true,
+                    count: 0
+                },
+                baseball: {
+                    active: false,
+                    count: 0
+                },
+                weights: {
+                    active: false,
+                    count: 0
+                }
+            };
+
+            filterEvents();
+        }
 
         /**
          * @name updateFilter
          * @desc Updates the filter
          * @memberof Controllers.CalendarController
          */
-        function updateFilter(field) {
+        function updateFilter(filterKey) {
             // Flip the filter
-            vm.filter[field] = !vm.filter[field];
+            vm.filter[filterKey]['active'] = !vm.filter[filterKey]['active'];
 
             // Flip the class
-            if (vm.filter[field]) {
+            if (vm.filter[filterKey]['active']) {
                 vm.class = "filterActive";
             } else {
                 vm.class = "filterInactive";
             }
 
-            // Refilter events
+            // Filter events
             filterEvents();
         }
 
@@ -65,13 +98,26 @@
          */
         function filterEvents() {
             var eventsFiltered = [];
-            vm.eventsBySport.forEach(function(sport) {
-                if (vm.filter[sport._id] === true) {
-                    sport.events.forEach(function(event) {
-                        eventsFiltered.push(event);
-                    });
-                }
-            });
+
+            if (vm.filter['personal']['active']) {
+                vm.eventsBySport.personal.forEach(function(sport) {
+                    if (vm.filter[sport._id] && vm.filter[sport._id]['active']) {
+                        sport.events.forEach(function(event) {
+                            eventsFiltered.push(event);
+                        });
+                    }
+                });
+            }
+            if (vm.filter['group']['active']) {
+                vm.eventsBySport.group.forEach(function(sport) {
+                    if (vm.filter[sport._id] && vm.filter[sport._id]['active']) {
+                        sport.events.forEach(function(event) {
+                            eventsFiltered.push(event);
+                        });
+                    }
+                });
+            }
+
             vm.events = eventsFiltered;
         }
 

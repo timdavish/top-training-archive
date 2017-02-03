@@ -1,6 +1,6 @@
 /**
  * postService Factory
- * @namespace Factories
+ * @namespace Services
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
@@ -12,9 +12,9 @@
     postService.$inject = ['$http', 'authService'];
 
     /**
-     * @namespace postservice
+     * @namespace postService
      * @desc Service factory for posts
-     * @memberof Factories
+     * @memberof Services
      */
     function postService($http, authService) {
         var service = {

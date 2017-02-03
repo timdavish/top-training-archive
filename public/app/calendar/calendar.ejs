@@ -3,13 +3,16 @@
 
 <div class="content-section-a">
     <div class="container">
-        <div class="row">
-            <span ng-repeat="(filterOption, value) in vm.filter">
-                <img ng-src="public/images/filters/{{filterOption}}.svg"
-                     ng-click="vm.updateFilter(filterOption)"
-                     ng-class="vm.filter[filterOption] ? 'filterActive' : 'filterInactive'"
+        <div class="row filterRow">
+            <div ng-repeat="(filterKey, properties) in vm.filter"
+                 class="filters">
+                <div ng-class="vm.filter[filterKey]['active'] ? 'filterActive' : 'filterInactive'"
+                     ng-style="{'background-image': 'url(public/images/filters/{{filterKey}}.svg)'}"
+                     ng-click="vm.updateFilter(filterKey)"
                      class="filterImage">
-            </span>
+                </div>
+                <div class="filterCount">{{filterKey}}: {{properties['count']}}</div>
+            </div>
         </div>
     </div>
 </div>
