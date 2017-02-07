@@ -108,6 +108,59 @@ router.get('/getEventsBySport', function(req, res, next) {
     });
 });
 
+// (GET) Get all events grouped and sorted high->low by sport
+router.get('/getEventsBySport2', function(req, res, next) {
+    Event.aggregate([
+        { $match: { // Where
+            archived: false // Not archived
+        }},
+        { $group: { // Group
+            _id: { $toLower: "$sport" }, // By sport
+            count: { $sum: 1 }, // Keep a count/sport
+
+            eventId: { $first: '$_id' }
+        }},
+        { $facet: {
+            personal: [
+                { $match: { // Where
+                    slots: 1 // Exactly 1 slot
+                    // archived: false // Not archived
+                }}
+                ,
+                { $group: { // Group
+                    _id: null, //
+                    count: { $sum: 1 }, // Keep a count
+                    events: { $push: "$$ROOT" } // Keep all event data
+                }},
+                { $sort : { // Sort
+                    count: -1, // Descending, count
+                    _id: 1 // Alphabetically, sport
+                }}
+            ],
+            group: [
+                { $match: { // Where
+                    slots: { $gt: 1 }, // Greater than 1 slot
+                    archived: false // Not archived
+                }}
+                // ,
+                // { $group: { // Group
+                //     _id: { $toLower: "$sport" }, // By sport
+                //     count: { $sum: 1 }, // Keep a count
+                //     events: { $push: "$$ROOT" } // Keep all event data
+                // }},
+                // { $sort : { // Sort
+                //     count: -1, // Descending, count
+                //     _id: 1 // Alphabetically, sport
+                // }}
+            ]
+        }}
+    ], function(err, events) {
+        if (err) return next(err);
+
+        res.json(events);
+    });
+});
+
 // (GET) Get a single event by id
 router.get('/getEvent/:event', function(req, res) {
     req.event.populate('students', function(err, event) {

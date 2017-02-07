@@ -21,10 +21,10 @@
 
         vm.filter = {};
         vm.events = [];
-        vm.eventsBySport = eventService.eventsBySport;
+        vm.eventsUnfiltered = eventService.eventsBySport;
 
         // Calendar variables
-        vm.calendarView = 'month';
+        vm.calendarView = 'week';
         vm.viewDate = new Date();
         vm.cellIsOpen = false;
 
@@ -100,7 +100,7 @@
             var eventsFiltered = [];
 
             if (vm.filter['personal']['active']) {
-                vm.eventsBySport.personal.forEach(function(sport) {
+                vm.eventsUnfiltered.personal.forEach(function(sport) {
                     if (vm.filter[sport._id] && vm.filter[sport._id]['active']) {
                         sport.events.forEach(function(event) {
                             eventsFiltered.push(event);
@@ -109,7 +109,7 @@
                 });
             }
             if (vm.filter['group']['active']) {
-                vm.eventsBySport.group.forEach(function(sport) {
+                vm.eventsUnfiltered.group.forEach(function(sport) {
                     if (vm.filter[sport._id] && vm.filter[sport._id]['active']) {
                         sport.events.forEach(function(event) {
                             eventsFiltered.push(event);

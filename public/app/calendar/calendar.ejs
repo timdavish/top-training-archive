@@ -77,9 +77,9 @@
                 on-event-click="vm.eventClicked(calendarEvent)"
                 on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
                 cell-is-open="vm.cellIsOpen"
-                day-view-start="06:00"
-                day-view-end="22:59"
-                day-view-split="30"
+                day-view-start="08:00"
+                day-view-end="21:59"
+                day-view-split="60"
                 cell-modifier="vm.modifyCell(calendarCell)"
                 cell-auto-open-disabled="true"
                 on-timespan-click="vm.timespanClicked(calendarDate, calendarCell)">

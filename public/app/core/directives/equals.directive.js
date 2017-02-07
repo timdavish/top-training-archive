@@ -7,15 +7,17 @@
 
     angular
         .module('app.core')
-        .directive('equals', function() {
-            return {
-                restrict: 'A', // only activate on element attribute
-                require: '?ngModel', // get a hold of NgModelController
-                link: function(scope, elem, attrs, ngModel) {
-                    if(!ngModel) return; // do nothing if no ng-model
+        .directive('equals', equals);
 
-                    // watch own value and re-validate on change
-                    scope.$watch(attrs.ngModel, function() {
+    function equals() {
+        return {
+            restrict: 'A', // only activate on element attribute
+            require: '?ngModel', // get a hold of NgModelController
+            link: function(scope, elem, attrs, ngModel) {
+                if(!ngModel) return; // do nothing if no ng-model
+
+                // watch own value and re-validate on change
+                scope.$watch(attrs.ngModel, function() {
                     validate();
                 });
 
@@ -35,6 +37,6 @@
                     }
                 };
             }
-        }
-    });
+        };
+    }
 })();
