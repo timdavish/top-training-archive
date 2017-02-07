@@ -161,6 +161,54 @@ router.get('/getEventsBySport2', function(req, res, next) {
     });
 });
 
+// {
+//     personal: {
+//         basketball: {
+//             count: #,
+//             events: {}
+//         },
+//         baseball: {
+//             count: #,
+//             events: {}
+//         }
+//     },
+//     group: {
+//         basketball: {
+//             count: #,
+//             events: {}
+//         },
+//         baseball: {
+//             count: #,
+//             events: {}
+//         }
+//     }
+// }
+//
+// {
+//     basketball: {
+//         count: #,
+//         personal: {
+//             count: #,
+//             events: {}
+//         },
+//         group: {
+//             count: #,
+//             events: {}
+//         }
+//     },
+//     baseball: {
+//         count: #,
+//         personal: {
+//             count: #,
+//             events: {}
+//         },
+//         group: {
+//             count: #,
+//             events: {}
+//         }
+//     }
+// }
+
 // (GET) Get a single event by id
 router.get('/getEvent/:event', function(req, res) {
     req.event.populate('students', function(err, event) {

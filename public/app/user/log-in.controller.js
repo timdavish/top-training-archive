@@ -1,5 +1,5 @@
 /**
- * Controller for login.html
+ * Controller for log-in.html
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -18,7 +18,7 @@
      */
     function LogInController($state, userService) {
         var vm = this;
-        
+
         vm.logIn = logIn;
 
         /* Functions */

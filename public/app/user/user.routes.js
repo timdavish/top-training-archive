@@ -18,13 +18,13 @@
     function getStates() {
         return [
             {
-                state: 'login',
+                state: 'log-in',
                 config: {
-                    url: '/login',
-                    templateUrl: 'public/app/user/login.ejs',
+                    url: '/log-in',
+                    templateUrl: 'public/app/user/log-in.ejs',
                     controller: 'LogInController',
                     controllerAs: 'vm',
-                    title: 'Login',
+                    title: 'Log In',
                     onEnter: ['$state', 'userService', function($state, userService) {
                         if (userService.isLoggedIn()) {
                             $state.go('home');
@@ -33,13 +33,28 @@
                 }
             },
             {
-                state: 'register',
+                state: 'sign-up-client',
                 config: {
-                    url: '/register',
-                    templateUrl: 'public/app/user/register.ejs',
-                    controller: 'RegisterController',
+                    url: '/sign-up-client',
+                    templateUrl: 'public/app/user/sign-up-client.ejs',
+                    controller: 'SignUpClientController',
                     controllerAs: 'vm',
-                    title: 'Register',
+                    title: 'Client Sign Up',
+                    onEnter: ['$state', 'userService', function($state, userService) {
+                        if (userService.isLoggedIn()) {
+                            $state.go('home');
+                        }
+                    }]
+                }
+            },
+            {
+                state: 'sign-up-trainer',
+                config: {
+                    url: '/sign-up-trainer',
+                    templateUrl: 'public/app/user/sign-up-trainer.ejs',
+                    controller: 'SignUpTrainerController',
+                    controllerAs: 'vm',
+                    title: 'Trainer Sign Up',
                     onEnter: ['$state', 'userService', function($state, userService) {
                         if (userService.isLoggedIn()) {
                             $state.go('home');

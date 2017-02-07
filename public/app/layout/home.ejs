@@ -19,8 +19,8 @@
                         <li>
                             <a href="/#/calendar" class="btn btn-default btn-lg header-button"><span class="header-button-text">View Calendar</span></a>
                         </li>
-                        <li>
-                            <a class="btn btn-default btn-lg header-button"><span class="header-button-text">Be a Trainer</span></a>
+                        <li ng-hide="vm.isLoggedIn()">
+                            <a href="/#/sign-up-trainer" class="btn btn-default btn-lg header-button"><span class="header-button-text">Be a Trainer</span></a>
                         </li>
                     </ul>
                 </div>

@@ -7,7 +7,7 @@
 
             <!-- Header -->
             <div class="page-header">
-                <h2>Register</h1>
+                <h2>Sign Up</h2>
                 <small>* indicates required field.</small>
             </div>
 
@@ -27,7 +27,7 @@
             </div>
 
             <!-- Registration form -->
-            <form name="registrationForm" ng-submit="vm.register()"
+            <form name="registrationForm" ng-submit="vm.signUpClient()"
                 style="margin-top: 30px;">
 
                 <!-- First name -->
@@ -70,14 +70,9 @@
                 </div>
                 <!-- /Zip code -->
 
-                <div class="form-group">
-                    <input type="radio" name="usertype" value="student" ng-model="vm.user.usertype" checked="checked" /> I need a trainer </br>
-                    <input type="radio" name="usertype" value="trainer" ng-model="vm.user.usertype" /> I am a trainer
-                </div>
-
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
-            
+
         </div>
     </div>
 </div>

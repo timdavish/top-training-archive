@@ -23,8 +23,8 @@ router.param('user', function(req, res, next, id) {
     });
 });
 
-// (POST) User registration
-router.post('/register', function(req, res, next) {
+// (POST) New user sign up
+router.post('/signUp', function(req, res, next) {
     // Ensure all fields are filled out
     if (!req.body.email || !req.body.password || !req.body.usertype) {
         return res.status(400).json({ message: 'Please fill out all fields.' });

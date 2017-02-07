@@ -18,7 +18,7 @@
      */
     function userService($http, authService) {
         var service = {
-            register: register,
+            signUp: signUp,
             logIn: logIn,
             logOut: logOut,
             isLoggedIn: isLoggedIn,
@@ -32,9 +32,9 @@
 
         /* Functions */
 
-        // Register a new user
-        function register(user) {
-            return $http.post('/users/register', user).success(function(data) {
+        // Sign up a new user
+        function signUp(user) {
+            return $http.post('/users/signUp', user).success(function(data) {
                 authService.saveToken(data.token);
             });
         }

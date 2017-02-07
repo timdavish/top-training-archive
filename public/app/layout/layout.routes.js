@@ -21,7 +21,10 @@
                 state: 'home',
                 config: {
                     url: '/home',
-                    templateUrl: 'public/app/layout/home.ejs'
+                    templateUrl: 'public/app/layout/home.ejs',
+                    controller: 'HomeController',
+                    controllerAs: 'vm',
+                    title: 'Home'
                 }
             }
         ];
