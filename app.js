@@ -40,6 +40,7 @@ app.use(passport.initialize()); // Use passport in our app
 app.use('/', require('./server/routes/index'));
 app.use('/users', require('./server/routes/users'));
 app.use('/events', require('./server/routes/events'));
+app.use('/posts', require('./server/routes/posts'));
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
