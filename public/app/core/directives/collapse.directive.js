@@ -9,6 +9,11 @@
         .module('app.core')
         .directive('collapse', collapse);
 
+    /**
+     * @namespace collapse
+     * @desc collapse directive
+     * @memberof Directives
+     */
     function collapse() {
         return {
             restrict: 'E',

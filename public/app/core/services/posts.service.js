@@ -31,7 +31,12 @@
 
         /* Functions */
 
-        // Create a new post
+        /**
+         * @namespace addPost
+         * @desc Adds a new post
+         * @param {post} post The post to add
+         * @memberof Services.postService
+         */
         function addPost(post) {
             return $http.post('/posts/addPost', post, {
                 headers: { Authorization: 'Bearer ' + authService.getToken() }
@@ -40,21 +45,35 @@
             });
         }
 
-        // Get all posts
+        /**
+         * @namespace getPosts
+         * @desc Get all posts
+         * @memberof Services.postService
+         */
         function getPosts() {
             return $http.get('/posts/getPosts').success(function(data) {
                 angular.copy(data, service.posts);
             });
         }
 
-        // Get a single post by id
+        /**
+         * @namespace getPost
+         * @desc Get a single post by id
+         * @param {id} id The id of the post to get
+         * @memberof Services.postService
+         */
         function getPost(id) {
             return $http.get('/posts/getPost/' + id).then(function(res) {
                 return res.data;
             });
         }
 
-        // Upvote a post
+        /**
+         * @namespace upvotePost
+         * @desc Upvote a post
+         * @param {post} post The post to upvote
+         * @memberof Services.postService
+         */
         function upvotePost(post) {
             return $http.put('/posts/upvotePost/' + post._id, null, {
                 headers: { Authorization: 'Bearer ' + authService.getToken() }
@@ -63,14 +82,26 @@
             });
         }
 
-        // Add a comment to a post
+        /**
+         * @namespace addComment
+         * @desc Add a comment to a post
+         * @param {id} id The id of the post to add a comment to
+         * @param {comment} comment The comment to add to the post
+         * @memberof Services.postService
+         */
         function addComment(id, comment) {
             return $http.post('/posts/addComment/' + id, comment, {
                 headers: { Authorization: 'Bearer ' + authService.getToken() }
             });
         }
 
-        // Upvote a comment
+        /**
+         * @namespace upvoteComment
+         * @desc Upvote a comment
+         * @param {post} post The post that the comment is pinned to
+         * @param {comment} comment The comment to upvote
+         * @memberof Services.postService
+         */
         function upvoteComment(post, comment) {
             return $http.put('/posts/upvoteComment/' + post._id + '/comments/' + comment._id, null, {
                 headers: { Authorization: 'Bearer ' + authService.getToken() }

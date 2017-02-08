@@ -11,10 +11,20 @@
 
     appRun.$inject = ['routerHelper'];
 
+    /**
+     * @namespace appRun
+     * @desc Begins configuration for layout routes
+     * @memberof Configurations
+     */
     function appRun(routerHelper) {
         routerHelper.configureStates(getStates());
     }
 
+    /**
+     * @namespace getStates
+     * @desc Layout routes
+     * @memberof Configurations
+     */
     function getStates() {
         return [
             {

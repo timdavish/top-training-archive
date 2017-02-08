@@ -11,10 +11,20 @@
 
     appRun.$inject = ['routerHelper'];
 
+    /**
+     * @namespace appRun
+     * @desc Begins configuration for search routes
+     * @memberof Configurations
+     */
     function appRun(routerHelper) {
         routerHelper.configureStates(getStates());
     }
 
+    /**
+     * @namespace getStates
+     * @desc Search routes
+     * @memberof Configurations
+     */
     function getStates() {
         return [
             {

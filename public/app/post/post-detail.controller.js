@@ -18,10 +18,10 @@
      */
     function PostDetailController(userService, postService, post) {
         var vm = this;
-        
-        vm.isLoggedIn = userService.isLoggedIn;
 
+        vm.isLoggedIn = userService.isLoggedIn;
         vm.post = post;
+
         vm.addComment = addComment;
         vm.incrementUpvotes = incrementUpvotes;
 
@@ -47,6 +47,7 @@
         /**
          * @name incrementUpvotes
          * @desc Increments the upvotes on a comment
+         * @param {comment} comment The comment to increment upvotes for
          * @memberof Controllers.PostDetailController
          */
         function incrementUpvotes(comment) {

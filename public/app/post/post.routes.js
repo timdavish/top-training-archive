@@ -11,10 +11,20 @@
 
     appRun.$inject = ['routerHelper'];
 
+    /**
+     * @namespace appRun
+     * @desc Begins configuration for post routes
+     * @memberof Configurations
+     */
     function appRun(routerHelper) {
         routerHelper.configureStates(getStates());
     }
 
+    /**
+     * @namespace getStates
+     * @desc Post routes
+     * @memberof Configurations
+     */
     function getStates() {
         return [
             {

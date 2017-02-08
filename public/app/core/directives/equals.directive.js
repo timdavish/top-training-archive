@@ -9,6 +9,11 @@
         .module('app.core')
         .directive('equals', equals);
 
+    /**
+     * @namespace equals
+     * @desc equals directive
+     * @memberof Directives
+     */
     function equals() {
         return {
             restrict: 'A', // only activate on element attribute

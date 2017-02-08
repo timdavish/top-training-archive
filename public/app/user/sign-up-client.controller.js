@@ -20,6 +20,7 @@
         var vm = this;
 
         vm.emailFormat = "/[^@]+@[^@]+/";
+        
         vm.signUpClient = signUpClient;
 
         /* Functions */

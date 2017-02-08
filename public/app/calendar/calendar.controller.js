@@ -22,8 +22,6 @@
         vm.filter = {};
         vm.events = [];
         vm.eventsUnfiltered = eventService.eventsBySport;
-
-        // Calendar variables
         vm.calendarView = 'week';
         vm.viewDate = new Date();
         vm.cellIsOpen = false;
@@ -74,6 +72,7 @@
         /**
          * @name updateFilter
          * @desc Updates the filter
+         * @param {String} filterKey the filter key to update
          * @memberof Controllers.CalendarController
          */
         function updateFilter(filterKey) {

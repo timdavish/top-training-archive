@@ -11,6 +11,11 @@
 
     configure.$inject = ['calendarConfig'];
 
+    /**
+     * @namespace configure
+     * @desc Calendar configuration
+     * @memberof Configurations
+     */
     function configure(calendarConfig) {
 
         // calendarConfig.templates.calendarMonthView = 'path/to/custom/template.html'; //change the month view template globally to a custom template
@@ -24,7 +29,7 @@
         // calendarConfig.i18nStrings.weekNumber = 'Week {week}'; //This will set the week number hover label on the month view
         //
         // calendarConfig.displayAllMonthEvents = true; //This will display all events on a month view even if they're not in the current month. Default false.
-        
+
         calendarConfig.showTimesOnWeekView = true; //Make the week view more like the day view, with the caveat that event end times are ignored.
 
         // console.log(calendarConfig); //view all available config

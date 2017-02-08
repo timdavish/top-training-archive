@@ -28,12 +28,20 @@
 
         /* Functions */
 
-        // Activate
+        /**
+         * @name activate
+         * @desc Activates the controller
+         * @memberof Controllers.HomeController
+         */
         function activate() {
             vm.params.zipcode = userService.getClientInfo().zipcode;
         }
 
-        // Search
+        /**
+         * @name search
+         * @desc Searches for trainers
+         * @memberof Controllers.HomeController
+         */
         function search() {
             // Ensure form is properly filled out
             if (!vm.params.sport || vm.params.sport === '' ||

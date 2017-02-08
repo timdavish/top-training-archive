@@ -29,22 +29,39 @@
 
         /* Functions */
 
-        // Save the token into local storage
-        function saveToken(token) {
+        /**
+         * @namespace saveToken
+         * @desc Saves the session token into local storage
+         * @memberof Services.authService
+         */
+        function saveToken() {
             $window.localStorage[service.tokenName] = token;
         }
 
-        // Drop the token from local storage
+        /**
+         * @namespace removeToken
+         * @desc Removes the session token from local storage
+         * @memberof Services.authService
+         */
         function removeToken() {
             $window.localStorage.removeItem(service.tokenName);
         }
 
-        // Retrieve the token from local storage
+        /**
+         * @namespace getToken
+         * @desc Retrieves the session token from local storage
+         * @memberof Services.authService
+         */
         function getToken() {
             return $window.localStorage[service.tokenName];
         }
 
-        // Retrieve the payload from the token
+        /**
+         * @namespace getPayload
+         * @desc Retrieves the payload from the session token
+         * @param {token} token The token to retrieve the payload from
+         * @memberof Services.authService
+         */
         function getPayload(token) {
             return JSON.parse($window.atob(token.split('.')[1]));
         }

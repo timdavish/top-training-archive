@@ -20,8 +20,8 @@
         var vm = this;
 
         vm.isLoggedIn = userService.isLoggedIn;
-
         vm.posts = postService.posts;
+
         vm.addPost = addPost;
         vm.incrementUpvotes = incrementUpvotes;
 
@@ -47,6 +47,7 @@
         /**
          * @name incrementUpvotes
          * @desc Increments the upvotes on a post
+         * @param {post} post The post to increment upvotes for
          * @memberof Controllers.PostListController
          */
         function incrementUpvotes(post) {

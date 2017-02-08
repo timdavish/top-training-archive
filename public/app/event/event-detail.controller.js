@@ -21,8 +21,8 @@
 
         vm.isLoggedIn = userService.isLoggedIn;
         vm.userType = userService.getUserType;
-
         vm.event = event;
+        
         vm.signUpEvent = signUpEvent;
 
         /* Functions */

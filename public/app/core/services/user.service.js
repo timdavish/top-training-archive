@@ -22,7 +22,7 @@
             logIn: logIn,
             logOut: logOut,
             isLoggedIn: isLoggedIn,
-            // User Info
+            // Get User Info
             getUserId: getUserId,
             getUserType: getUserType,
             getEmail: getEmail,
@@ -34,26 +34,44 @@
 
         /* Functions */
 
-        // Sign up a new user
+        /**
+         * @namespace signUp
+         * @desc Signs up a new user
+         * @param {user} user The user info to sign up with
+         * @memberof Services.userService
+         */
         function signUp(user) {
             return $http.post('/users/signUp', user).success(function(data) {
                 authService.saveToken(data.token);
             });
         }
 
-        // Log in an existing user
+        /**
+         * @namespace logIn
+         * @desc Logs in an existing user
+         * @param {user} user The user to log in
+         * @memberof Services.userService
+         */
         function logIn(user) {
             return $http.post('/users/login', user).success(function(data) {
                 authService.saveToken(data.token);
             });
         }
 
-        // Log current user out
+        /**
+         * @namespace logOut
+         * @desc Logs the current user out
+         * @memberof Services.userService
+         */
         function logOut() {
             authService.removeToken();
         }
 
-        // Check if the user is logged in
+        /**
+         * @namespace isLoggedIn
+         * @desc Checks if a user is logged in
+         * @memberof Services.userService
+         */
         function isLoggedIn() {
             var token = authService.getToken();
 
@@ -66,7 +84,11 @@
             }
         }
 
-        // Retrieve the _id of the user that's logged in
+        /**
+         * @namespace getUserId
+         * @desc Retrieve the _id of the user that's logged in
+         * @memberof Services.userService
+         */
         function getUserId() {
             if (service.isLoggedIn()) {
                 var token = authService.getToken();
@@ -76,7 +98,11 @@
             }
         }
 
-        // Retrieve the usertype of the user that's logged in
+        /**
+         * @namespace getUserType
+         * @desc Retrieve the usertype of the user that's logged in
+         * @memberof Services.userService
+         */
         function getUserType() {
             if (service.isLoggedIn()) {
                 var token = authService.getToken();
@@ -86,7 +112,11 @@
             }
         }
 
-        // Retrieve the email of the user that's logged in
+        /**
+         * @namespace getEmail
+         * @desc Retrieve the email of the user that's logged in
+         * @memberof Services.userService
+         */
         function getEmail() {
             if (service.isLoggedIn()) {
                 var token = authService.getToken();
@@ -96,7 +126,11 @@
             }
         }
 
-        // Retrieve the clientInfo of the user that's logged in
+        /**
+         * @namespace getClientInfo
+         * @desc Retrieve the clientInfo of the user that's logged in
+         * @memberof Services.userService
+         */
         function getClientInfo() {
             if (service.isLoggedIn()) {
                 var token = authService.getToken();
@@ -106,7 +140,11 @@
             }
         }
 
-        // Retrieve the trainerInfo of the user that's logged in
+        /**
+         * @namespace getTrainerInfo
+         * @desc Retrieve the trainerInfo of the user that's logged in
+         * @memberof Services.userService
+         */
         function getTrainerInfo() {
             if (service.isLoggedIn()) {
                 var token = authService.getToken();
@@ -114,13 +152,6 @@
 
                 return payload.trainerInfo;
             }
-        }
-
-        // Retrieve the email of the user that's logged in
-        function getEmailById(id) {
-            return $http.get('/users/' + id).then(function(res) {
-                return res.email;
-            });
         }
     }
 })();

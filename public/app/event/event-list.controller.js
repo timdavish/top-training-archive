@@ -21,10 +21,10 @@
 
         vm.isLoggedIn = userService.isLoggedIn;
         vm.userType = userService.getUserType;
-
         vm.events = eventService.events;
-        vm.addEvent = addEvent;
         vm.datePickerOpen = false;
+        
+        vm.addEvent = addEvent;
         vm.toggleDatePicker = toggleDatePicker;
 
         /* Functions */

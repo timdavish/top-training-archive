@@ -25,7 +25,11 @@
 
         /* Functions */
 
-        // Activate
+        /**
+         * @name activate
+         * @desc Activates the controller
+         * @memberof Controllers.SearchController
+         */
         function activate() {
             vm.trainers = searchService.trainers;
         }
