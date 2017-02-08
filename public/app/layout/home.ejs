@@ -12,17 +12,51 @@
                     <h3>Reach the top of your game with top training resources for athletes.</h3>
                     <hr class="intro-divider">
 
-                    <ul class="list-inline intro-social-buttons">
-                        <li>
-                            <a class="btn btn-default btn-lg header-button"><span class="header-button-text">Find a Trainer</span></a>
-                        </li>
-                        <li>
-                            <a href="/#/calendar" class="btn btn-default btn-lg header-button"><span class="header-button-text">View Calendar</span></a>
-                        </li>
-                        <li ng-hide="vm.isLoggedIn()">
-                            <a href="/#/sign-up-trainer" class="btn btn-default btn-lg header-button"><span class="header-button-text">Be a Trainer</span></a>
-                        </li>
-                    </ul>
+                    <!-- Switch -->
+                    <div ng-switch on="vm.activeButton">
+
+                        <!-- Default view -->
+                        <ul ng-switch-default class="list-inline">
+                            <li>
+                                <a ng-click="vm.activeButton = 'search'" class="btn btn-primary btn-lg header-button"><span class="header-button-text">Find a Trainer</span></a>
+                            </li>
+                            <li>
+                                <a href="/#/calendar" class="btn btn-primary btn-lg header-button"><span class="header-button-text">View Calendar</span></a>
+                            </li>
+                            <li ng-hide="vm.isLoggedIn()">
+                                <a href="/#/sign-up-trainer" class="btn btn-primary btn-lg header-button"><span class="header-button-text">Be a Trainer</span></a>
+                            </li>
+                        </ul>
+                        <!-- /Default view -->
+
+                        <!-- Find a Trainer -->
+                        <ul ng-switch-when="search" class="list-inline">
+                            <li>
+                                <a ng-click="vm.activeButton = ''" class="btn btn-primary btn-lg header-button-sm">
+                                    <span class="header-button-text">Back</span>
+                                </a>
+                            </li>
+                            <li>
+                                <input class="form-control input-lg input-search"
+                                    ng-model="vm.params.sport"
+                                    type="text" placeholder="Enter Sport" />
+                            </li>
+                            <li>
+                                <input class="form-control input-lg input-search"
+                                    ng-model="vm.params.zipcode"
+                                    type="text" placeholder="Enter Zipcode" />
+                            </li>
+                            <li>
+                                <a ng-click="vm.search()" class="btn btn-primary btn-lg header-button-sm">
+                                    <span class="header-button-text">Search</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /Find a Trainer -->
+
+                    </div>
+                    <!-- /Switch -->
+
                 </div>
             </div>
         </div>

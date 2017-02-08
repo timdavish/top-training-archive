@@ -1,12 +1,12 @@
 /**
- * Layout routes
+ * Search routes
  * @namespace Configurations
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
 
     angular
-        .module('app.layout')
+        .module('app.search')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
@@ -18,13 +18,13 @@
     function getStates() {
         return [
             {
-                state: 'home',
+                state: 'search',
                 config: {
-                    url: '/home',
-                    templateUrl: 'public/app/layout/home.ejs',
-                    controller: 'HomeController',
+                    url: '/search',
+                    templateUrl: 'public/app/search/search-list.ejs',
+                    controller: 'SearchController',
                     controllerAs: 'vm',
-                    title: 'Home'
+                    title: 'Search'
                 }
             }
         ];

@@ -16,6 +16,7 @@
         /* Feature Areas */
         'app.layout',
         'app.user',
+        'app.search',
         'app.calendar',
         'app.event',
         'app.post'

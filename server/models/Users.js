@@ -54,8 +54,10 @@ UserSchema.methods.generateJWT = function() {
 
     return jwt.sign({
         _id: this._id,
-        email: this.contact.email,
         usertype: this.usertype,
+        email: this.contact.email,
+        clientInfo: this.clientInfo,
+        trainerInfo: this.trainerInfo,
         exp: parseInt(exp.getTime() / 1000)
     }, 'SECRET');
     // CHANGE 'SECRET' TO REFERENCE AN ENVIRONMENT VARIABLE OUTSIDE OF CODEBASE

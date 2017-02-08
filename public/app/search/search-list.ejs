@@ -1,0 +1,27 @@
+
+<!-- Event list template -->
+
+<!-- All Events -->
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+
+            <h2>Trainers</h2>
+
+            <div ng-repeat="trainer in vm.trainers">
+                <span style="font-size: 20px; margin-left: 10px;">
+                    <span>
+                        {{ trainer }}
+                    </span>
+                </span>
+                <!-- <span>
+                    <a href="#/events/{{ event._id }}">View this event</a>
+                </span> -->
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /All Events.content-section-a -->

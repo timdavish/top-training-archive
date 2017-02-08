@@ -71,9 +71,21 @@ router.post('/login', function(req, res, next) {
     })(req, res, next);
 });
 
+// (GET) Get trainers
+router.get('/getTrainers', function(req, res, next) {
+    User.aggregate([
+        { $match: {
+            usertype: 'trainer'
+        }}
+    ], function(err, trainers) {
+        if (err) { return next(err); }
+        res.json(trainers);
+    });
+});
+
 // (GET) Get a single user by id
 router.get('/:user', function(req, res) {
-    res.json(req.post);
+    res.json(req.user);
 });
 
 // Export the router

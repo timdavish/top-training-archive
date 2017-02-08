@@ -54,12 +54,12 @@
          * @return Success status
          */
         function getEvents() {
-            return $http.get('/events/getEvents').success(function(data) {
+            return $http.get('/events/getEvents').success(function(events) {
                 // Translate JSON'd dates back to moment dates for the calendar's sake
-                translateDates(data);
+                translateDates(events);
 
                 // Keep angular copy of data updated
-                angular.copy(data, service.events);
+                angular.copy(events, service.events);
             });
         }
 

@@ -9,18 +9,49 @@
         .module('app.layout')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['userService'];
+    HomeController.$inject = ['$window', 'searchService', 'userService'];
 
     /**
      * @namespace HomeController
      * @desc Home controller
      * @memberof Controllers
      */
-    function HomeController(userService) {
+    function HomeController($window, searchService, userService) {
         var vm = this;
 
         vm.isLoggedIn = userService.isLoggedIn;
-        // vm.getEmail = userService.getEmail;
-        // vm.userType = userService.getUserType;
+        vm.params = {};
+
+        vm.search = search;
+
+        activate();
+
+        /* Functions */
+
+        // Activate
+        function activate() {
+            vm.params.zipcode = userService.getClientInfo().zipcode;
+        }
+
+        // Search
+        function search() {
+            // Ensure form is properly filled out
+            if (!vm.params.sport || vm.params.sport === '' ||
+                !vm.params.zipcode || vm.params.zipcode === '') {
+
+                // vm.error = 'Please fill the form out properly.';
+                return;
+            }
+
+            searchService.searchTrainers(vm.params).error(function(error) {
+                vm.error = error;
+            }).success(function() {
+                console.log("Trying to redirect!");
+                var host = $window.location.host;
+                var landingUrl = "http://" + host + "/#/search";
+                console.log(landingUrl);
+                $window.location.href = landingUrl;
+            });
+        }
     }
 })();

@@ -61,7 +61,6 @@ router.post('/addEvent/:user', auth, function(req, res, next) {
 router.get('/getEvents', function(req, res, next) {
     Event.find(function(err, events) {
         if (err) { return next(err); }
-
         res.json(events);
     });
 });
@@ -102,7 +101,7 @@ router.get('/getEventsBySport', function(req, res, next) {
             ]
         }}
     ], function(err, events) {
-        if (err) return next(err);
+        if (err) { return next(err); }
 
         res.json(events);
     });
@@ -155,7 +154,7 @@ router.get('/getEventsBySport2', function(req, res, next) {
             ]
         }}
     ], function(err, events) {
-        if (err) return next(err);
+        if (err) { return next(err); }
 
         res.json(events);
     });
