@@ -6,27 +6,43 @@ var jwt = require('jsonwebtoken'); // Used for generating tokens
 
 // Define the User model schema
 var UserSchema = new mongoose.Schema({
-    email: { type: String, unique: true, lowercase: true },
-    hash: String,
-    salt: String,
     usertype: { type: String, lowercase: true },
-    firstname: String,
-    lastname: String,
-    zipcode: Number,
-    events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
-    // , profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
+    contact: {
+        email: { type: String, lowercase: true, unique: true },
+        firstname: String,
+        lastname: String
+    },
+    accounts: {
+        local: {
+            hash: String,
+            salt: String
+        },
+        facebook: {
+
+        }
+    },
+    clientInfo: {
+        zipcode: Number,
+        events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
+        // profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
+    },
+    trainerInfo: {
+        locations: [{ type: String }],
+        sports: [{ type: String, lowercase: true }],
+        events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
+    }
 });
 
 // Set a hashed password using a crypto salt
 UserSchema.methods.setPassword = function(password) {
-    this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    this.accounts.local.salt = crypto.randomBytes(16).toString('hex');
+    this.accounts.local.hash = crypto.pbkdf2Sync(password, this.accounts.local.salt, 1000, 64).toString('hex');
 };
 
 // Validate a password using the crypto salt
 UserSchema.methods.validPassword = function(password) {
-    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
-    return this.hash === hash;
+    var hash = crypto.pbkdf2Sync(password, this.accounts.local.salt, 1000, 64).toString('hex');
+    return this.accounts.local.hash === hash;
 };
 
 // Generate a token
@@ -38,7 +54,7 @@ UserSchema.methods.generateJWT = function() {
 
     return jwt.sign({
         _id: this._id,
-        email: this.email,
+        email: this.contact.email,
         usertype: this.usertype,
         exp: parseInt(exp.getTime() / 1000)
     }, 'SECRET');

@@ -10,7 +10,7 @@ var EventSchema = new mongoose.Schema({
     startsAt: Date,
     endsAt: Date,
     trainer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     archived: { type: Boolean, default: false }
 });
 

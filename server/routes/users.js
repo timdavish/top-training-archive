@@ -30,11 +30,20 @@ router.post('/signUp', function(req, res, next) {
         return res.status(400).json({ message: 'Please fill out all fields.' });
     }
 
-    // Create a new user and set their email and password
+    // Create a new user and set their initial properties
     var user = new User();
-    user.email = req.body.email;
-    user.setPassword(req.body.password);
     user.usertype = req.body.usertype;
+    user.contact.email = req.body.email;
+    user.contact.firstname = req.body.firstname;
+    user.contact.lastname = req.body.lastname;
+    user.setPassword(req.body.password);
+
+    // Fill in specific usertype info
+    if (user.usertype === 'client') {
+        user.clientInfo.zipcode = req.body.zipcode;
+    } else if (user.usertype === 'trainer') {
+
+    }
 
     // Save the user in the database
     user.save(function(err) {

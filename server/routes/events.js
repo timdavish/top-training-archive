@@ -48,7 +48,7 @@ router.post('/addEvent/:user', auth, function(req, res, next) {
     event.save(function(err, event) {
         if (err) { return next(err); }
 
-        req.user.events.push(event);
+        req.user.trainerInfo.events.push(event);
         req.user.save(function(err, user) {
             if (err) { return next(err); }
 
@@ -218,10 +218,10 @@ router.get('/getEvent/:event', function(req, res) {
     });
 });
 
-// (PUT) Sign up a student for an event
+// (PUT) Sign up a client for an event
 router.put('/signUpEvent/:event/:user', auth, function(req, res, next) {
     // Ensure the user hasn't already signed up for this event
-    if (req.event.students.indexOf(req.user._id) != -1) {
+    if (req.event.clients.indexOf(req.user._id) != -1) {
         return res.status(400).json({ message: 'You are already signed up for this event.' });
     }
 
@@ -230,12 +230,12 @@ router.put('/signUpEvent/:event/:user', auth, function(req, res, next) {
         return res.status(400).json({ message: 'There are no slots available for this event.' });
     }
 
-    req.event.students.push(req.user);
+    req.event.clients.push(req.user);
     req.event.slotsTaken++;
     req.event.save(function(err, event) {
         if (err) { return next(err); }
 
-        req.user.events.push(event);
+        req.user.clientInfo.events.push(event);
         req.user.save(function(err, user) {
             if (err) { return next(err); }
 

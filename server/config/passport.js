@@ -12,7 +12,7 @@ passport.use(new LocalStrategy(
         passwordField: 'password'
     },
     function(email, password, done) {
-        User.findOne({ email: email }, function(err, user) {
+        User.findOne({ 'contact.email': email }, function(err, user) {
             if (err) { return done(err); }
             if (!user) {
                 return done(null, false, { message: 'Incorrect email.' });

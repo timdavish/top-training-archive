@@ -18,7 +18,7 @@
      */
     function EventDetailController(userService, eventService, event) {
         var vm = this;
-        
+
         vm.isLoggedIn = userService.isLoggedIn;
         vm.userType = userService.getUserType;
 
@@ -35,8 +35,8 @@
         function signUpEvent() {
             eventService.signUpEvent(vm.event).error(function(error) {
                 vm.error = error;
-            }).success(function(student) {
-                vm.event.students.push(student);
+            }).success(function(client) {
+                vm.event.clients.push(client);
                 vm.event.slotsTaken++;
             });
         }
