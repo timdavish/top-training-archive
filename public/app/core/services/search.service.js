@@ -18,6 +18,8 @@
      */
     function searchService($http, authService) {
         var service = {
+            sport: "",
+            zipcode: "",
             trainers: [],
             searchTrainers: searchTrainers
         };
@@ -36,7 +38,10 @@
         function searchTrainers(params) {
             return $http.get('/users/getTrainers').success(function(trainers) {
                 // Keep angular copy of data updated
+                service.sport = params.sport;
+                service.zipcode = params.zipcode;
                 angular.copy(trainers, service.trainers);
+
             });
         }
     }

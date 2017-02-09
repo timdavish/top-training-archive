@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 // Database setup and connection
 var mongoose = require('mongoose');
 require('./server/models/Users'); // Users model
+require('./server/models/Reviews'); // Reviews model
 require('./server/models/Events'); // Events model
 require('./server/models/Posts'); // Posts model
 require('./server/models/Comments'); // Comments model

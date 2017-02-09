@@ -19,6 +19,8 @@
     function SearchController(searchService) {
         var vm = this;
 
+        vm.sport = "";
+        vm.zipcode = "";
         vm.trainers = [];
 
         activate();
@@ -31,6 +33,8 @@
          * @memberof Controllers.SearchController
          */
         function activate() {
+            vm.sport = searchService.sport;
+            vm.zipcode = searchService.zipcode;
             vm.trainers = searchService.trainers;
         }
     }

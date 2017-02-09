@@ -6,17 +6,14 @@
     <div class="container">
         <div class="row">
 
-            <h2>Trainers</h2>
+            <h2>Trainers near {{ vm.zipcode }}</h2>
 
             <div ng-repeat="trainer in vm.trainers">
-                <span style="font-size: 20px; margin-left: 10px;">
-                    <span>
-                        {{ trainer }}
-                    </span>
-                </span>
-                <!-- <span>
-                    <a href="#/events/{{ event._id }}">View this event</a>
-                </span> -->
+                <span>{{ trainer.contact.firstname }} {{ trainer.contact.lastname[0] }}.</span>
+                <br />
+                <span>{{ vm.sport }}</span>
+                <br />
+                <span><a href="#/trainers/{{ trainer._id }}">View Profile</a></span>
             </div>
 
         </div>

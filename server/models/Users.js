@@ -17,9 +17,7 @@ var UserSchema = new mongoose.Schema({
             hash: String,
             salt: String
         },
-        facebook: {
-
-        }
+        facebook: {}
     },
     clientInfo: {
         zipcode: Number,
@@ -29,7 +27,15 @@ var UserSchema = new mongoose.Schema({
     trainerInfo: {
         locations: [{ type: String }],
         sports: [{ type: String, lowercase: true }],
-        events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
+        packages: [{
+            sport: { type: String, lowercase: true },
+            size: { type: String, lowercase: true },
+            price: String
+        }],
+        events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+        summary: String,
+        experience: String,
+        reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
     }
 });
 

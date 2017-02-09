@@ -21,7 +21,6 @@
 
         vm.isLoggedIn = userService.isLoggedIn;
         vm.params = {};
-
         vm.search = search;
 
         activate();
@@ -34,7 +33,9 @@
          * @memberof Controllers.HomeController
          */
         function activate() {
-            vm.params.zipcode = userService.getClientInfo().zipcode;
+            if (vm.isLoggedIn()) {
+                vm.params.zipcode = userService.getClientInfo().zipcode;
+            }
         }
 
         /**
@@ -47,17 +48,15 @@
             if (!vm.params.sport || vm.params.sport === '' ||
                 !vm.params.zipcode || vm.params.zipcode === '') {
 
-                // vm.error = 'Please fill the form out properly.';
+                // vm.error = 'Please fill the form out properly.'; // Display an error
                 return;
             }
 
             searchService.searchTrainers(vm.params).error(function(error) {
                 vm.error = error;
             }).success(function() {
-                console.log("Trying to redirect!");
                 var host = $window.location.host;
                 var landingUrl = "http://" + host + "/#/search";
-                console.log(landingUrl);
                 $window.location.href = landingUrl;
             });
         }

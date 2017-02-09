@@ -32,9 +32,10 @@
         /**
          * @namespace saveToken
          * @desc Saves the session token into local storage
+         * @param {token} token The token representing the session
          * @memberof Services.authService
          */
-        function saveToken() {
+        function saveToken(token) {
             $window.localStorage[service.tokenName] = token;
         }
 
