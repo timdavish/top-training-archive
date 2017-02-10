@@ -20,7 +20,7 @@
         var vm = this;
 
         vm.sport = "";
-        vm.zipcode = "";
+        vm.location = "";
         vm.trainers = [];
 
         activate();
@@ -34,7 +34,7 @@
          */
         function activate() {
             vm.sport = searchService.sport;
-            vm.zipcode = searchService.zipcode;
+            vm.location = searchService.location;
             vm.trainers = searchService.trainers;
         }
     }

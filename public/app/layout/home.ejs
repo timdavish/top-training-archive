@@ -31,26 +31,38 @@
 
                         <!-- Find a Trainer -->
                         <ul ng-switch-when="search" class="list-inline">
+                            <!-- Back button -->
                             <li>
                                 <a ng-click="vm.activeButton = ''" class="btn btn-primary btn-lg header-button-sm">
                                     <span class="header-button-text">Back</span>
                                 </a>
                             </li>
+                            <!-- /Back button -->
+                            <!-- Sport -->
                             <li>
                                 <input class="form-control input-lg input-search"
                                     ng-model="vm.params.sport"
-                                    type="text" placeholder="Enter Sport" />
+                                    uib-typeahead="sport for sport in vm.sports | filter:$viewValue | limitTo:8"
+                                    typeahead-min-length="0"
+                                    type="text" placeholder="Sport" />
                             </li>
+                            <!-- /Sport -->
+                            <!-- Location -->
                             <li>
                                 <input class="form-control input-lg input-search"
-                                    ng-model="vm.params.zipcode"
-                                    type="text" placeholder="Enter Zipcode" />
+                                    ng-model="vm.params.location"
+                                    uib-typeahead="address for address in vm.getLocations($viewValue) | limitTo:8"
+                                    typeahead-min-length="1"
+                                    type="text" placeholder="Location" />
                             </li>
+                            <!-- /Location -->
+                            <!-- Search -->
                             <li>
                                 <a ng-click="vm.search()" class="btn btn-primary btn-lg header-button-sm">
                                     <span class="header-button-text">Search</span>
                                 </a>
                             </li>
+                            <!-- /Search -->
                         </ul>
                         <!-- /Find a Trainer -->
 

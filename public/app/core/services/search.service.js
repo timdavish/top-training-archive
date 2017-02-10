@@ -19,7 +19,7 @@
     function searchService($http, authService) {
         var service = {
             sport: "",
-            zipcode: "",
+            location: "",
             trainers: [],
             searchTrainers: searchTrainers
         };
@@ -39,7 +39,7 @@
             return $http.get('/users/getTrainers').success(function(trainers) {
                 // Keep angular copy of data updated
                 service.sport = params.sport;
-                service.zipcode = params.zipcode;
+                service.location = params.location;
                 angular.copy(trainers, service.trainers);
 
             });

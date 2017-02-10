@@ -1,5 +1,5 @@
 {
-  "name": "Top_Training",
+  "name": "top_training",
   "version": "0.0.1",
   "dependencies": {
     "angular": "1.5.7",
@@ -7,6 +7,7 @@
     "angular-bootstrap": "^2.5.0",
     "angular-bootstrap-calendar": "^0.27.5",
     "angular-bootstrap-colorpicker": "3.0.25",
+    "angular-sanitize": "1.5.7",
     "angular-ui-router": "0.3.2",
     "bootstrap": "3.3.7",
     "font-awesome": "^4.7.0",

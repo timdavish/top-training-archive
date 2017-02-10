@@ -7,6 +7,9 @@
 
     angular.module('app.core', [
         /* Angular modules */
+        'ngAnimate',
+        'ngSanitize',
+        'ui.bootstrap',
         'ui.router',
 
         /* Blocks modules */
@@ -15,8 +18,6 @@
         'blocks.router',
 
         /* 3rd Party modules */
-        'mwl.calendar',
-        'ui.bootstrap',
-        'ngAnimate'
+        'mwl.calendar'
     ]);
 })();
