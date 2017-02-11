@@ -27,16 +27,7 @@
         <!-- inject:css -->
         <link href="/public/styles/index.css" rel="stylesheet">
         <!-- endinject -->
-    </head>
-    <body ng-app="app">
-        <!-- Include top navigation bar -->
-        <%- include('top-nav.ejs') %>
 
-        <!-- Main view -->
-        <ui-view></ui-view>
-
-        <!-- Include footer -->
-        <%- include('footer.ejs') %>
 
         <!-- inject-vendor:js -->
         <!-- Angular -->
@@ -122,5 +113,15 @@
         <script src="/public/app/post/post-detail.controller.js"></script>
         <script src="/public/app/post/post-list.controller.js"></script>
         <!-- endinject -->
+    </head>
+    <body ng-app="app" class="ng-cloak" ng-cloak>
+        <!-- Include top navigation bar -->
+        <%- include('top-nav.ejs') %>
+
+        <!-- Main view -->
+        <ui-view></ui-view>
+
+        <!-- Include footer -->
+        <%- include('footer.ejs') %>
     </body>
 </html>

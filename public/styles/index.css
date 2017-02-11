@@ -1,11 +1,9 @@
 /*
- * Start Bootstrap - Landing Page (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ * This stops the page from flickering, and helps the ng-show/ng-hide animations start
+ * at the right place instead of waiting to load.
  */
-
-.ng-hide { /* This helps the ng-show/ng-hide animations start at the right place instead of waiting to load. */
-    display: none!important;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+    display: none !important;
 }
 
 .filterRow {

@@ -1,5 +1,5 @@
 {
-  "name": "Top_Training",
+  "name": "top_training",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "body-parser": "~1.15.2",
-    "bootstrap": "^3.3.7",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
