@@ -51,9 +51,9 @@
                             <li>
                                 <input class="form-control input-lg input-search"
                                     ng-model="vm.params.location"
-                                    uib-typeahead="address for address in vm.getLocations($viewValue) | limitTo:8"
-                                    typeahead-min-length="1"
+                                    places-auto-complete
                                     type="text" placeholder="Location" />
+
                             </li>
                             <!-- /Location -->
                             <!-- Search -->
