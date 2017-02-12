@@ -2,9 +2,30 @@
   "name": "top_training",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "7.2.1"
+  },
   "scripts": {
+    "build": "npm install && bower install",
     "start": "node ./bin/start",
-    "stop": "taskkill /im node.exe /F"
+    "stop": "taskkill /im node.exe /F",
+
+    "pretest": "echo 'Testing...'",
+    "test": "npm run lint && npm run test:public",
+    "posttest": "echo 'Testing completed.'",
+
+    "prelint": "echo 'Linting...'",
+    "lint": "jshint server/server.js",
+    "postlint": "echo 'Linting completed.'",
+    
+    "pretest:public": "echo 'Testing (public)...'",
+    "test:public": "mocha public/test -u bdd -R spec",
+    "posttest:public": "echo 'Testing (public) completed.'"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4",
+    "mocha": "^3.2.0",
+    "should": "^11.2.0"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
