@@ -9,39 +9,39 @@ var bodyParser = require('body-parser');
 
 // Database setup and connection
 var mongoose = require('mongoose');
-require('./server/models/Users'); // Users model
-require('./server/models/Reviews'); // Reviews model
-require('./server/models/Events'); // Events model
-require('./server/models/Posts'); // Posts model
-require('./server/models/Comments'); // Comments model
+require('./models/Users'); // Users model
+require('./models/Reviews'); // Reviews model
+require('./models/Events'); // Events model
+require('./models/Posts'); // Posts model
+require('./models/Comments'); // Comments model
 mongoose.Promise = global.Promise; // Adjust mongoose promise
 mongoose.connect('mongodb://localhost/TT');
 
 // Password authentication
 var passport = require('passport');
-require('./server/config/passport'); // Passport configuration
+require('./config/passport'); // Passport configuration
 
 // App initialization
 var app = express();
 
 // View engine setup
-app.set('views', path.join(__dirname, 'public/app/layout'));
+app.set('views', path.join(__dirname, './../public/app/layout'));
 app.set('view engine', 'ejs');
 
 // Other app setup
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico'))); // uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public/images/', 'favicon.ico'))); // uncomment after placing your favicon in /public/images
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '/'))); // Set our public folder
+app.use(express.static(path.join(__dirname, '/../'))); // Set our public folder
 app.use(passport.initialize()); // Use passport in our app
 
 // API routes
-app.use('/', require('./server/routes/index'));
-app.use('/users', require('./server/routes/users'));
-app.use('/events', require('./server/routes/events'));
-app.use('/posts', require('./server/routes/posts'));
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+app.use('/events', require('./routes/events'));
+app.use('/posts', require('./routes/posts'));
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

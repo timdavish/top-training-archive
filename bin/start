@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Module dependencies
-var app = require('../app');
+var app = require('../server/server');
 var debug = require('debug')('top-training:server');
 var http = require('http');
 
@@ -76,4 +76,5 @@ function onListening() {
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
+    console.log('Listening on ' + bind);
 }
