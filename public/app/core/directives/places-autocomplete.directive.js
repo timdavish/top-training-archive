@@ -20,7 +20,7 @@
             link: function(scope, element, attributes, model) {
                 var input = element[0];
                 var options = {
-                    types: [],
+                    types: ['(cities)'],
                     componentRestrictions: {country: 'US'}
                 };
 

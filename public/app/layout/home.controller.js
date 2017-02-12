@@ -9,21 +9,21 @@
         .module('app.layout')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$http', '$window', '$scope', 'searchService', 'userService'];
+    HomeController.$inject = ['$window', 'searchService', 'userService'];
 
     /**
      * @namespace HomeController
      * @desc Home controller
      * @memberof Controllers
      */
-    function HomeController($http, $window, $scope, searchService, userService) {
+    function HomeController($window, searchService, userService) {
         var vm = this;
 
         vm.isLoggedIn = userService.isLoggedIn;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
         vm.params = {};
         vm.placesAutoComplete;
-        
+
         vm.search = search;
 
         activate();
