@@ -52,8 +52,8 @@
         <script src="/bower_components/toastr/toastr.min.js"></script>
 
         <!-- Google Maps API -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA&libraries=places"></script>
-        <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA"></script>
+        <!-- <script src="http://jvandemo.github.io/angularjs-google-maps/dist/angularjs-google-maps.js"></script> -->
         <!-- endinject -->
 
 
@@ -66,6 +66,7 @@
         <script src="/public/app/core/core.constants.js"></script>
         <!-- Services -->
         <script src="/public/app/core/services/authentication.service.js"></script>
+        <script src="/public/app/core/services/geolocation.service.js"></script>
         <script src="/public/app/core/services/user.service.js"></script>
         <script src="/public/app/core/services/search.service.js"></script>
         <script src="/public/app/core/services/event.service.js"></script>
@@ -73,7 +74,8 @@
         <!-- Directives -->
         <script src="/public/app/core/directives/equals.directive.js"></script>
         <script src="/public/app/core/directives/collapse.directive.js"></script>
-        <script src="/public/app/core/directives/places-autocomplete.directive.js"></script>
+        <script src="/public/app/core/directives/google-auto-complete.directive.js"></script>
+        <script src="/public/app/core/directives/google-reverse-geocode.directive.js"></script>
 
         <!-- Reusable Blocks/Modules -->
         <!-- Exception -->

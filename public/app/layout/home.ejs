@@ -51,7 +51,8 @@
                             <li>
                                 <input class="form-control input-lg input-search"
                                     ng-model="vm.params.location"
-                                    places-auto-complete
+                                    google-reverse-geocode lat="{{vm.params.lat}}" long="{{vm.params.long}}"
+                                    google-auto-complete
                                     type="text" placeholder="Location" />
 
                             </li>

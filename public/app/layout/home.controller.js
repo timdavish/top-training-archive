@@ -9,20 +9,20 @@
         .module('app.layout')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$window', 'searchService', 'userService'];
+    HomeController.$inject = ['$window', 'searchService', 'userService', 'geolocationService'];
 
     /**
      * @namespace HomeController
      * @desc Home controller
      * @memberof Controllers
      */
-    function HomeController($window, searchService, userService) {
+    function HomeController($window, searchService, userService, geolocationService) {
         var vm = this;
 
         vm.isLoggedIn = userService.isLoggedIn;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
         vm.params = {};
-        vm.placesAutoComplete;
+        vm.googleAutoComplete;
 
         vm.search = search;
 
@@ -36,8 +36,19 @@
          * @memberof Controllers.HomeController
          */
         function activate() {
-            if (vm.isLoggedIn()) {
-                vm.params.location = userService.getClientInfo().zipcode;
+            geolocationService.getCurrentLocation()
+                .then(applyCurrentLocation)
+                .catch(applyClientLocation);
+
+            function applyCurrentLocation(location) {
+                vm.params.lat = location.coords.latitude;
+                vm.params.long = location.coords.longitude;
+            }
+
+            function applyClientLocation(e) {
+                if (vm.isLoggedIn()) {
+                    vm.params.location = userService.getClientInfo().zipcode;
+                }
             }
         }
 

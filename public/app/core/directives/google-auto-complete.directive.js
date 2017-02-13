@@ -1,5 +1,5 @@
 /**
- * Places Autocomplete Directive
+ * Google Auto Complete Directive
  * @namespace Directives
  */
 (function() { // IIFE structure
@@ -7,14 +7,14 @@
 
     angular
         .module('app.core')
-        .directive('placesAutoComplete', placesAutoComplete);
+        .directive('googleAutoComplete', googleAutoComplete);
 
     /**
-     * @namespace placesAutoComplete
-     * @desc placesAutoComplete directive
+     * @namespace googleAutoComplete
+     * @desc googleAutoComplete directive
      * @memberof Directives
      */
-    function placesAutoComplete() {
+    function googleAutoComplete() {
         return {
             require: 'ngModel',
             link: function(scope, element, attributes, model) {
@@ -24,9 +24,9 @@
                     componentRestrictions: {country: 'US'}
                 };
 
-                scope.vm.placesAutoComplete = new google.maps.places.Autocomplete(input, options);
+                scope.vm.googleAutoComplete = new google.maps.places.Autocomplete(input, options);
 
-                google.maps.event.addListener(scope.vm.placesAutoComplete, 'place_changed', function() {
+                google.maps.event.addListener(scope.vm.googleAutoComplete, 'place_changed', function() {
                     scope.$apply(function() {
                         model.$setViewValue(element.val());
                     });
