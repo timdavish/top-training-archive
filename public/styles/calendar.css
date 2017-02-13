@@ -1,0 +1,38 @@
+/**
+ * CSS for calendar
+ */
+.filterRow {
+    height: 50px;
+}
+
+.filters {
+    display: inline-block;
+    height: inherit;
+    width: inherit;
+}
+
+.filterImage {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+    background-size: 100%;
+}
+
+.filterActive {
+    opacity: 1;
+}
+
+.filterInactive {
+    opacity: .5;
+}
+
+.filterCount {
+    display: inline-block;
+    color: black;
+    letter-spacing: -1px;
+    /*background: rgb(0, 0, 0); /* fallback color */
+    /*background: rgba(0, 0, 0, 0.7);*/
+    border-radius: 100px;
+    padding: 3px;
+}
