@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken'); // Used for generating tokens
 
 // Define the User model schema
 var UserSchema = new mongoose.Schema({
+    // All users have this data
     usertype: { type: String, lowercase: true },
     contact: {
         email: { type: String, lowercase: true, unique: true },
@@ -19,13 +20,25 @@ var UserSchema = new mongoose.Schema({
         },
         facebook: {}
     },
+    // Only clients have this data
     clientInfo: {
         zipcode: Number,
         events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
         // profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
     },
+    // Only trainers have this data
     trainerInfo: {
-        locations: [{ type: String }],
+        locations: [{
+            type: {
+                type: String,
+                enum: 'Point',
+                default: 'Point'
+            },
+            coordinates: {
+                type: [Number],
+                default: [-122.3, 47.6]
+            }
+        }],
         sports: [{ type: String, lowercase: true }],
         packages: [{
             sport: { type: String, lowercase: true },
@@ -38,6 +51,8 @@ var UserSchema = new mongoose.Schema({
         reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
     }
 });
+
+UserSchema.index({"trainerInfo.locations": "2dsphere"});
 
 // Set a hashed password using a crypto salt
 UserSchema.methods.setPassword = function(password) {

@@ -9,14 +9,14 @@
         .module('app.layout')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$window', 'searchService', 'userService', 'geolocationService'];
+    HomeController.$inject = ['$q', '$window', 'searchService', 'userService', 'geolocationService'];
 
     /**
      * @namespace HomeController
      * @desc Home controller
      * @memberof Controllers
      */
-    function HomeController($window, searchService, userService, geolocationService) {
+    function HomeController($q, $window, searchService, userService, geolocationService) {
         var vm = this;
 
         vm.isLoggedIn = userService.isLoggedIn;
@@ -66,14 +66,21 @@
                 // vm.error = 'Please fill the form out properly.'; // Display an error
                 return;
             }
+            console.log(vm.params);
+            searchService.searchTrainers(vm.params)
+                .then(redirectToSearchResults)
+                .catch(redirectToSearchResultsFailed);
 
-            searchService.searchTrainers(vm.params).error(function(error) {
-                vm.error = error;
-            }).success(function() {
+            function redirectToSearchResults() {
                 var host = $window.location.host;
                 var landingUrl = "http://" + host + "/#/search";
                 $window.location.href = landingUrl;
-            });
+            }
+
+            function redirectToSearchResultsFailed(error) {
+                vm.error = error;
+                return $q.reject(error);
+            }
         }
     }
 })();

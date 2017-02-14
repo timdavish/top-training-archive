@@ -18,8 +18,9 @@
         return {
             require: 'ngModel',
             link: function (scope, element, attributes, model) {
+                var latlng = new google.maps.LatLng(scope.vm.params.lat, scope.vm.params.long);
+
                 var geocoder = new google.maps.Geocoder();
-                var latlng = new google.maps.LatLng(attributes.lat, attributes.long);
 
                 geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
@@ -32,6 +33,6 @@
                     }
                 });
             }
-        }
+        };
     }
 })();

@@ -36,12 +36,12 @@
          * @return Success status
          */
         function searchTrainers(params) {
-            return $http.get('/users/getTrainers').success(function(trainers) {
+            return $http.post('/users/getTrainers', params).success(function(trainers) {
                 // Keep angular copy of data updated
                 service.sport = params.sport;
                 service.location = params.location;
                 angular.copy(trainers, service.trainers);
-
+                console.log(trainers);
             });
         }
     }

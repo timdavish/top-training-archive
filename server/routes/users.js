@@ -72,13 +72,30 @@ router.post('/login', function(req, res, next) {
 });
 
 // (GET) Get trainers
-router.get('/getTrainers', function(req, res, next) {
+router.post('/getTrainers', function(req, res, next) {
+    var params = req.body;
+    params.sport = params.sport.toLowerCase();
+
     User.aggregate([
-        { $match: {
-            usertype: 'trainer'
+        { $geoNear: { // calculates and sorts by distance
+            query: {
+                usertype: 'trainer', // trainers only
+                'trainerInfo.sports': params.sport // trainers who train this sport only
+            },
+            near: {
+                type: 'Point', // 2dsphere
+                coordinates: [-108.35, 47.6218] // coordinates to start search at
+            },
+            maxDistance: 10 * 1.609 * 1000, // m = 10 miles * 1.609 km/mile * 1000 m/km
+            distanceMultiplier: 0.621 * 0.001, // mile = 1 m * 0.621 mile/km * 0.001 km/m
+            distanceField: 'dist.calculated', // field to assign distance result
+            includeLocs: 'dist.location', // field to assign location result
+            limit: 10, // limit
+            spherical: true // 2dsphere calculations
         }}
     ], function(err, trainers) {
         if (err) { return next(err); }
+        
         res.json(trainers);
     });
 });
