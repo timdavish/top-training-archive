@@ -13,59 +13,58 @@
                     <hr class="intro-divider">
 
                     <!-- Switch -->
-                    <div ng-switch on="vm.activeButton">
+                    <div ng-switch on="vm.buttonView">
 
                         <!-- Default view -->
-                        <ul ng-switch-default class="list-inline">
-                            <li>
-                                <a ng-click="vm.activeButton = 'search'" class="btn btn-primary btn-lg header-button"><span class="header-button-text">Find a Trainer</span></a>
-                            </li>
-                            <li>
-                                <a href="/#/calendar" class="btn btn-primary btn-lg header-button"><span class="header-button-text">View Calendar</span></a>
-                            </li>
-                            <li ng-hide="vm.isLoggedIn()">
-                                <a href="/#/sign-up-trainer" class="btn btn-primary btn-lg header-button"><span class="header-button-text">Be a Trainer</span></a>
-                            </li>
-                        </ul>
+                        <form class="list-inline"
+                            ng-switch-default>
+                            <!-- Find a Trainer button -->
+                            <li><input class="form-control input-lg input-search btn-primary header-button header-button-text"
+                                    ng-click="vm.buttonView = 'search'"
+                                    type="button" value="Find a Trainer" /></li>
+                            <!-- /Find a Trainer button -->
+                            <!-- Calendar button -->
+                            <li><input class="form-control input-lg input-search btn-primary header-button header-button-text"
+                                    ng-click="vm.redirectTo('calendar')"
+                                    type="button" value="View Calendar" /></li>
+                            <!-- /Calendar button -->
+                            <!-- Trainer Sign Up button -->
+                            <li><input class="form-control input-lg input-search btn-primary header-button header-button-text"
+                                    ng-click="vm.redirectTo('sign-up-trainer')"
+                                    type="button" value="Join as a Trainer" /></li>
+                            <!-- /Trainer Sign Up button -->
+                        </form>
                         <!-- /Default view -->
 
-                        <!-- Find a Trainer -->
-                        <ul ng-switch-when="search" class="list-inline">
+                        <!-- Find a Trainer View -->
+                        <form class="list-inline"
+                            ng-switch-when="search"
+                            ng-submit="vm.search()">
                             <!-- Back button -->
-                            <li>
-                                <a ng-click="vm.activeButton = ''" class="btn btn-primary btn-lg header-button-sm">
-                                    <span class="header-button-text">Back</span>
-                                </a>
-                            </li>
+                            <li><input class="form-control input-lg input-search btn-primary header-button-sm header-button-text"
+                                    ng-click="vm.buttonView = ''"
+                                    type="submit" value="Back" /></li>
                             <!-- /Back button -->
                             <!-- Sport -->
-                            <li>
-                                <input class="form-control input-lg input-search"
+                            <li><input class="form-control input-lg input-search"
                                     ng-model="vm.params.sport"
-                                    uib-typeahead="sport for sport in vm.sports | filter:$viewValue | limitTo:8"
+                                    uib-typeahead="sport for sport in vm.sports | filter:$viewValue | limitTo:5"
                                     typeahead-min-length="0"
-                                    type="text" placeholder="Sport" />
-                            </li>
+                                    type="text" placeholder="Sport" /></li>
                             <!-- /Sport -->
                             <!-- Location -->
-                            <li>
-                                <input class="form-control input-lg input-search"
+                            <li><input class="form-control input-lg input-search"
                                     ng-model="vm.params.location"
                                     google-reverse-geocode
                                     google-auto-complete
-                                    type="text" placeholder="Location" />
-
-                            </li>
+                                    type="text" placeholder="Location" /></li>
                             <!-- /Location -->
                             <!-- Search -->
-                            <li>
-                                <a ng-click="vm.search()" class="btn btn-primary btn-lg header-button-sm">
-                                    <span class="header-button-text">Search</span>
-                                </a>
-                            </li>
+                            <li><input class="form-control input-lg input-search btn-primary header-button-sm header-button-text"
+                                    type="submit" value="Search" /></li>
                             <!-- /Search -->
-                        </ul>
-                        <!-- /Find a Trainer -->
+                        </form>
+                        <!-- /Find a Trainer View -->
 
                     </div>
                     <!-- /Switch -->

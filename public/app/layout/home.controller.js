@@ -25,6 +25,7 @@
         vm.googleAutoComplete;
 
         vm.search = search;
+        vm.redirectTo = redirectTo;
 
         activate();
 
@@ -72,15 +73,24 @@
                 .catch(redirectToSearchResultsFailed);
 
             function redirectToSearchResults() {
-                var host = $window.location.host;
-                var landingUrl = "http://" + host + "/#/search";
-                $window.location.href = landingUrl;
+                redirectTo('search');
             }
 
             function redirectToSearchResultsFailed(error) {
                 vm.error = error;
                 return $q.reject(error);
             }
+        }
+
+        /**
+         * @name redirectTo
+         * @desc redirects the browser to the specified page
+         * @memberof Controllers.HomeController
+         */
+        function redirectTo(page) {
+            var host = $window.location.host;
+            var landingUrl = "http://" + host + "/#/" + page;
+            $window.location.href = landingUrl;
         }
     }
 })();
