@@ -84,10 +84,10 @@ router.post('/getTrainers', function(req, res, next) {
             },
             near: {
                 type: 'Point', // 2dsphere
-                coordinates: [-108.35, 47.6218] // coordinates to start search at
+                coordinates: [-111.35, 47.6218] // coordinates to start search at
             },
-            maxDistance: 10 * 1.609 * 1000, // m = 10 miles * 1.609 km/mile * 1000 m/km
-            distanceMultiplier: 0.621 * 0.001, // mile = 1 m * 0.621 mile/km * 0.001 km/m
+            maxDistance: 1000 * 1.609 * 1000, // m = miles * 1.609 km/mile * 1000 m/km
+            distanceMultiplier: 1 * 0.621 * 0.001, // miles = m * 0.621 mile/km * 0.001 km/m
             distanceField: 'dist.calculated', // field to assign distance result
             includeLocs: 'dist.location', // field to assign location result
             limit: 10, // limit
@@ -95,7 +95,7 @@ router.post('/getTrainers', function(req, res, next) {
         }}
     ], function(err, trainers) {
         if (err) { return next(err); }
-        
+
         res.json(trainers);
     });
 });

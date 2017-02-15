@@ -41,7 +41,6 @@
                 service.sport = params.sport;
                 service.location = params.location;
                 angular.copy(trainers, service.trainers);
-                console.log(trainers);
             });
         }
     }

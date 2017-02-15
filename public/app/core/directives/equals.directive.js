@@ -16,7 +16,7 @@
      */
     function equals() {
         return {
-            restrict: 'A', // only activate on element attribute
+            restrict: 'AE', // only activate on attribute
             require: '?ngModel', // get a hold of NgModelController
             link: function(scope, elem, attrs, ngModel) {
                 if(!ngModel) return; // do nothing if no ng-model

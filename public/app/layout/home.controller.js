@@ -22,7 +22,6 @@
         vm.isLoggedIn = userService.isLoggedIn;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
         vm.params = {};
-        vm.googleAutoComplete;
 
         vm.search = search;
         vm.redirectTo = redirectTo;
@@ -62,12 +61,12 @@
             // Ensure form is properly filled out
             if (!vm.params.sport || vm.params.sport === '' ||
                 vm.sports.indexOf(vm.params.sport) === -1 ||
-                !vm.params.location || vm.params.location === '') {
+                !vm.params.lat || !vm.params.long) {
 
                 // vm.error = 'Please fill the form out properly.'; // Display an error
                 return;
             }
-            console.log(vm.params);
+
             searchService.searchTrainers(vm.params)
                 .then(redirectToSearchResults)
                 .catch(redirectToSearchResultsFailed);

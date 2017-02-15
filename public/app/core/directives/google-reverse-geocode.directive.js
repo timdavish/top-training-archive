@@ -16,6 +16,7 @@
      */
     function googleReverseGeocode() {
         return {
+            restrict: 'AE',
             require: 'ngModel',
             link: function (scope, element, attributes, model) {
                 var latlng = new google.maps.LatLng(scope.vm.params.lat, scope.vm.params.long);

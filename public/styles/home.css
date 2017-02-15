@@ -107,6 +107,11 @@ h6 {
 }
 /* /TOPNAV */
 
+.fix-form-margin {
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
 /* COLLAPSABLE */
 .content {
     max-width: 1000px;

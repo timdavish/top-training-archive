@@ -16,7 +16,7 @@
                     <div ng-switch on="vm.buttonView">
 
                         <!-- Default view -->
-                        <form class="list-inline"
+                        <form class="list-inline fix-form-margin"
                             ng-switch-default>
                             <!-- Find a Trainer button -->
                             <li><input class="form-control input-lg input-search btn-primary header-button header-button-text"
@@ -37,7 +37,7 @@
                         <!-- /Default view -->
 
                         <!-- Find a Trainer View -->
-                        <form class="list-inline"
+                        <form class="list-inline fix-form-margin"
                             ng-switch-when="search"
                             ng-submit="vm.search()">
                             <!-- Back button -->
@@ -53,7 +53,7 @@
                                     type="text" placeholder="Sport" /></li>
                             <!-- /Sport -->
                             <!-- Location -->
-                            <li><input class="form-control input-lg input-search"
+                            <li><input class="form-control input-lg input-search" id="results"
                                     ng-model="vm.params.location"
                                     google-reverse-geocode
                                     google-auto-complete

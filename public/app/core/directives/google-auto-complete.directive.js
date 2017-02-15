@@ -16,18 +16,24 @@
      */
     function googleAutoComplete() {
         return {
+            restrict: 'AE',
             require: 'ngModel',
             link: function(scope, element, attributes, model) {
                 var input = element[0];
                 var options = {
-                    types: ['(regions)'],
+                    types: ['geocode'],
                     componentRestrictions: {country: 'US'}
                 };
 
-                scope.vm.googleAutoComplete = new google.maps.places.Autocomplete(input, options);
+                var googleAutoComplete = new google.maps.places.Autocomplete(input, options);
 
-                google.maps.event.addListener(scope.vm.googleAutoComplete, 'place_changed', function() {
+                google.maps.event.addListener(googleAutoComplete, 'place_changed', function() {
                     scope.$apply(function() {
+                        var location = googleAutoComplete.getPlace().geometry.location;
+
+                        scope.vm.params.lat = location.lat();
+                        scope.vm.params.long = location.lng();
+
                         model.$setViewValue(element.val());
                     });
                 });
