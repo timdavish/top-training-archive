@@ -92,7 +92,16 @@ router.post('/getTrainers', function(req, res, next) {
             includeLocs: 'dist.location', // field to assign location result
             limit: 10, // limit
             spherical: true // 2dsphere calculations
-        }}
+        }},
+        { $project: { // Choose which data fields make it through
+            accounts: 0, // we don't want account (login) info
+            clientInfo: 0 // we don't want client info
+        }},
+        { $group: { // Group
+            _id: null, // Don't group by anything
+            count: { $sum: 1 }, // Keep a count
+            trainers: { $push: "$$ROOT" } // Keep all trainer data
+        }},
     ], function(err, trainers) {
         if (err) { return next(err); }
 

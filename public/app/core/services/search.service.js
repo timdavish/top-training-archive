@@ -18,9 +18,11 @@
      */
     function searchService($http, authService) {
         var service = {
+            searchResults: {},
+            trainer: {},
             sport: "",
             location: "",
-            trainers: [],
+
             searchTrainers: searchTrainers
         };
 
@@ -36,11 +38,11 @@
          * @return Success status
          */
         function searchTrainers(params) {
-            return $http.post('/users/getTrainers', params).success(function(trainers) {
+            return $http.post('/users/getTrainers', params).success(function(searchResults) {
                 // Keep angular copy of data updated
                 service.sport = params.sport;
                 service.location = params.location;
-                angular.copy(trainers, service.trainers);
+                angular.copy(searchResults[0], service.searchResults);
             });
         }
     }

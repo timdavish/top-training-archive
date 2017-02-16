@@ -1,0 +1,42 @@
+
+<!-- Event detail template -->
+
+<!-- Event detail -->
+<div class="content-section-b">
+    <div class="container">
+        <div class="row">
+
+            <!-- Error pop-up -->
+            <div ng-show="vm.error" class="alert alert-danger row">
+                <span>{{ vm.error.message }}</span>
+            </div>
+
+            <!-- Event details -->
+            <h2>{{ vm.trainer.contact.firstname }} {{ vm.trainer.contact.lastname }}</h2>
+
+            <span>{{ vm.sport }}</span><br />
+
+            <div ng-repeat="location in vm.trainer.trainerInfo.locations">
+                <span>{{ location }}</span>
+            </div>
+
+            <div ng-repeat="package in vm.trainer.trainerInfo.packages">
+                <span>{{ package }}</span>
+            </div>
+
+            <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
+                <span>{{ review }}</span>
+            </div>
+            <!-- /Event details -->
+
+            <!-- Event signup -->
+            <form ng-submit="vm.signUpEvent()" ng-show="vm.userType() == 'client'">
+                <button type="submit">Sign up for this event!</button>
+            </form>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-b -->

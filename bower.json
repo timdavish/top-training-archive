@@ -1,6 +1,19 @@
 {
   "name": "top_training",
   "version": "0.0.1",
+  "description": "An app that connects trainers to trainees.",
+  "authors": [
+      "Tim Davis"
+  ],
+  "homepage": "https://github.com/timdavish/Top_Training",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/timdavish/Top_Training.git"
+  },
+  "ignore": [
+      "node_modules",
+      "bower_components"
+  ],
   "dependencies": {
     "angular": "1.5.7",
     "angular-animate": "1.5.7",

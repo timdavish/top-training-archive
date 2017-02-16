@@ -36,6 +36,16 @@
                     controllerAs: 'vm',
                     title: 'Search'
                 }
+            },
+            {
+                state: 'search/trainers',
+                config: {
+                    url: '/search/trainers/{id}',
+                    templateUrl: 'public/app/search/trainer.ejs',
+                    controller: 'TrainerController',
+                    controllerAs: 'vm',
+                    title: 'Trainer'
+                }
             }
         ];
     }

@@ -22,6 +22,7 @@
         vm.isLoggedIn = userService.isLoggedIn;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
         vm.params = {};
+        vm.autocompleteOptions = {};
 
         vm.search = search;
         vm.redirectTo = redirectTo;
@@ -36,6 +37,12 @@
          * @memberof Controllers.HomeController
          */
         function activate() {
+            // Set our autocomplete options for this page
+            vm.autocompleteOptions = {
+                types: ['geocode'],
+                componentRestrictions: {country: 'US'}
+            };
+
             geolocationService.getCurrentLocation()
                 .then(applyCurrentLocation)
                 .catch(applyClientLocation);

@@ -19,9 +19,12 @@
     function SearchController(searchService) {
         var vm = this;
 
+        vm.trainers = [];
+        vm.count = 0;
         vm.sport = "";
         vm.location = "";
-        vm.trainers = [];
+
+        vm.viewProfile = viewProfile;
 
         activate();
 
@@ -33,9 +36,14 @@
          * @memberof Controllers.SearchController
          */
         function activate() {
+            vm.trainers = searchService.searchResults.trainers;
+            vm.count = searchService.searchResults.count;
             vm.sport = searchService.sport;
             vm.location = searchService.location;
-            vm.trainers = searchService.trainers;
+        }
+
+        function viewProfile(trainer) {
+            searchService.trainer = trainer;
         }
     }
 })();

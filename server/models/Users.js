@@ -4,12 +4,21 @@ var mongoose = require('mongoose');
 var crypto = require('crypto'); // Used for generating password hash
 var jwt = require('jsonwebtoken'); // Used for generating tokens
 
-// Define the User model schema
+// Define the User schema
 var UserSchema = new mongoose.Schema({
     // All users have this data
-    usertype: { type: String, lowercase: true },
+    usertype: {
+        type: String,
+        enum: ['client', 'trainer', 'admin'],
+        required: true,
+        lowercase: true
+    },
     contact: {
-        email: { type: String, lowercase: true, unique: true },
+        email: {
+            type: String,
+            lowercase: true,
+            unique: true
+        },
         firstname: String,
         lastname: String
     },
@@ -20,10 +29,23 @@ var UserSchema = new mongoose.Schema({
         },
         facebook: {}
     },
+    data: {
+        created: {
+            type: Date,
+            default: Date.now
+        },
+        lastActive: {
+            type: Date,
+            default: Date.now
+        }
+    },
     // Only clients have this data
     clientInfo: {
         zipcode: Number,
-        events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }]
+        events: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Event'
+        }]
         // profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
     },
     // Only trainers have this data
@@ -45,13 +67,20 @@ var UserSchema = new mongoose.Schema({
             size: { type: String, lowercase: true },
             price: String
         }],
-        events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+        events: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Event'
+        }],
         summary: String,
         experience: String,
-        reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
+        reviews: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Review'
+        }]
     }
 });
 
+// Index our searchable locations
 UserSchema.index({"trainerInfo.locations": "2dsphere"});
 
 // Set a hashed password using a crypto salt
