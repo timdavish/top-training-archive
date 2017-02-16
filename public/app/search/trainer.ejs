@@ -6,12 +6,16 @@
     <div class="container">
         <div class="row">
 
+            <!-- Back -->
+            <a href="/#/search">Back</a>
+            <!-- /Back -->
+
             <!-- Error pop-up -->
             <div ng-show="vm.error" class="alert alert-danger row">
                 <span>{{ vm.error.message }}</span>
             </div>
 
-            <!-- Event details -->
+            <!-- Trainer details -->
             <h2>{{ vm.trainer.contact.firstname }} {{ vm.trainer.contact.lastname }}</h2>
 
             <span>{{ vm.sport }}</span><br />
@@ -27,12 +31,7 @@
             <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
                 <span>{{ review }}</span>
             </div>
-            <!-- /Event details -->
-
-            <!-- Event signup -->
-            <form ng-submit="vm.signUpEvent()" ng-show="vm.userType() == 'client'">
-                <button type="submit">Sign up for this event!</button>
-            </form>
+            <!-- /Trainer details -->
 
         </div>
         <!-- /.row -->

@@ -20,7 +20,7 @@
             require: 'ngModel',
             link: function(scope, element, attributes, model) {
                 var input = element[0];
-                var options = vm.autocompleteOptions;
+                var options = scope.vm.autocompleteOptions;
                 var googleAutoComplete = new google.maps.places.Autocomplete(input, options);
 
                 google.maps.event.addListener(googleAutoComplete, 'place_changed', function() {
