@@ -5,11 +5,38 @@
     <div class="container">
         <div class="row">
 
-            <!-- Header -->
-            <div class="page-header">
-                <h1>Profile</h1>
-            </div>
+          <div ng-show="vm.error" class="alert alert-danger row">
+              <span> {{vm.error.message}} </span>
+          </div>
+          <!-- Header -->
+          <div class="page-header">
 
+              <h1>Profile</h1>
+          </div>
+          <h2> {{vm.contact.firstname}} {{vm.contact.lastname}}</h2>
+          <h3>{{vm.contact.email}}</h3>
+          <span>Joined: {{vm.data.created}} Last Active: {{vm.data.lastActive}} </span>
+          <div ng-show="vm.trainerInfo">
+            <div ng-repeat="sport in vm.trainerInfo.sports">
+              {{sport}}
+            </div>
+            <div>
+              <h4>Experience<h4>
+              {{vm.trainerInfo.experience}}
+            </div>
+            <div>
+              <h4>Summary<h4>
+              {{vm.trainerInfo.summary}}
+            </div>
+            <!--todo: add reviews schema-->
+
+          </div>
+          <div ng-show="vm.clientInfo">
+            {{vm.clientInfo.zipcode}}
+            <div ng-repeat="event in vm.clientInfo.events">
+                {{event.startsAt}} - {{event.title}} - {{event.trainer}}
+            </div>
+          </div>
 
         </div>
     </div>
