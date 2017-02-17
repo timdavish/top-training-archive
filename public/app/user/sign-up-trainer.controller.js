@@ -1,5 +1,5 @@
 /**
- * Controller for sign-up-trainer.html
+ * Controller for sign-up-trainer.ejs
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -20,7 +20,7 @@
         var vm = this;
 
         vm.emailFormat = "/[^@]+@[^@]+/";
-        
+
         vm.signUpTrainer = signUpTrainer;
 
         /* Functions */

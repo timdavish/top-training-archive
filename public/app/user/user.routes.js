@@ -72,6 +72,22 @@
                     }]
                 }
             }
+            ,
+            {
+                state: 'profile',
+                config: {
+                    url: '/profile',
+                    templateUrl: 'public/app/user/profile.ejs',
+                    controller: 'ProfileController',
+                    controllerAs: 'vm',
+                    title: 'Profile',
+                    onEnter: ['$state', 'userService', function($state, userService) {
+                        if (!userService.isLoggedIn()) {
+                            $state.go('home');
+                        }
+                    }]
+                }
+            }
         ];
     }
 })();

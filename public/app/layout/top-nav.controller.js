@@ -18,10 +18,26 @@
      */
     function TopNavController(userService) {
         var vm = this;
-        
-        vm.isLoggedIn = userService.isLoggedIn;
-        vm.getEmail = userService.getEmail;
-        vm.userType = userService.getUserType;
-        vm.logOut = userService.logOut;
+
+        vm.isLoggedIn;
+        vm.logOut;
+        vm.usertype = "";
+        vm.firstname = "";
+
+        activate();
+
+        /* Functions */
+
+        function activate() {
+            vm.isLoggedIn = userService.isLoggedIn;
+            vm.logOut = userService.logOut;
+
+            if (vm.isLoggedIn()) {
+                var payload = userService.getUserPayload();
+
+                vm.userType = payload.usertype;
+                vm.firstname = payload.contact.firstname;
+            }
+        }
     }
 })();

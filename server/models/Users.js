@@ -86,12 +86,12 @@ UserSchema.index({"trainerInfo.locations": "2dsphere"});
 // Set a hashed password using a crypto salt
 UserSchema.methods.setPassword = function(password) {
     this.accounts.local.salt = crypto.randomBytes(16).toString('hex');
-    this.accounts.local.hash = crypto.pbkdf2Sync(password, this.accounts.local.salt, 1000, 64).toString('hex');
+    this.accounts.local.hash = crypto.pbkdf2Sync(password, this.accounts.local.salt, 1000, 64, 'sha1').toString('hex');
 };
 
 // Validate a password using the crypto salt
 UserSchema.methods.validPassword = function(password) {
-    var hash = crypto.pbkdf2Sync(password, this.accounts.local.salt, 1000, 64).toString('hex');
+    var hash = crypto.pbkdf2Sync(password, this.accounts.local.salt, 1000, 64, 'sha1').toString('hex');
     return this.accounts.local.hash === hash;
 };
 
@@ -105,7 +105,8 @@ UserSchema.methods.generateJWT = function() {
     return jwt.sign({
         _id: this._id,
         usertype: this.usertype,
-        email: this.contact.email,
+        contact: this.contact,
+        data: this.data,
         clientInfo: this.clientInfo,
         trainerInfo: this.trainerInfo,
         exp: parseInt(exp.getTime() / 1000)

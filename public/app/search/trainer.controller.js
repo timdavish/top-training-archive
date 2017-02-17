@@ -23,7 +23,6 @@
         vm.sport = "";
 
         activate();
-        console.log(vm.trainer);
 
         /* Functions */
 

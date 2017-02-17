@@ -1,5 +1,5 @@
 /**
- * Controller for log-in.html
+ * Controller for log-in.ejs
  * @namespace Controllers
  */
 (function() { // IIFE structure

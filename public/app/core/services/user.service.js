@@ -23,6 +23,7 @@
             logOut: logOut,
             isLoggedIn: isLoggedIn,
             // Get User Info
+            getUserPayload: getUserPayload,
             getUserId: getUserId,
             getUserType: getUserType,
             getEmail: getEmail,
@@ -81,6 +82,21 @@
                 return payload.exp > Date.now() / 1000;
             } else {
                 return false;
+            }
+        }
+
+        /**
+         * @namespace getUserPayload
+         * @desc Retrieve the session payload for the user
+         * @return {payload} payload with user data
+         * @memberof Services.userService
+         */
+        function getUserPayload() {
+            if (service.isLoggedIn()) {
+                var token = authService.getToken();
+                var payload = authService.getPayload(token);
+
+                return payload;
             }
         }
 

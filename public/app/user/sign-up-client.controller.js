@@ -1,5 +1,5 @@
 /**
- * Controller for sign-up-client.html
+ * Controller for sign-up-client.ejs
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -20,7 +20,7 @@
         var vm = this;
 
         vm.emailFormat = "/[^@]+@[^@]+/";
-        
+
         vm.signUpClient = signUpClient;
 
         /* Functions */
