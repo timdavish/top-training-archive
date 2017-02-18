@@ -9,17 +9,17 @@
         .module('app.post')
         .controller('PostDetailController', PostDetailController);
 
-    PostDetailController.$inject = ['userService', 'postService', 'post'];
+    PostDetailController.$inject = ['authentication', 'postService', 'post'];
 
     /**
      * @namespace PostDetailController
      * @desc Post detail controller
      * @memberof Controllers
      */
-    function PostDetailController(userService, postService, post) {
+    function PostDetailController(authentication, postService, post) {
         var vm = this;
 
-        vm.isLoggedIn = userService.isLoggedIn;
+        vm.isLoggedIn = authentication.isLoggedIn();
         vm.post = post;
 
         vm.addComment = addComment;

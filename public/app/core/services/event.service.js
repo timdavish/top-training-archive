@@ -9,14 +9,14 @@
         .module('app.core')
         .factory('eventService', eventService);
 
-    eventService.$inject = ['$http', 'moment', 'authService', 'userService'];
+    eventService.$inject = ['$http', 'moment', 'authentication'];
 
     /**
      * @namespace eventService
      * @desc Service factory for events
      * @memberof Services
      */
-    function eventService($http, moment, authService, userService) {
+    function eventService($http, moment, authentication) {
         var service = {
             events: [],
             eventsBySport: [],
@@ -41,7 +41,7 @@
          */
         function addEvent(userId, event) {
             return $http.post('/events/addEvent/' + userId, event, {
-                headers: { Authorization: 'Bearer ' + authService.getToken() }
+                headers: { Authorization: 'Bearer ' + authentication.getToken() }
             }).success(function(data) {
                 service.events.push(data);
             });
@@ -122,9 +122,9 @@
          * @return Success status
          */
         function signUpEvent(event) {
-            var userId = userService.getUserId();
+            var userId = authentication.currentUser()._id;
             return $http.put('/events/signUpEvent/' + event._id + '/' + userId, null, {
-                headers: { Authorization: 'Bearer ' + authService.getToken() }
+                headers: { Authorization: 'Bearer ' + authentication.getToken() }
             });
         }
     }

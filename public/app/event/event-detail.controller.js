@@ -9,20 +9,20 @@
         .module('app.event')
         .controller('EventDetailController', EventDetailController);
 
-    EventDetailController.$inject = ['userService', 'eventService', 'event'];
+    EventDetailController.$inject = ['authentication', 'eventService', 'event'];
 
     /**
      * @namespace EventDetailController
      * @desc Event detail controller
      * @memberof Controllers
      */
-    function EventDetailController(userService, eventService, event) {
+    function EventDetailController(authentication, eventService, event) {
         var vm = this;
 
-        vm.isLoggedIn = userService.isLoggedIn;
-        vm.userType = userService.getUserType;
+        vm.currentUser = authentication.currentUser();
+        vm.isLoggedIn = authentication.isLoggedIn();
         vm.event = event;
-        
+
         vm.signUpEvent = signUpEvent;
 
         /* Functions */

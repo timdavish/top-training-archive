@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('LogInController', LogInController);
 
-    LogInController.$inject = ['$state', 'userService'];
+    LogInController.$inject = ['$state', 'authentication'];
 
     /**
      * @namespace LogInController
      * @desc LogIn controller
      * @memberof Controllers
      */
-    function LogInController($state, userService) {
+    function LogInController($state, authentication) {
         var vm = this;
 
         vm.logIn = logIn;
@@ -29,7 +29,7 @@
          * @memberof Controllers.LogInController
          */
         function logIn() {
-            userService.logIn(vm.user).error(function(error) {
+            authentication.logIn(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
                 $state.go('home');

@@ -9,14 +9,14 @@
         .module('app.core')
         .factory('searchService', searchService);
 
-    searchService.$inject = ['$http', 'authService'];
+    searchService.$inject = ['$http', 'authentication'];
 
     /**
      * @namespace searchService
      * @desc Service factory for searching
      * @memberof Services
      */
-    function searchService($http, authService) {
+    function searchService($http, authentication) {
         var service = {
             searchResults: {},
             trainer: {},

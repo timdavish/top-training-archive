@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('SignUpTrainerController', SignUpTrainerController);
 
-    SignUpTrainerController.$inject = ['$state', 'userService'];
+    SignUpTrainerController.$inject = ['$state', 'authentication'];
 
     /**
      * @namespace SignUpTrainerController
      * @desc SignUpTrainer controller
      * @memberof Controllers
      */
-    function SignUpTrainerController($state, userService) {
+    function SignUpTrainerController($state, authentication) {
         var vm = this;
 
         vm.emailFormat = "/[^@]+@[^@]+/";
@@ -32,7 +32,7 @@
          */
         function signUpTrainer() {
             vm.user.usertype = "trainer";
-            userService.signUp(vm.user).error(function(error) {
+            authentication.signUp(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
                 $state.go('home');

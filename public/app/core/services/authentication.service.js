@@ -7,22 +7,29 @@
 
     angular
         .module('app.core')
-        .factory('authService', authService);
+        .factory('authentication', authentication);
 
-    authService.$inject = ['$http', '$window'];
+    authentication.$inject = ['$http', '$window'];
 
     /**
-     * @namespace authService
+     * @namespace authentication
      * @desc Service factory for authentication
      * @memberof Services
      */
-    function authService($http, $window) {
+    function authentication($http, $window) {
         var service = {
+            // Session Token
             tokenName: 'top-training-token',
             saveToken: saveToken,
             removeToken: removeToken,
             getToken: getToken,
-            getPayload: getPayload
+            getPayload: getPayload,
+            // User
+            signUp: signUp,
+            logIn: logIn,
+            logOut: logOut,
+            isLoggedIn: isLoggedIn,
+            currentUser: currentUser
         };
 
         return service;
@@ -33,7 +40,7 @@
          * @namespace saveToken
          * @desc Saves the session token into local storage
          * @param {token} token The token representing the session
-         * @memberof Services.authService
+         * @memberof Services.authentication
          */
         function saveToken(token) {
             $window.localStorage[service.tokenName] = token;
@@ -42,7 +49,7 @@
         /**
          * @namespace removeToken
          * @desc Removes the session token from local storage
-         * @memberof Services.authService
+         * @memberof Services.authentication
          */
         function removeToken() {
             $window.localStorage.removeItem(service.tokenName);
@@ -51,7 +58,7 @@
         /**
          * @namespace getToken
          * @desc Retrieves the session token from local storage
-         * @memberof Services.authService
+         * @memberof Services.authentication
          */
         function getToken() {
             return $window.localStorage[service.tokenName];
@@ -61,10 +68,81 @@
          * @namespace getPayload
          * @desc Retrieves the payload from the session token
          * @param {token} token The token to retrieve the payload from
-         * @memberof Services.authService
+         * @memberof Services.authentication
          */
         function getPayload(token) {
             return JSON.parse($window.atob(token.split('.')[1]));
+        }
+
+        /**
+         * @namespace signUp
+         * @desc Signs up a new user
+         * @param {user} user The user info to sign up with
+         * @memberof Services.authentication
+         */
+        function signUp(user) {
+            return $http.post('/users/signUp', user).success(function(data) {
+                service.saveToken(data.token);
+            });
+        }
+
+        /**
+         * @namespace logIn
+         * @desc Logs in an existing user
+         * @param {user} user The user to log in
+         * @memberof Services.authentication
+         */
+        function logIn(user) {
+            return $http.post('/users/login', user).success(function(data) {
+                service.saveToken(data.token);
+            });
+        }
+
+        /**
+         * @namespace logOut
+         * @desc Logs the current user out
+         * @memberof Services.authentication
+         */
+        function logOut() {
+            service.removeToken();
+        }
+
+        /**
+         * @namespace isLoggedIn
+         * @desc Checks if a user is logged in
+         * @memberof Services.authentication
+         */
+        function isLoggedIn() {
+            var token = service.getToken();
+
+            if (token) {
+                var payload = service.getPayload(token);
+
+                return payload.exp > Date.now() / 1000;
+            } else {
+                return false;
+            }
+        }
+
+        /**
+         * @namespace currentUser
+         * @desc Retrieve the logged in user's data from session token payload
+         * @return {object} object with all user data
+         * @memberof Services.authentication
+         */
+        function currentUser() {
+            if (service.isLoggedIn()) {
+                var token = service.getToken();
+                var payload = service.getPayload(token);
+
+                return {
+                    id: payload._id,
+                    usertype: payload.usertype,
+                    contact: payload.contact,
+                    data: payload.data,
+                    info: payload.usertype === 'client' ? payload.clientInfo : payload.trainerInfo
+                };
+            }
         }
     }
 })();

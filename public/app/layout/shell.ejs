@@ -66,7 +66,6 @@
         <!-- Services -->
         <script src="/public/app/core/services/authentication.service.js"></script>
         <script src="/public/app/core/services/geolocation.service.js"></script>
-        <script src="/public/app/core/services/user.service.js"></script>
         <script src="/public/app/core/services/search.service.js"></script>
         <script src="/public/app/core/services/event.service.js"></script>
         <script src="/public/app/core/services/posts.service.js"></script>
@@ -90,7 +89,7 @@
         <script src="/public/app/layout/layout.module.js"></script>
         <script src="/public/app/layout/layout.routes.js"></script>
         <script src="/public/app/layout/home.controller.js"></script>
-        <script src="/public/app/layout/top-nav.controller.js"></script>
+        <script src="/public/app/layout/navigation.controller.js"></script>
 
         <!-- User Module -->
         <script src="/public/app/user/user.module.js"></script>
@@ -127,7 +126,7 @@
     </head>
     <body ng-app="app" class="ng-cloak" ng-cloak>
         <!-- Include top navigation bar -->
-        <%- include('top-nav.ejs') %>
+        <%- include('navigation.ejs') %>
 
         <!-- Main view -->
         <ui-view></ui-view>

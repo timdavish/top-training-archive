@@ -9,21 +9,21 @@
         .module('app.event')
         .controller('EventListController', EventListController);
 
-    EventListController.$inject = ['userService', 'eventService'];
+    EventListController.$inject = ['authentication', 'eventService'];
 
     /**
      * @namespace EventListController
      * @desc Controller for the events list
      * @memberof Controllers
      */
-    function EventListController(userService, eventService) {
+    function EventListController(authentication, eventService) {
         var vm = this;
 
-        vm.isLoggedIn = userService.isLoggedIn;
-        vm.userType = userService.getUserType;
+        vm.currentUser = authentication.currentUser();
+        vm.isLoggedIn = authentication.isLoggedIn();
         vm.events = eventService.events;
         vm.datePickerOpen = false;
-        
+
         vm.addEvent = addEvent;
         vm.toggleDatePicker = toggleDatePicker;
 
@@ -46,7 +46,7 @@
                 return;
             }
 
-            var userId = userService.getUserId();
+            var userId = authentication.getUserId();
             var event = {
                 title: vm.title,
                 sport: vm.sport,

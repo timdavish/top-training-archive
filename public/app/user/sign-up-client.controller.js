@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('SignUpClientController', SignUpClientController);
 
-    SignUpClientController.$inject = ['$state', 'userService'];
+    SignUpClientController.$inject = ['$state', 'authentication'];
 
     /**
      * @namespace SignUpClientController
      * @desc SignUpClient controller
      * @memberof Controllers
      */
-    function SignUpClientController($state, userService) {
+    function SignUpClientController($state, authentication) {
         var vm = this;
 
         vm.emailFormat = "/[^@]+@[^@]+/";
@@ -32,7 +32,7 @@
          */
         function signUpClient() {
             vm.user.usertype = "client";
-            userService.signUp(vm.user).error(function(error) {
+            authentication.signUp(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
                 $state.go('home');

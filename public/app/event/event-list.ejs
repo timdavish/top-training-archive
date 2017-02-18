@@ -27,7 +27,7 @@
 <!-- /All Events.content-section-a -->
 
 <!-- Add a new Event -->
-<div class="content-section-b" ng-show="vm.isLoggedIn() && vm.userType() == 'trainer'">
+<div class="content-section-b" ng-show="vm.isLoggedIn && vm.currentUser.usertype == 'trainer'">
     <div class="container">
         <div class="row">
 
@@ -44,7 +44,7 @@
             <!-- /Header -->
 
             <!-- Add new event form -->
-            <form ng-submit="vm.addEvent()" ng-show="vm.isLoggedIn()">
+            <form ng-submit="vm.addEvent()" ng-show="vm.isLoggedIn">
 
                 <!-- Event Title -->
                 <div class="form-group">

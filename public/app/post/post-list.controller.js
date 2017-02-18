@@ -9,17 +9,17 @@
         .module('app.post')
         .controller('PostListController', PostListController);
 
-    PostListController.$inject = ['userService', 'postService'];
+    PostListController.$inject = ['authentication', 'postService'];
 
     /**
      * @namespace PostListController
      * @desc Post list controller
      * @memberof Controllers
      */
-    function PostListController(userService, postService) {
+    function PostListController(authentication, postService) {
         var vm = this;
 
-        vm.isLoggedIn = userService.isLoggedIn;
+        vm.isLoggedIn = authentication.isLoggedIn();
         vm.posts = postService.posts;
 
         vm.addPost = addPost;

@@ -9,14 +9,14 @@
         .module('app.core')
         .factory('postService', postService);
 
-    postService.$inject = ['$http', 'authService'];
+    postService.$inject = ['$http', 'authentication'];
 
     /**
      * @namespace postService
      * @desc Service factory for posts
      * @memberof Services
      */
-    function postService($http, authService) {
+    function postService($http, authentication) {
         var service = {
             posts: [],
             addPost: addPost,
@@ -39,7 +39,7 @@
          */
         function addPost(post) {
             return $http.post('/posts/addPost', post, {
-                headers: { Authorization: 'Bearer ' + authService.getToken() }
+                headers: { Authorization: 'Bearer ' + authentication.getToken() }
             }).success(function(data) {
                 service.posts.push(data);
             });
@@ -76,7 +76,7 @@
          */
         function upvotePost(post) {
             return $http.put('/posts/upvotePost/' + post._id, null, {
-                headers: { Authorization: 'Bearer ' + authService.getToken() }
+                headers: { Authorization: 'Bearer ' + authentication.getToken() }
             }).success(function(data) {
                 post.upvotes += 1;
             });
@@ -91,7 +91,7 @@
          */
         function addComment(id, comment) {
             return $http.post('/posts/addComment/' + id, comment, {
-                headers: { Authorization: 'Bearer ' + authService.getToken() }
+                headers: { Authorization: 'Bearer ' + authentication.getToken() }
             });
         }
 
@@ -104,7 +104,7 @@
          */
         function upvoteComment(post, comment) {
             return $http.put('/posts/upvoteComment/' + post._id + '/comments/' + comment._id, null, {
-                headers: { Authorization: 'Bearer ' + authService.getToken() }
+                headers: { Authorization: 'Bearer ' + authentication.getToken() }
             }).success(function(data) {
                 comment.upvotes += 1;
             });

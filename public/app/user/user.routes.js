@@ -35,8 +35,8 @@
                     controller: 'LogInController',
                     controllerAs: 'vm',
                     title: 'Log In',
-                    onEnter: ['$state', 'userService', function($state, userService) {
-                        if (userService.isLoggedIn()) {
+                    onEnter: ['$state', 'authentication', function($state, authentication) {
+                        if (authentication.isLoggedIn()) {
                             $state.go('home');
                         }
                     }]
@@ -50,8 +50,8 @@
                     controller: 'SignUpClientController',
                     controllerAs: 'vm',
                     title: 'Client Sign Up',
-                    onEnter: ['$state', 'userService', function($state, userService) {
-                        if (userService.isLoggedIn()) {
+                    onEnter: ['$state', 'authentication', function($state, authentication) {
+                        if (authentication.isLoggedIn()) {
                             $state.go('home');
                         }
                     }]
@@ -65,8 +65,8 @@
                     controller: 'SignUpTrainerController',
                     controllerAs: 'vm',
                     title: 'Trainer Sign Up',
-                    onEnter: ['$state', 'userService', function($state, userService) {
-                        if (userService.isLoggedIn()) {
+                    onEnter: ['$state', 'authentication', function($state, authentication) {
+                        if (authentication.isLoggedIn()) {
                             $state.go('home');
                         }
                     }]
@@ -81,8 +81,8 @@
                     controller: 'ProfileController',
                     controllerAs: 'vm',
                     title: 'Profile',
-                    onEnter: ['$state', 'userService', function($state, userService) {
-                        if (!userService.isLoggedIn()) {
+                    onEnter: ['$state', 'authentication', function($state, authentication) {
+                        if (!authentication.isLoggedIn()) {
                             $state.go('home');
                         }
                     }]
