@@ -22,7 +22,8 @@
             logIn: logIn,
             logOut: logOut,
             isLoggedIn: isLoggedIn,
-            // Get User Info
+            currentUser: currentUser,
+            
             getUserPayload: getUserPayload,
             getUserId: getUserId,
             getUserType: getUserType,
@@ -82,6 +83,26 @@
                 return payload.exp > Date.now() / 1000;
             } else {
                 return false;
+            }
+        }
+
+        /**
+         * @namespace currentUser
+         * @desc Retrieve the logged in user's data from session token payload
+         * @return {object} object with all user data
+         * @memberof Services.userService
+         */
+        function currentUser() {
+            if (service.isLoggedIn()) {
+                var token = authService.getToken();
+                var payload = authService.getPayload(token);
+
+                return {
+                    usertype: payload.usertype,
+                    contact: payload.contact,
+                    data: payload.data,
+                    info: payload.usertype === 'client' ? payload.clientInfo : payload.trainerInfo
+                };
             }
         }
 

@@ -97,10 +97,13 @@ UserSchema.methods.validPassword = function(password) {
 
 // Generate a token
 UserSchema.methods.generateJWT = function() {
-    // Set token experation (60 days)
+    // Set token experation (1 day)
     var today = new Date();
     var exp = new Date(today);
-    exp.setDate(today.getDate() + 60);
+    exp.setDate(today.getDate() + 1);
+
+    var secret = 'SECRET';
+    // CHANGE THIS TO REFERENCE AN ENVIRONMENT VARIABLE OUTSIDE OF CODEBASE
 
     return jwt.sign({
         _id: this._id,
@@ -110,8 +113,7 @@ UserSchema.methods.generateJWT = function() {
         clientInfo: this.clientInfo,
         trainerInfo: this.trainerInfo,
         exp: parseInt(exp.getTime() / 1000)
-    }, 'SECRET');
-    // CHANGE 'SECRET' TO REFERENCE AN ENVIRONMENT VARIABLE OUTSIDE OF CODEBASE
+    }, secret);
 };
 
 // Set mongoose model
