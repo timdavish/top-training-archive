@@ -19,8 +19,8 @@
     function EventListController(authentication, eventService) {
         var vm = this;
 
-        vm.currentUser = authentication.currentUser();
-        vm.isLoggedIn = authentication.isLoggedIn();
+        vm.currentUser = authentication.currentUser;
+        vm.isLoggedIn = authentication.isLoggedIn;
         vm.events = eventService.events;
         vm.datePickerOpen = false;
 

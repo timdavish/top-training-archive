@@ -23,7 +23,7 @@
 </div>
 
 <!-- Add new post form (logged in) -->
-<form ng-submit="vm.addPost()" ng-show="vm.isLoggedIn"
+<form ng-submit="vm.addPost()" ng-show="vm.isLoggedIn()"
     style="margin-top: 30px;">
     <h3>Add a new post</h3>
 
@@ -45,6 +45,6 @@
 </form>
 
 <!-- Add new post (not logged in) -->
-<div ng-hide="vm.isLoggedIn">
+<div ng-hide="vm.isLoggedIn()">
     <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
 </div>

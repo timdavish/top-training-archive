@@ -19,7 +19,7 @@
     function PostDetailController(authentication, postService, post) {
         var vm = this;
 
-        vm.isLoggedIn = authentication.isLoggedIn();
+        vm.isLoggedIn = authentication.isLoggedIn;
         vm.post = post;
 
         vm.addComment = addComment;

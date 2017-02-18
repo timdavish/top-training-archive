@@ -19,8 +19,8 @@
     function EventDetailController(authentication, eventService, event) {
         var vm = this;
 
-        vm.currentUser = authentication.currentUser();
-        vm.isLoggedIn = authentication.isLoggedIn();
+        vm.currentUser = authentication.currentUser;
+        vm.isLoggedIn = authentication.isLoggedIn;
         vm.event = event;
 
         vm.signUpEvent = signUpEvent;

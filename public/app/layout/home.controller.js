@@ -19,7 +19,7 @@
     function HomeController($q, $window, authentication, searchService, geolocationService) {
         var vm = this;
 
-        vm.isLoggedIn = authentication.isLoggedIn();
+        vm.isLoggedIn = authentication.isLoggedIn;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
         vm.params = {};
         vm.autocompleteOptions = {};

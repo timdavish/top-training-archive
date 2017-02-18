@@ -19,7 +19,7 @@
     function PostListController(authentication, postService) {
         var vm = this;
 
-        vm.isLoggedIn = authentication.isLoggedIn();
+        vm.isLoggedIn = authentication.isLoggedIn;
         vm.posts = postService.posts;
 
         vm.addPost = addPost;

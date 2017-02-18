@@ -21,15 +21,15 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <!-- Logged in -->
-                <li ng-show="vm.isLoggedIn"><a>Welcome, {{ vm.currentUser.contact.firstname }}</a></li>
-                <li ng-show="vm.isLoggedIn"><a href="/#/profile">Profile</a></li>
-                <li ng-show="vm.isLoggedIn"><a href="" ng-click="vm.logOut()">Log Out</a></li>
+                <li ng-show="vm.isLoggedIn()"><a>Welcome, {{ vm.currentUser().contact.firstname }}</a></li>
+                <li ng-show="vm.isLoggedIn()"><a href="/#/profile">Profile</a></li>
+                <li ng-show="vm.isLoggedIn()"><a href="" ng-click="vm.logOut()">Log Out</a></li>
                 <!-- /Logged in -->
 
                 <!-- Logged out -->
-                <li ng-hide="vm.isLoggedIn"><a href="/#/sign-up-trainer">Apply to Train</a></li>
-                <li ng-hide="vm.isLoggedIn"><a href="/#/log-in">Log In</a></li>
-                <li ng-hide="vm.isLoggedIn"><a href="/#/sign-up-client">Sign Up</a></li>
+                <li ng-hide="vm.isLoggedIn()"><a href="/#/sign-up-trainer">Apply to Train</a></li>
+                <li ng-hide="vm.isLoggedIn()"><a href="/#/log-in">Log In</a></li>
+                <li ng-hide="vm.isLoggedIn()"><a href="/#/sign-up-client">Sign Up</a></li>
                 <!-- /Logged out -->
             </ul>
         </div>
