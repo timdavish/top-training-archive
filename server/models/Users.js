@@ -16,8 +16,12 @@ var UserSchema = new mongoose.Schema({
     contact: {
         email: {
             type: String,
+            required: true,
             lowercase: true,
             unique: true
+        },
+        phone: {
+            type: Number
         },
         firstname: String,
         lastname: String
@@ -41,6 +45,42 @@ var UserSchema = new mongoose.Schema({
     },
     // Only clients have this data
     clientInfo: {
+        activeSessions: [{
+            trainer: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            sport: {
+                type: String
+            },
+            count: {
+                type: Number,
+                enum: [1, 2, 5, 10],
+                default: 1
+            },
+            price: {
+                type: Number
+            },
+            purchaseDate: {
+                type: Date,
+                default: Date.now
+            },
+            expireDate: {
+                type: Date
+            }
+        }],
+        activeEvents: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Event'
+        }],
+        activeTrainers: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        savedTrainers: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }],
         zipcode: Number,
         events: [{
             type: mongoose.Schema.Types.ObjectId,
@@ -63,9 +103,16 @@ var UserSchema = new mongoose.Schema({
         }],
         sports: [{ type: String, lowercase: true }],
         packages: [{
+            count: {
+                type: Number,
+                enum: [1, 2, 5, 10],
+                default: 1
+            },
+            price: {
+                type: Number
+            },
             sport: { type: String, lowercase: true },
-            size: { type: String, lowercase: true },
-            price: String
+            size: { type: String, lowercase: true }
         }],
         events: [{
             type: mongoose.Schema.Types.ObjectId,
