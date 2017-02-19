@@ -19,21 +19,11 @@
     function TrainerController(searchService) {
         var vm = this;
 
-        vm.trainer = {};
-        vm.sport = "";
+        vm.trainer = searchService.trainer;
+        vm.sport = searchService.sport;
 
-        activate();
+        console.log(vm.trainer);
 
         /* Functions */
-
-        /**
-         * @name activate
-         * @desc Activates the controller
-         * @memberof Controllers.TrainerController
-         */
-        function activate() {
-            vm.trainer = searchService.trainer;
-            vm.sport = searchService.sport;
-        }
     }
 })();

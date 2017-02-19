@@ -9,13 +9,14 @@
             <h3>{{ vm.count }} {{ vm.sport }} Trainers near {{ vm.location }}</h3>
 
             <div ng-repeat="trainer in vm.trainers">
-                <div>
-                    <span>{{ trainer.contact.firstname }} {{ trainer.contact.lastname[0] }}.</span>
-                    <br />
-                    <span>{{ vm.sport }}</span>
-                    <br />
-                    <span><a ng-click="vm.viewProfile(trainer)" href="#/search/trainers/{{ trainer._id }}">View Profile</a></span>
-                </div><br />
+                <span>{{ trainer.contact.firstname }} {{ trainer.contact.lastname[0] }}.</span>
+                <br />
+                <span>{{ vm.sport }}</span>
+                <br />
+                <span>{{ trainer.dist.calculated | numberRound:1 }} miles from {{ vm.location }}</span>
+                <br />
+                <span><a ng-click="vm.viewProfile(trainer)" href="#/search/trainers/{{ trainer._id }}">View Profile</a></span>
+                <br />
             </div>
 
         </div>

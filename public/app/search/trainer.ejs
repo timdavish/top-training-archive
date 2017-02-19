@@ -20,14 +20,17 @@
 
             <span>{{ vm.sport }}</span><br />
 
+            <h2>Training Locations</h2>
             <div ng-repeat="location in vm.trainer.trainerInfo.locations">
                 <span>{{ location }}</span>
             </div>
 
+            <h2>Packages</h2>
             <div ng-repeat="package in vm.trainer.trainerInfo.packages">
                 <span>{{ package }}</span>
             </div>
 
+            <h2>Reviews</h2>
             <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
                 <span>{{ review }}</span>
             </div>
