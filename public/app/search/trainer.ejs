@@ -5,51 +5,83 @@
 <div class="content-section-b">
     <div class="container">
         <div class="row">
-
-            <!-- Back -->
-            <a href="/#/search">Back</a>
-            <!-- /Back -->
-
-            <!-- Trainer details -->
-            <div>
-                <h2>{{ vm.trainer.contact.firstname }} {{ vm.trainer.contact.lastname }}</h2>
-                <select ng-model="vm.sport">
-                    <option ng-repeat="set in vm.trainer.trainerInfo.sports"
-                            value="{{ set.sport }}">
-                        {{ set.sport }}
-                    </option>
-                </select>
-            </div>
-
-            <div>
-                {{vm.sport}}
-            </div>
-
-            <div ng-repeat="set in vm.trainer.trainerInfo.sports"
-                 ng-if="vm.sport === set.sport">
-
-                <span>{{ set.summary }}</span>
-
-                <h2>Packages</h2>
-                <div ng-repeat="package in set.packages">
-                    <span>{{ package }}</span>
+            <div class="col-md-offset-1 col-md-10">
+                <!-- Back -->
+                <div class="floatL">
+                    <a href="/#/search">Back</a>
                 </div>
+                <!-- /Back -->
 
+                <!-- Summary Pane -->
+                <div class="content floatL clear col-md-7">
+                    <h2>{{ vm.trainer.contact.firstname }} {{ vm.trainer.contact.lastname }}</h2>
+                    <select ng-model="vm.sport">
+                        <option ng-repeat="set in vm.trainer.trainerInfo.sports"
+                                value="{{ set.sport }}">
+                            {{ set.sport }}
+                        </option>
+                    </select>
+
+                    <div ng-repeat="set in vm.trainer.trainerInfo.sports"
+                         ng-if="vm.sport === set.sport">
+
+                        <span>{{ set.summary }}</span>
+                    </div>
+                </div>
+                <!-- /Summary Pane -->
+
+                <!-- Locations -->
+                <div class="content floatR col-md-5">
+                    <h2>Training Locations</h2>
+                    <div ng-repeat="location in vm.trainer.trainerInfo.locations">
+                        <span>{{ location.coordinates }}</span>
+                    </div>
+                </div>
+                <!-- /Locations -->
+
+                <!-- Packages & Credentials & Services -->
+                <div ng-repeat="set in vm.trainer.trainerInfo.sports"
+                     ng-if="vm.sport === set.sport">
+
+                    <h2 class="clear">Packages</h2>
+                    <div ng-repeat="package in set.packages">
+                        <div class="content floatL clear col-md-7">
+                            <p>Training group size: {{ package.size }}</p>
+                            <p>Number of sessions: {{ package.count }}</p>
+                            <p>Price: {{ package.price * package.count }}</p>
+                            <p>Price per session: {{ package.price }}</p>
+                        </div>
+                    </div>
+
+                    <h2 class="clear">Credentials</h2>
+                    <div class="content floatL clear col-md-7">
+                        <p>{{ set.credentials.experience }} years training experience.</p>
+                        <p>School: {{ set.credentials.school }}</p>
+                    </div>
+
+                    <h2 class="clear">Services</h2>
+                    <div class="content floatL clear col-md-7">
+                        <p>{{ set.services.ages }}</p>
+                        <p>{{ set.services.positions }}</p>
+                        <p>{{ set.services.specialties }}</p>
+                    </div>
+                </div>
+                <!-- /Packages & Credentials & Services -->
+
+                <!-- Reviews -->
+                <h2 class="clear">Reviews</h2>
+                <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
+                    <div class="content floatL clear col-md-7">
+                        <p>{{ review.author }}</p>
+                        <p>({{ review.type }})</p>
+                        <p>{{ review.rating }} stars</p>
+                        <p>{{ review.content }}</p>
+                    </div>
+                </div>
+                <!-- /Reviews -->
 
             </div>
-
-            <!-- Non-changing Info -->
-            <h2>Training Locations</h2>
-            <div ng-repeat="location in vm.trainer.trainerInfo.locations">
-                <span>{{ location }}</span>
-            </div>
-
-            <h2>Reviews</h2>
-            <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
-                <span>{{ review }}</span>
-            </div>
-            <!-- /Non-changing Info -->
-
+            <!-- /col -->
         </div>
         <!-- /.row -->
     </div>
