@@ -10,31 +10,45 @@
             <a href="/#/search">Back</a>
             <!-- /Back -->
 
-            <!-- Error pop-up -->
-            <div ng-show="vm.error" class="alert alert-danger row">
-                <span>{{ vm.error.message }}</span>
+            <!-- Trainer details -->
+            <div>
+                <h2>{{ vm.trainer.contact.firstname }} {{ vm.trainer.contact.lastname }}</h2>
+                <select ng-model="vm.sport">
+                    <option ng-repeat="set in vm.trainer.trainerInfo.sports"
+                            value="{{ set.sport }}">
+                        {{ set.sport }}
+                    </option>
+                </select>
             </div>
 
-            <!-- Trainer details -->
-            <h2>{{ vm.trainer.contact.firstname }} {{ vm.trainer.contact.lastname }}</h2>
+            <div>
+                {{vm.sport}}
+            </div>
 
-            <span>{{ vm.sport }}</span><br />
+            <div ng-repeat="set in vm.trainer.trainerInfo.sports"
+                 ng-if="vm.sport === set.sport">
 
+                <span>{{ set.summary }}</span>
+
+                <h2>Packages</h2>
+                <div ng-repeat="package in set.packages">
+                    <span>{{ package }}</span>
+                </div>
+
+
+            </div>
+
+            <!-- Non-changing Info -->
             <h2>Training Locations</h2>
             <div ng-repeat="location in vm.trainer.trainerInfo.locations">
                 <span>{{ location }}</span>
-            </div>
-
-            <h2>Packages</h2>
-            <div ng-repeat="package in vm.trainer.trainerInfo.packages">
-                <span>{{ package }}</span>
             </div>
 
             <h2>Reviews</h2>
             <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
                 <span>{{ review }}</span>
             </div>
-            <!-- /Trainer details -->
+            <!-- /Non-changing Info -->
 
         </div>
         <!-- /.row -->

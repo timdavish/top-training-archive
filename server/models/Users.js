@@ -6,45 +6,50 @@ var jwt = require('jsonwebtoken'); // Used for generating tokens
 
 // Define the User schema
 var UserSchema = new mongoose.Schema({
-    // All users have this data
-    usertype: {
+    usertype: { // All users have this data
         type: String,
         enum: ['client', 'trainer', 'admin'],
         required: true,
         lowercase: true
     },
-    contact: {
-        email: {
+    contact: { // All users have this data
+        email: { // Email
             type: String,
             required: true,
             lowercase: true,
             unique: true
         },
-        phone: {
+        phone: { // Phone number
             type: Number
         },
-        firstname: String,
-        lastname: String
+        firstname: { // First name
+            type: String
+        },
+        lastname: { // Last name
+            type: String
+        }
     },
-    accounts: {
-        local: {
+    accounts: { // All users have this data
+        local: { // Local login
             hash: String,
             salt: String
         },
-        facebook: {}
+        facebook: { // Facebook login
+
+        }
     },
-    data: {
-        created: {
+    data: { // All users have this data
+        created: { // Account creation date
             type: Date,
             default: Date.now
         },
-        lastActive: {
+        lastActive: { // Last active date
             type: Date,
             default: Date.now
         }
     },
-    // Only clients have this data
-    clientInfo: {
+
+    clientInfo: { // Client specific data
         activeSessions: [{
             trainer: {
                 type: mongoose.Schema.Types.ObjectId,
@@ -88,9 +93,63 @@ var UserSchema = new mongoose.Schema({
         }]
         // profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
     },
-    // Only trainers have this data
-    trainerInfo: {
-        locations: [{
+
+    trainerInfo: { // Trainer specific data
+        sports: [{ // Each sport requires seperate data set
+            sport: { // The sport
+                type: String,
+                default: 'Basketball',
+                required: true
+            },
+            packages: [{ // Packages for this sport
+                count: { // Number of sessions in a package
+                    type: Number,
+                    enum: [1, 2, 5, 10],
+                    default: 1
+                },
+                size: { // Number of clients in each session
+                    type: Number,
+                    default: 1
+                },
+                price: { // Price
+                    type: Number,
+                    default: 30
+                }
+            }],
+            events: [{ // Events for this sport
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Event'
+            }],
+            summary: { // Page fluff
+                type: String,
+                default: 'Trainer summary'
+            },
+            credentials: { // Page fluff
+                experience: {
+                    type: Number,
+                    default: 0
+                },
+                school: {
+                    type: String,
+                    default: 'College/University'
+                }
+            },
+            services: { // Page fluff
+                ages: [{
+                    type: String,
+                    default: 'Kids'
+                }],
+                positions: [{
+                    type: String,
+                    default: 'Position'
+                }],
+                specialties: [{
+                    type: String,
+                    default: 'Specialty'
+                }]
+            }
+        }],
+        locations: [{ // Training locations
             type: {
                 type: String,
                 enum: 'Point',
@@ -101,26 +160,7 @@ var UserSchema = new mongoose.Schema({
                 default: [-122.3, 47.6]
             }
         }],
-        sports: [{ type: String, lowercase: true }],
-        packages: [{
-            count: {
-                type: Number,
-                enum: [1, 2, 5, 10],
-                default: 1
-            },
-            price: {
-                type: Number
-            },
-            sport: { type: String, lowercase: true },
-            size: { type: String, lowercase: true }
-        }],
-        events: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Event'
-        }],
-        summary: String,
-        experience: String,
-        reviews: [{
+        reviews: [{ // Trainer reviews
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Review'
         }]

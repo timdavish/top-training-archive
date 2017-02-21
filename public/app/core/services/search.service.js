@@ -40,7 +40,7 @@
         function searchTrainers(params) {
             return $http.post('/users/getTrainers', params).success(function(searchResults) {
                 // Keep angular copy of data updated
-                service.sport = params.sport;
+                service.sport = params.sport.toLowerCase();
                 service.location = params.location;
                 angular.copy(searchResults[0], service.searchResults);
             });

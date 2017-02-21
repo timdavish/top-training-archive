@@ -23,6 +23,7 @@
         vm.sport = searchService.sport;
 
         console.log(vm.trainer);
+        console.log(vm.sport);
 
         /* Functions */
     }
