@@ -18,6 +18,7 @@
         'blocks.router',
 
         /* 3rd Party modules */
-        'mwl.calendar'
+        'mwl.calendar',
+        'ngMap'
     ]);
 })();
