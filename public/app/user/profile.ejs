@@ -10,11 +10,11 @@
           </div>
           <!-- Header -->
           <div class="page-header">
-
               <h1>Profile</h1>
           </div>
+          </br>
           <h2> {{vm.contact.firstname}} {{vm.contact.lastname}}</h2>
-          <h3>{{vm.contact.email}}</h3>
+          <h4>{{vm.contact.email}}</h3>
           <span>Joined: {{vm.data.created}} Last Active: {{vm.data.lastActive}} </span>
           <div ng-show="vm.trainerInfo">
             <div ng-repeat="sport in vm.trainerInfo.sports">
@@ -25,12 +25,22 @@
               {{vm.trainerInfo.experience}}
             </div>
             <div>
-              <h4>Summary<h4>
-              {{vm.trainerInfo.summary}}
-            </div>
+              <div ng-click="vm.editSummary = true" ng-hide="vm.editSummary">
+                <h4 >Summary<h4>
+                <p>{{vm.trainerInfo.summary}}</p>
+              </div>
+              <div ng-show="vm.editSummary" >
+                  <label>Edit Your Summary:</label>
+                  <br/>
+                  <textarea type="text" ng-model="vm.tempSummary" placeholder="summary">{{vm.tempSummary}}</textarea>
+                  <br/>
+                  <button ng-click="vm.CommitAllEdits()">Save</button>
+                  <button ng-click="vm.CancelAllEdits()">Cancel</button>
+              </div>
+          </div>
             <!--todo: add reviews schema-->
 
-          </div>
+
           <div ng-show="vm.clientInfo">
             {{vm.clientInfo.zipcode}}
             <div ng-repeat="event in vm.clientInfo.events">
