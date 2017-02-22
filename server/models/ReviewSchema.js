@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose');
 
+//Schema
 var ReviewSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,

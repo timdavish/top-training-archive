@@ -149,6 +149,7 @@ var UserSchema = new mongoose.Schema({
                 }]
             }
         }],
+        /*
         locations: [{ // Training locations
             type: {
                 type: String,
@@ -160,10 +161,15 @@ var UserSchema = new mongoose.Schema({
                 default: [-122.3, 47.6]
             }
         }],
+        */
+        //Reviews Removed,
+        //Call from Reviews Schema
+        /*
         reviews: [{ // Trainer reviews
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Review'
         }]
+        */
     }
 });
 
