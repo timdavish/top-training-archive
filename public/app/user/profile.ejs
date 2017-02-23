@@ -20,22 +20,34 @@
             <div ng-repeat="sport in vm.trainerInfo.sports">
               {{sport}}
             </div>
+
             <div>
-              <h4>Experience<h4>
-              {{vm.trainerInfo.experience}}
+                <div ng-click="vm.setEditField('experience')">
+                  <h4>Experience<h4>
+                  <p>{{vm.experience}}</p>
+                </div>
+                <div ng-show="vm.editing && vm.editField === 'experience'">
+                    <!-- <label>Edit Your Summary:</label> -->
+                    <textarea type="text" ng-model="vm.tempExperience" placeholder="experience"
+                          ng-change="vm.changes = true">{{vm.tempExperience}}</textarea>
+                    <br/>
+                    <button ng-click="vm.commitEdits()">Save</button>
+                    <button ng-click="vm.cancelEdits()">Cancel</button>
+                </div>
             </div>
+
             <div>
-              <div ng-click="vm.editSummary = true" ng-hide="vm.editSummary">
-                <h4 >Summary<h4>
+              <div ng-click="vm.setEditField('summary')">
+                <h4>Summary<h4>
                 <p>{{vm.summary}}</p>
               </div>
-              <div ng-show="vm.editSummary" >
-                  <label>Edit Your Summary:</label>
+              <div ng-show="vm.editing && vm.editField === 'summary'">
+                  <!-- <label>Edit Your Summary:</label> -->
+                  <textarea type="text" ng-model="vm.tempSummary" placeholder="summary"
+                        ng-change="vm.changes = true">{{vm.tempSummary}}</textarea>
                   <br/>
-                  <textarea type="text" ng-model="vm.tempSummary" placeholder="summary">{{vm.tempSummary}}</textarea>
-                  <br/>
-                  <button ng-click="vm.CommitAllEdits()">Save</button>
-                  <button ng-click="vm.CancelAllEdits()">Cancel</button>
+                  <button ng-click="vm.commitEdits()">Save</button>
+                  <button ng-click="vm.cancelEdits()">Cancel</button>
               </div>
           </div>
             <!--todo: add reviews schema-->

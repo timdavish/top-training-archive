@@ -9,17 +9,20 @@
         .module('app.user')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$state','authentication'];
+    ProfileController.$inject = ['$state', 'authentication'];
 
     /**
      * @namespace ProfileController
      * @desc SignUpClient controller
      * @memberof Controllers
      */
-    function ProfileController($state,authentication) {
+    function ProfileController($state, authentication) {
         var vm = this;
         var model = authentication.getPayload(authentication.getToken());
+        // var model = authentication.currentUser; // This does similar to the above
+
         console.log(model);
+
         //ref Users.js - UserSchema
         vm.userType = model.usertype;
         vm.contact = model.contact;
@@ -36,37 +39,59 @@
         vm.tempSummary = vm.summary;
 
         vm.experience = model.experience;
+        vm.tempExperience = vm.experience;
         vm.reviews = model.reviews;
 
-        vm.editSummary = false;
-        vm.editPackages = false;
-        vm.editSports = false;
-        vm.editTrainerInfo = false;
+        // Editing variables
+        vm.editing = false;
+        vm.changes = false;
+        vm.editField = '';
 
-        vm.CommitAllEdits = CommitAllEdits;
-        vm.CancelAllEdits = CancelAllEdits;
+        vm.setEditField = setEditField;
+        vm.commitEdits = commitEdits;
+        vm.cancelEdits = cancelEdits;
+
         vm.AddReview = addReview;
         vm.AddEvent = addEvent;
-        /**
-        */
-        function CommitAllEdits(){
+
+        /* Functions */
+
+        function setEditField(field) {
+            // Check for changes
+            if (!vm.changes) {
+                // Changes haven't been made, so toggle new edit field
+                vm.editing = true;
+                vm.editField = field;
+            } else {
+                // Changes have been made somewhere, alert the user before toggling new edit field
+                alert('You have unsaved changes');
+            }
+        }
+
+        function commitEdits() {
+            // Reset editing variables
+            vm.editing = false;
+            vm.changes = false;
+            vm.editField = '';
+
             vm.summary = vm.tempSummary;
+            vm.experience = vm.tempExperience;
             vm.trainerInfo = vm.tempTrainerInfo;
             vm.packages = vm.tempPackages;
-            vm.editTrainerInfo = false;
-            vm.editSport=false;
-            vm.editPackages=false;
-            vm.editSummary = false;
         }
-        function CancelAllEdits(){
-          vm.tempSummary = vm.summary;
-          vm.tempTrainerInfo = vm.tempTrainerInfo;
-          vm.tempPackages = vm.packages;
-          vm.editTrainerInfo = false;
-          vm.editSport = false;
-          vm.editPackages=false;
-          vm.editSummary=false;
+
+        function cancelEdits() {
+            // Reset editing variables
+            vm.editing = false;
+            vm.changes = false;
+            vm.editField = '';
+
+            vm.tempSummary = vm.summary;
+            vm.tempExperience = vm.experience;
+            vm.tempTrainerInfo = vm.tempTrainerInfo;
+            vm.tempPackages = vm.packages;
         }
+
         /**
         *@name addReview
         *@desc Adds a review to the selected profile.
