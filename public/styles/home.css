@@ -28,7 +28,7 @@ body {
     width: 100%;
     height: 100%;
     margin: 0px;
-    padding: 0px;
+    /*padding: 0px;*/
     /*overflow-x: hidden;*/
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
@@ -124,7 +124,6 @@ h6 {
 /* /TOPNAV */
 
 .fix-form {
-    display: block;
     margin-left: 0px;
     margin-bottom: 10px;
 }
@@ -186,7 +185,7 @@ h6 {
     background-image: none;
 }
 .intro-header {
-    padding: 7%;
+    padding: 70px 7%;
     text-align: center;
     color: black;
     background: url(../images/banner3.jpg) no-repeat center center;
@@ -195,8 +194,6 @@ h6 {
 .intro-message {
     position: relative;
     max-width: 900px;
-    width: 80%;
-    /*margin: 0 auto;*/
     margin-left: auto;
     margin-right: auto;
     padding: 3% 0;
