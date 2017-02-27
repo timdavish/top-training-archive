@@ -1,4 +1,124 @@
 
+<!-- Event detail template -->
+
+<!-- Event detail -->
+<div class="content-section-b">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+                <!-- Back -->
+                <div class="floatL">
+                    <a href="/#/search">Back</a>
+                </div>
+                <!-- /Back -->
+
+                <!-- Summary Pane -->
+                <div class="content floatL clear col-md-7">
+                    <h2>{{ vm.model.contact.firstname }} {{ vm.model.contact.lastname }}</h2>
+                    <select ng-model="vm.sport"
+                        ng-init="vm.sport = vm.model.trainerInfo.sports[0].sport">
+                        <option ng-repeat="set in vm.model.trainerInfo.sports"
+                            value="{{ set.sport }}">
+                            {{ set.sport }}
+                        </option>
+                    </select>
+
+                    <div ng-repeat="set in vm.model.trainerInfo.sports"
+                        ng-if="vm.sport === set.sport"
+                        ng-click="vm.setEditField('summary')">
+
+                        <div click-to-edit type="inputText" ng-model="set.summary"></div>
+                    </div>
+                    <!-- <div ng-show="vm.editing && vm.editField === 'summary'">
+                        <textarea type="text" placeholdeer="summary"
+                            ng-model="vm.summary"
+                            ng-change="vm.changes = true">
+                            {{vm.summary}}
+                        </textarea>
+                        <br/>
+                        <button ng-click="vm.commitEdits()">Save</button>
+                        <button ng-click="vm.cancelEdits()">Cancel</button>
+                    </div> -->
+                </div>
+                <!-- /Summary Pane -->
+
+                <!-- Locations -->
+                <div class="content floatR col-md-5">
+                    <h2>Training Locations</h2>
+                    <map zoom-to-include-markers="true"
+                        class="map">
+                        <marker ng-repeat="location in vm.model.trainerInfo.locations"
+                            position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
+                            <!-- title="{{location.title}}"> -->
+                        </marker>
+                    </map>
+                    <div ng-repeat="location in vm.model.trainerInfo.locations">
+                        <span>{{ location.coordinates }}</span>
+                    </div>
+                </div>
+                <!-- /Locations -->
+
+                <!-- Packages & Credentials & Services -->
+                <div ng-repeat="set in vm.model.trainerInfo.sports"
+                     ng-if="vm.sport === set.sport">
+
+                    <div class="content floatL col-md-7">
+                        <h2 class="">Packages</h2>
+
+                        <div ng-repeat="package in set.packages">
+                            <p>Training group size: {{ package.size }}</p>
+                            <p>Number of sessions: {{ package.count }}</p>
+                            <p>Price: {{ package.price * package.count }}</p>
+                            <p>Price per session: {{ package.price }}</p>
+                        </div>
+                    </div>
+
+                    <div class="content floatL col-md-7">
+                        <h2 class="">Credentials</h2>
+
+                        <p>{{ set.credentials.experience }} years training experience.</p>
+                        <p>School: {{ set.credentials.school }}</p>
+                    </div>
+
+                    <div class="content floatL col-md-7">
+                        <h2 class="">Services</h2>
+
+                        <p>{{ set.services.ages }}</p>
+                        <p>{{ set.services.positions }}</p>
+                        <p>{{ set.services.specialties }}</p>
+                    </div>
+                </div>
+                <!-- /Packages & Credentials & Services -->
+
+                <!-- Reviews -->
+                <div class="content floatL col-md-7">
+                    <h2 class="">Reviews</h2>
+
+                    <div ng-repeat="review in vm.model.trainerInfo.reviews">
+                        <p>{{ review.author }}</p>
+                        <p>({{ review.type }})</p>
+                        <p>{{ review.rating }} stars</p>
+                        <p>{{ review.content }}</p>
+                    </div>
+                </div>
+                <!-- /Reviews -->
+
+            </div>
+            <!-- /col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-b -->
+
+
+
+
+
+
+
+
 <!-- Profile template -->
 
 <div class="content-section-b">

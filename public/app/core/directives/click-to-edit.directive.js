@@ -29,12 +29,12 @@
             template:
                 '<div class="templateRoot">'+
                     '<div>'+
-                        '<div ng-show="!editing" ng-click="toggle()">{{model}}<div class="edit-pencil glyphicon glyphicon-pencil"></div></div>'+
+                        '<div ng-show="!editing" ng-click="toggle()">{{model}}<div class="floatR edit-pencil glyphicon glyphicon-pencil"></div></div>'+
+                        '<div ng-show="editing">'+
+                            '<div class="floatR glyphicon glyphicon-remove" ng-click="cancel()"></div>'+
+                            '<div class="floatR glyphicon glyphicon-ok" ng-click="save()"></div>'+
+                        '</div>'+
                         '<input class="inputText" type="text" ng-model="localModel" ng-enter="save()" ng-show="editing && type == \'inputText\'" />' +
-                    '</div>'+
-                    '<div ng-show="editing">'+
-                        '<div class="glyphicon glyphicon-ok" ng-click="save()"></div>'+
-                        '<div class="glyphicon glyphicon-remove" ng-click="cancel()"></div>'+
                     '</div>'+
                 '</div>',
             link: function(scope, element, attributes, model) {
