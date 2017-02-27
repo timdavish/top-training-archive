@@ -26,6 +26,7 @@
     "posttest:public": "echo 'Testing (public) completed.'"
   },
   "devDependencies": {
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-cache": "^0.4.5",
     "gulp-clean-css": "^3.0.3",
@@ -37,6 +38,8 @@
     "gulp-jshint": "^2.0.4",
     "gulp-load-plugins": "^1.5.0",
     "gulp-newer": "^1.3.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-plumber": "^1.1.0",
     "gulp-size": "^2.1.0",
     "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^2.0.1",
