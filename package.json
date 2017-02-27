@@ -3,31 +3,42 @@
   "version": "0.0.1",
   "description": "An app that connects trainers to trainees.",
   "authors": [
-      "Tim Davis"
+    "Tim Davis",
+    "Joe Davis"
   ],
   "homepage": "https://github.com/timdavish/Top_Training",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/timdavish/Top_Training.git"
+    "type": "git",
+    "url": "https://github.com/timdavish/Top_Training.git"
   },
   "scripts": {
     "build": "npm install && bower install",
     "start": "node ./bin/start",
     "stop": "taskkill /im node.exe /F",
     "test": "npm run lint && npm run test:public",
-
     "pretest": "echo 'Testing...'",
     "posttest": "echo 'Testing completed.'",
-
     "prelint": "echo 'Linting...'",
     "lint": "jshint server/server.js",
     "postlint": "echo 'Linting completed.'",
-
     "pretest:public": "echo 'Testing (public)...'",
     "test:public": "mocha public/test -u bdd -R spec",
     "posttest:public": "echo 'Testing (public) completed.'"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cache": "^0.4.5",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-deporder": "^1.1.0",
+    "gulp-htmlclean": "^2.7.9",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-newer": "^1.3.0",
+    "gulp-size": "^2.1.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^2.0.1",
+    "gulp-util": "^3.0.8",
     "jshint": "^2.9.4",
     "mocha": "^3.2.0",
     "should": "^11.2.0"
