@@ -33,6 +33,29 @@ gulp.task('default', ['run', 'watch']);
 // run task
 gulp.task('run', ['images', 'html', 'js', 'css']);
 
+// lint task
+gulp.task('lint', ['jslint', 'csslint']);
+
+// jslint task
+gulp.task('jslint', function() {
+    var src = folder.src.js;
+    var dest = folder.dest.js;
+
+    return gulp.src(src)
+        .pipe(plug.jshint())
+        .pipe(plug.jshint.reporter());
+});
+
+// csslint
+gulp.task('csslint', function() {
+    var src = folder.src.css;
+    var dest = folder.dest.css;
+
+    return gulp.src(src)
+        .pipe(plug.csslint())
+        .pipe(plug.csslint.formatter());
+});
+
 // watch task
 gulp.task('watch', function() {
     // image changes
