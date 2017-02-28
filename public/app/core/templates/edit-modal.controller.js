@@ -1,9 +1,28 @@
-var app = angular.module('app.core');
+/**
+ * Controller for edit-modal.html
+ * @namespace Controllers
+ */
+(function() { // IIFE structure
+    'use strict'; // Strict mode
 
-app.controller('YesNoController', ['$scope', 'close', function($scope, close) {
+    angular
+        .module('app.core')
+        .controller('YesNoController', YesNoController);
 
-  $scope.close = function(result) {
- 	  close(result, 500); // close, but give 500ms for bootstrap to animate
-  };
+    YesNoController.$inject = ['$scope', 'close'];
 
-}]);
+    /**
+     * @namespace YesNoController
+     * @desc YesNo controller
+     * @memberof Controllers
+     */
+    function YesNoController($scope, close) {
+        var vm = this;
+
+        $scope.close = close;
+        console.log('YesNoController activated.');
+
+        // vm.close = close;
+
+    }
+})();

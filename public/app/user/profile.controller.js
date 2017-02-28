@@ -185,19 +185,35 @@
 
         /* Functions */
 
-        function openModal(type) {
-            var templateUrl = "public/app/core/partials/edit-modal.html";
-            var controller = "YesNoController";
+        function openModal(type, set) {
+            var templateUrl;
+            var controller;
+            var inputs;
+
+            if (type === 'summary') {
+                templateUrl = 'public/app/core/partials/edit-modal.html';
+                controller = 'YesNoController';
+                inputs = {
+                    title: type,
+                    summary: set.summary
+                };
+            }
+            console.log(set.summary);
+            console.log(inputs);
+
             ModalService.showModal({
                 templateUrl: templateUrl,
                 controller: controller,
-                inputs: {
-                    title: "Editing"
-                }
+                controllerAs: 'vm',
+                inputs: inputs,
             }).then(function(modal) {
-                console.log(modal);
+                modal.element.modal();
                 modal.close.then(function(result) {
-
+                    if (result.status.save) {
+                        set.summary = result.summary;
+                    }
+                    console.log(result);
+                    console.log(set.summary);
                 });
             });
         }
