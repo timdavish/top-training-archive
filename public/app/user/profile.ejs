@@ -12,69 +12,95 @@
 
                 <!-- Summary Pane -->
                 <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                    <div class="column">
-                        <!-- Edit button -->
-                        <a href title="Edit this pane"
-                           class="floatR" ng-click="">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>
-                        <!-- /Edit button -->
+                    <div class="pane">
 
-                        <h2>{{ vm.model.contact.firstname }} {{ vm.model.contact.lastname }}</h2>
-                        <select ng-model="vm.sport">
-                            <option ng-repeat="set in vm.model.trainerInfo.sports"
-                                    value="{{ set.sport }}">
-                                {{ set.sport | capitalizeFirst }}
-                            </option>
-                        </select>
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
 
-                        <p>{{ set.summary }}</p>
+                            <h3>Summary</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <div class="floatL profile-picture-container">
+                                <img class="circle-container" src="public/images/sherm.jpg"
+                                     alt="alt">
+                            </div>
+
+                            <h1 class="">{{ vm.model.contact.firstname }} {{ vm.model.contact.lastname }}</h1>
+                            <select class="form-control select"
+                                    ng-model="vm.sport">
+                                <option ng-repeat="set in vm.model.trainerInfo.sports"
+                                        value="{{ set.sport }}">
+                                    {{ set.sport | capitalizeFirst }}
+                                </option>
+                            </select>
+
+                            <p class="">{{ set.summary }}</p>
+                        </div>
+
                     </div>
                 </div>
                 <!-- /Summary Pane -->
 
                 <!-- Locations -->
                 <div class="floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <div class="column center">
-                        <!-- Edit button -->
-                        <a href title="Edit this pane"
-                           class="floatR" ng-click="">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>
-                        <!-- /Edit button -->
+                    <div class="pane center">
 
-                        <h3>Training Locations</h3>
-                        <map zoom-to-include-markers="true"
-                             class="map">
-                            <marker ng-repeat="location in vm.model.trainerInfo.locations"
-                                position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
-                                <!-- title="{{location.title}}"> -->
-                            </marker>
-                        </map>
-                        <div ng-repeat="location in vm.model.trainerInfo.locations">
-                            <span>{{ location.coordinates }}</span>
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
+
+                            <h3>Training Locations</h3>
                         </div>
+
+                        <div class="pane-content">
+                            <map zoom-to-include-markers="true"
+                                 class="map">
+                                <marker ng-repeat="location in vm.model.trainerInfo.locations"
+                                    position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
+                                    <!-- title="{{location.title}}"> -->
+                                </marker>
+                            </map>
+                            <div ng-repeat="location in vm.model.trainerInfo.locations">
+                                <span>{{ location.coordinates }}</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <!-- /Locations -->
 
                 <!-- Packages Pane -->
                 <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                    <div class="column">
-                        <!-- Edit button -->
-                        <a href title="Edit this pane"
-                           class="floatR" ng-click="">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>
-                        <!-- /Edit button -->
+                    <div class="pane">
 
-                        <h2 class="">{{ vm.sport | capitalizeFirst }} Packages</h2>
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
 
-                        <div ng-repeat="package in set.packages">
-                            <p>Training group size: {{ package.size }}</p>
-                            <p>Number of sessions: {{ package.count }}</p>
-                            <p>Price: {{ package.price * package.count }}</p>
-                            <p>Price per session: {{ package.price }}</p>
+                            <h3>{{ vm.sport | capitalizeFirst }} Packages</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <div ng-repeat="package in set.packages">
+                                <p>Training group size: {{ package.size }}</p>
+                                <p>Number of sessions: {{ package.count }}</p>
+                                <p>Price: {{ package.price * package.count }}</p>
+                                <p>Price per session: {{ package.price }}</p>
+                            </div>
                         </div>
 
                     </div>
@@ -83,18 +109,23 @@
 
                 <!-- Credentials Pane -->
                 <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                    <div class="column">
-                        <!-- Edit button -->
-                        <a href title="Edit this pane"
-                           class="floatR" ng-click="">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>
-                        <!-- /Edit button -->
+                    <div class="pane">
 
-                        <h2 class="">Credentials</h2>
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
 
-                        <p>{{ set.credentials.experience }} years training experience.</p>
-                        <p>School: {{ set.credentials.school }}</p>
+                            <h3>Credentials</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <p>{{ set.credentials.experience }} years training experience.</p>
+                            <p>School: {{ set.credentials.school }}</p>
+                        </div>
 
                     </div>
                 </div>
@@ -102,19 +133,24 @@
 
                 <!-- Services Pane -->
                 <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                    <div class="column">
-                        <!-- Edit button -->
-                        <a href title="Edit this pane"
-                           class="floatR" ng-click="">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>
-                        <!-- /Edit button -->
+                    <div class="pane">
 
-                        <h2 class="">Services</h2>
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
 
-                        <p>{{ set.services.ages }}</p>
-                        <p>{{ set.services.positions }}</p>
-                        <p>{{ set.services.specialties }}</p>
+                            <h3>Services</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <p>{{ set.services.ages }}</p>
+                            <p>{{ set.services.positions }}</p>
+                            <p>{{ set.services.specialties }}</p>
+                        </div>
 
                     </div>
                 </div>
@@ -125,15 +161,19 @@
 
             <!-- Reviews -->
             <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                <div class="column">
+                <div class="pane">
 
-                    <h2 class="">Reviews</h2>
+                    <div class="pane-header">
+                        <h3>Reviews</h3>
+                    </div>
 
-                    <div ng-repeat="review in vm.model.trainerInfo.reviews">
-                        <p>{{ review.author }}</p>
-                        <p>({{ review.type }})</p>
-                        <p>{{ review.rating }} stars</p>
-                        <p>{{ review.content }}</p>
+                    <div class="pane-content">
+                        <div ng-repeat="review in vm.model.trainerInfo.reviews">
+                            <p>{{ review.author }}</p>
+                            <p>({{ review.type }})</p>
+                            <p>{{ review.rating }} stars</p>
+                            <p>{{ review.content }}</p>
+                        </div>
                     </div>
 
                 </div>
