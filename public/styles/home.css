@@ -46,6 +46,17 @@ h6 {
 .floatL { float: left; }
 .floatR { float: right; }
 .clear { clear: both; }
+.center { text-align: center; }
+
+.column {
+    min-height: 120px;
+    border: 1px #ccc solid;
+    padding: 15px;
+    margin-top: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
 
 .glyphicon-thumbs-up {
     cursor: pointer
@@ -129,8 +140,8 @@ h6 {
 }
 
 .map {
-    height: 300px;
-    width: 300px;
+    height: 260px;
+    width: 260px;
     display: block;
 }
 

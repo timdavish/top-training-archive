@@ -18,7 +18,7 @@
      */
     function clickToEdit($timeout) {
         return {
-            restrict: 'AE',
+            restrict: 'AE',``
             require: 'ngModel',
             transclude: true,
             replace: true,
@@ -29,7 +29,7 @@
             template:
                 '<div class="templateRoot">'+
                     '<div>'+
-                        '<div ng-show="!editing" ng-click="toggle()">{{model}}<div class="floatR edit-pencil glyphicon glyphicon-pencil"></div></div>'+
+                        '<div ng-show="!editing" ng-click="toggle()">{{model}}<div class="floatR glyphicon glyphicon-edit"></div></div>'+
                         '<div ng-show="editing">'+
                             '<div class="floatR glyphicon glyphicon-remove" ng-click="cancel()"></div>'+
                             '<div class="floatR glyphicon glyphicon-ok" ng-click="save()"></div>'+

@@ -68,7 +68,7 @@
                             }
                         ],
                         events: [],
-                        summary: "Trainer summary for basketball",
+                        summary: "NBA, College, High School; I've worked at every level. As a clinician for Converse for 7 years I specialized in teaching skills and prepping athletes. Learn fundamentals!",
                         credentials: {
                             experience: 0,
                             school: "College/University"
@@ -103,7 +103,7 @@
                             }
                         ],
                         events: [],
-                        summary: "Trainer summary for baseball",
+                        summary: "A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus.",
                         credentials: {
                             experience: 0,
                             school: "College/University"
@@ -148,6 +148,7 @@
                 email: "bob@asdf.com"
             }
         };
+        vm.sport = vm.model.trainerInfo.sports[0].sport;
         // Editing variables
         vm.editing = false;
         vm.changes = false;

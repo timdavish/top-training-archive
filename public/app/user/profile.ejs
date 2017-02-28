@@ -2,68 +2,73 @@
 <!-- Event detail template -->
 
 <!-- Event detail -->
-<div class="content-section-b">
-    <div class="container">
+<div class="container">
+    <div class="content-section-b">
         <div class="row">
-            <div class="col-md-offset-1 col-md-10">
-                <!-- Back -->
-                <div class="floatL">
-                    <a href="/#/search">Back</a>
-                </div>
-                <!-- /Back -->
+
+            <!-- Sport specific Summary, Packages, Credentials, Services Panes -->
+            <div ng-repeat="set in vm.model.trainerInfo.sports"
+                 ng-if="vm.sport === set.sport">
 
                 <!-- Summary Pane -->
-                <div class="content floatL clear col-md-7">
-                    <h2>{{ vm.model.contact.firstname }} {{ vm.model.contact.lastname }}</h2>
-                    <select ng-model="vm.sport"
-                        ng-init="vm.sport = vm.model.trainerInfo.sports[0].sport">
-                        <option ng-repeat="set in vm.model.trainerInfo.sports"
-                            value="{{ set.sport }}">
-                            {{ set.sport }}
-                        </option>
-                    </select>
+                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                    <div class="column">
+                        <!-- Edit button -->
+                        <a href title="Edit this pane"
+                           class="floatR" ng-click="">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <!-- /Edit button -->
 
-                    <div ng-repeat="set in vm.model.trainerInfo.sports"
-                        ng-if="vm.sport === set.sport"
-                        ng-click="vm.setEditField('summary')">
+                        <h2>{{ vm.model.contact.firstname }} {{ vm.model.contact.lastname }}</h2>
+                        <select ng-model="vm.sport">
+                            <option ng-repeat="set in vm.model.trainerInfo.sports"
+                                    value="{{ set.sport }}">
+                                {{ set.sport | capitalizeFirst }}
+                            </option>
+                        </select>
 
-                        <div click-to-edit type="inputText" ng-model="set.summary"></div>
+                        <p>{{ set.summary }}</p>
                     </div>
-                    <!-- <div ng-show="vm.editing && vm.editField === 'summary'">
-                        <textarea type="text" placeholdeer="summary"
-                            ng-model="vm.summary"
-                            ng-change="vm.changes = true">
-                            {{vm.summary}}
-                        </textarea>
-                        <br/>
-                        <button ng-click="vm.commitEdits()">Save</button>
-                        <button ng-click="vm.cancelEdits()">Cancel</button>
-                    </div> -->
                 </div>
                 <!-- /Summary Pane -->
 
                 <!-- Locations -->
-                <div class="content floatR col-md-5">
-                    <h2>Training Locations</h2>
-                    <map zoom-to-include-markers="true"
-                        class="map">
-                        <marker ng-repeat="location in vm.model.trainerInfo.locations"
-                            position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
-                            <!-- title="{{location.title}}"> -->
-                        </marker>
-                    </map>
-                    <div ng-repeat="location in vm.model.trainerInfo.locations">
-                        <span>{{ location.coordinates }}</span>
+                <div class="floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="column center">
+                        <!-- Edit button -->
+                        <a href title="Edit this pane"
+                           class="floatR" ng-click="">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <!-- /Edit button -->
+
+                        <h3>Training Locations</h3>
+                        <map zoom-to-include-markers="true"
+                             class="map">
+                            <marker ng-repeat="location in vm.model.trainerInfo.locations"
+                                position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
+                                <!-- title="{{location.title}}"> -->
+                            </marker>
+                        </map>
+                        <div ng-repeat="location in vm.model.trainerInfo.locations">
+                            <span>{{ location.coordinates }}</span>
+                        </div>
                     </div>
                 </div>
                 <!-- /Locations -->
 
-                <!-- Packages & Credentials & Services -->
-                <div ng-repeat="set in vm.model.trainerInfo.sports"
-                     ng-if="vm.sport === set.sport">
+                <!-- Packages Pane -->
+                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                    <div class="column">
+                        <!-- Edit button -->
+                        <a href title="Edit this pane"
+                           class="floatR" ng-click="">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <!-- /Edit button -->
 
-                    <div class="content floatL col-md-7">
-                        <h2 class="">Packages</h2>
+                        <h2 class="">{{ vm.sport | capitalizeFirst }} Packages</h2>
 
                         <div ng-repeat="package in set.packages">
                             <p>Training group size: {{ package.size }}</p>
@@ -71,27 +76,57 @@
                             <p>Price: {{ package.price * package.count }}</p>
                             <p>Price per session: {{ package.price }}</p>
                         </div>
-                    </div>
 
-                    <div class="content floatL col-md-7">
+                    </div>
+                </div>
+                <!-- /Packages Pane -->
+
+                <!-- Credentials Pane -->
+                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                    <div class="column">
+                        <!-- Edit button -->
+                        <a href title="Edit this pane"
+                           class="floatR" ng-click="">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <!-- /Edit button -->
+
                         <h2 class="">Credentials</h2>
 
                         <p>{{ set.credentials.experience }} years training experience.</p>
                         <p>School: {{ set.credentials.school }}</p>
-                    </div>
 
-                    <div class="content floatL col-md-7">
+                    </div>
+                </div>
+                <!-- /Credentials Pane -->
+
+                <!-- Services Pane -->
+                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                    <div class="column">
+                        <!-- Edit button -->
+                        <a href title="Edit this pane"
+                           class="floatR" ng-click="">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <!-- /Edit button -->
+
                         <h2 class="">Services</h2>
 
                         <p>{{ set.services.ages }}</p>
                         <p>{{ set.services.positions }}</p>
                         <p>{{ set.services.specialties }}</p>
+
                     </div>
                 </div>
-                <!-- /Packages & Credentials & Services -->
+                <!-- /Services Pane -->
 
-                <!-- Reviews -->
-                <div class="content floatL col-md-7">
+            </div>
+            <!-- /Sport specific Summary, Packages, Credentials, Services Panes -->
+
+            <!-- Reviews -->
+            <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <div class="column">
+
                     <h2 class="">Reviews</h2>
 
                     <div ng-repeat="review in vm.model.trainerInfo.reviews">
@@ -100,86 +135,14 @@
                         <p>{{ review.rating }} stars</p>
                         <p>{{ review.content }}</p>
                     </div>
-                </div>
-                <!-- /Reviews -->
 
+                </div>
             </div>
-            <!-- /col -->
+            <!-- /Reviews -->
+
         </div>
         <!-- /.row -->
     </div>
-    <!-- /.container -->
+    <!-- /.content-section-b -->
 </div>
-<!-- /.content-section-b -->
-
-
-
-
-
-
-
-
-<!-- Profile template -->
-
-<div class="content-section-b">
-    <div class="container">
-        <div class="row">
-
-          <div ng-show="vm.error" class="alert alert-danger row">
-              <span> {{vm.error.message}} </span>
-          </div>
-          <!-- Header -->
-          <div class="page-header">
-              <h1>Profile</h1>
-          </div>
-          </br>
-          <h2> {{vm.contact.firstname}} {{vm.contact.lastname}}</h2>
-          <h4>{{vm.contact.email}}</h3>
-          <span>Joined: {{vm.data.created}} Last Active: {{vm.data.lastActive}} </span>
-          <div ng-show="vm.trainerInfo">
-            <div ng-repeat="sport in vm.trainerInfo.sports">
-              {{sport}}
-            </div>
-
-            <div>
-                <div ng-click="vm.setEditField('experience')">
-                  <h4>Experience<h4>
-                  <p>{{vm.experience}}</p>
-                </div>
-                <div ng-show="vm.editing && vm.editField === 'experience'">
-                    <!-- <label>Edit Your Summary:</label> -->
-                    <textarea type="text" ng-model="vm.tempExperience" placeholder="experience"
-                          ng-change="vm.changes = true">{{vm.tempExperience}}</textarea>
-                    <br/>
-                    <button ng-click="vm.commitEdits()">Save</button>
-                    <button ng-click="vm.cancelEdits()">Cancel</button>
-                </div>
-            </div>
-
-            <div>
-              <div ng-click="vm.setEditField('summary')">
-                <h4>Summary<h4>
-                <p>{{vm.summary}}</p>
-              </div>
-              <div ng-show="vm.editing && vm.editField === 'summary'">
-                  <!-- <label>Edit Your Summary:</label> -->
-                  <textarea type="text" ng-model="vm.tempSummary" placeholder="summary"
-                        ng-change="vm.changes = true">{{vm.tempSummary}}</textarea>
-                  <br/>
-                  <button ng-click="vm.commitEdits()">Save</button>
-                  <button ng-click="vm.cancelEdits()">Cancel</button>
-              </div>
-          </div>
-            <!--todo: add reviews schema-->
-
-
-          <div ng-show="vm.clientInfo">
-            {{vm.clientInfo.zipcode}}
-            <div ng-repeat="event in vm.clientInfo.events">
-                {{event.startsAt}} - {{event.title}} - {{event.trainer}}
-            </div>
-          </div>
-
-        </div>
-    </div>
-</div>
+<!-- /.container -->
