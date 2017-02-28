@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$state', 'authentication'];
+    ProfileController.$inject = ['$state', 'ModalService', 'authentication'];
 
     /**
      * @namespace ProfileController
      * @desc SignUpClient controller
      * @memberof Controllers
      */
-    function ProfileController($state, authentication) {
+    function ProfileController($state, ModalService, authentication) {
         var vm = this;
         // vm.model = authentication.currentUser();
         vm.model = {
@@ -177,12 +177,34 @@
         // vm.reviews = model.reviews;
 
 
-
+        vm.openModal = openModal;
+        vm.edit = edit;
         vm.setEditField = setEditField;
         vm.commitEdits = commitEdits;
         vm.cancelEdits = cancelEdits;
 
         /* Functions */
+
+        function openModal(type) {
+            var templateUrl = "public/app/core/partials/edit-modal.html";
+            var controller = "YesNoController";
+            ModalService.showModal({
+                templateUrl: templateUrl,
+                controller: controller,
+                inputs: {
+                    title: "Editing"
+                }
+            }).then(function(modal) {
+                console.log(modal);
+                modal.close.then(function(result) {
+
+                });
+            });
+        }
+
+        function edit(item) {
+            vm.editingItem = {  };
+        }
 
         function setEditField(field) {
             // Check for changes

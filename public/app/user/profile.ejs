@@ -17,7 +17,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href title="Edit this pane"
-                               class="floatR" ng-click="">
+                               class="floatR" ng-click="vm.openModal(set)">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -47,8 +47,31 @@
                 </div>
                 <!-- /Summary Pane -->
 
+                <!-- Contact -->
+                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="pane center">
+
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
+
+                            <h3>Contact</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <button class="btn btn-primary">Message {{ vm.model.contact.firstname }}</button>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Contact -->
+
                 <!-- Locations -->
-                <div class="floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
                     <div class="pane center">
 
                         <div class="pane-header">
