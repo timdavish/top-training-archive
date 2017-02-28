@@ -3,8 +3,7 @@ var mongoose = require('mongoose');
 exports.EventType = 'event';
 exports.PackageType = 'package';
 exports.NoType = 'none';
-exports.ProductTypeEnum =
-[exports.EventType,exports.PackageType,exports.NoType];
+exports.ProductTypeEnum = [exports.EventType, exports.PackageType, exports.NoType];
 //Schema
 var ProductSchema = new mongoose.Schema({
     owner: { //Trainer
@@ -29,11 +28,11 @@ var ProductSchema = new mongoose.Schema({
     expireDate: {
         type: Date
     },
-    type:{
+    type: {
         type: String,
-        enum:ProductTypeEnum,
+        enum: exports.ProductTypeEnum,
         required: true
     }
 });
 
-mongoose.model('Product',ProductSchema);
+mongoose.model('Product', ProductSchema);

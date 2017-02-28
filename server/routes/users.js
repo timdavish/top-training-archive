@@ -1,11 +1,14 @@
-
 // Module dependencies
 var express = require('express');
 var passport = require('passport'); // Password authentication
 
 // Database interaction
 var mongoose = require('mongoose');
+//Models:
 var User = mongoose.model('User'); // Users model
+var Product = mongoose.model('Product'); // Product Model
+var Service = mongoose.model('Service'); // Service Model
+var Review = mongoose.model('Review'); //Review Model
 
 // Router initialization
 var router = express.Router();
@@ -77,32 +80,37 @@ router.post('/getTrainers', function(req, res, next) {
     params.sport = params.sport.toLowerCase();
     params.searchDistance = 100;
 
-    User.aggregate([
-        { $geoNear: { // calculates and sorts by distance
-            query: {
-                usertype: 'trainer', // trainers only
-                'trainerInfo.sports.sport': params.sport // trainers who train this sport only
-            },
-            near: {
-                type: 'Point', // 2dsphere
-                coordinates: [params.long, params.lat] // long, lat coordinates to start search at
-            },
-            maxDistance: params.searchDistance * 1.609 * 1000, // m = miles * 1.609 km/mile * 1000 m/km
-            distanceMultiplier: 1 * 0.621 * 0.001, // miles = m * 0.621 mile/km * 0.001 km/m
-            distanceField: 'dist.calculated', // field to assign distance result
-            includeLocs: 'dist.location', // field to assign location result
-            limit: 10, // limit
-            spherical: true // 2dsphere calculations
-        }},
-        { $project: { // Choose which data fields make it through
-            accounts: 0, // we don't want account (login) info
-            clientInfo: 0 // we don't want client info
-        }},
-        { $group: { // Group
-            _id: null, // Don't group by anything
-            count: { $sum: 1 }, // Keep a count
-            trainers: { $push: "$$ROOT" } // Keep all trainer data
-        }},
+    User.aggregate([{
+            $geoNear: { // calculates and sorts by distance
+                query: {
+                    usertype: 'trainer', // trainers only
+                    'trainerInfo.sports.sport': params.sport // trainers who train this sport only
+                },
+                near: {
+                    type: 'Point', // 2dsphere
+                    coordinates: [params.long, params.lat] // long, lat coordinates to start search at
+                },
+                maxDistance: params.searchDistance * 1.609 * 1000, // m = miles * 1.609 km/mile * 1000 m/km
+                distanceMultiplier: 1 * 0.621 * 0.001, // miles = m * 0.621 mile/km * 0.001 km/m
+                distanceField: 'dist.calculated', // field to assign distance result
+                includeLocs: 'dist.location', // field to assign location result
+                limit: 10, // limit
+                spherical: true // 2dsphere calculations
+            }
+        },
+        {
+            $project: { // Choose which data fields make it through
+                accounts: 0, // we don't want account (login) info
+                clientInfo: 0 // we don't want client info
+            }
+        },
+        {
+            $group: { // Group
+                _id: null, // Don't group by anything
+                count: { $sum: 1 }, // Keep a count
+                trainers: { $push: "$$ROOT" } // Keep all trainer data
+            }
+        },
     ], function(err, trainers) {
         if (err) { return next(err); }
 

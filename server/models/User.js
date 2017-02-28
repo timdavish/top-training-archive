@@ -1,14 +1,17 @@
-
 // Module dependencies
 var mongoose = require('mongoose');
 var crypto = require('crypto'); // Used for generating password hash
 var jwt = require('jsonwebtoken'); // Used for generating tokens
 
+exports.ClientType = 'client';
+exports.TrainerType = 'trainer';
+exports.AdminType = 'admin';
+exports.UserTypeEnum = [exports.ClientType, exports.TrainerType, exports.AdminType];
 // Define the User schema
 var UserSchema = new mongoose.Schema({
     usertype: { // All users have this data
         type: String,
-        enum: ['client', 'trainer', 'admin'],
+        enum: exports.UserTypeEnum,
         required: true,
         lowercase: true
     },
@@ -47,12 +50,26 @@ var UserSchema = new mongoose.Schema({
             type: Date,
             default: Date.now
         }
-      }
+    },
+    products: {
+        expired: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }],
+        pending: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }],
+        completed: [{
+            type: mongoose.Schema.Type.ObjectId,
+            ref: 'Product'
+        }]
+
     }
 });
 
 // Index our searchable locations
-UserSchema.index({"trainerInfo.locations": "2dsphere"});
+UserSchema.index({ "trainerInfo.locations": "2dsphere" });
 
 // Set a hashed password using a crypto salt
 UserSchema.methods.setPassword = function(password) {
@@ -89,3 +106,17 @@ UserSchema.methods.generateJWT = function() {
 
 // Set mongoose model
 mongoose.model('User', UserSchema);
+
+exports.NewUser = function(info) {
+    var ret = UserSchema;
+    ret.usertype = info.usertype || '';
+    ret.contact = {};
+    ret.contact.email = info.contact.email || '';
+    ret.contact.phone = info.contact.phone || 0;
+    ret.contact.lastname = info.contact.lastname || '';
+    ret.contact.firstname = info.contact.firstname || '';
+    ret.accounts.facebook = info.accounts.facebook || '';
+    ret.data.created = info.data.created || {};
+    ret.data.lastactive = info.data.lastactive || {};
+    return ret;
+};
