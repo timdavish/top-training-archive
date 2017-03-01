@@ -5,7 +5,7 @@
  * at the right place instead of waiting to load.
  */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
- display: none !important;
+    display: none !important;
 }
 
 /* TESTING */
@@ -58,72 +58,72 @@ h6 {
 
 /* TOPNAV */
 .navbar-default {
-  background-color: #24292e;
-  border-color: #24292e;
+    background-color: #24292e;
+    border-color: #24292e;
 }
 .navbar-default .navbar-brand {
-  color: rgba(255, 255, 255, 0.70);
+    color: rgba(255, 255, 255, 0.70);
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #ffffff;
+    color: #ffffff;
 }
 .navbar-default .navbar-text {
-  color: rgba(255, 255, 255, 0.70);
+    color: rgba(255, 255, 255, 0.70);
 }
 .navbar-default .navbar-nav > li > a {
-  color: rgba(255, 255, 255, 0.70);
+    color: rgba(255, 255, 255, 0.70);
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #ffffff;
+    color: #ffffff;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #ffffff;
-  background-color: #24292e;
+    color: #ffffff;
+    background-color: #24292e;
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  color: #ffffff;
-  background-color: #24292e;
+    color: #ffffff;
+    background-color: #24292e;
 }
 .navbar-default .navbar-toggle {
-  border-color: #24292e;
+    border-color: #24292e;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #24292e;
+    background-color: #24292e;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: rgba(255, 255, 255, 0.70);
+    background-color: rgba(255, 255, 255, 0.70);
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: rgba(255, 255, 255, 0.70);
+    border-color: rgba(255, 255, 255, 0.70);
 }
 .navbar-default .navbar-link {
-  color: rgba(255, 255, 255, 0.70);
+    color: rgba(255, 255, 255, 0.70);
 }
 .navbar-default .navbar-link:hover {
-  color: #ffffff;
+    color: #ffffff;
 }
 @media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: rgba(255, 255, 255, 0.70);
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ffffff;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #ffffff;
-    background-color: #24292e;
-  }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: rgba(255, 255, 255, 0.70);
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #ffffff;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #ffffff;
+        background-color: #24292e;
+    }
 }
 /* /TOPNAV */
 
