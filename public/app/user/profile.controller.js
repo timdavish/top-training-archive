@@ -65,13 +65,18 @@
                                 count: 2,
                                 size: 1,
                                 price: 25
+                            },
+                            {
+                                count: 5,
+                                size: 1,
+                                price: 22
                             }
                         ],
                         events: [],
                         summary: "NBA, College, High School; I've worked at every level. As a clinician for Converse for 7 years I specialized in teaching skills and prepping athletes. Learn fundamentals!",
                         credentials: {
-                            experience: 0,
-                            school: "College/University"
+                            experience: 7,
+                            school: "University of Washington"
                         },
                         services: {
                             ages: [
@@ -100,6 +105,11 @@
                                 count: 2,
                                 size: 1,
                                 price: 25
+                            },
+                            {
+                                count: 5,
+                                size: 1,
+                                price: 22
                             }
                         ],
                         events: [],

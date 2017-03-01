@@ -12,6 +12,7 @@
 
                 <!-- Summary Pane -->
                 <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <!-- <div class="floatL col-xs-12 col-sm-7 col-md-7 col-lg-7"> -->
                     <div class="pane">
 
                         <div class="pane-header">
@@ -41,37 +42,19 @@
                             </select>
 
                             <p class="">{{ set.summary }}</p>
+
+                            <div class="contact center">
+                                <button class="btn btn-primary">Message {{ vm.model.contact.firstname }}</button>
+                            </div>
                         </div>
 
                     </div>
                 </div>
                 <!-- /Summary Pane -->
 
-                <!-- Contact -->
-                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <div class="pane center">
-
-                        <div class="pane-header">
-                            <!-- Edit button -->
-                            <a href title="Edit this pane"
-                               class="floatR" ng-click="">
-                                <i class="glyphicon glyphicon-edit"></i>
-                            </a>
-                            <!-- /Edit button -->
-
-                            <h3>Contact</h3>
-                        </div>
-
-                        <div class="pane-content">
-                            <button class="btn btn-primary">Message {{ vm.model.contact.firstname }}</button>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- /Contact -->
-
                 <!-- Locations -->
                 <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <!-- <div class="clearR floatR col-xs-12 col-sm-5 col-md-5 col-lg-5"> -->
                     <div class="pane center">
 
                         <div class="pane-header">
@@ -94,7 +77,8 @@
                                 </marker>
                             </map>
                             <div ng-repeat="location in vm.model.trainerInfo.locations">
-                                <span>{{ location.coordinates }}</span>
+                                <span>{{ location }}</span>
+                                <span google-reverse-geocode ng-model="location" lat="location.coordinates[1]" long="location.coordinates[0]"></span>
                             </div>
                         </div>
 
@@ -104,6 +88,7 @@
 
                 <!-- Packages Pane -->
                 <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <!-- <div class="floatL col-xs-12 col-sm-7 col-md-7 col-lg-7"> -->
                     <div class="pane">
 
                         <div class="pane-header">
@@ -131,7 +116,8 @@
                 <!-- /Packages Pane -->
 
                 <!-- Credentials Pane -->
-                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <!-- <div class="clearR floatR col-xs-12 col-sm-5 col-md-5 col-lg-5"> -->
                     <div class="pane">
 
                         <div class="pane-header">
@@ -146,8 +132,23 @@
                         </div>
 
                         <div class="pane-content">
-                            <p>{{ set.credentials.experience }} years training experience.</p>
-                            <p>School: {{ set.credentials.school }}</p>
+                            <div class="row pane-row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Training Experience</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <p>{{ set.credentials.experience }} years</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>College / University</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <p>{{ set.credentials.school }}</p>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -155,7 +156,8 @@
                 <!-- /Credentials Pane -->
 
                 <!-- Services Pane -->
-                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <!-- <div class="clearR floatR col-xs-12 col-sm-5 col-md-5 col-lg-5"> -->
                     <div class="pane">
 
                         <div class="pane-header">
@@ -170,9 +172,38 @@
                         </div>
 
                         <div class="pane-content">
-                            <p>{{ set.services.ages }}</p>
-                            <p>{{ set.services.positions }}</p>
-                            <p>{{ set.services.specialties }}</p>
+                            <div class="row pane-row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Age groups</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div ng-repeat="age in set.services.ages">
+                                        <span>{{ age }}</span><br />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row pane-row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Positions</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div ng-repeat="position in set.services.positions">
+                                        <span>{{ position }}</span><br />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Specialties</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div ng-repeat="specialty in set.services.specialties">
+                                        <span>{{ specialty }}</span><br />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -184,6 +215,7 @@
 
             <!-- Reviews -->
             <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            <!-- <div class="floatL col-xs-12 col-sm-7 col-md-7 col-lg-7"> -->
                 <div class="pane">
 
                     <div class="pane-header">
