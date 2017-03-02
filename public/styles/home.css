@@ -178,6 +178,9 @@ h6 {
     width: 260px;
     display: block;
 }
+.review {
+    padding-bottom: 10px;
+}
 /* /PROFILE */
 
 /* COLLAPSABLE */

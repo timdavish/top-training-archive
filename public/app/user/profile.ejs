@@ -18,7 +18,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href title="Edit this pane"
-                               class="floatR" ng-click="vm.openModal('summary', set)">
+                               class="floatR" ng-click="vm.openModal(vm.panes.summary, set)">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -60,7 +60,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href title="Edit this pane"
-                               class="floatR" ng-click="">
+                               class="floatR" ng-click="vm.openModal(vm.panes.locations, set)">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -94,7 +94,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href title="Edit this pane"
-                               class="floatR" ng-click="">
+                               class="floatR" ng-click="vm.openModal(vm.panes.packages, set)">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -123,7 +123,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href title="Edit this pane"
-                               class="floatR" ng-click="">
+                               class="floatR" ng-click="vm.openModal(vm.panes.credentials, set)">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -163,7 +163,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href title="Edit this pane"
-                               class="floatR" ng-click="">
+                               class="floatR" ng-click="vm.openModal(vm.panes.services, set)">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -223,10 +223,11 @@
                     </div>
 
                     <div class="pane-content">
-                        <div ng-repeat="review in vm.model.trainerInfo.reviews">
-                            <p>{{ review.author }}</p>
+                        <div ng-repeat="review in vm.model.trainerInfo.reviews"
+                             class="review">
+                            <h4>({{ review.rating }} stars) {{ review.title }}</h4>
+                            <p>By {{ review.author }} on {{ review.date }}</p>
                             <p>({{ review.type }})</p>
-                            <p>{{ review.rating }} stars</p>
                             <p>{{ review.content }}</p>
                         </div>
                     </div>

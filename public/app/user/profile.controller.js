@@ -9,31 +9,37 @@
         .module('app.user')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$state', 'ModalService', 'authentication'];
+    ProfileController.$inject = ['$state', 'authentication', 'ModalService'];
 
     /**
      * @namespace ProfileController
      * @desc SignUpClient controller
      * @memberof Controllers
      */
-    function ProfileController($state, ModalService, authentication) {
+    function ProfileController($state, authentication, ModalService) {
         var vm = this;
+
         // vm.model = authentication.currentUser();
+        vm.panes = {};
         vm.model = {
             usertype: "trainer",
             trainerInfo: {
                 reviews: [
                     {
-                        author: "Crispy Chicken Nugget",
-                        rating: 5,
+                        author: "Tom Riddle",
                         type: "Verified Client",
-                        content: "This is the best trainer I've ever had. Blah blah blah blah blah blah blah blah"
+                        rating: 5,
+                        title: "Highly Recommend",
+                        content: "This is the best trainer I've ever had. Blah blah blah blah blah blah blah blah",
+                        date: "February 21, 2017"
                     },
                     {
                         author: "Bill Cosby",
-                        rating: 1,
                         type: "Testimonial",
-                        content: "This is the worst trainer I've ever had. Blah blah blah blah blah blah blah blah"
+                        rating: 3,
+                        title: "An Alright Trainer",
+                        content: "Wasn't the greatest or the worst trainer I've ever had. Blah blah blah blah blah blah blah blah",
+                        date: "January 2, 2017"
                     }
                 ],
                 locations: [
@@ -84,12 +90,13 @@
                                 "High School"
                             ],
                             positions: [
-                                "Position 1",
-                                "Position 2"
+                                "Guard",
+                                "Forward",
+                                "Center"
                             ],
                             specialties: [
-                                "Specialty 1",
-                                "Specialty 2"
+                                "Shooting",
+                                "Defense"
                             ]
                         }
                     },
@@ -115,8 +122,8 @@
                         events: [],
                         summary: "A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus.",
                         credentials: {
-                            experience: 0,
-                            school: "College/University"
+                            experience: 5,
+                            school: "University of Washington"
                         },
                         services: {
                             ages: [
@@ -124,12 +131,13 @@
                                 "High School"
                             ],
                             positions: [
-                                "Position 1",
-                                "Position 2"
+                                "Infield",
+                                "Outfield"
                             ],
                             specialties: [
-                                "Specialty 1",
-                                "Specialty 2"
+                                "Fielding",
+                                "Hitting",
+                                "Base running"
                             ]
                         }
                     }
@@ -159,136 +167,97 @@
             }
         };
         vm.sport = vm.model.trainerInfo.sports[0].sport;
-        // Editing variables
-        vm.editing = false;
-        vm.changes = false;
-        vm.editField = '';
         console.log(vm.model);
 
-        // var model = authentication.getPayload(authentication.getToken());
-        // console.log(model);
-        // //ref Users.js - UserSchema
-        // vm.userType = model.usertype;
-        // vm.contact = model.contact;
-        // vm.accounts = model.accounts;
-        // vm.data = model.data;
-        // vm.clientInfo = model.clientInfo;
-        // vm.trainerInfo = model.trainerInfo;
-        // vm.tempTrainerInfo = vm.trainerInfo;
-        // vm.sports = model.sports;
-        // vm.packages = model.packages;
-        // vm.tempPackages = vm.packages;
-        // vm.events = model.events;
-        // vm.summary = model.summary;
-        // vm.tempSummary = vm.summary;
-        //
-        // vm.experience = model.experience;
-        // vm.tempExperience = vm.experience;
-        // vm.reviews = model.reviews;
-
-
         vm.openModal = openModal;
-        vm.edit = edit;
-        vm.setEditField = setEditField;
-        vm.commitEdits = commitEdits;
-        vm.cancelEdits = cancelEdits;
+
+        activate();
 
         /* Functions */
 
-        function openModal(type, set) {
+        function activate() {
+            // Set profile panes
+            vm.panes = {
+                summary: 'summary',
+                locations: 'locations',
+                packages: 'packages',
+                credentials: 'credentials',
+                services: 'services'
+            };
+        }
+
+        function openModal(pane, data) {
             var templateUrl;
             var controller;
             var inputs;
+            var error;
 
-            if (type === 'summary') {
-                templateUrl = 'public/app/core/partials/edit-modal.html';
-                controller = 'YesNoController';
+            if (pane === vm.panes.summary) {
+                templateUrl = 'public/app/user/partials/summary-modal.html';
+                controller = 'SummaryModalController';
                 inputs = {
-                    title: type,
-                    summary: set.summary
+                    summary: data.summary
+                };
+            } else if (pane === vm.panes.locations) {
+                error = 'TODO: edit training locations';
+            } else if (pane === vm.panes.packages) {
+                error = 'TODO: edit packages';
+            } else if (pane === vm.panes.credentials) {
+                templateUrl = 'public/app/user/partials/credentials-modal.html';
+                controller = 'CredentialsModalController';
+                inputs = {
+                    experience: data.credentials.experience,
+                    school: data.credentials.school
+                };
+            } else if (pane === vm.panes.services) {
+                templateUrl = 'public/app/user/partials/services-modal.html';
+                controller = 'ServicesModalController';
+                inputs = {
+                    ages: data.services.ages,
+                    positions: data.services.positions,
+                    specialties: data.services.specialties
                 };
             }
-            console.log(set.summary);
-            console.log(inputs);
 
-            ModalService.showModal({
-                templateUrl: templateUrl,
-                controller: controller,
-                controllerAs: 'vm',
-                inputs: inputs,
-            }).then(function(modal) {
+            // Make sure everything is set
+            if (templateUrl && controller && inputs) {
+                inputs.title = pane;
+
+                ModalService.showModal({
+                    templateUrl: templateUrl,
+                    controller: controller,
+                    controllerAs: 'vm',
+                    inputs: inputs,
+                }).then(function(modal) {
+                    modalOnClose(modal, pane);
+                });
+            } else if (error) {
+                console.log(error);
+            }
+
+            function modalOnClose(modal, pane) {
                 modal.element.modal();
                 modal.close.then(function(result) {
                     if (result.status.save) {
-                        set.summary = result.summary;
+
+                        if (pane === vm.panes.summary) {
+                            data.summary = result.summary;
+                        } else if (pane === vm.panes.locations) {
+
+                        } else if (pane === vm.panes.packages) {
+
+                        } else if (pane === vm.panes.credentials) {
+                            data.credentials.experience = result.experience;
+                            data.credentials.school = result.school;
+                        } else if (pane === vm.panes.services) {
+                            data.services.ages = result.ages;
+                            data.services.positions = result.positions;
+                            data.services.specialties = result.specialties;
+                        }
+
                     }
-                    console.log(result);
-                    console.log(set.summary);
                 });
-            });
-        }
-
-        function edit(item) {
-            vm.editingItem = {  };
-        }
-
-        function setEditField(field) {
-            // Check for changes
-            if (!vm.changes) {
-                // Changes haven't been made, so toggle new edit field
-                vm.editing = true;
-                vm.editField = field;
-            } else {
-                // Changes have been made somewhere, alert the user before toggling new edit field
-                alert('You have unsaved changes');
             }
         }
-
-        function commitEdits() {
-            // Reset editing variables
-            vm.editing = false;
-            vm.changes = false;
-            vm.editField = '';
-
-            vm.summary = vm.tempSummary;
-            vm.experience = vm.tempExperience;
-            vm.trainerInfo = vm.tempTrainerInfo;
-            vm.packages = vm.tempPackages;
-        }
-
-        function cancelEdits() {
-            // Reset editing variables
-            vm.editing = false;
-            vm.changes = false;
-            vm.editField = '';
-
-            vm.tempSummary = vm.summary;
-            vm.tempExperience = vm.experience;
-            vm.tempTrainerInfo = vm.tempTrainerInfo;
-            vm.tempPackages = vm.packages;
-        }
-
-        /**
-        *@name addReview
-        *@desc Adds a review to the selected profile.
-        (if you want to do this here)
-        *@memberof Controllers.ProfileController
-        */
-        function addReview(){
-          //Do an addreview
-          //todo: add/remove
-        }
-        /**
-        *@name addEvent
-        *@desc Add's an event to the list
-         (if you want to do this here.)
-         *@memberof Controllers.ProfileController
-        */
-        function addEvent(){
-          //Add an event
-          //todo: add/remove
-        }
-
-
     }
 })();

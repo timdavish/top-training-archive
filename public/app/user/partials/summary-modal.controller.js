@@ -1,22 +1,22 @@
 /**
- * Controller for edit-modal.html
+ * Controller for summary-modal.html
  * @namespace Controllers
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
 
     angular
-        .module('app.core')
-        .controller('YesNoController', YesNoController);
+        .module('app.user')
+        .controller('SummaryModalController', SummaryModalController);
 
-    YesNoController.$inject = ['$scope', '$element', 'close', 'title', 'summary'];
+    SummaryModalController.$inject = ['$element', 'close', 'title', 'summary'];
 
     /**
-     * @namespace YesNoController
-     * @desc YesNo controller
+     * @namespace SummaryModalController
+     * @desc Summary Edit Modal Controller
      * @memberof Controllers
      */
-    function YesNoController($scope, $element, close, title, summary) {
+    function SummaryModalController($element, close, title, summary) {
         var vm = this;
 
         vm.title = title;
@@ -28,7 +28,6 @@
         /* Functions */
 
         function save() {
-            console.log('Saving changes and closing modal..');
             close({
                 status: {
                     save: true
@@ -38,10 +37,7 @@
         }
 
         function cancel() {
-            console.log('Discarding changes and closing modal..');
-
             $element.modal('hide');
-
             close({
                 status: {
                     save: false
