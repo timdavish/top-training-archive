@@ -19,6 +19,7 @@
 
         /* 3rd Party modules */
         'mwl.calendar',
-        'ngMap'
+        'ngMap',
+        'angularModalService'
     ]);
 })();

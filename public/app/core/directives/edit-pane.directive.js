@@ -1,5 +1,5 @@
 /**
- * click-to-edit Directive
+ * edit-pane Directive
  * @namespace Directives
  */
 (function() { // IIFE structure
@@ -7,16 +7,16 @@
 
     angular
         .module('app.core')
-        .directive('clickToEdit', clickToEdit);
+        .directive('editPane', editPane);
 
-    clickToEdit.$inject = ['$timeout'];
+    editPane.$inject = ['$timeout'];
 
     /**
-     * @namespace clickToEdit
-     * @desc clickToEdit directive
+     * @namespace editPane
+     * @desc editPane directive
      * @memberof Directives
      */
-    function clickToEdit($timeout) {
+    function editPane($timeout) {
         return {
             restrict: 'AE',
             require: 'ngModel',
@@ -29,7 +29,7 @@
             template:
                 '<div class="templateRoot">'+
                     '<div>'+
-                        '<div ng-show="!editing" ng-click="toggle()">{{model}}<div class="floatR edit-pencil glyphicon glyphicon-pencil"></div></div>'+
+                        '<div ng-show="!editing" ng-click="toggle()">{{model}}<div class="floatR glyphicon glyphicon-edit"></div></div>'+
                         '<div ng-show="editing">'+
                             '<div class="floatR glyphicon glyphicon-remove" ng-click="cancel()"></div>'+
                             '<div class="floatR glyphicon glyphicon-ok" ng-click="save()"></div>'+
