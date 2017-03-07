@@ -3,16 +3,16 @@
   "version": "0.0.1",
   "description": "An app that connects trainers to trainees.",
   "authors": [
-      "Tim Davis"
+    "Tim Davis"
   ],
   "homepage": "https://github.com/timdavish/Top_Training",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/timdavish/Top_Training.git"
+    "type": "git",
+    "url": "https://github.com/timdavish/Top_Training.git"
   },
   "ignore": [
-      "node_modules",
-      "bower_components"
+    "node_modules",
+    "bower_components"
   ],
   "dependencies": {
     "angular": "1.5.7",
@@ -20,6 +20,7 @@
     "angular-bootstrap": "^2.5.0",
     "angular-bootstrap-calendar": "^0.27.5",
     "angular-bootstrap-colorpicker": "3.0.25",
+    "angular-modal-service": "^0.10.1",
     "angular-sanitize": "1.5.7",
     "angular-ui-router": "0.3.2",
     "bootstrap": "3.3.7",
@@ -27,6 +28,7 @@
     "interactjs": "1.2.8",
     "jquery": "2.1.1",
     "moment": "2.17.1",
+    "ngmap": "^1.17.8",
     "rrule": "2.1.0",
     "toastr": "^2.1.3"
   }

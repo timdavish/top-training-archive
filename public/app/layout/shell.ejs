@@ -27,10 +27,14 @@
         <!-- inject:css -->
         <link href="/public/styles/home.css" rel="stylesheet" />
         <link href="/public/styles/calendar.css" rel="stylesheet" />
+        <link href="/public/styles/modal.css" rel="stylesheet" />
         <!-- endinject -->
 
 
         <!-- inject-vendor:js -->
+        <!-- jQuery -->
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
         <!-- Angular -->
         <script src="/bower_components/angular/angular.min.js"></script>
         <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
@@ -38,7 +42,6 @@
         <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
         <!-- Bootstrap -->
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
         <!-- Angular Bootstrap Calendar -->
@@ -51,8 +54,12 @@
 
         <script src="/bower_components/toastr/toastr.min.js"></script>
 
-        <!-- Google Maps API -->
-        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA"></script>
+        <!-- Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places,visualization&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA"></script>
+        <script src="/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+
+        <!-- Modals -->
+        <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
         <!-- endinject -->
 
 
@@ -70,12 +77,15 @@
         <script src="/public/app/core/services/event.service.js"></script>
         <script src="/public/app/core/services/posts.service.js"></script>
         <!-- Directives -->
-        <script src="/public/app/core/directives/equals.directive.js"></script>
+        <script src="/public/app/core/directives/edit-pane.directive.js"></script>
         <script src="/public/app/core/directives/collapse.directive.js"></script>
+        <script src="/public/app/core/directives/equals.directive.js"></script>
         <script src="/public/app/core/directives/google-auto-complete.directive.js"></script>
         <script src="/public/app/core/directives/google-reverse-geocode.directive.js"></script>
+        <script src="/public/app/core/directives/ng-enter.directive.js"></script>
         <!-- Filters -->
         <script src="/public/app/core/filters/number-round.filter.js"></script>
+        <script src="/public/app/core/filters/capitalize-first.filter.js"></script>
 
         <!-- Reusable Blocks/Modules -->
         <!-- Exception -->
@@ -100,6 +110,9 @@
         <script src="/public/app/user/sign-up-client.controller.js"></script>
         <script src="/public/app/user/sign-up-trainer.controller.js"></script>
         <script src="/public/app/user/profile.controller.js"></script>
+        <script src="/public/app/user/modals/summary-modal.controller.js"></script>
+        <script src="/public/app/user/modals/credentials-modal.controller.js"></script>
+        <script src="/public/app/user/modals/services-modal.controller.js"></script>
 
         <!-- Search Module -->
         <script src="/public/app/search/search.module.js"></script>

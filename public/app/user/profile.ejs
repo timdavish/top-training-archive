@@ -1,53 +1,244 @@
 
-<!-- Profile template -->
+<!-- Event detail template -->
 
-<div class="content-section-b">
-    <div class="container">
+<!-- Event detail -->
+<div class="container">
+    <div class="content-section-b">
         <div class="row">
 
-          <div ng-show="vm.error" class="alert alert-danger row">
-              <span> {{vm.error.message}} </span>
-          </div>
-          <!-- Header -->
-          <div class="page-header">
-              <h1>Profile</h1>
-          </div>
-          </br>
-          <h2> {{vm.contact.firstname}} {{vm.contact.lastname}}</h2>
-          <h4>{{vm.contact.email}}</h3>
-          <span>Joined: {{vm.data.created}} Last Active: {{vm.data.lastActive}} </span>
-          <div ng-show="vm.trainerInfo">
-            <div ng-repeat="sport in vm.trainerInfo.sports">
-              {{sport}}
-            </div>
-            <div>
-              <h4>Experience<h4>
-              {{vm.trainerInfo.experience}}
-            </div>
-            <div>
-              <div ng-click="vm.editSummary = true" ng-hide="vm.editSummary">
-                <h4 >Summary<h4>
-                <p>{{vm.summary}}</p>
-              </div>
-              <div ng-show="vm.editSummary" >
-                  <label>Edit Your Summary:</label>
-                  <br/>
-                  <textarea type="text" ng-model="vm.tempSummary" placeholder="summary">{{vm.tempSummary}}</textarea>
-                  <br/>
-                  <button ng-click="vm.CommitAllEdits()">Save</button>
-                  <button ng-click="vm.CancelAllEdits()">Cancel</button>
-              </div>
-          </div>
-            <!--todo: add reviews schema-->
+            <!-- Sport specific Summary, Packages, Credentials, Services Panes -->
+            <div ng-repeat="set in vm.model.trainerInfo.sports"
+                 ng-if="vm.sport === set.sport">
 
+                <!-- Summary Pane -->
+                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <!-- <div class="floatL col-xs-12 col-sm-7 col-md-7 col-lg-7"> -->
+                    <div class="pane">
 
-          <div ng-show="vm.clientInfo">
-            {{vm.clientInfo.zipcode}}
-            <div ng-repeat="event in vm.clientInfo.events">
-                {{event.startsAt}} - {{event.title}} - {{event.trainer}}
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="vm.openModal(vm.panes.summary, set)">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
+
+                            <h3>Certified Trainer</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <div class="floatL profile-picture-container">
+                                <img class="circle-container" src="public/images/sherm.jpg"
+                                     alt="alt">
+                            </div>
+
+                            <h1 class="">{{ vm.model.contact.firstname }} {{ vm.model.contact.lastname }}</h1>
+                            <select class="form-control select"
+                                    ng-model="vm.sport">
+                                <option ng-repeat="set in vm.model.trainerInfo.sports"
+                                        value="{{ set.sport }}">
+                                    {{ set.sport | capitalizeFirst }}
+                                </option>
+                            </select>
+
+                            <p class="">{{ set.summary }}</p>
+
+                            <div class="contact center">
+                                <button class="btn btn-primary">Message {{ vm.model.contact.firstname }}</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Summary Pane -->
+
+                <!-- Locations -->
+                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <!-- <div class="clearR floatR col-xs-12 col-sm-5 col-md-5 col-lg-5"> -->
+                    <div class="pane center">
+
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="vm.openModal(vm.panes.locations, set)">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
+
+                            <h3>Training Locations</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <map zoom-to-include-markers="true"
+                                 class="map">
+                                <marker ng-repeat="location in vm.model.trainerInfo.locations"
+                                    position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
+                                    <!-- title="{{location.title}}"> -->
+                                </marker>
+                            </map>
+                            <div ng-repeat="location in vm.model.trainerInfo.locations">
+                                <span>{{ location }}</span>
+                                <span google-reverse-geocode ng-model="location" lat="location.coordinates[1]" long="location.coordinates[0]"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Locations -->
+
+                <!-- Packages Pane -->
+                <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <!-- <div class="floatL col-xs-12 col-sm-7 col-md-7 col-lg-7"> -->
+                    <div class="pane">
+
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="vm.openModal(vm.panes.packages, set)">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
+
+                            <h3>{{ vm.sport | capitalizeFirst }} Packages</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <div ng-repeat="package in set.packages">
+                                <p>Training group size: {{ package.size }}</p>
+                                <p>Number of sessions: {{ package.count }}</p>
+                                <p>Price: {{ package.price * package.count }}</p>
+                                <p>Price per session: {{ package.price }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Packages Pane -->
+
+                <!-- Credentials Pane -->
+                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <!-- <div class="clearR floatR col-xs-12 col-sm-5 col-md-5 col-lg-5"> -->
+                    <div class="pane">
+
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="vm.openModal(vm.panes.credentials, set)">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
+
+                            <h3>Credentials</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <div class="row pane-row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Training Experience</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <p>{{ set.credentials.experience }} years</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>College / University</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <p>{{ set.credentials.school }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Credentials Pane -->
+
+                <!-- Services Pane -->
+                <div class="clearR floatR col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <!-- <div class="clearR floatR col-xs-12 col-sm-5 col-md-5 col-lg-5"> -->
+                    <div class="pane">
+
+                        <div class="pane-header">
+                            <!-- Edit button -->
+                            <a href title="Edit this pane"
+                               class="floatR" ng-click="vm.openModal(vm.panes.services, set)">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <!-- /Edit button -->
+
+                            <h3>Services</h3>
+                        </div>
+
+                        <div class="pane-content">
+                            <div class="row pane-row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Age groups</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div ng-repeat="age in set.services.ages">
+                                        <span>{{ age }}</span><br />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row pane-row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Positions</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div ng-repeat="position in set.services.positions">
+                                        <span>{{ position }}</span><br />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <h4>Specialties</h4>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div ng-repeat="specialty in set.services.specialties">
+                                        <span>{{ specialty }}</span><br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Services Pane -->
+
             </div>
-          </div>
+            <!-- /Sport specific Summary, Packages, Credentials, Services Panes -->
+
+            <!-- Reviews -->
+            <div class="floatL col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            <!-- <div class="floatL col-xs-12 col-sm-7 col-md-7 col-lg-7"> -->
+                <div class="pane">
+
+                    <div class="pane-header">
+                        <h3>Reviews</h3>
+                    </div>
+
+                    <div class="pane-content">
+                        <div ng-repeat="review in vm.model.trainerInfo.reviews"
+                             class="review">
+                            <h4>({{ review.rating }} stars) {{ review.title }}</h4>
+                            <p>By {{ review.author }} on {{ review.date }}</p>
+                            <p>({{ review.type }})</p>
+                            <p>{{ review.content }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /Reviews -->
 
         </div>
+        <!-- /.row -->
     </div>
+    <!-- /.content-section-b -->
 </div>
+<!-- /.container -->

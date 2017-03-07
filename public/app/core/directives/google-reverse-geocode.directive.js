@@ -18,8 +18,12 @@
         return {
             restrict: 'AE',
             require: 'ngModel',
+            scope: {
+                lat: '=',
+                long: '='
+            },
             link: function (scope, element, attributes, model) {
-                var latlng = new google.maps.LatLng(scope.vm.params.lat, scope.vm.params.long);
+                var latlng = new google.maps.LatLng(scope.lat, scope.long);
 
                 var geocoder = new google.maps.Geocoder();
 

@@ -46,7 +46,6 @@
                 return;
             }
 
-            var userId = authentication.getUserId();
             var event = {
                 title: vm.title,
                 sport: vm.sport,
@@ -54,9 +53,10 @@
                 slots: vm.slots,
                 startsAt: moment(vm.date).format("ddd MMM D YYYY " + moment(vm.startsAt).format("HH:mm") + " [GMT]ZZ").toString(),
                 endsAt: moment(vm.date).format("ddd MMM D YYYY " + moment(vm.endsAt).format("HH:mm") + " [GMT]ZZ").toString(),
-                trainer: userId
+                trainer: vm.currentUser().id
             };
-            eventService.addEvent(userId, event).error(function(error) {
+
+            eventService.addEvent(event).error(function(error) {
                 vm.error = error;
             }).success(function() {
                 // reset view model variables to be blank so that they aren't reloaded
