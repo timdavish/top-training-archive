@@ -5,7 +5,7 @@
 <div class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="intro-message">
                     <h1 class="">Top Training</h1>
                     <br />
@@ -16,7 +16,7 @@
                     <div ng-switch on="vm.buttonView">
 
                         <!-- Default view -->
-                        <form class="list-inline fix-form-margin"
+                        <form class="list-inline fix-form"
                             ng-switch-default>
                             <!-- Find a Trainer button -->
                             <li><input class="form-control input-lg input-search btn-primary header-button header-button-text"
@@ -31,13 +31,14 @@
                             <!-- Trainer Sign Up button -->
                             <li><input class="form-control input-lg input-search btn-primary header-button header-button-text"
                                     ng-click="vm.redirectTo('sign-up-trainer')"
+                                    ng-hide="vm.isLoggedIn()"
                                     type="button" value="Apply to Train" /></li>
                             <!-- /Trainer Sign Up button -->
                         </form>
                         <!-- /Default view -->
 
                         <!-- Find a Trainer View -->
-                        <form class="list-inline fix-form-margin"
+                        <form class="list-inline fix-form"
                             ng-switch-when="search"
                             ng-submit="vm.search()">
                             <!-- Back button -->
@@ -55,7 +56,7 @@
                             <!-- Location -->
                             <li><input class="form-control input-lg input-search" id="results"
                                     ng-model="vm.params.location"
-                                    google-reverse-geocode
+                                    google-reverse-geocode lat="vm.params.lat" long="vm.params.long"
                                     google-auto-complete
                                     type="text" placeholder="Location" /></li>
                             <!-- /Location -->

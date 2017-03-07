@@ -7,9 +7,11 @@
         <div class="row">
             <div class="col-md-offset-1 col-md-10">
                 <!-- Back -->
-                <div class="floatL">
-                    <a href="/#/search">Back</a>
-                </div>
+                <a href="/#/search" title="Back to Trainers"
+                   class="floatL" ng-click="">
+                   <i class="glyphicon glyphicon-chevron-left"></i>
+                   Back to Trainers
+               </a>
                 <!-- /Back -->
 
                 <!-- Summary Pane -->
@@ -33,6 +35,13 @@
                 <!-- Locations -->
                 <div class="content floatR col-md-5">
                     <h2>Training Locations</h2>
+                    <map zoom-to-include-markers="true"
+                        class="map">
+                        <marker ng-repeat="location in vm.trainer.trainerInfo.locations"
+                            position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
+                            <!-- title="{{location.title}}"> -->
+                        </marker>
+                    </map>
                     <div ng-repeat="location in vm.trainer.trainerInfo.locations">
                         <span>{{ location.coordinates }}</span>
                     </div>
@@ -43,9 +52,10 @@
                 <div ng-repeat="set in vm.trainer.trainerInfo.sports"
                      ng-if="vm.sport === set.sport">
 
-                    <h2 class="clear">Packages</h2>
-                    <div ng-repeat="package in set.packages">
-                        <div class="content floatL clear col-md-7">
+                    <div class="content floatL col-md-7">
+                        <h2 class="">Packages</h2>
+
+                        <div ng-repeat="package in set.packages">
                             <p>Training group size: {{ package.size }}</p>
                             <p>Number of sessions: {{ package.count }}</p>
                             <p>Price: {{ package.price * package.count }}</p>
@@ -53,14 +63,16 @@
                         </div>
                     </div>
 
-                    <h2 class="clear">Credentials</h2>
-                    <div class="content floatL clear col-md-7">
+                    <div class="content floatL col-md-7">
+                        <h2 class="">Credentials</h2>
+
                         <p>{{ set.credentials.experience }} years training experience.</p>
                         <p>School: {{ set.credentials.school }}</p>
                     </div>
 
-                    <h2 class="clear">Services</h2>
-                    <div class="content floatL clear col-md-7">
+                    <div class="content floatL col-md-7">
+                        <h2 class="">Services</h2>
+
                         <p>{{ set.services.ages }}</p>
                         <p>{{ set.services.positions }}</p>
                         <p>{{ set.services.specialties }}</p>
@@ -69,9 +81,10 @@
                 <!-- /Packages & Credentials & Services -->
 
                 <!-- Reviews -->
-                <h2 class="clear">Reviews</h2>
-                <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
-                    <div class="content floatL clear col-md-7">
+                <div class="content floatL col-md-7">
+                    <h2 class="">Reviews</h2>
+
+                    <div ng-repeat="review in vm.trainer.trainerInfo.reviews">
                         <p>{{ review.author }}</p>
                         <p>({{ review.type }})</p>
                         <p>{{ review.rating }} stars</p>

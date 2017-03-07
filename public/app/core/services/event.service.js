@@ -39,7 +39,8 @@
          * @param {event} event The event data
          * @return Success status
          */
-        function addEvent(userId, event) {
+        function addEvent(event) {
+            var userId = event.trainer;
             return $http.post('/events/addEvent/' + userId, event, {
                 headers: { Authorization: 'Bearer ' + authentication.getToken() }
             }).success(function(data) {

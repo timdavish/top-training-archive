@@ -14,7 +14,7 @@
     /**
      * @namespace numberRound
      * @desc Filter for rounding a number
-     * @memberof Services
+     * @memberof Filters
      */
     function numberRound($locale, numberFilter) {
         var formats = $locale.NUMBER_FORMATS;
