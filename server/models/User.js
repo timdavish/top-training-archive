@@ -51,23 +51,26 @@ var UserSchema = new mongoose.Schema({
             default: Date.now
         }
     },
-    products: {
-        expired: [{
+    products: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
-        }],
-        pending: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
-        }],
-        completed: [{
-            type: mongoose.Schema.Type.ObjectId,
             ref: 'Product'
         }]
-
-    }
+        /*,
+            reciepts: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'ProductReciept'
+            }]*/
 });
-
+UserSchema.methods.AddProduct = function(sport, limit, price, expires, type) {
+    var product = mongoose.model('Product');
+    product.owner = this._id;
+    product.limit = limit;
+    product.price = price;
+    product.expireDate = expires;
+    product.type = type;
+    product.save();
+    this.products.push(Product);
+};
 // Index our searchable locations
 UserSchema.index({ "trainerInfo.locations": "2dsphere" });
 
@@ -106,17 +109,3 @@ UserSchema.methods.generateJWT = function() {
 
 // Set mongoose model
 mongoose.model('User', UserSchema);
-
-exports.NewUser = function(info) {
-    var ret = UserSchema;
-    ret.usertype = info.usertype || '';
-    ret.contact = {};
-    ret.contact.email = info.contact.email || '';
-    ret.contact.phone = info.contact.phone || 0;
-    ret.contact.lastname = info.contact.lastname || '';
-    ret.contact.firstname = info.contact.firstname || '';
-    ret.accounts.facebook = info.accounts.facebook || '';
-    ret.data.created = info.data.created || {};
-    ret.data.lastactive = info.data.lastactive || {};
-    return ret;
-};

@@ -13,17 +13,13 @@ var ProductSchema = new mongoose.Schema({
     sport: {
         type: String
     },
-    count: {
+    limit: {
         type: Number,
-        enum: [1, 2, 5, 10],
+        //enum: [0, 1, 2, 5, 10,20,30],
         default: 1
     },
     price: {
         type: Number
-    },
-    purchaseDate: {
-        type: Date,
-        default: Date.now
     },
     expireDate: {
         type: Date
@@ -32,7 +28,24 @@ var ProductSchema = new mongoose.Schema({
         type: String,
         enum: exports.ProductTypeEnum,
         required: true
-    }
+    },
+    receipts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ProductReceipt'
+    }]
 });
 
+ProductSchema.methods.AddReceipt = function(conf, cb) {
+    var num = this.receipts.length;
+    if (num < this.limit) {
+        var rec = mongoose.model('ProductReceipt');
+        rec.owner = conf.owner;
+        rec.product = this._id;
+        rec.purchaseDate = new Date();
+        rec.expireDate = this.expireDate;
+        rec.type = conf.type || exports.NoType;
+        receipts.push(rec);
+        this.save(cb);
+    }
+}
 mongoose.model('Product', ProductSchema);
