@@ -21,9 +21,17 @@
 
         vm.currentUser = authentication.currentUser;
         vm.package = {
-            count: 2,
+            owner: {
+                contact: {
+                    firstname: 'Bob',
+                    lastname: 'Builder'
+                }
+            },
+            count: 1,
             size: 1,
             price: 25.00
         };
+        vm.subtotal = vm.package.price * vm.package.count;
+        vm.tax = vm.package.price * .095;
     }
 })();
