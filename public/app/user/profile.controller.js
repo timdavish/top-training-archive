@@ -24,6 +24,7 @@
         vm.model = {
             usertype: "trainer",
             trainerInfo: {
+                rating: 4.5,
                 reviews: [
                     {
                         author: "Tom Riddle",
@@ -36,7 +37,7 @@
                     {
                         author: "Bill Cosby",
                         type: "Testimonial",
-                        rating: 3,
+                        rating: 4,
                         title: "An Alright Trainer",
                         content: "Wasn't the greatest or the worst trainer I've ever had. Blah blah blah blah blah blah blah blah",
                         date: "January 2, 2017"

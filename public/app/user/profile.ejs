@@ -41,6 +41,9 @@
                                 </option>
                             </select>
 
+                            <!-- Rating -->
+                            <h4 class="summary-rating"><star-rating rating="vm.model.trainerInfo.rating" readonly="true"></star-rating> <small>2 reviews</small></h4>
+
                             <p class="">{{ set.summary }}</p>
 
                             <div class="contact center">
@@ -225,7 +228,7 @@
                     <div class="pane-content">
                         <div ng-repeat="review in vm.model.trainerInfo.reviews"
                              class="review">
-                            <h4>({{ review.rating }} stars) {{ review.title }}</h4>
+                            <h4><star-rating rating="review.rating" readonly="true"></star-rating> {{ review.title }}</h4>
                             <p>By {{ review.author }} on {{ review.date }}</p>
                             <p>({{ review.type }})</p>
                             <p>{{ review.content }}</p>

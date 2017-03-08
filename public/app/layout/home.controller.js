@@ -53,9 +53,9 @@
             }
 
             function applyClientLocation(e) {
-                if (vm.isLoggedIn()) {
-                    vm.params.location = authentication.getClientInfo().zipcode;
-                }
+                // if (vm.isLoggedIn()) {
+                //     vm.params.location = authentication.currentUser().clientInfo.zipcode;
+                // }
             }
         }
 
