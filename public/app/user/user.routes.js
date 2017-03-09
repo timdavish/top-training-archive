@@ -71,14 +71,13 @@
                         }
                     }]
                 }
-            }
-            ,
+            },
             {
-                state: 'profile',
+                state: 'trainer-profile',
                 config: {
-                    url: '/profile',
-                    templateUrl: 'public/app/user/profile.ejs',
-                    controller: 'ProfileController',
+                    url: '/profile/trainer',
+                    templateUrl: 'public/app/user/trainer-profile.ejs',
+                    controller: 'TrainerProfileController',
                     controllerAs: 'vm',
                     title: 'Profile',
                     onEnter: ['$state', 'authentication', function($state, authentication) {

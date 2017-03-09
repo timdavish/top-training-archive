@@ -38,11 +38,12 @@
                 }
             },
             {
-                state: 'search/trainers',
+                state: 'search/trainer',
                 config: {
-                    url: '/search/trainers/{id}',
-                    templateUrl: 'public/app/search/trainer.ejs',
-                    controller: 'TrainerController',
+                    url: '/search/trainer/{id}',
+                    // templateUrl: 'public/app/search/trainer.ejs',
+                    templateUrl: 'public/app/user/trainer-profile.ejs',
+                    controller: 'TrainerSearchProfileController',
                     controllerAs: 'vm',
                     title: 'Trainer'
                 }

@@ -44,8 +44,6 @@
 
                     var base = Math.floor(scope.rating);
                     var decimal = scope.rating - base;
-                    console.log(base);
-                    console.log(decimal);
 
                     for (var i = 1; i <= scope.max; i++) {
                         if (i <= scope.rating) {
@@ -53,7 +51,6 @@
                                 class: 'fa-star'
                             });
                         } else if ((base + 1) === i && decimal >= .333) {
-                            console.log('Half star: i: ' + i + ' rating: ' + scope.rating);
                             scope.stars.push({
                                 class: 'fa-star-half-o'
                             });

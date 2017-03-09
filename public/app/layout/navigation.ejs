@@ -22,7 +22,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Logged in -->
                 <li ng-show="vm.isLoggedIn()"><a>Welcome, {{ vm.currentUser().contact.firstname }}</a></li>
-                <li ng-show="vm.isLoggedIn()"><a href="/#/profile">Profile</a></li>
+                <li ng-show="vm.isLoggedIn()"><a href="/#/profile/trainer">Profile</a></li>
                 <li ng-show="vm.isLoggedIn()"><a href="" ng-click="vm.logOut()">Log Out</a></li>
                 <!-- /Logged in -->
 
