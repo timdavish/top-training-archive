@@ -14,11 +14,12 @@
         'app.core',
 
         /* Feature Areas */
-        'app.layout',
-        'app.user',
-        'app.search',
         'app.calendar',
+        'app.checkout',
         'app.event',
-        'app.post'
+        'app.layout',
+        'app.post',
+        'app.search',
+        'app.user'
     ]);
 })();
