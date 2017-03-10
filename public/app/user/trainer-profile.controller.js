@@ -1,5 +1,5 @@
 /**
- * Controller for profile.ejs
+ * Controller for trainer-profile.ejs
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -7,23 +7,23 @@
 
     angular
         .module('app.user')
-        .controller('ProfileController', ProfileController);
+        .controller('TrainerProfileController', TrainerProfileController);
 
-    ProfileController.$inject = ['$state', 'authentication', 'ModalService'];
+    TrainerProfileController.$inject = ['$state', 'authentication', 'ModalService'];
 
     /**
-     * @namespace ProfileController
-     * @desc SignUpClient controller
+     * @namespace TrainerProfileController
+     * @desc Trainer profile controller
      * @memberof Controllers
      */
-    function ProfileController($state, authentication, ModalService) {
+    function TrainerProfileController($state, authentication, ModalService) {
         var vm = this;
 
         // vm.model = authentication.currentUser();
-        vm.panes = {};
         vm.model = {
             usertype: "trainer",
             trainerInfo: {
+                rating: 4.5,
                 reviews: [
                     {
                         author: "Tom Riddle",
@@ -36,7 +36,7 @@
                     {
                         author: "Bill Cosby",
                         type: "Testimonial",
-                        rating: 3,
+                        rating: 4,
                         title: "An Alright Trainer",
                         content: "Wasn't the greatest or the worst trainer I've ever had. Blah blah blah blah blah blah blah blah",
                         date: "January 2, 2017"
@@ -63,16 +63,19 @@
                         sport: "basketball",
                         packages: [
                             {
+                                _id: 1,
                                 count: 1,
                                 size: 1,
                                 price: 30
                             },
                             {
+                                _id: 2,
                                 count: 2,
                                 size: 1,
                                 price: 25
                             },
                             {
+                                _id: 3,
                                 count: 5,
                                 size: 1,
                                 price: 22
@@ -104,16 +107,19 @@
                         sport: "baseball",
                         packages: [
                             {
+                                _id: 4,
                                 count: 1,
                                 size: 1,
                                 price: 30
                             },
                             {
+                                _id: 5,
                                 count: 2,
                                 size: 1,
                                 price: 25
                             },
                             {
+                                _id: 6,
                                 count: 5,
                                 size: 1,
                                 price: 22
@@ -167,7 +173,11 @@
             }
         };
         vm.sport = vm.model.trainerInfo.sports[0].sport;
-        console.log(vm.model);
+        vm.search = false; // Don't want to show back button
+        vm.editable = true; // Want to show edit buttons
+        vm.panes = {}; // For edit modals
+
+        // console.log(vm.model);
 
         vm.openModal = openModal;
 
