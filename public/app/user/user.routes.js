@@ -71,8 +71,7 @@
                         }
                     }]
                 }
-            }
-            ,
+            },
             {
                 state: 'profile',
                 config: {

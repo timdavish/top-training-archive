@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('LogInController', LogInController);
 
-    LogInController.$inject = ['$state', 'authentication'];
+    LogInController.$inject = ['$state', '$stateParams', 'authentication'];
 
     /**
      * @namespace LogInController
      * @desc LogIn controller
      * @memberof Controllers
      */
-    function LogInController($state, authentication) {
+    function LogInController($state, $stateParams, authentication) {
         var vm = this;
 
         vm.logIn = logIn;
@@ -32,7 +32,11 @@
             authentication.logIn(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
-                $state.go('home');
+                if ($stateParams.package) {
+                    $state.go('checkout', { id: $stateParams.package });
+                } else {
+                    $state.go('home');
+                }
             });
         }
     }
