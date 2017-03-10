@@ -50,6 +50,11 @@
 
         /* Functions */
 
+        /**
+         * @name contactPanelClick
+         * @desc Handles clicking on the contact panel
+         * @memberof Controllers.CheckoutController
+         */
         function contactPanelClick() {
             // console.log(step);
             if (vm.selectedStep !== 1) {
@@ -57,16 +62,22 @@
             }
         }
 
+        /**
+         * @name contactPanelShow
+         * @desc Handles showing the contact panel
+         * @memberof Controllers.CheckoutController
+         */
         function contactPanelShow() {
             vm.selectedStep = 1;
 
-            var toHide = angular.element(document.getElementsByClassName("panel-collapse collapse in"));
-            var toShow = angular.element(document.getElementById("checkout-collapse1"));
-
-            toHide.collapse('hide');
-            toShow.collapse('show');
+            switchToPanel("checkout-collapse1");
         }
 
+        /**
+         * @name contactContinue
+         * @desc Handles clicking on the contact panel continue button
+         * @memberof Controllers.CheckoutController
+         */
         function contactContinue() {
             if (validContactInput()) {
                 step = 2;
@@ -75,6 +86,11 @@
             }
         }
 
+        /**
+         * @name paymentPanelClick
+         * @desc Handles clicking on the summary & payment panel
+         * @memberof Controllers.CheckoutController
+         */
         function paymentPanelClick() {
             // console.log(step);
             if (vm.selectedStep !== 2 && step >= 2) {
@@ -82,16 +98,22 @@
             }
         }
 
+        /**
+         * @name paymentPanelShow
+         * @desc Handles showing the summary & payment panel
+         * @memberof Controllers.CheckoutController
+         */
         function paymentPanelShow() {
             vm.selectedStep = 2;
 
-            var toHide = angular.element(document.getElementsByClassName("panel-collapse collapse in"));
-            var toShow = angular.element(document.getElementById("checkout-collapse2"));
-
-            toHide.collapse('hide');
-            toShow.collapse('show');
+            switchToPanel("checkout-collapse2");
         }
 
+        /**
+         * @name paymentContinue
+         * @desc Handles clicking on the summary & payment panel order button
+         * @memberof Controllers.CheckoutController
+         */
         function paymentContinue() {
             if (validPaymentInput()) {
                 step = 3;
@@ -100,6 +122,11 @@
             }
         }
 
+        /**
+         * @name confirmationPanelClick
+         * @desc Handles clicking on the order confirmation panel
+         * @memberof Controllers.CheckoutController
+         */
         function confirmationPanelClick() {
             // console.log(step);
             if (vm.selectedStep !== 3 && step >= 3) {
@@ -107,20 +134,44 @@
             }
         }
 
+        /**
+         * @name confirmationPanelShow
+         * @desc Handles showing the order confirmation panel
+         * @memberof Controllers.CheckoutController
+         */
         function confirmationPanelShow() {
             vm.selectedStep = 3;
 
+            switchToPanel("checkout-collapse3");
+        }
+
+        /**
+         * @name switchToPanel
+         * @desc Helper function: handles hiding current panel and showing another
+         * @memberof Controllers.CheckoutController
+         */
+        function switchToPanel(panel) {
             var toHide = angular.element(document.getElementsByClassName("panel-collapse collapse in"));
-            var toShow = angular.element(document.getElementById("checkout-collapse3"));
+            var toShow = angular.element(document.getElementById(panel));
 
             toHide.collapse('hide');
             toShow.collapse('show');
         }
 
+        /**
+         * @name validContactInput
+         * @desc Helper function: validates contact information panel fields
+         * @memberof Controllers.CheckoutController
+         */
         function validContactInput() {
             return (vm.name && !vm.name === '' && vm.number && !vm.number === '' || true);
         }
 
+        /**
+         * @name validPaymentInput
+         * @desc Helper function: validates payment panel fields
+         * @memberof Controllers.CheckoutController
+         */
         function validPaymentInput() {
             return true;
         }
