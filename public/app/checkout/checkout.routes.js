@@ -35,10 +35,27 @@
                     controller: 'CheckoutController',
                     controllerAs: 'vm',
                     title: 'Checkout',
-                    onEnter: ['$state', 'authentication', function($state, authentication) {
-                        // if (authentication.isLoggedIn()) {
-                        //     $state.go('home');
-                        // }
+                    onEnter: ['$state', '$stateParams', 'authentication', function($state, $stateParams, authentication) {
+                        if (!authentication.isLoggedIn()) {
+                            $state.go('checkout/login/', { package: $stateParams.id });
+                        } else if (authentication.currentUser().usertype === 'trainer') {
+                            $state.go('home');
+                        }
+                    }]
+                }
+            },
+            {
+                state: 'checkout/login/',
+                config: {
+                    url: '/checkout/login/packages/{package}',
+                    templateUrl: 'public/app/user/log-in.ejs',
+                    controller: 'LogInController',
+                    controllerAs: 'vm',
+                    title: 'Login before Checkout',
+                    onEnter: ['$state', '$stateParams', 'authentication', function($state, $stateParams, authentication) {
+                        if (authentication.isLoggedIn()) {
+                            $state.go('checkout', { id: $stateParams.package });
+                        }
                     }]
                 }
             }

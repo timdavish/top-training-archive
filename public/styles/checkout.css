@@ -4,6 +4,9 @@
 .dl-small {
   margin-bottom: 4px;
 }
+.dl-large {
+    margin-bottom: 20px;
+}
 .form-control {
   width: auto;
 }
@@ -13,4 +16,7 @@
 }
 .form-control-large {
   width: 310px;
+}
+.panel-heading {
+    cursor: pointer;
 }

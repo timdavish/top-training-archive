@@ -5,167 +5,288 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-1 col-md-10">
-
-                <div class="page-header">
-                    <h1>Checkout <small>Step 2 of 3</small></h1>
-                </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="well">
-                            Previous step
+
+                        <div class="page-header">
+                            <h1>Checkout <small>Step {{ vm.selectedStep }} of 3</small></h1>
                         </div>
 
-                        <!-- Review order -->
-                        <h3 class="section-header">Order Summary</h3>
-                        <div class="list-group">
-                            <div class="list-group-item">
-                                <div class="list-group-item-heading">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <dl class="dl-small">
-                                                        <dt>Package</dt>
-                                                        <dd>
-                                                            <span ng-if="vm.package.size === 1">Private</span>
-                                                            <span ng-if="vm.package.size > 1 && vm.package.size < 7">Semi-Private</span>
-                                                            <span ng-if="vm.package.size > 6">Group</span>
-                                                            Training Session<span ng-if="vm.package.count > 1">s</span>
-                                                            <a href="" class="btn-sm btn-link">Edit</a>
-                                                        </dd>
-                                                    </dl>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <dl class="dl-small">
-                                                        <dt>Quantity</dt>
-                                                        <dd>{{ vm.package.count }}</dd>
-                                                    </dl>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <dl class="dl-small">
-                                                        <dt>Session Price</dt>
-                                                        <dd>${{ vm.package.price }}</dd>
-                                                    </dl>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <dl class="dl-small">
-                                                        <dt>Total Price</dt>
-                                                        <dd>${{ vm.package.price * vm.package.count | numberRound:2 }}</dd>
-                                                    </dl>
-                                                </div>
+                        <div class="panel-group" id="checkout-accordian">
 
-                                                <!-- Promo code -->
-                                                <div class="col-xs-12">
-                                                    <div class="checkbox">
-                                                        <label data-toggle="collapse" data-target="#promo">
-                                                            <input type="checkbox"> I have a promo code
-                                                        </label>
+                            <!-- Contact Information -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading"
+                                     ng-click="vm.contactPanelClick()">
+                                    <h4 class="panel-title">Contact Information</h4>
+                                </div>
+
+                                <div id="checkout-collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <p class="form-text text-muted"><small>Please provide some information so that your trainer can easily get in contact with you.</small></p>
+
+                                        <div class="form-group fix-form">
+                                            <label class="col-form-label" for="name">Athlete Name</label>
+                                            <input type="text" id="name" class="form-control" placeholder=""
+                                                ng-model="vm.name" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="number">Phone Number</label>
+                                            <input type="text" id="number" class="form-control" placeholder="123-456-7890"
+                                                ng-model="vm.number" />
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary btn-md"
+                                                ng-click="vm.contactContinue()">
+                                            Continue
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Contact Information -->
+
+                            <!-- Order Summary and Payment -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading"
+                                     ng-click="vm.paymentPanelClick()">
+                                    <h4 class="panel-title">Order Summary and Payment</h4>
+                                </div>
+
+                                <div id="checkout-collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <!-- Review order -->
+                                        <h3 class="section-header">Order Summary</h3>
+                                        <div class="list-group">
+                                            <div class="list-group-item">
+                                                <div class="list-group-item-heading">
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-xs-6">
+                                                            <dl class="dl-small">
+                                                                <dt>Package</dt>
+                                                                <dd>
+                                                                    <span ng-if="vm.package.size === 1">Private</span>
+                                                                    <span ng-if="vm.package.size > 1 && vm.package.size < 7">Semi-Private</span>
+                                                                    <span ng-if="vm.package.size > 6">Group</span>
+                                                                    Training Session<span ng-if="vm.package.count > 1">s</span>
+                                                                    <a href="" class="btn-sm btn-link">Edit</a>
+                                                                </dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <dl class="dl-small">
+                                                                <dt>Quantity</dt>
+                                                                <dd>{{ vm.package.count }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <dl class="dl-small">
+                                                                <dt>Session Price</dt>
+                                                                <dd>${{ vm.package.price }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <dl class="dl-small">
+                                                                <dt>Total Price</dt>
+                                                                <dd>${{ vm.package.price * vm.package.count | numberRound:2 }}</dd>
+                                                            </dl>
+                                                        </div>
+
+                                                        <!-- Promo code -->
+                                                        <div class="col-xs-12">
+                                                            <div class="checkbox">
+                                                                <label data-toggle="collapse" data-target="#promo">
+                                                                    <input type="checkbox"> I have a promo code
+                                                                </label>
+                                                            </div>
+                                                            <div class="collapse" id="promo">
+                                                                <div class="form-group">
+                                                                    <label for="inputpromo" class="control-label">Promo Code</label>
+                                                                    <div class="form-inline">
+                                                                        <input type="text" class="form-control" id="inputpromo" placeholder="Enter promo code">
+                                                                        <button class="btn btn-sm">Apply</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /Promo code -->
+
+                                                        <div class="col-xs-10">
+                                                            Tax
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            ${{ vm.tax | numberRound:2 }}
+                                                        </div>
+
+                                                        <div class="col-xs-10">
+                                                            Order total
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            ${{ vm.subtotal + vm.tax | numberRound:2 }}
+                                                        </div>
                                                     </div>
-                                                    <div class="collapse" id="promo">
-                                                        <div class="form-group">
-                                                            <label for="inputpromo" class="control-label">Promo Code</label>
-                                                            <div class="form-inline">
-                                                                <input type="text" class="form-control" id="inputpromo" placeholder="Enter promo code">
-                                                                <button class="btn btn-sm">Apply</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /Review order -->
+
+                                        <!-- Payment -->
+                                        <h3 class="section-header">Payment Method</h3>
+                                        <div class="list-group">
+                                            <div class="list-group-item">
+                                                <div class="list-group-item-heading">
+                                                    <div class="row radio">
+                                                        <div class="col-xs-3">
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked>
+                                                                My Visa Card
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-xs-9">
+                                                            <div class="row">
+                                                                <div class="col-xs-4">
+                                                                    <dl class="dl-small">
+                                                                    <dt>Credit Card Number</dt>
+                                                                    <dd>**********1111</dd>
+                                                                    </dl>
+                                                                </div>
+                                                                <div class="col-xs-2">
+                                                                    <dl class="dl-small">
+                                                                    <dt>Expiration</dt>
+                                                                    <dd>07/2016</dd>
+                                                                    </dl>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <dl class="dl-small">
+                                                                    <dt>Billing Address</dt>
+                                                                    <dd>11815 SE 93rd St, Newcastle, WA, 98056</dd>
+                                                                    </dl>
+                                                                </div>
+                                                            </div>
+                                                            <button class="btn btn-sm">Edit</button>
+                                                            <button class="btn btn-sm btn-link">Delete this card</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <div class="list-group-item-heading">
+                                                    <div class="row radio">
+                                                        <div class="col-xs-3">
+                                                            <label data-toggl-e="collapse" data-target="#newcard">
+                                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                                            New Credit Card
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-xs-9">
+                                                            <div class="media">
+                                                                <a class="media-left" href="#">
+                                                                    <img src="https://lovewithfood.com/assets/credit_cards/cards-b3a7c7b8345355bf110ebedfd6401312.png" height="25" alt="" />
+                                                                </a>
+                                                                <div class="media-body" id="newcard">
+                                                                    We accept these credit cards.
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- /Promo code -->
-
-                                                <div class="col-xs-10">
-                                                    Tax
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    ${{ vm.tax | numberRound:2 }}
-                                                </div>
-
-                                                <div class="col-xs-10">
-                                                    Order total
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    ${{ vm.subtotal + vm.tax | numberRound:2 }}
-                                                </div>
                                             </div>
                                         </div>
+                                        <!-- /Payment -->
+
+                                        <!-- Place order -->
+                                        <button type="button" class="btn btn-primary btn-lg btn-block"
+                                                ng-click="vm.paymentContinue()">
+                                            Place Order
+                                        </button>
+                                        <!-- /Place order -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /Review order -->
+                            <!-- /Order Summary and Payment -->
 
-                        <!-- Payment -->
-                        <h3 class="section-header">Payment Method</h3>
-                        <div class="list-group">
-                            <div class="list-group-item">
-                                <div class="list-group-item-heading">
-                                    <div class="row radio">
-                                        <div class="col-xs-3">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked>
-                                                My Visa Card
-                                            </label>
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <div class="row">
-                                                <div class="col-xs-4">
-                                                    <dl class="dl-small">
-                                                    <dt>Credit Card Number</dt>
-                                                    <dd>**********1111</dd>
-                                                    </dl>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <dl class="dl-small">
-                                                    <dt>Expiration</dt>
-                                                    <dd>07/2016</dd>
-                                                    </dl>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <dl class="dl-small">
-                                                    <dt>Billing Address</dt>
-                                                    <dd>11815 SE 93rd St, Newcastle, WA, 98056</dd>
-                                                    </dl>
+                            <!-- Order Confirmation -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading"
+                                     ng-click="vm.confirmationPanelClick()">
+                                    <h4 class="panel-title">Order Confirmation</h4>
+                                </div>
+
+                                <div id="checkout-collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>Order #209371</p>
+
+                                        <div class="list-group">
+                                            <div class="list-group-item">
+                                                <div class="list-group-item-heading">
+                                                    <div class="row">
+                                                        <div class="col-xs-6">
+                                                            <dl class="dl-small">
+                                                                <dt>Package</dt>
+                                                                <dd>
+                                                                    <span ng-if="vm.package.size === 1">Private</span>
+                                                                    <span ng-if="vm.package.size > 1 && vm.package.size < 7">Semi-Private</span>
+                                                                    <span ng-if="vm.package.size > 6">Group</span>
+                                                                    Training Session<span ng-if="vm.package.count > 1">s</span>
+                                                                </dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <dl class="dl-small">
+                                                                <dt>Quantity</dt>
+                                                                <dd>{{ vm.package.count }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <dl class="dl-small">
+                                                                <dt>Session Price</dt>
+                                                                <dd>${{ vm.package.price }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <dl class="dl-small">
+                                                                <dt>Total Price</dt>
+                                                                <dd>${{ vm.package.price * vm.package.count | numberRound:2 }}</dd>
+                                                            </dl>
+                                                        </div>
+
+                                                        <div class="col-xs-10">
+                                                            Tax
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            ${{ vm.tax | numberRound:2 }}
+                                                        </div>
+
+                                                        <div class="col-xs-10">
+                                                            Order total
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            ${{ vm.subtotal + vm.tax | numberRound:2 }}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-sm">Edit</button>
-                                            <button class="btn btn-sm btn-link">Delete this card</button>
                                         </div>
+
+                                        <p>You can find your order reviews in <a href="">your account</a></p>
+
+                                        <p>If there are any problems with your order please email support@address.com</p>
+
+                                        <a href>
+                                            <i class="fa fa-print" aria-hidden="true"></i>
+                                            Print this confirmation
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="list-group-item">
-                                <div class="list-group-item-heading">
-                                    <div class="row radio">
-                                        <div class="col-xs-3">
-                                            <label data-toggl-e="collapse" data-target="#newcard">
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                            New Credit Card
-                                            </label>
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <div class="media">
-                                                <a class="media-left" href="#">
-                                                    <img src="https://lovewithfood.com/assets/credit_cards/cards-b3a7c7b8345355bf110ebedfd6401312.png" height="25" alt="" />
-                                                </a>
-                                                <div class="media-body" id="newcard">
-                                                    We accept these credit cards.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- /Order Confirmation -->
                         </div>
-                        <!-- /Payment -->
 
-                        <!-- Place order -->
-                        <div class="well">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">Place Order</button>
-                        </div>
-                        <!-- /Place order -->
                     </div>
+                    <!-- /.col -->
                 </div>
-
+                <!-- /.row -->
             </div>
             <!-- /.col -->
         </div>
