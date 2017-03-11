@@ -1,4 +1,3 @@
-
 // Module dependencies
 var express = require('express');
 var path = require('path');
@@ -9,11 +8,14 @@ var bodyParser = require('body-parser');
 
 // Database setup and connection
 var mongoose = require('mongoose');
-require('./models/Users'); // Users model
-require('./models/Reviews'); // Reviews model
+require('./models/User'); // User model
+require('./models/Review'); // Review model
 require('./models/Events'); // Events model
 require('./models/Posts'); // Posts model
 require('./models/Comments'); // Comments model
+require('./models/Product');
+require('./models/ProductReceipt');
+require('./models/Service');
 mongoose.Promise = global.Promise; // Adjust mongoose promise
 mongoose.connect('mongodb://localhost/TT');
 

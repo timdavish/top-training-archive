@@ -3,26 +3,23 @@
   "version": "0.0.1",
   "description": "An app that connects trainers to trainees.",
   "authors": [
-      "Tim Davis"
+    "Tim Davis"
   ],
   "homepage": "https://github.com/timdavish/Top_Training",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/timdavish/Top_Training.git"
+    "type": "git",
+    "url": "https://github.com/timdavish/Top_Training.git"
   },
   "scripts": {
     "build": "npm install && bower install",
     "start": "node ./bin/start",
     "stop": "taskkill /im node.exe /F",
     "test": "npm run lint && npm run test:public",
-
     "pretest": "echo 'Testing...'",
     "posttest": "echo 'Testing completed.'",
-
     "prelint": "echo 'Linting...'",
     "lint": "jshint server/server.js",
     "postlint": "echo 'Linting completed.'",
-
     "pretest:public": "echo 'Testing (public)...'",
     "test:public": "mocha public/test -u bdd -R spec",
     "posttest:public": "echo 'Testing (public) completed.'"
@@ -40,6 +37,7 @@
     "express": "~4.14.0",
     "express-jwt": "^5.1.0",
     "jsonwebtoken": "^7.2.1",
+    "lodash": "^4.17.4",
     "mongoose": "^4.7.6",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",

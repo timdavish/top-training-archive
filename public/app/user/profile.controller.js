@@ -9,23 +9,25 @@
         .module('app.user')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$state', 'authentication', 'ModalService'];
+    //ProfileController.$inject = ['$state', 'authentication', 'ModalService', 'userService'];
+    ProfileController.$inject = ['$state', 'authentication']; //, 'ModalService'];
 
     /**
      * @namespace ProfileController
      * @desc SignUpClient controller
      * @memberof Controllers
      */
-    function ProfileController($state, authentication, ModalService) {
+    //function ProfileController($state, authentication, ModalService, userService) {
+    function ProfileController($state, authentication) {
         var vm = this;
-
-        // vm.model = authentication.currentUser();
+        //var fromdb = userService.getUser()
+        vm.model = authentication.currentUser();
+        console.log(vm.model);
         vm.panes = {};
         vm.model = {
             usertype: "trainer",
             trainerInfo: {
-                reviews: [
-                    {
+                reviews: [{
                         author: "Tom Riddle",
                         type: "Verified Client",
                         rating: 5,
@@ -42,27 +44,22 @@
                         date: "January 2, 2017"
                     }
                 ],
-                locations: [
-                    {
+                locations: [{
                         type: "Point",
-                        coordinates: [
-                            -122.3,
+                        coordinates: [-122.3,
                             47.6
                         ]
                     },
                     {
                         type: "Point",
-                        coordinates: [
-                            -100.3,
+                        coordinates: [-100.3,
                             47.6
                         ]
                     }
                 ],
-                sports: [
-                    {
+                sports: [{
                         sport: "basketball",
-                        packages: [
-                            {
+                        packages: [{
                                 count: 1,
                                 size: 1,
                                 price: 30
@@ -102,8 +99,7 @@
                     },
                     {
                         sport: "baseball",
-                        packages: [
-                            {
+                        packages: [{
                                 count: 1,
                                 size: 1,
                                 price: 30

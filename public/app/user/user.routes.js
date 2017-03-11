@@ -26,8 +26,7 @@
      * @memberof Configurations
      */
     function getStates() {
-        return [
-            {
+        return [{
                 state: 'log-in',
                 config: {
                     url: '/log-in',
@@ -71,8 +70,7 @@
                         }
                     }]
                 }
-            }
-            ,
+            },
             {
                 state: 'profile',
                 config: {
@@ -81,7 +79,7 @@
                     controller: 'ProfileController',
                     controllerAs: 'vm',
                     title: 'Profile',
-                    onEnter: ['$state', 'authentication', function($state, authentication) {
+                    onEnter: ['$state', 'authentication', 'userService', function($state, authentication, userService) {
                         if (!authentication.isLoggedIn()) {
                             $state.go('home');
                         }
