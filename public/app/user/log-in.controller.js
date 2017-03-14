@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('LogInController', LogInController);
 
-    LogInController.$inject = ['$state', '$stateParams', 'authentication'];
+    LogInController.$inject = ['$rootScope', '$state', 'authentication'];
 
     /**
      * @namespace LogInController
      * @desc LogIn controller
      * @memberof Controllers
      */
-    function LogInController($state, $stateParams, authentication) {
+    function LogInController($rootScope, $state, authentication) {
         var vm = this;
 
         vm.logIn = logIn;
@@ -32,8 +32,16 @@
             authentication.logIn(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
-                if ($stateParams.package) {
-                    $state.go('checkout', { id: $stateParams.package });
+                console.log($rootScope.returnToState);
+                // If we have return state
+                if ($rootScope.returnToState && $rootScope.returnToStateParams) {
+                    console.log('Redirecting to:', $rootScope.returnToState.name);
+                    $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
+
+                    // Reset return state and its params
+                    $rootScope.returnToState = null;
+                    $rootScope.returnToStateParams = null
+                // Otherwise just go home
                 } else {
                     $state.go('home');
                 }

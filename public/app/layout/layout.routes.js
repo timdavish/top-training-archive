@@ -34,7 +34,8 @@
                     templateUrl: 'public/app/layout/home.ejs',
                     controller: 'HomeController',
                     controllerAs: 'vm',
-                    title: 'Home'
+                    title: 'Home',
+                    requiresLoggedIn: false // Used by router
                 }
             }
         ];
