@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('SignUpClientController', SignUpClientController);
 
-    SignUpClientController.$inject = ['$state', 'authentication'];
+    SignUpClientController.$inject = ['$rootScope', '$state', 'authentication'];
 
     /**
      * @namespace SignUpClientController
      * @desc SignUpClient controller
      * @memberof Controllers
      */
-    function SignUpClientController($state, authentication) {
+    function SignUpClientController($rootScope, $state, authentication) {
         var vm = this;
 
         vm.emailFormat = "/[^@]+@[^@]+/";
@@ -35,7 +35,17 @@
             authentication.signUp(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
-                $state.go('home');
+                // If we have return state
+                if ($rootScope.returnToState && $rootScope.returnToStateParams) {
+                    $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
+
+                    // Reset return state and its params
+                    $rootScope.returnToState = null;
+                    $rootScope.returnToStateParams = null
+                // Otherwise just go home
+                } else {
+                    $state.go('home');
+                }
             });
         }
     }

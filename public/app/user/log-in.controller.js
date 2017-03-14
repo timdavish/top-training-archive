@@ -32,10 +32,8 @@
             authentication.logIn(vm.user).error(function(error) {
                 vm.error = error;
             }).then(function() {
-                console.log($rootScope.returnToState);
                 // If we have return state
                 if ($rootScope.returnToState && $rootScope.returnToStateParams) {
-                    console.log('Redirecting to:', $rootScope.returnToState.name);
                     $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
 
                     // Reset return state and its params
