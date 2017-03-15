@@ -14,7 +14,8 @@ dependencies:
         - rm -rf ./bower_components
     # Override dependencies
     override:
-        - npm build
+        - npm install
+        - bower install
 
 ## Customize test commands
 test:
