@@ -35,7 +35,8 @@
                     controller: 'HomeController',
                     controllerAs: 'vm',
                     title: 'Home',
-                    requiresLoggedIn: false // Used by router
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false // Require login at this state
                 }
             }
         ];

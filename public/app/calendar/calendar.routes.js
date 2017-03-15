@@ -35,6 +35,8 @@
                     controller: 'CalendarController',
                     controllerAs: 'vm',
                     title: 'Calendar',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
                     resolve: {
                         eventPromise: ['eventService', function(eventService) {
                             return eventService.getEventsBySport();

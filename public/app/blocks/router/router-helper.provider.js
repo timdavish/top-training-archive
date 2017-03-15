@@ -68,12 +68,15 @@
     function routerRun($rootScope, $state, authentication) {
         // Listen to state changes
         $rootScope.$on('$stateChangeStart', function(event, nextState, nextParams) {
-            // If login required & you're logged out, set postLogInRoute
-            if (nextState.requiresLoggedIn && !authentication.isLoggedIn()) {
+            // If we want to store next state to return to
+            if (nextState.wantToReturn) {
                 // Save nextState and its params
-                $rootScope.returnToState = nextState;
-                $rootScope.returnToStateParams = nextParams;
+                $rootScope.returnState = nextState;
+                $rootScope.returnStateParams = nextParams;
+            }
 
+            // If login required & you're logged out, redirect to login
+            if (nextState.requiresLoggedIn && !authentication.isLoggedIn()) {
                 event.preventDefault(); // Prevent any default events before changing state
                 $state.go('log-in');
             }

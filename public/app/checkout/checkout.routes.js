@@ -35,7 +35,8 @@
                     controller: 'CheckoutController',
                     controllerAs: 'vm',
                     title: 'Checkout',
-                    requiresLoggedIn: true // Used by router
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: true // Require login at this state
                 }
             }
         ];

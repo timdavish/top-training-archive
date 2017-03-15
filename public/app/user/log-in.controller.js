@@ -33,8 +33,9 @@
                 vm.error = error;
             }).then(function() {
                 // If we have return state
-                if ($rootScope.returnToState && $rootScope.returnToStateParams) {
-                    $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
+                if ($rootScope.returnState && $rootScope.returnStateParams) {
+                    // Go to return state
+                    $state.go($rootScope.returnState.name, $rootScope.returnStateParams);
 
                     // Reset return state and its params
                     $rootScope.returnToState = null;

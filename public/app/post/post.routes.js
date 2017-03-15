@@ -35,6 +35,8 @@
                     controller: 'PostListController',
                     controllerAs: 'vm',
                     title: 'Posts',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
                     resolve: {
                         postPromise: ['postService', function(postService) {
                             return postService.getPosts();
@@ -50,6 +52,8 @@
                     controller: 'PostDetailController',
                     controllerAs: 'vm',
                     title: 'Post',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
                     resolve: {
                         post: ['$stateParams', 'postService', function($stateParams, postService) {
                             return postService.getPost($stateParams.id);

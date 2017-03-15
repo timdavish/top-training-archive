@@ -35,6 +35,8 @@
                     controller: 'LogInController',
                     controllerAs: 'vm',
                     title: 'Log In',
+                    wantToReturn: false, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
                     onEnter: ['$state', 'authentication', function($state, authentication) {
                         if (authentication.isLoggedIn()) {
                             $state.go('home');
@@ -50,6 +52,8 @@
                     controller: 'SignUpClientController',
                     controllerAs: 'vm',
                     title: 'Client Sign Up',
+                    wantToReturn: false, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
                     onEnter: ['$state', 'authentication', function($state, authentication) {
                         if (authentication.isLoggedIn()) {
                             $state.go('home');
@@ -65,6 +69,8 @@
                     controller: 'SignUpTrainerController',
                     controllerAs: 'vm',
                     title: 'Trainer Sign Up',
+                    wantToReturn: false, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
                     onEnter: ['$state', 'authentication', function($state, authentication) {
                         if (authentication.isLoggedIn()) {
                             $state.go('home');
@@ -80,11 +86,13 @@
                     controller: 'TrainerProfileController',
                     controllerAs: 'vm',
                     title: 'Profile',
-                    onEnter: ['$state', 'authentication', function($state, authentication) {
-                        if (!authentication.isLoggedIn()) {
-                            $state.go('home');
-                        }
-                    }]
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: true // Require login at this state
+                    // onEnter: ['$state', 'authentication', function($state, authentication) {
+                    //     if (!authentication.isLoggedIn()) {
+                    //         $state.go('home');
+                    //     }
+                    // }]
                 }
             }
         ];

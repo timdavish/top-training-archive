@@ -34,7 +34,9 @@
                     templateUrl: 'public/app/search/search-list.ejs',
                     controller: 'SearchController',
                     controllerAs: 'vm',
-                    title: 'Search'
+                    title: 'Search',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false // Require login at this state
                 }
             },
             {
@@ -45,7 +47,9 @@
                     templateUrl: 'public/app/user/trainer-profile.ejs',
                     controller: 'TrainerSearchProfileController',
                     controllerAs: 'vm',
-                    title: 'Trainer'
+                    title: 'Trainer',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false // Require login at this state
                 }
             }
         ];
