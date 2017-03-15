@@ -15,6 +15,7 @@ dependencies:
     # Override dependencies
     override:
         - npm install
+        - npm install bower -g
         - bower install
 
 ## Customize test commands
