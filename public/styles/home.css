@@ -180,9 +180,9 @@ h6 {
 .contact {
     margin-top: 10px;
 }
-.map {
+.map-wrap {
+    width: auto;
     height: 260px;
-    width: 260px;
     display: block;
 }
 .review {

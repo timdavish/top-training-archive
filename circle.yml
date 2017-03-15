@@ -1,0 +1,23 @@
+## Customize test machine
+machine:
+    # Set timezone
+    timezone: America/Los_Angeles
+    # Set node version
+    node:
+        version: 7.2.1
+
+## Customize dependencies
+dependencies:
+    # Remove cachced dependencies
+    pre:
+        - rm -rf ./node_modules
+        - rm -rf ./bower_components
+    # Override dependencies
+    override:
+        - npm build
+
+## Customize test commands
+test:
+    # Override tests
+    override:
+        - npm test

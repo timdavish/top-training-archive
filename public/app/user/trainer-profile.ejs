@@ -83,13 +83,15 @@
                         </div>
 
                         <div class="pane-content">
-                            <map zoom-to-include-markers="true"
-                                 class="map">
-                                <marker ng-repeat="location in vm.model.trainerInfo.locations"
-                                    position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
-                                    <!-- title="{{location.title}}"> -->
-                                </marker>
-                            </map>
+                            <div class="map-wrap">
+                                <map zoom-to-include-markers="true">
+                                    <marker ng-repeat="location in vm.model.trainerInfo.locations"
+                                        position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
+                                        <!-- title="{{location.title}}"> -->
+                                    </marker>
+                                </map>
+                            </div>
+
                             <div ng-repeat="location in vm.model.trainerInfo.locations">
                                 <span>{{ location }}</span>
                                 <span google-reverse-geocode ng-model="location" lat="location.coordinates[1]" long="location.coordinates[0]"></span>

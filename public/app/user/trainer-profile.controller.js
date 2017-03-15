@@ -23,7 +23,7 @@
         vm.model = {
             usertype: "trainer",
             trainerInfo: {
-                rating: 4.5,
+                rating: 4.34,
                 reviews: [
                     {
                         author: "Tom Riddle",
@@ -53,7 +53,7 @@
                     {
                         type: "Point",
                         coordinates: [
-                            -100.3,
+                            -122.32,
                             47.6
                         ]
                     }
