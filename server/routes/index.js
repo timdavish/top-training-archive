@@ -7,7 +7,7 @@ var router = express.Router();
 
 // (GET) Render our shell with default home page
 router.get('/', function(req, res, next) {
-  res.render('shell.ejs');
+    res.render('index.ejs');
 });
 
 // Export the router

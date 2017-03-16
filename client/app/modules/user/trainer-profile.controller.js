@@ -203,7 +203,7 @@
             var error;
 
             if (pane === vm.panes.summary) {
-                templateUrl = 'public/app/user/modals/summary-modal.html';
+                templateUrl = 'client/app/modules/user/modals/summary-modal.html';
                 controller = 'SummaryModalController';
                 inputs = {
                     summary: data.summary
@@ -213,14 +213,14 @@
             } else if (pane === vm.panes.packages) {
                 error = 'TODO: edit packages';
             } else if (pane === vm.panes.credentials) {
-                templateUrl = 'public/app/user/modals/credentials-modal.html';
+                templateUrl = 'client/app/modules/user/modals/credentials-modal.html';
                 controller = 'CredentialsModalController';
                 inputs = {
                     experience: data.credentials.experience,
                     school: data.credentials.school
                 };
             } else if (pane === vm.panes.services) {
-                templateUrl = 'public/app/user/modals/services-modal.html';
+                templateUrl = 'client/app/modules/user/modals/services-modal.html';
                 controller = 'ServicesModalController';
                 inputs = {
                     ages: data.services.ages,

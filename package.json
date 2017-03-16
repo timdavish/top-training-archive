@@ -14,7 +14,7 @@
     "build": "npm install && bower install",
     "start": "node ./bin/start",
     "stop": "taskkill /im node.exe /F",
-    "test": "npm run lint && npm run test:public",
+    "test": "npm run lint && npm run test:client",
 
     "pretest": "echo 'Testing...'",
     "posttest": "echo 'Testing completed.'",
@@ -23,9 +23,9 @@
     "lint": "jshint server/server.js",
     "postlint": "echo 'Linting completed.'",
 
-    "pretest:public": "echo 'Testing (public)...'",
-    "test:public": "mocha public/test -u bdd -R spec",
-    "posttest:public": "echo 'Testing (public) completed.'"
+    "pretest:client": "echo 'Testing (client)...'",
+    "test:client": "mocha client/tests -u bdd -R spec",
+    "posttest:client": "echo 'Testing (client) completed.'"
   },
   "devDependencies": {
     "jshint": "^2.9.4",
