@@ -31,7 +31,7 @@
                 state: 'log-in',
                 config: {
                     url: '/log-in',
-                    templateUrl: 'public/app/user/log-in.ejs',
+                    templateUrl: 'client/app/modules/user/log-in.ejs',
                     controller: 'LogInController',
                     controllerAs: 'vm',
                     title: 'Log In',
@@ -48,7 +48,7 @@
                 state: 'sign-up-client',
                 config: {
                     url: '/sign-up-client',
-                    templateUrl: 'public/app/user/sign-up-client.ejs',
+                    templateUrl: 'client/app/modules/user/sign-up-client.ejs',
                     controller: 'SignUpClientController',
                     controllerAs: 'vm',
                     title: 'Client Sign Up',
@@ -65,7 +65,7 @@
                 state: 'sign-up-trainer',
                 config: {
                     url: '/sign-up-trainer',
-                    templateUrl: 'public/app/user/sign-up-trainer.ejs',
+                    templateUrl: 'client/app/modules/user/sign-up-trainer.ejs',
                     controller: 'SignUpTrainerController',
                     controllerAs: 'vm',
                     title: 'Trainer Sign Up',
@@ -82,7 +82,7 @@
                 state: 'trainer-profile',
                 config: {
                     url: '/profile/trainer',
-                    templateUrl: 'public/app/user/trainer-profile.ejs',
+                    templateUrl: 'client/app/modules/user/trainer-profile.ejs',
                     controller: 'TrainerProfileController',
                     controllerAs: 'vm',
                     title: 'Profile',

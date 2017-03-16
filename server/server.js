@@ -25,7 +25,7 @@ require('./config/passport'); // Passport configuration
 var app = express();
 
 // View engine setup
-app.set('views', path.join(__dirname, './../public/app/layout'));
+app.set('views', path.join(__dirname, './../client'));
 app.set('view engine', 'ejs');
 
 // Other app setup
@@ -58,7 +58,7 @@ app.use(function(err, req, res, next) {
 
     // Render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('app/modules/layout/error.ejs');
 });
 
 module.exports = app;

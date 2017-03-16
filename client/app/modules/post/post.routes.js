@@ -1,19 +1,19 @@
 /**
- * Event routes
+ * Post routes
  * @namespace Configurations
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
 
     angular
-        .module('app.event')
+        .module('app.post')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
 
     /**
      * @namespace appRun
-     * @desc Begins configuration for event routes
+     * @desc Begins configuration for post routes
      * @memberof Configurations
      */
     function appRun(routerHelper) {
@@ -22,41 +22,41 @@
 
     /**
      * @namespace getStates
-     * @desc Event routes
+     * @desc Post routes
      * @memberof Configurations
      */
     function getStates() {
         return [
             {
-                state: 'events',
+                state: 'posts',
                 config: {
-                    url: '/events',
-                    templateUrl: 'public/app/event/event-list.ejs',
-                    controller: 'EventListController',
+                    url: '/posts',
+                    templateUrl: 'client/app/modules/post/post-list.ejs',
+                    controller: 'PostListController',
                     controllerAs: 'vm',
-                    title: 'Events',
+                    title: 'Posts',
                     wantToReturn: true, // Return to this state after login
                     requiresLoggedIn: false, // Require login at this state
                     resolve: {
-                        eventPromise: ['eventService', function(eventService) {
-                            return eventService.getEvents();
+                        postPromise: ['postService', function(postService) {
+                            return postService.getPosts();
                         }]
                     }
                 }
             },
             {
-                state: 'event',
+                state: 'post',
                 config: {
-                    url: '/events/{id}',
-                    templateUrl: 'public/app/event/event-detail.ejs',
-                    controller: 'EventDetailController',
+                    url: '/posts/{id}',
+                    templateUrl: 'client/app/modules/post/post-detail.ejs',
+                    controller: 'PostDetailController',
                     controllerAs: 'vm',
-                    title: 'Event',
+                    title: 'Post',
                     wantToReturn: true, // Return to this state after login
                     requiresLoggedIn: false, // Require login at this state
                     resolve: {
-                        event: ['$stateParams', 'eventService', function($stateParams, eventService) {
-                            return eventService.getEvent($stateParams.id);
+                        post: ['$stateParams', 'postService', function($stateParams, postService) {
+                            return postService.getPost($stateParams.id);
                         }]
                     }
                 }
