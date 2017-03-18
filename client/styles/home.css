@@ -205,7 +205,9 @@ h6 {
 /* COLLAPSABLE */
 .content {
     max-width: 1000px;
-    margin: 0 auto; /* top & bottom, left & right */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, .3);
     border-radius: 5px;
