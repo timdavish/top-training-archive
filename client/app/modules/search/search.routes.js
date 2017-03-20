@@ -7,17 +7,17 @@
 
     angular
         .module('app.search')
-        .run(appRun);
+        .run(configureStates);
 
-    appRun.$inject = ['routerHelper'];
+    configureStates.$inject = ['router'];
 
     /**
-     * @namespace appRun
+     * @namespace configureStates
      * @desc Begins configuration for search routes
      * @memberof Configurations
      */
-    function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function configureStates(router) {
+        router.configureStates(getStates());
     }
 
     /**
