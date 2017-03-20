@@ -7,16 +7,16 @@
 
     angular
         .module('app.support')
-        .run(appRun);
+        .run(configureStates);
 
-    appRun.$inject = ['routerHelper'];
+    configureStates.$inject = ['routerHelper'];
 
     /**
-     * @namespace appRun
+     * @namespace configureStates
      * @desc Begins configuration for layout routes
      * @memberof Configurations
      */
-    function appRun(routerHelper) {
+    function configureStates(routerHelper) {
         routerHelper.configureStates(getStates());
     }
 
@@ -27,6 +27,18 @@
      */
     function getStates() {
         return [
+            {
+                state: 'contact',
+                config: {
+                    url: '/support/contact',
+                    templateUrl: 'client/app/modules/support/contact/contact-us.html',
+                    controller: '',
+                    controllerAs: 'vm',
+                    title: 'Contact',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false // Require login at this state
+                }
+            },
             {
                 state: 'faq',
                 config: {

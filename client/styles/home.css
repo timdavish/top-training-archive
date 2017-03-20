@@ -31,7 +31,7 @@ body {
     /*padding: 0px;*/
     /*overflow-x: hidden;*/
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
+    /*font-weight: 700;*/
     line-height: 1.5;
 }
 h1,
@@ -42,6 +42,7 @@ h5,
 h6 {
     margin: 0;
     padding: 0;
+    font-weight: 550;
 }
 .floatL { float: left; }
 .floatR { float: right; }
@@ -56,7 +57,17 @@ h6 {
 }
 .page-header {
     margin-top: 15px;
-    margin-bottom: 14px;
+    margin-bottom: 15px;
+}
+.sub-header {
+    margin-bottom: 5px;
+}
+.textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+.post-menu-text {
+    padding-left: 15px;
 }
 /* /GENERAL */
 
