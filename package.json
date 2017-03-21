@@ -3,12 +3,15 @@
   "version": "0.0.1",
   "description": "An app that connects trainers to trainees.",
   "authors": [
-      "Tim Davis"
+    "Tim Davis"
   ],
   "homepage": "https://github.com/timdavish/Top_Training",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/timdavish/Top_Training.git"
+    "type": "git",
+    "url": "https://github.com/timdavish/Top_Training.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timdavish/Top_Training/issues"
   },
   "scripts": {
     "build": "npm install && bower install",
