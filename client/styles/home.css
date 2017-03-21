@@ -62,13 +62,6 @@ h6 {
 .sub-header {
     margin-bottom: 5px;
 }
-.textarea {
-    resize: vertical;
-    min-height: 150px;
-}
-.post-menu-text {
-    padding-left: 15px;
-}
 /* /GENERAL */
 
 /* TOPNAV */
