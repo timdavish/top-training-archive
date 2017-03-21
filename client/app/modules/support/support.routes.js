@@ -31,8 +31,8 @@
                 state: 'contact',
                 config: {
                     url: '/support/contact',
-                    templateUrl: 'client/app/modules/support/contact/contact-us.html',
-                    controller: '',
+                    templateUrl: 'client/app/modules/support/contact/contact.html',
+                    controller: 'ContactController',
                     controllerAs: 'vm',
                     title: 'Contact',
                     wantToReturn: true, // Return to this state after login
@@ -49,6 +49,23 @@
                     title: 'FAQ',
                     wantToReturn: true, // Return to this state after login
                     requiresLoggedIn: false // Require login at this state
+                }
+            },
+            {
+                state: 'faq/articles',
+                config: {
+                    url: '/support/faq/articles/{id}',
+                    templateUrl: 'client/app/modules/support/faq/article.html',
+                    controller: 'ArticleController',
+                    controllerAs: 'vm',
+                    title: 'Article',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
+                    resolve: {
+                        articleId: ['$stateParams', function($stateParams) {
+                            return $stateParams.id;
+                        }]
+                    }
                 }
             },
             {
