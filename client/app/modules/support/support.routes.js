@@ -50,6 +50,30 @@
                     wantToReturn: true, // Return to this state after login
                     requiresLoggedIn: false // Require login at this state
                 }
+            },
+            {
+                state: 'privacy',
+                config: {
+                    url: '/support/privacy',
+                    templateUrl: 'client/app/modules/support/privacy/privacy.html',
+                    controller: '',
+                    controllerAs: 'vm',
+                    title: 'Privacy',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false // Require login at this state
+                }
+            },
+            {
+                state: 'terms-of-service',
+                config: {
+                    url: '/support/terms-of-service',
+                    templateUrl: 'client/app/modules/support/terms/terms-of-service.html',
+                    controller: '',
+                    controllerAs: 'vm',
+                    title: 'Terms Of Service',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: false // Require login at this state
+                }
             }
         ];
     }
