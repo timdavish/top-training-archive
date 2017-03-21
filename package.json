@@ -17,7 +17,7 @@
     "build": "npm install && bower install",
     "start": "node ./bin/start",
     "stop": "taskkill /im node.exe /F",
-    "test": "npm run lint && npm run test:client",
+    "test": "npm run test:client",
 
     "pretest": "echo 'Testing...'",
     "posttest": "echo 'Testing completed.'",
