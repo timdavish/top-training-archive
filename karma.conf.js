@@ -14,8 +14,9 @@ module.exports = function(config) {
         // List of files/patterns to load in the browser
         files: [
 			'client/test/test-helpers.js', // Test helper functions
-            'client/app/**/*.html',
-            'client/app/**/*.js'
+            'client/app/**/*.html', // App
+            'client/app/**/*.js', // App
+			'client/test/**/*.spec.js' // Tests
         ],
 
         // List of files to exclude
@@ -39,16 +40,23 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
 
         // Enable/disabled watching files and executing tests on file changes
-        autoWatch: true,
+        autoWatch: false,
 
         // Start these browsers
         browsers: ['Chrome'],
+		// browsers: ['ChromeNoSandbox'],
+		//     customLaunchers: {
+		//         ChromeNoSandbox: {
+		//             base: 'Chrome',
+		//             flags: ['--no-sandbox']
+		//         }
+		//     },
 
         // Continuous integration mode
         // If true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true
 
         //
-        concurrency: Infinity
+        // concurrency: Infinity
     });
 };
