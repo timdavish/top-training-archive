@@ -1,0 +1,97 @@
+
+<!-- Contact us template -->
+
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+
+            <!-- Menu -->
+            <div class="col-md-3 no-padding">
+                <div class="list-group page-header">
+                    <div class="list-group-item list-group-item-header">Get help with Top Training</div>
+                    <a href="/#/support/contact" class="list-group-item active">Contact Top Training</a>
+                    <a href="/#/support/faq" class="list-group-item">Frequently Asked Questions</a>
+                    <a href="/#/support/howwework" class="list-group-item">How We Work</a>
+                    <a href="/#/support/testimonials" class="list-group-item">Testimonials</a>
+                </div>
+
+                <p class="post-menu-text"><small>If you have a question, try viewing our <a href="/#/support/faq">Frequently Asked Questions</a> to see if your question has been answered.</small></p>
+            </div>
+            <!-- /Menu -->
+
+            <!-- Contact form -->
+            <form class="col-md-9 row fix-form">
+
+                <div class="col-md-12 page-header">
+                    <h3>Contact Top Training</h3>
+                </div>
+
+                <div class="col-md-12">
+                    <h4 class="sub-header">Need help with something?</h4>
+                    <p>
+                        You’ve come to the right place! <br />
+                        See if you can find an answer to your question in our <a href="/#/support/faq">FAQ</a>. <br />
+                        Send a message to our Support staff using the form below.
+                    </p>
+                </div>
+
+                <!-- Name -->
+                <div class="col-md-6 form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="form[firstname]" required="required"
+                        id="firstname" class="form-control" placeholder="Jane"
+                        ng-model="vm.firstname" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="form[lastname]" required="required"
+                        id="lastname" class="form-control" placeholder="Doe"
+                        ng-model="vm.lastname" />
+                </div>
+
+                <!-- Contact -->
+                <div class="col-md-6 form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="form[email]" required="required"
+                        id="email" class="form-control" placeholder="jane@email.com"
+                        ng-model="vm.email" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" name="form[phone]" required="required"
+                        id="phone" class="form-control" placeholder="123-456-7890"
+                        ng-model="vm.phone" />
+                </div>
+
+                <!-- Subject -->
+                <div class="col-md-12 form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" name="form[subject]" required="required"
+                        id="subject" class="form-control" placeholder="I need help with the website"
+                        ng-model="vm.subject" />
+                </div>
+
+                <!-- Content -->
+                <div class="col-md-12 form-group">
+                    <label for="content">How can we help?</label>
+                    <textarea name="form[content]" required="required"
+                        id="content" class="form-control textarea" placeholder="Please describe exactly what you're trying to accomplish."
+                        ng-model="vm.content">
+                    </textarea>
+                </div>
+
+                <!-- Submit -->
+                <!-- <div class="col-md-8">
+                    <p class="form-text text-muted"><small>Top Training will do our best to help you.</small></p>
+                </div> -->
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-md"
+                            value="Send request">
+                    </input>
+                </div>
+            </form>
+            <!-- /Contact form -->
+
+        </div>
+    </div>
+</div>

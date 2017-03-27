@@ -21,6 +21,7 @@
         'app.layout',
         'app.post',
         'app.search',
+        'app.support',
         'app.user'
     ]);
 })();
