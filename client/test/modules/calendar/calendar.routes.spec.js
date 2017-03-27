@@ -16,12 +16,14 @@
 			// Global variables inside this block
 			var $state,
 				$rootScope,
+				$httpBackend,
 				state = 'calendar';
 
 			// Inject dependencies
-			beforeEach(inject(function(_$state_, _$rootScope_) {
+			beforeEach(inject(function(_$state_, _$rootScope_, _$httpBackend_) {
 				$state = _$state_;
 				$rootScope = _$rootScope_;
+				$httpBackend = _$httpBackend_;
 			}));
 
 			// Test
@@ -35,15 +37,7 @@
 
 			// Test
 			it('should respond to URL', function() {
-				expect($state.href(state).toEqual('/calendar'));
-			});
-
-			// Test
-			it('should activate the state', function() {
-				$state.go(state);
-				$rootScope.$digest();
-
-				expect($state.current.name).toBe(state);
+				expect($state.href(state)).toEqual('#/calendar');
 			});
 		});
 	});

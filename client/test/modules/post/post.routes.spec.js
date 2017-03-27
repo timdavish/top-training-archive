@@ -1,22 +1,22 @@
 /**
- * client/test/modules/event/event.routes.spec.js
- * Calendar routes tests
+ * client/test/modules/post/post.routes.spec.js
+ * Post routes tests
  * @namespace Tests
  */
 (function() { // IIFE structure
 
 	// Suite block
-	describe('Unit: Calendar routes', function() {
+	describe('Unit: Post routes', function() {
 
 		// Include modules before each describe or it in this block
 		beforeEach(module('app'));
 
 		// Suite block
-		describe('State: events', function() {
+		describe('State: posts', function() {
 			// Global variables inside this block
 			var $state,
 				$rootScope,
-				state = 'events';
+				state = 'posts';
 
 			// Inject dependencies
 			beforeEach(inject(function(_$state_, _$rootScope_) {
@@ -35,16 +35,16 @@
 
 			// Test
 			it('should respond to URL', function() {
-				expect($state.href(state)).toEqual('#/events');
+				expect($state.href(state)).toEqual('#/posts');
 			});
 		});
 
 		// Suite block
-		describe('State: event', function() {
+		describe('State: post', function() {
 			// Global variables inside this block
 			var $state,
 				$rootScope,
-				state = 'event';
+				state = 'post';
 
 			// Inject dependencies
 			beforeEach(inject(function(_$state_, _$rootScope_) {
@@ -63,7 +63,7 @@
 
 			// Test
 			it('should respond to URL', function() {
-				expect($state.href(state)).toEqual('#/events/');
+				expect($state.href(state)).toEqual('#/posts/');
 			});
 		});
 	});

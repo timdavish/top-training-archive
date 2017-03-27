@@ -13,9 +13,32 @@ module.exports = function(config) {
 
         // List of files/patterns to load in the browser
         files: [
+			'bower_components/angular/angular.min.js',
+			'bower_components/angular-mocks/angular-mocks.js',
+			'bower_components/angular-animate/angular-animate.min.js',
+			'bower_components/angular-sanitize/angular-sanitize.min.js',
+			'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+			'bower_components/jquery/dist/jquery.min.js',
+			'bower_components/bootstrap/dist/js/bootstrap.min.js',
+			'bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js',
+			'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+			'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js',
+			'bower_components/moment/min/moment.min.js',
+			'bower_components/interactjs/dist/interact.min.js',
+			'bower_components/rrule/lib/rrule.js',
+			'bower_components/toastr/toastr.min.js',
+			'https://maps.googleapis.com/maps/api/js?libraries=places,visualization&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA',
+			'bower_components/ngmap/build/scripts/ng-map.min.js',
+			'bower_components/angular-modal-service/dst/angular-modal-service.min.js',
+
+			'client/app/app.module.js', // App module
+			'client/app/core/core.module.js', // App core module
+			'client/app/blocks/blocks.module.js', // App blocks module
+			'client/app/**/*.module.js', // All other app modules
+			'client/app/**/*.js', // All other app js
+			'client/app/**/*.html', // App html
+
 			'client/test/test-helpers.js', // Test helper functions
-            'client/app/**/*.html', // App
-            'client/app/**/*.js', // App
 			'client/test/**/*.spec.js' // Tests
         ],
 
@@ -44,19 +67,12 @@ module.exports = function(config) {
 
         // Start these browsers
         browsers: ['Chrome'],
-		// browsers: ['ChromeNoSandbox'],
-		//     customLaunchers: {
-		//         ChromeNoSandbox: {
-		//             base: 'Chrome',
-		//             flags: ['--no-sandbox']
-		//         }
-		//     },
 
         // Continuous integration mode
         // If true, Karma captures browsers, runs the tests and exits
-        singleRun: true
+        singleRun: true,
 
         //
-        // concurrency: Infinity
+        concurrency: Infinity
     });
 };

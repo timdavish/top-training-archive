@@ -1,23 +1,23 @@
 /**
- * client/test/modules/checkout/checkout.routes.spec.js
- * Checkout routes tests
+ * client/test/modules/layout/layout.routes.spec.js
+ * Layout routes tests
  * @namespace Tests
  */
 (function() { // IIFE structure
 
 	// Suite block
-	describe('Unit: Checkout routes', function() {
+	describe('Unit: Layout routes', function() {
 
 		// Include modules before each describe or it in this block
 		beforeEach(module('app'));
 
 		// Suite block
-		describe('State: checkout', function() {
+		describe('State: home', function() {
 			// Global variables inside this block
 			var $state,
 				$rootScope,
 				$httpBackend,
-				state = 'checkout';
+				state = 'home';
 
 			// Inject dependencies
 			beforeEach(inject(function(_$state_, _$rootScope_, _$httpBackend_) {
@@ -32,12 +32,12 @@
 
 				expect(config.url).toBeDefined();
 				expect(config.wantToReturn).toBeTruthy();
-				expect(config.requiresLoggedIn).toBeTruthy();
+				expect(config.requiresLoggedIn).toBeFalsy();
 			});
 
 			// Test
 			it('should respond to URL', function() {
-				expect($state.href(state)).toEqual('#/checkout/packages/');
+				expect($state.href(state)).toEqual('#/home');
 			});
 		});
 	});
