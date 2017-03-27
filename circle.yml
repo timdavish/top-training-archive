@@ -22,4 +22,4 @@ dependencies:
 test:
     # Override tests
     override:
-        - npm test
+        - karma start
