@@ -31,10 +31,7 @@ module.exports = function(config) {
 			'bower_components/ngmap/build/scripts/ng-map.min.js',
 			'bower_components/angular-modal-service/dst/angular-modal-service.min.js',
 
-			'client/app/app.module.js', // App module
-			'client/app/core/core.module.js', // App core module
-			'client/app/blocks/blocks.module.js', // App blocks module
-			'client/app/**/*.module.js', // All other app modules
+			'client/app/**/*.module.js', // Load modules first
 			'client/app/**/*.js', // All other app js
 			'client/app/**/*.html', // App html
 
@@ -43,12 +40,10 @@ module.exports = function(config) {
         ],
 
         // List of files to exclude
-        exclude: [
-        ],
+        exclude: [],
 
         // Preprocess matching files before serving them to the browser
-        preprocessors: {
-        },
+        preprocessors: {},
 
         // Test results reporter
         reporters: ['progress'],

@@ -16,12 +16,14 @@
 			// Global variables inside this block
 			var $state,
 				$rootScope,
+				$httpBackend,
 				state = 'search';
 
 			// Inject dependencies
-			beforeEach(inject(function(_$state_, _$rootScope_) {
+			beforeEach(inject(function(_$state_, _$rootScope_, _$httpBackend_) {
 				$state = _$state_;
 				$rootScope = _$rootScope_;
+				$httpBackend = _$httpBackend_;
 			}));
 
 			// Test
