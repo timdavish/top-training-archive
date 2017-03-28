@@ -8,18 +8,19 @@ machine:
 
 ## Customize dependencies
 dependencies:
-    # Remove cachced dependencies
+    # Remove cached dependencies
     pre:
         - rm -rf ./node_modules
         - rm -rf ./bower_components
+        - npm install -g bower karma-cli
+
     # Override dependencies
     override:
         - npm install
-        - npm install bower -g
         - bower install
 
 ## Customize test commands
 test:
     # Override tests
     override:
-        - npm test
+        - karma start

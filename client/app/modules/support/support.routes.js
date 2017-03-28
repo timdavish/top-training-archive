@@ -9,15 +9,15 @@
         .module('app.support')
         .run(configureStates);
 
-    configureStates.$inject = ['routerHelper'];
+    configureStates.$inject = ['router'];
 
     /**
      * @namespace configureStates
      * @desc Begins configuration for layout routes
      * @memberof Configurations
      */
-    function configureStates(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function configureStates(router) {
+        router.configureStates(getStates());
     }
 
     /**
