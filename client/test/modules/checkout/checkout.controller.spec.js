@@ -21,7 +21,7 @@
 
 			// Inject dependencies
 			beforeEach(inject(function($injector) {
-				var routeDetails = compileRouteTemplateWithController($injector, 'checkout', 'CheckoutController');
+				var routeDetails = specHelper.compileRouteTemplateWithController($injector, 'checkout', 'CheckoutController');
 
 				ctrl = routeDetails.controller;
 				scope = routeDetails.scope;
