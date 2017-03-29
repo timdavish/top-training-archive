@@ -18,12 +18,13 @@
      */
     function logger($log, toastr) {
         var service = {
-            showToasts: true,
+            showToasts: false,
 
-            error: error,
+			// Message types
             info: info,
             success: success,
             warning: warning,
+			error: error,
 
             // straight to console; bypass toastr
             log: $log.log
@@ -34,19 +35,6 @@
         /* Functions */
 
         /**
-         * @namespace error
-         * @desc Adds an error message to the log
-         * @param {String} message Error message
-         * @param {String} data Error data
-         * @param {String} title Error title
-         * @memberof Services.logger
-         */
-        function error(message, data, title) {
-            toastr.error(message, title);
-            $log.error('Error: ' + message, data);
-        }
-
-        /**
          * @namespace info
          * @desc Adds an info message to the log
          * @param {String} message Info message
@@ -55,8 +43,13 @@
          * @memberof Services.logger
          */
         function info(message, data, title) {
-            toastr.info(message, title);
-            $log.info('Info: ' + message, data);
+			// Log to the console
+			$log.info('Info: ' + message, data);
+
+			if (service.showToasts) {
+				// Show a toast
+				toastr.info(message, title);
+			}
         }
 
         /**
@@ -68,8 +61,13 @@
          * @memberof Services.logger
          */
         function success(message, data, title) {
-            toastr.success(message, title);
+			// Log to the console
             $log.info('Success: ' + message, data);
+
+			if (service.showToasts) {
+				// Show a toast
+				toastr.success(message, title);
+			}
         }
 
         /**
@@ -81,8 +79,31 @@
          * @memberof Services.logger
          */
         function warning(message, data, title) {
-            toastr.warning(message, title);
+			// Log to the console
             $log.warn('Warning: ' + message, data);
+
+			if (service.showToasts) {
+				// Show a toast
+				toastr.warning(message, title);
+			}
+        }
+
+        /**
+         * @namespace error
+         * @desc Adds an error message to the log
+         * @param {String} message Error message
+         * @param {String} data Error data
+         * @param {String} title Error title
+         * @memberof Services.logger
+         */
+        function error(message, data, title) {
+			// Log to the console
+            $log.error('Error: ' + message, data);
+
+			if (service.showToasts) {
+				// Show a toast
+				toastr.error(message, title);
+			}
         }
     }
 })();
