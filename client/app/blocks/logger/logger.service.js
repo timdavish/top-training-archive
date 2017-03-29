@@ -9,25 +9,21 @@
         .module('blocks.logger')
         .factory('logger', logger);
 
-    logger.$inject = ['$log', 'toastr'];
+    logger.$inject = ['$log'];
 
     /**
      * @namespace logger
      * @desc Logger used by entire app
      * @memberof Services
      */
-    function logger($log, toastr) {
+    function logger($log) {
         var service = {
-            showToasts: false,
-
 			// Message types
-            info: info,
-            success: success,
-            warning: warning,
-			error: error,
-
-            // straight to console; bypass toastr
-            log: $log.log
+			log: $log.log, // Log normally
+            info: info, // Log an info
+            success: success, // Log a success
+            warning: warning, // Log a warning
+			error: error, // Log an error
         };
 
         return service;
@@ -42,14 +38,8 @@
          * @param {String} title Info title
          * @memberof Services.logger
          */
-        function info(message, data, title) {
-			// Log to the console
+        function info(message, data) {
 			$log.info('Info: ' + message, data);
-
-			if (service.showToasts) {
-				// Show a toast
-				toastr.info(message, title);
-			}
         }
 
         /**
@@ -60,14 +50,8 @@
          * @param {String} title Success title
          * @memberof Services.logger
          */
-        function success(message, data, title) {
-			// Log to the console
+        function success(message, data) {
             $log.info('Success: ' + message, data);
-
-			if (service.showToasts) {
-				// Show a toast
-				toastr.success(message, title);
-			}
         }
 
         /**
@@ -78,14 +62,8 @@
          * @param {String} title Warning title
          * @memberof Services.logger
          */
-        function warning(message, data, title) {
-			// Log to the console
+        function warning(message, data) {
             $log.warn('Warning: ' + message, data);
-
-			if (service.showToasts) {
-				// Show a toast
-				toastr.warning(message, title);
-			}
         }
 
         /**
@@ -96,14 +74,8 @@
          * @param {String} title Error title
          * @memberof Services.logger
          */
-        function error(message, data, title) {
-			// Log to the console
+        function error(message, data) {
             $log.error('Error: ' + message, data);
-
-			if (service.showToasts) {
-				// Show a toast
-				toastr.error(message, title);
-			}
         }
     }
 })();
