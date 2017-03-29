@@ -1,3 +1,3 @@
-# Top Training
+# TopTraining
 
-Copyright © Top Training 2017. All Rights Reserved
+Copyright © TopTraining 2017. All Rights Reserved
