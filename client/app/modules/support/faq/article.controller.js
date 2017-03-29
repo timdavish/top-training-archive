@@ -9,22 +9,56 @@
         .module('support.faq')
         .controller('ArticleController', ArticleController);
 
-    ArticleController.$inject = ['articleId'];
+    ArticleController.$inject = ['$q', 'articleId', 'logger'];
 
     /**
      * @namespace ArticleController
      * @desc Article controller
      * @memberof Controllers
      */
-    function ArticleController(articleId) {
+    function ArticleController($q, articleId, logger) {
         var vm = this;
 
-        vm.articleSource = 'client/app/modules/support/faq/articles/' + articleId + '.html';
-
+		vm.setArticle = setArticle;
         vm.getArticle = getArticle;
 
-        /* Functions */
+		activate();
 
+		/* Functions */
+
+		/**
+         * @name activate
+         * @desc Activates the view and controller
+         * @memberof Controllers.ArticleController
+         */
+		function activate() {
+			// Promises that need to be resolved to activate
+			var promises = [
+				setArticle()
+			];
+
+			return $q.all(promises)
+				.then(activateComplete);
+
+			function activateComplete() {
+				logger.info('Activated article view and controller');
+			}
+		}
+
+		/**
+         * @name setArticle
+         * @desc Sets the article source
+         * @memberof Controllers.ContactController
+         */
+		function setArticle() {
+			vm.articleSource = 'client/app/modules/support/faq/articles/' + articleId + '.html';
+		}
+
+		/**
+         * @name getArticle
+         * @desc Gets the article source
+         * @memberof Controllers.ContactController
+         */
         function getArticle() {
             return vm.articleSource;
         }

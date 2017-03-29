@@ -9,15 +9,35 @@
         .module('support.faq')
         .controller('FAQController', FAQController);
 
-    FAQController.$inject = [];
+    FAQController.$inject = ['$q', 'logger'];
 
     /**
      * @namespace FAQController
      * @desc FAQ controller
      * @memberof Controllers
      */
-    function FAQController() {
+    function FAQController($q, logger) {
         var vm = this;
 
+		activate();
+
+		/* Functions */
+
+		/**
+         * @name activate
+         * @desc Activates the view and controller
+         * @memberof Controllers.FAQController
+         */
+		function activate() {
+			// Promises that need to be resolved to activate
+			var promises = [];
+
+			return $q.all(promises)
+				.then(activateComplete);
+
+			function activateComplete() {
+				logger.info('Activated faq view and controller');
+			}
+		}
     }
 })();

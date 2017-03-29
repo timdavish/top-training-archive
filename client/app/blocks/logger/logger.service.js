@@ -18,6 +18,10 @@
      */
     function logger($log) {
         var service = {
+			// Set whether to show logs or not
+			showLogs: true,
+			showInfoLogs: true,
+
 			// Message types
 			log: $log.log, // Log normally
             info: info, // Log an info
@@ -35,11 +39,12 @@
          * @desc Adds an info message to the log
          * @param {String} message Info message
          * @param {String} data Info data
-         * @param {String} title Info title
          * @memberof Services.logger
          */
         function info(message, data) {
-			$log.info('Info: ' + message, data);
+			if (service.showLogs && service.showInfoLogs) {
+				$log.info('Info: ' + message, data ? 'Data: ' + data : '');
+			}
         }
 
         /**
@@ -47,11 +52,12 @@
          * @desc Adds a success message Successto the log
          * @param {String} message Success message
          * @param {String} data Success data
-         * @param {String} title Success title
          * @memberof Services.logger
          */
         function success(message, data) {
-            $log.info('Success: ' + message, data);
+			if (service.showLogs) {
+	            $log.info('Success: ' + message, data ? 'Data: ' + data : '');
+			}
         }
 
         /**
@@ -59,11 +65,12 @@
          * @desc Adds a warning message to the log
          * @param {String} message Warning message
          * @param {String} data Warning data
-         * @param {String} title Warning title
          * @memberof Services.logger
          */
         function warning(message, data) {
-            $log.warn('Warning: ' + message, data);
+			if (service.showLogs) {
+	            $log.warn('Warning: ' + message, data ? 'Data: ' + data : '');
+			}
         }
 
         /**
@@ -71,11 +78,12 @@
          * @desc Adds an error message to the log
          * @param {String} message Error message
          * @param {String} data Error data
-         * @param {String} title Error title
          * @memberof Services.logger
          */
         function error(message, data) {
-            $log.error('Error: ' + message, data);
+			if (service.showLogs) {
+	            $log.error('Error: ' + message, data ? 'Data: ' + data : '');
+			}
         }
     }
 })();

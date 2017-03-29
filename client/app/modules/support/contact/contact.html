@@ -20,7 +20,7 @@
             <!-- /Menu -->
 
             <!-- Contact form -->
-            <form class="col-md-9 row fix-form">
+            <form ng-submit="vm.sendRequest()" class="col-md-9 row fix-form">
 
                 <div class="col-md-12 page-header">
                     <h3>Contact TopTraining</h3>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="text" name="form[phone]" required="required"
+                    <input type="text" name="form[phone]"
                         id="phone" class="form-control" placeholder="123-456-7890"
                         ng-model="vm.phone" />
                 </div>
