@@ -48,6 +48,11 @@
 			}
 		}
 
+		/**
+         * @name setGeneralArticles
+         * @desc Sets the articles for the general section
+         * @memberof Controllers.FAQController
+         */
 		function setGeneralArticles() {
 			vm.generalArticles.push(
 				{ name: 'What is TopTraining?', link: 'what-is-toptraining'},
@@ -55,17 +60,23 @@
 			);
 		}
 
+		/**
+         * @name setClientArticles
+         * @desc Sets the articles for the client section
+         * @memberof Controllers.FAQController
+         */
 		function setClientArticles() {
 			vm.clientArticles.push(
-				{ name: 'What is TopTraining?', link: 'what-is-toptraining'},
-				{ name: 'How does TopTraining keep me safe?', link: 'what-is-toptrainingasdf'}
 			);
 		}
 
+		/**
+         * @name setTrainerArticles
+         * @desc Sets the articles for the trainer section
+         * @memberof Controllers.FAQController
+         */
 		function setTrainerArticles() {
 			vm.trainerArticles.push(
-				{ name: 'What is TopTraining?', link: 'what-is-toptraining'},
-				{ name: 'How does TopTraining keep me safe?', link: 'what-is-toptrainingasdf'}
 			);
 		}
     }
