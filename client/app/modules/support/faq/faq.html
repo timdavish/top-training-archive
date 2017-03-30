@@ -19,7 +19,7 @@
             </div>
             <!-- /Menu -->
 
-            <!-- Contact form -->
+            <!-- FAQ -->
             <div class="col-md-9 row fix-form">
 
                 <div class="col-md-12 page-header">
@@ -30,8 +30,8 @@
                 <div class='col-md-12'>
                     <div class='search-box'>
                         <form class='search-form'>
-                            <input class='form-control' placeholder="Search for your issue" type='text'>
-                                <button class='btn btn-link search-btn'>
+                            <input ng-model="searchText" class='form-control' placeholder="Search for your issue" type='text' />
+                            <button class='btn btn-link search-btn'>
                                 <i class='glyphicon glyphicon-search'></i>
                             </button>
                         </form>
@@ -43,30 +43,66 @@
                 <div class="col-md-12">
                     <div class="panel-group" id="faq-accordian">
 
-                        <div class="panel panel-default">
+						<!-- General -->
+						<div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title">Clients (Athletes and Parents)</h4>
+                                <h4 class="panel-title">Common General Questions</h4>
                             </div>
 
                             <div id="faq-clients-collapse" class="panel-collapse collapse in">
                                 <div class="panel-body">
 
-                                    <ul class="">
-                                        <li><h4>FAQ</h4></li>
-                                        <li><a href="/#/support/faq/articles/what-is-top-training" class="btn btn-link">What is Top Training?</a></li>
+                                    <ul class="faq-list" ng-repeat="article in vm.generalArticles | filter:searchText">
+										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
                                     </ul>
 
                                 </div>
                             </div>
-
                         </div>
+						<!-- /General -->
+
+						<!-- Clients -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Clients (Athletes & Parents)</h4>
+                            </div>
+
+                            <div id="faq-clients-collapse" class="panel-collapse collapse in">
+                                <div class="panel-body">
+
+									<ul class="faq-list" ng-repeat="article in vm.clientArticles | filter:searchText">
+										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+						<!-- /Clients -->
+
+						<!-- Trainers -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Trainers</h4>
+                            </div>
+
+                            <div id="faq-clients-collapse" class="panel-collapse collapse in">
+                                <div class="panel-body">
+
+									<ul class="faq-list" ng-repeat="article in vm.trainerArticles | filter:searchText">
+										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+						<!-- /Trainers -->
 
                     </div>
                 </div>
                 <!-- /Accordian -->
 
             </div>
-            <!-- /Contact form -->
+            <!-- /FAQ -->
 
         </div>
     </div>
