@@ -16,16 +16,7 @@
   "scripts": {
     "build": "npm install && bower install",
     "start": "node ./bin/start",
-    "stop": "taskkill /im node.exe /F",
-    "test": "npm run test:client",
-    "pretest": "echo 'Testing...'",
-    "posttest": "echo 'Testing completed.'",
-    "prelint": "echo 'Linting...'",
-    "lint": "jshint server/server.js",
-    "postlint": "echo 'Linting completed.'",
-    "pretest:client": "echo 'Testing (client)...'",
-    "test:client": "mocha client/tests -u bdd -R spec",
-    "posttest:client": "echo 'Testing (client) completed.'"
+    "stop": "taskkill /im node.exe /F"
   },
   "devDependencies": {
     "jasmine-core": "^2.5.2",
