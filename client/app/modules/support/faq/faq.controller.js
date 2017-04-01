@@ -35,9 +35,9 @@
 		function activate() {
 			// Promises that need to be resolved to activate
 			var promises = [
-				setGeneralArticles(),
-				setClientArticles(),
-				setTrainerArticles()
+				getGeneralArticles(),
+				getClientArticles(),
+				getTrainerArticles()
 			];
 
 			return $q.all(promises)
@@ -49,34 +49,36 @@
 		}
 
 		/**
-         * @name setGeneralArticles
-         * @desc Sets the articles for the general section
+         * @name getGeneralArticles
+         * @desc Gets the articles for the general section
          * @memberof Controllers.FAQController
          */
-		function setGeneralArticles() {
+		function getGeneralArticles() {
 			vm.generalArticles.push(
-				{ name: 'What is TopTraining?', link: 'what-is-toptraining'},
-				{ name: 'How does TopTraining keep me safe?', link: 'what-is-toptrainingasdf'}
+				{ name: 'What is TopTraining?', link: 'what-is-toptraining', keywords: []},
+				{ name: 'How does TopTraining keep me safe?', link: 'what-is-toptrainingasdf', keywords: ['safe', 'safety']}
 			);
 		}
 
 		/**
-         * @name setClientArticles
-         * @desc Sets the articles for the client section
+         * @name getClientArticles
+         * @desc Gets the articles for the client section
          * @memberof Controllers.FAQController
          */
-		function setClientArticles() {
+		function getClientArticles() {
 			vm.clientArticles.push(
+				{ name: 'How do I book a training session?', link: 'what-is-toptraining', keywords: ['trainer', 'package', 'purchase']}
 			);
 		}
 
 		/**
-         * @name setTrainerArticles
-         * @desc Sets the articles for the trainer section
+         * @name getTrainerArticles
+         * @desc Gets the articles for the trainer section
          * @memberof Controllers.FAQController
          */
-		function setTrainerArticles() {
+		function getTrainerArticles() {
 			vm.trainerArticles.push(
+				{ name: 'Trainer Expectations', link: 'what-is-toptraining', keywords: ['training', 'guidelines']}
 			);
 		}
     }

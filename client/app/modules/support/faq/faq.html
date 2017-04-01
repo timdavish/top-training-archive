@@ -44,15 +44,19 @@
                     <div class="panel-group" id="faq-accordian">
 
 						<!-- General -->
-						<div class="panel panel-default">
+						<div class="panel panel-default" ng-show="generalFiltered.length > 0">
                             <div class="panel-heading">
-                                <h4 class="panel-title">Common General Questions</h4>
+								<h4 class="panel-title">
+	                                <a data-toggle="collapse" data-target="#faq-general-collapse">
+										Common General Questions
+									</a>
+								</h4>
                             </div>
 
-                            <div id="faq-clients-collapse" class="panel-collapse collapse in">
+                            <div id="faq-general-collapse" class="panel-collapse collapse in">
                                 <div class="panel-body">
 
-                                    <ul class="faq-list" ng-repeat="article in vm.generalArticles | filter:searchText">
+                                    <ul class="faq-list" ng-repeat="article in vm.generalArticles | filter:searchText as generalFiltered">
 										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
                                     </ul>
 
@@ -62,15 +66,21 @@
 						<!-- /General -->
 
 						<!-- Clients -->
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" ng-show="clientFiltered.length > 0">
                             <div class="panel-heading">
-                                <h4 class="panel-title">Clients (Athletes & Parents)</h4>
+
+                                <h4 class="panel-title">
+									<a data-toggle="collapse" data-target="#faq-clients-collapse">
+										Clients (Athletes & Parents)
+									</a>
+								</h4>
+
                             </div>
 
                             <div id="faq-clients-collapse" class="panel-collapse collapse in">
                                 <div class="panel-body">
 
-									<ul class="faq-list" ng-repeat="article in vm.clientArticles | filter:searchText">
+									<ul class="faq-list" ng-repeat="article in vm.clientArticles | filter:searchText as clientFiltered">
 										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
                                     </ul>
 
@@ -80,15 +90,21 @@
 						<!-- /Clients -->
 
 						<!-- Trainers -->
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" ng-show="trainerFiltered.length > 0">
                             <div class="panel-heading">
-                                <h4 class="panel-title">Trainers</h4>
+
+                                <h4 class="panel-title">
+									<a data-toggle="collapse" data-target="#faq-trainers-collapse">
+										Trainers
+									</a>
+								</h4>
+
                             </div>
 
-                            <div id="faq-clients-collapse" class="panel-collapse collapse in">
+                            <div id="faq-trainers-collapse" class="panel-collapse collapse in">
                                 <div class="panel-body">
 
-									<ul class="faq-list" ng-repeat="article in vm.trainerArticles | filter:searchText">
+									<ul class="faq-list" ng-repeat="article in vm.trainerArticles | filter:searchText as trainerFiltered">
 										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
                                     </ul>
 
@@ -96,6 +112,12 @@
                             </div>
                         </div>
 						<!-- /Trainers -->
+
+						<!-- No results -->
+						<h4 ng-if="generalFiltered.length === 0 && clientFiltered.length === 0 && trainerFiltered.length === 0">
+							No results for "{{ searchText }}"
+						</h4>
+						<!-- /No results -->
 
                     </div>
                 </div>
