@@ -12,6 +12,15 @@
     padding-left: 15px;
 }
 
+/* FAQ */
+.faq-list {
+	margin: 0;
+	padding: 0;
+}
+.faq-list > li {
+	list-style: none;
+}
+
 /* SEARCH BOX */
 .search-box {
     display: inline-block;
@@ -56,3 +65,4 @@
     background-color: #8FBE00;
 }
 /* /SEARCH BOX */
+/* /FAQ */

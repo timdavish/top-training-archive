@@ -39,7 +39,7 @@
 
                     // Reset return state and its params
                     $rootScope.returnToState = null;
-                    $rootScope.returnToStateParams = null
+                    $rootScope.returnToStateParams = null;
                 // Otherwise just go home
                 } else {
                     $state.go('home');

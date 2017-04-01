@@ -17,6 +17,9 @@
 /* /TESTING */
 
 /* GENERAL */
+* {
+    max-width: 100%;
+}
 html {
     overflow-y: scroll; /* force scrollbar */
 }
@@ -264,7 +267,7 @@ h6 {
     padding: 70px 7%;
     text-align: center;
     color: black;
-    background: url(../images/banner3.jpg) no-repeat center center;
+    background: url(../images/banner1.jpg) no-repeat center center;
     background-size: cover;
 }
 .intro-message {
@@ -282,9 +285,10 @@ h6 {
     font-size: 5em;
 }
 .intro-divider {
-    width: 400px;
+    max-width: 50%;
     border-top: 1px solid black;
     border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-radius: 15px;
 }
 .intro-message > h3 {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.2);

@@ -1,2 +1,36 @@
 
-<ng-include src="vm.articleSource" class="ng-cloak" ng-cloak></ng-include>
+<!-- FAQ template -->
+
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+
+            <!-- Menu -->
+            <div class="col-md-3 no-padding">
+                <div class="list-group page-header">
+                    <div class="list-group-item list-group-item-header">Get help with TopTraining</div>
+                    <a href="/#/support/contact" class="list-group-item">Contact TopTraining</a>
+                    <a href="/#/support/faq" class="list-group-item active">Frequently Asked Questions</a>
+                    <a href="/#/support/howwework" class="list-group-item">How We Work</a>
+                    <a href="/#/support/testimonials" class="list-group-item">Testimonials</a>
+                </div>
+
+                <p class="post-menu-text"><small>If you can't find what you're looking for, <a href="/#/support/contact">contact us here.</a></small></p>
+            </div>
+            <!-- /Menu -->
+
+            <!-- Article -->
+            <div class="col-md-9 row fix-form">
+
+                <div class="col-md-12 page-header">
+                    <h3></h3>
+                </div>
+
+				<ng-include src="vm.articleSource" class="ng-cloak" ng-cloak></ng-include>
+
+            </div>
+            <!-- /Article -->
+
+        </div>
+    </div>
+</div>

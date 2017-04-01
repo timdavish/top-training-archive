@@ -8,7 +8,7 @@
         <meta name="description" content="InsertDescriptionHere">
         <meta name="author" content="Tim Davis">
 
-        <title>Top Training</title>
+        <title>TopTraining</title>
 
 
         <!-- inject-vendor:css -->
@@ -55,8 +55,6 @@
         <script src="/bower_components/interactjs/dist/interact.min.js"></script>
         <script src="/bower_components/rrule/lib/rrule.js"></script>
 
-        <script src="/bower_components/toastr/toastr.min.js"></script>
-
         <!-- Google Maps -->
         <script src="https://maps.googleapis.com/maps/api/js?libraries=places,visualization&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA"></script>
         <script src="/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
@@ -75,10 +73,11 @@
         <script src="/client/app/core/core.constants.js"></script>
         <!-- Services -->
         <script src="/client/app/core/services/authentication.service.js"></script>
+		<script src="/client/app/core/services/event.service.js"></script>
         <script src="/client/app/core/services/geolocation.service.js"></script>
-        <script src="/client/app/core/services/search.service.js"></script>
-        <script src="/client/app/core/services/event.service.js"></script>
         <script src="/client/app/core/services/posts.service.js"></script>
+		<script src="/client/app/core/services/search.service.js"></script>
+		<script src="/client/app/core/services/support.service.js"></script>
         <!-- Directives -->
         <script src="/client/app/core/directives/edit-pane.directive.js"></script>
         <script src="/client/app/core/directives/collapse.directive.js"></script>
@@ -97,6 +96,7 @@
         <script src="/client/app/blocks/exception/exception.module.js"></script>
         <!-- Logger -->
         <script src="/client/app/blocks/logger/logger.module.js"></script>
+		<script src="/client/app/blocks/logger/logger.service.js"></script>
         <!-- Router -->
         <script src="/client/app/blocks/router/router.module.js"></script>
         <script src="/client/app/blocks/router/router.provider.js"></script>

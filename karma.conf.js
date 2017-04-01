@@ -26,7 +26,6 @@ module.exports = function(config) {
 			'bower_components/moment/min/moment.min.js',
 			'bower_components/interactjs/dist/interact.min.js',
 			'bower_components/rrule/lib/rrule.js',
-			'bower_components/toastr/toastr.min.js',
 			'https://maps.googleapis.com/maps/api/js?libraries=places,visualization&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA',
 			'bower_components/ngmap/build/scripts/ng-map.min.js',
 			'bower_components/angular-modal-service/dst/angular-modal-service.min.js',

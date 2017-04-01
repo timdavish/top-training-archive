@@ -1,14 +1,14 @@
 {
-  "name": "top_training",
-  "version": "0.0.1",
+  "name": "toptraining",
+  "version": "1.0.0",
   "description": "An app that connects trainers to trainees.",
   "authors": [
     "Tim Davis"
   ],
-  "homepage": "https://github.com/timdavish/Top_Training",
+  "homepage": "https://www.TopTraining.pro",
   "repository": {
     "type": "git",
-    "url": "https://github.com/timdavish/Top_Training.git"
+    "url": "https://github.com/timdavish/TopTraining.git"
   },
   "ignore": [
     "node_modules",
@@ -30,7 +30,6 @@
     "jquery": "2.1.1",
     "moment": "2.17.1",
     "ngmap": "^1.17.8",
-    "rrule": "2.1.0",
-    "toastr": "^2.1.3"
+    "rrule": "2.1.0"
   }
 }
