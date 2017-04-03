@@ -1,5 +1,5 @@
 /**
- * Router Helper
+ * Router Monitor
  * @namespace Router
  */
 (function() { // IIFE structure
@@ -7,16 +7,16 @@
 
     angular
         .module('blocks.router')
-        .run(redirector);
+        .run(monitor);
 
-    redirector.$inject = ['$rootScope', '$state', 'authentication'];
+    monitor.$inject = ['$rootScope', '$state', 'authentication'];
 
     /**
-     * @namespace redirector
+     * @namespace monitor
      * @desc Handles redirecting to/from login when login is required on a page
      * @memberof Router
      */
-    function redirector($rootScope, $state, authentication) {
+    function monitor($rootScope, $state, authentication) {
 		// Whether or not we are already planning to return from a login
 		$rootScope.returning = false;
 
@@ -33,10 +33,11 @@
          * @param {object} toParams The params of the state we are changing to
          * @param {object} fromState The state we are changing from
          * @param {object} fromParams The params of the state we are changing from
-         * @memberof Router.redirector
+         * @memberof Router.monitor
          */
         function stateChangeStartHandler(event, toState, toParams, fromState, fromParams) {
-            // If login required & you're logged out, redirect to login
+            // Handle redirects
+			// If login required & you're logged out, redirect to login
             if (toState.requiresLoggedIn && !authentication.isLoggedIn()) {
                 // If we want to redirect back to auth-required state after login
 				if (toState.wantToReturn) {
