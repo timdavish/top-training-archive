@@ -19,8 +19,7 @@
     function ArticleController($q, articleId, logger) {
         var vm = this;
 
-		vm.setArticle = setArticle;
-        vm.getArticle = getArticle;
+		vm.articleSource = '';
 
 		activate();
 
@@ -53,14 +52,5 @@
 		function setArticle() {
 			vm.articleSource = 'client/app/modules/support/faq/articles/' + articleId + '.html';
 		}
-
-		/**
-         * @name getArticle
-         * @desc Gets the article source
-         * @memberof Controllers.ContactController
-         */
-        function getArticle() {
-            return vm.articleSource;
-        }
     }
 })();
