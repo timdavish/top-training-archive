@@ -38,18 +38,18 @@
 			var deferred = $q.defer();
 
 			$http.post('/support/sendRequest', params)
-				.then(sendRequestComplete)
-				.catch(sendRequestCatch);
+				.then(sendRequestSuccess)
+				.catch(sendRequestFail);
 
 			return deferred.promise;
 
 			/* Functions */
 
-			function sendRequestComplete(result) {
+			function sendRequestSuccess(result) {
 				deferred.resolve(result);
 			}
 
-			function sendRequestCatch() {
+			function sendRequestFail() {
 				deferred.reject('sendRequest failed');
 			}
         }
@@ -63,19 +63,19 @@
 			var deferred = $q.defer();
 
 			$http.get('client/app/modules/support/faq/articles/articles.json')
-				.then(getArticlesComplete)
-				.catch(getArticlesCatch);
+				.then(getArticlesSuccess)
+				.catch(getArticlesFail);
 
 			return deferred.promise;
 
 			/* Functions */
 
-			function getArticlesComplete(result) {
+			function getArticlesSuccess(result) {
 				var data = result.data;
 				deferred.resolve(data);
 			}
 
-			function getArticlesCatch() {
+			function getArticlesFail() {
 				deferred.reject('getArticles failed');
 			}
         }
