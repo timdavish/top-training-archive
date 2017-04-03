@@ -21,7 +21,6 @@
 			// Contact
             sendRequest: sendRequest,
 			// FAQ
-			articles: [],
 			getArticles: getArticles
         };
 
@@ -38,7 +37,7 @@
         function sendRequest(params) {
 			var deferred = $q.defer();
 
-			$http.post('', params)
+			$http.post('/support/sendRequest', params)
 				.then(sendRequestComplete)
 				.catch(sendRequestCatch);
 
