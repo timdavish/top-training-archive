@@ -9,6 +9,7 @@
         /* Support sub-modules */
         'support.about',
         'support.contact',
-        'support.faq'
+        'support.faq',
+		'support.legal'
     ]);
 })();

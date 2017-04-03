@@ -9,16 +9,20 @@
         .module('app.core')
         .factory('support', support);
 
-    support.$inject = ['$q', '$http', 'logger'];
+    support.$inject = ['$q', '$http'];
 
     /**
      * @namespace support
      * @desc Service factory for support
      * @memberof Services
      */
-    function support($q, $http, logger) {
+    function support($q, $http) {
         var service = {
-            sendRequest: sendRequest
+			// Contact
+            sendRequest: sendRequest,
+			// FAQ
+			articles: [],
+			getArticles: getArticles
         };
 
         return service;
@@ -34,25 +38,47 @@
         function sendRequest(params) {
 			var deferred = $q.defer();
 
-			return $http.post('', params)
+			$http.post('', params)
 				.then(sendRequestComplete)
 				.catch(sendRequestCatch);
 
+			return deferred.promise;
+
 			/* Functions */
 
-			function sendRequestComplete(data) {
-				logger.success('Contact sendRequest promise resolved');
-
-				deferred.resolve(data);
+			function sendRequestComplete(result) {
+				deferred.resolve(result);
 			}
 
 			function sendRequestCatch() {
-				logger.error('Contact sendRequest promise rejected');
+				deferred.reject('sendRequest failed');
+			}
+        }
 
-				deferred.reject('Error sending contact request');
+		/**
+         * @namespace getArticles
+         * @desc Gets articles from article.json
+         * @memberof Services.support
+         */
+        function getArticles() {
+			var deferred = $q.defer();
+
+			$http.get('client/app/modules/support/faq/articles/articles.json')
+				.then(getArticlesComplete)
+				.catch(getArticlesCatch);
+
+			return deferred.promise;
+
+			/* Functions */
+
+			function getArticlesComplete(result) {
+				var data = result.data;
+				deferred.resolve(data);
 			}
 
-			return deferred;
+			function getArticlesCatch() {
+				deferred.reject('getArticles failed');
+			}
         }
     }
 })();

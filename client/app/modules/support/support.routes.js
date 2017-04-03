@@ -54,8 +54,8 @@
             {
                 state: 'faq/articles',
                 config: {
-                    url: '/support/faq/articles/{id}',
-                    templateUrl: 'client/app/modules/support/faq/article.html',
+                    url: '/support/faq/article/articles/{id}',
+                    templateUrl: 'client/app/modules/support/faq/article/article.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
                     title: 'Article',

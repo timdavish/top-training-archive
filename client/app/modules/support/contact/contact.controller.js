@@ -30,18 +30,28 @@
          * @desc Activates the view and controller
          * @memberof Controllers.ContactController
          */
-		function activate() {
-			// Promises that need to be resolved to activate
-			var promises = [];
+		 function activate() {
+ 			// Promises that need to be resolved to activate
+ 			var promises = [];
 
-			return $q.all(promises)
-				.then(activateComplete);
+ 			return $q.all(promises)
+ 				.then(activateSuccess)
+ 				.catch(activateFail);
 
-			function activateComplete() {
-				logger.info('Activated contact view and controller');
-			}
-		}
+ 			function activateSuccess() {
+ 				logger.success('Activated contact view and ctrl');
+ 			}
 
+ 			function activateFail(error) {
+ 				logger.error('Failed to activate contact view and ctrl', error);
+ 			}
+ 		}
+
+		/**
+         * @name sendRequest
+         * @desc Attempts to send support request
+         * @memberof Controllers.ContactController
+         */
 		function sendRequest() {
 			var params = {
 				firstname: vm.firstname,
@@ -52,11 +62,16 @@
 				content: vm.content
 			};
 
-			return support.sendRequest(params)
-				.then(sendRequestComplete);
+			support.sendRequest(params)
+				.then(sendRequestSuccess)
+				.catch(sendRequestFail);
 
-			function sendRequestComplete(data) {
+			function sendRequestSuccess(data) {
 				logger.info('Finished sending support request', data);
+			}
+
+			function sendRequestFail(error) {
+				logger.error('Failed to send support request', error);
 			}
 		}
     }

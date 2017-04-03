@@ -1,0 +1,20 @@
+{
+	"general": [
+		{
+			"title": "What is TopTraining?", "link": "what-is-toptraining", "keywords": []
+		},
+		{
+			"title": "How does TopTraining keep me safe?", "link": "what-is-toptrainingasdf", "keywords": ["safe", "safety"]
+		}
+	],
+	"client": [
+		{
+			"title": "How do I book a training session?", "link": "what-is-toptraining", "keywords": ["trainer", "package", "purchase"]
+		}
+	],
+	"trainer": [
+		{
+			"title": "Trainer Expectations", "link": "what-is-toptraining", "keywords": ["training", "guidelines"]
+		}
+	]
+}

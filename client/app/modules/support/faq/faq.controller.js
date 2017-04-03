@@ -9,14 +9,14 @@
         .module('support.faq')
         .controller('FAQController', FAQController);
 
-    FAQController.$inject = ['$q', 'logger'];
+    FAQController.$inject = ['$q', 'support', 'logger'];
 
     /**
      * @namespace FAQController
      * @desc FAQ controller
      * @memberof Controllers
      */
-    function FAQController($q, logger) {
+    function FAQController($q, support, logger) {
         var vm = this;
 
 		vm.generalArticles = [];
@@ -35,51 +35,50 @@
 		function activate() {
 			// Promises that need to be resolved to activate
 			var promises = [
-				getGeneralArticles(),
-				getClientArticles(),
-				getTrainerArticles()
+				getArticles()
 			];
 
 			return $q.all(promises)
-				.then(activateComplete);
+				.then(activateSuccess)
+				.catch(activateFail);
 
-			function activateComplete() {
-				logger.info('Activated faq view and controller');
+			function activateSuccess() {
+				logger.success('Activated FAQ view and ctrl');
+			}
+
+			function activateFail(error) {
+				logger.error('Failed to activate FAQ view and ctrl', error);
 			}
 		}
 
 		/**
-         * @name getGeneralArticles
-         * @desc Gets the articles for the general section
+         * @name getArticles
+         * @desc Gets all the articles for the FAQ
          * @memberof Controllers.FAQController
          */
-		function getGeneralArticles() {
-			vm.generalArticles.push(
-				{ name: 'What is TopTraining?', link: 'what-is-toptraining', keywords: []},
-				{ name: 'How does TopTraining keep me safe?', link: 'what-is-toptrainingasdf', keywords: ['safe', 'safety']}
-			);
-		}
+		function getArticles() {
+			var deferred = $q.defer();
 
-		/**
-         * @name getClientArticles
-         * @desc Gets the articles for the client section
-         * @memberof Controllers.FAQController
-         */
-		function getClientArticles() {
-			vm.clientArticles.push(
-				{ name: 'How do I book a training session?', link: 'what-is-toptraining', keywords: ['trainer', 'package', 'purchase']}
-			);
-		}
+			support.getArticles()
+				.then(getArticlesSuccess)
+				.catch(getArticlesFail);
 
-		/**
-         * @name getTrainerArticles
-         * @desc Gets the articles for the trainer section
-         * @memberof Controllers.FAQController
-         */
-		function getTrainerArticles() {
-			vm.trainerArticles.push(
-				{ name: 'Trainer Expectations', link: 'what-is-toptraining', keywords: ['training', 'guidelines']}
-			);
+			return deferred.promise;
+
+			/* Functions */
+
+			function getArticlesSuccess(data) {
+				// Set our articles
+				vm.generalArticles = data.general;
+				vm.clientArticles = data.client;
+				vm.trainerArticles = data.trainer;
+				deferred.resolve();
+
+			}
+
+			function getArticlesFail(error) {
+				deferred.reject(error);
+			}
 		}
     }
 })();
