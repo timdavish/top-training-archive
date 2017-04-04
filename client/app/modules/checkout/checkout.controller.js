@@ -32,7 +32,7 @@
             price: 25.00
         };
         vm.subtotal = vm.package.price * vm.package.count;
-        vm.tax = vm.package.price * .095;
+        vm.tax = vm.package.price * 0.095;
         var step = 1;
         vm.selectedStep = 1;
 
@@ -78,8 +78,8 @@
          * @desc Handles clicking on the contact panel continue button
          * @memberof Controllers.CheckoutController
          */
-        function contactContinue() {
-            if (validContactInput()) {
+        function contactContinue(isValid) {
+            if (isValid) {
                 step = 2;
 
                 paymentPanelShow();
@@ -156,15 +156,6 @@
 
             toHide.collapse('hide');
             toShow.collapse('show');
-        }
-
-        /**
-         * @name validContactInput
-         * @desc Helper function: validates contact information panel fields
-         * @memberof Controllers.CheckoutController
-         */
-        function validContactInput() {
-            return (vm.name && !vm.name === '' && vm.number && !vm.number === '' || true);
         }
 
         /**

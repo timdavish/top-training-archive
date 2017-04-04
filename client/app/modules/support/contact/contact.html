@@ -59,8 +59,9 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" name="form[phone]"
-                        id="phone" class="form-control" placeholder="123-456-7890"
+                    <input type="tel" pattern="^\d{3}-?\d{3}-?\d{4}$" name="form[phone]"
+                        title="Phone number (e.g. 123-456-7890)"
+						id="phone" class="form-control" placeholder="123-456-7890"
                         ng-model="vm.phone" />
                 </div>
 

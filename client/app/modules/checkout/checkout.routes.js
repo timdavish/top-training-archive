@@ -31,7 +31,7 @@
                 state: 'checkout',
                 config: {
                     url: '/checkout/packages/{id}',
-                    templateUrl: 'client/app/modules/checkout/checkout.ejs',
+                    templateUrl: 'client/app/modules/checkout/checkout.html',
                     controller: 'CheckoutController',
                     controllerAs: 'vm',
                     title: 'Checkout',
