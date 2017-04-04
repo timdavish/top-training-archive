@@ -54,6 +54,7 @@ h6 {
 .clearR { clear: right; }
 .center { text-align: center; }
 .no-padding { padding: 0px; }
+.no-margin { margin: 0px; }
 .fix-form {
     margin-left: 0px;
     margin-bottom: 10px;

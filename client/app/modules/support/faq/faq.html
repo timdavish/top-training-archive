@@ -23,7 +23,7 @@
             <div class="col-md-9 row fix-form">
 
                 <div class="col-md-12 page-header">
-                    <h3>F<small class="lead">requently</small> A<small class="lead">sked</small> Q<small class="lead">uestions</small></h3>
+                    <h3>Frequently Asked Questions</h3>
                 </div>
 
                 <!-- Search -->
@@ -57,7 +57,7 @@
                                 <div class="panel-body">
 
                                     <ul class="faq-list" ng-repeat="article in vm.generalArticles | filter:searchText as generalFiltered">
-										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
+										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.title }}</a></li>
                                     </ul>
 
                                 </div>
@@ -81,7 +81,7 @@
                                 <div class="panel-body">
 
 									<ul class="faq-list" ng-repeat="article in vm.clientArticles | filter:searchText as clientFiltered">
-										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
+										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.title }}</a></li>
                                     </ul>
 
                                 </div>
@@ -105,7 +105,7 @@
                                 <div class="panel-body">
 
 									<ul class="faq-list" ng-repeat="article in vm.trainerArticles | filter:searchText as trainerFiltered">
-										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.name }}</a></li>
+										<li><a href="/#/support/faq/articles/{{ article.link }}" class="btn btn-link">{{ article.title }}</a></li>
                                     </ul>
 
                                 </div>

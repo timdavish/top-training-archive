@@ -23,24 +23,32 @@
 
                                 <div id="checkout-collapse1" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                        <p class="form-text text-muted"><small>Please provide some information so that your trainer can easily get in contact with you.</small></p>
+										<form name="contactForm" ng-submit="vm.contactContinue(contactForm.$valid)"
+											  class="no-padding">
+	                                        <p class="form-text text-muted fix-form"><small>Please provide some information so that your trainer can easily get in contact with you.</small></p>
 
-                                        <div class="form-group fix-form">
-                                            <label class="col-form-label" for="name">Athlete Name</label>
-                                            <input type="text" id="name" class="form-control form-control-auto" placeholder=""
-                                                ng-model="vm.name" />
-                                        </div>
+											<!-- Contact -->
+	                                        <div class="form-group fix-form">
+	                                            <label class="col-form-label" for="name">Athlete Name</label>
+	                                            <input type="text" id="name" class="form-control form-control-auto" placeholder=""
+	                                                ng-model="vm.name" required="required" />
+	                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="number">Phone Number</label>
-                                            <input type="text" id="number" class="form-control form-control-auto" placeholder="123-456-7890"
-                                                ng-model="vm.number" />
-                                        </div>
+	                                        <div class="form-group">
+	                                            <label class="form-control-label" for="phone">Phone Number</label>
+	                                            <input type="tel" pattern="^\d{3}-?\d{3}-?\d{4}$" required="required"
+													title="Phone number (e.g. 123-456-7890)"
+													id="phone" class="form-control form-control-auto" placeholder="123-456-7890"
+	                                                ng-model="vm.phone" />
+	                                        </div>
 
-                                        <button type="button" class="btn btn-primary btn-md"
-                                                ng-click="vm.contactContinue()">
-                                            Continue
-                                        </button>
+											<!-- Submit -->
+											<div class="form-group no-margin">
+							                    <input type="submit" class="btn btn-primary btn-md"
+							                            value="Continue" ng-disabled="">
+							                    </input>
+							                </div>
+										</form>
                                     </div>
                                 </div>
                             </div>

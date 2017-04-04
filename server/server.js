@@ -29,7 +29,7 @@ app.set('views', path.join(__dirname, './../client'));
 app.set('view engine', 'ejs');
 
 // Other app setup
-//app.use(favicon(path.join(__dirname, 'public/images/', 'favicon.ico'))); // uncomment after placing your favicon in /public/images
+//app.use(favicon(path.join(__dirname, 'client/images/', 'favicon.ico'))); // uncomment after placing your favicon in /public/images
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,6 +42,7 @@ app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/events', require('./routes/events'));
 app.use('/posts', require('./routes/posts'));
+app.use('/support', require('./routes/support'));
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

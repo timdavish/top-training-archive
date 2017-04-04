@@ -9,16 +9,19 @@
         .module('app.core')
         .factory('support', support);
 
-    support.$inject = ['$q', '$http', 'logger'];
+    support.$inject = ['$q', '$http'];
 
     /**
      * @namespace support
      * @desc Service factory for support
      * @memberof Services
      */
-    function support($q, $http, logger) {
+    function support($q, $http) {
         var service = {
-            sendRequest: sendRequest
+			// Contact
+            sendRequest: sendRequest,
+			// FAQ
+			getArticles: getArticles
         };
 
         return service;
@@ -34,25 +37,47 @@
         function sendRequest(params) {
 			var deferred = $q.defer();
 
-			return $http.post('', params)
-				.then(sendRequestComplete)
-				.catch(sendRequestCatch);
+			$http.post('/support/sendRequest', params)
+				.then(sendRequestSuccess)
+				.catch(sendRequestFail);
+
+			return deferred.promise;
 
 			/* Functions */
 
-			function sendRequestComplete(data) {
-				logger.success('Contact sendRequest promise resolved');
+			function sendRequestSuccess(result) {
+				deferred.resolve(result);
+			}
 
+			function sendRequestFail() {
+				deferred.reject('sendRequest failed');
+			}
+        }
+
+		/**
+         * @namespace getArticles
+         * @desc Gets articles from article.json
+         * @memberof Services.support
+         */
+        function getArticles() {
+			var deferred = $q.defer();
+
+			$http.get('client/app/modules/support/faq/articles/articles.json')
+				.then(getArticlesSuccess)
+				.catch(getArticlesFail);
+
+			return deferred.promise;
+
+			/* Functions */
+
+			function getArticlesSuccess(result) {
+				var data = result.data;
 				deferred.resolve(data);
 			}
 
-			function sendRequestCatch() {
-				logger.error('Contact sendRequest promise rejected');
-
-				deferred.reject('Error sending contact request');
+			function getArticlesFail() {
+				deferred.reject('getArticles failed');
 			}
-
-			return deferred;
         }
     }
 })();

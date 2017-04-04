@@ -20,7 +20,8 @@
             <!-- /Menu -->
 
             <!-- Contact form -->
-            <form ng-submit="vm.sendRequest()" class="col-md-9 row fix-form">
+            <form name="contactForm" ng-submit="vm.sendRequest(contactForm.$valid)"
+				  class="col-md-9 row fix-form">
 
                 <div class="col-md-12 page-header">
                     <h3>Contact TopTraining</h3>
@@ -52,14 +53,15 @@
                 <!-- Contact -->
                 <div class="col-md-6 form-group">
                     <label for="email">Email</label>
-                    <input type="text" name="form[email]" required="required"
+                    <input type="email" name="form[email]" required="required"
                         id="email" class="form-control" placeholder="jane@email.com"
                         ng-model="vm.email" />
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="text" name="form[phone]"
-                        id="phone" class="form-control" placeholder="123-456-7890"
+                    <input type="tel" pattern="^\d{3}-?\d{3}-?\d{4}$" name="form[phone]"
+                        title="Phone number (e.g. 123-456-7890)"
+						id="phone" class="form-control" placeholder="123-456-7890"
                         ng-model="vm.phone" />
                 </div>
 
@@ -86,7 +88,7 @@
                 </div> -->
                 <div class="col-md-12">
                     <input type="submit" class="btn btn-primary btn-md"
-                            value="Send request">
+                            value="Send request" ng-disabled="">
                     </input>
                 </div>
             </form>

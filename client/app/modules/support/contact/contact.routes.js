@@ -1,19 +1,19 @@
 /**
- * Checkout routes
+ * Contact routes
  * @namespace Configurations
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
 
     angular
-        .module('app.checkout')
+        .module('support.contact')
         .run(configureStates);
 
     configureStates.$inject = ['router'];
 
     /**
      * @namespace configureStates
-     * @desc Begins configuration for user routes
+     * @desc Begins configuration for layout routes
      * @memberof Configurations
      */
     function configureStates(router) {
@@ -22,21 +22,21 @@
 
     /**
      * @namespace getStates
-     * @desc User routes
+     * @desc Contact routes
      * @memberof Configurations
      */
     function getStates() {
         return [
             {
-                state: 'checkout',
+                state: 'contact',
                 config: {
-                    url: '/checkout/packages/{id}',
-                    templateUrl: 'client/app/modules/checkout/checkout.html',
-                    controller: 'CheckoutController',
+                    url: '/support/contact',
+                    templateUrl: 'client/app/modules/support/contact/contact.html',
+                    controller: 'ContactController',
                     controllerAs: 'vm',
-                    title: 'Checkout',
+                    title: 'Contact',
                     wantToReturn: true, // Return to this state after login
-                    requiresLoggedIn: true // Require login at this state
+                    requiresLoggedIn: false // Require login at this state
                 }
             }
         ];

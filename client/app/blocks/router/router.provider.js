@@ -1,5 +1,5 @@
 /**
- * Router Helper
+ * Router Provider
  * @namespace Router
  */
 (function() { // IIFE structure
