@@ -40,6 +40,8 @@
  				.then(activateSuccess)
  				.catch(activateFail);
 
+			/* Functions */
+
  			function activateSuccess() {
  				logger.success('Activated contact view and ctrl');
  			}
@@ -86,14 +88,24 @@
          * @desc Attempts to send support request
          * @memberof Controllers.ContactController
          */
-		function sendRequest() {
+		function sendRequest(isValid) {
 			var params = getRequestParams();
 
-			support.sendRequest(params)
-				.then(sendRequestSuccess)
-				.catch(sendRequestFail);
+			// Validate form
+			if (isValid) {
+				support.sendRequest(params)
+					.then(sendRequestSuccess)
+					.catch(sendRequestFail);
+			// Set an error message
+			} else {
+				logger.warning('Form didn\'t pass validation');
+			}
+
+			/* Functions */
 
 			function sendRequestSuccess(data) {
+				// Reset contact form
+				nullifyRequestParams();
 				logger.info('Finished sending support request', data);
 			}
 
@@ -116,6 +128,20 @@
 				subject: vm.subject,
 				content: vm.content
 			};
+		}
+
+		/**
+         * @name nullifyRequestParams
+         * @desc Reset contact form
+         * @memberof Controllers.ContactController
+         */
+		function nullifyRequestParams() {
+			vm.firstname = null;
+			vm.lastname = null;
+			vm.email = null;
+			vm.phone = null;
+			vm.subject = null;
+			vm.content = null;
 		}
     }
 })();
