@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('TrainerProfileController', TrainerProfileController);
 
-    TrainerProfileController.$inject = ['$state', 'authentication', 'ModalService'];
+    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'location', 'ModalService', 'logger'];
 
     /**
      * @namespace TrainerProfileController
      * @desc Trainer profile controller
      * @memberof Controllers
      */
-    function TrainerProfileController($state, authentication, ModalService) {
+    function TrainerProfileController($q, $state, authentication, location, ModalService, logger) {
         var vm = this;
 
         // vm.model = authentication.currentUser();
@@ -24,6 +24,30 @@
             usertype: "trainer",
             trainerInfo: {
                 rating: 4.34,
+				locations: [
+					{
+						priority: 1,
+						formatted_address: "E Yesler Way, Seattle, WA",
+						geometry: {
+							type: "Point",
+							coordinates: [
+								-122.3,
+								47.62
+							]
+						}
+					},
+					{
+						priority: 2,
+						formatted_address: "Atlantic Ave, Seattle, WA",
+						geometry: {
+							type: "Point",
+							coordinates: [
+								-122.32,
+								47.6
+							]
+						}
+					}
+				],
                 reviews: [
                     {
                         author: "Tom Riddle",
@@ -40,22 +64,6 @@
                         title: "An Alright Trainer",
                         content: "Wasn't the greatest or the worst trainer I've ever had. Blah blah blah blah blah blah blah blah",
                         date: "January 2, 2017"
-                    }
-                ],
-                locations: [
-                    {
-                        type: "Point",
-                        coordinates: [
-                            -122.3,
-                            47.6
-                        ]
-                    },
-                    {
-                        type: "Point",
-                        coordinates: [
-                            -122.32,
-                            47.6
-                        ]
                     }
                 ],
                 sports: [
@@ -177,7 +185,7 @@
         vm.editable = true; // Want to show edit buttons
         vm.panes = {}; // For edit modals
 
-        // console.log(vm.model);
+        // console.log(vm.model.trainerInfo.locations);
 
         vm.openModal = openModal;
 
@@ -185,7 +193,41 @@
 
         /* Functions */
 
-        function activate() {
+		/**
+         * @name activate
+         * @desc Activates the view and controller
+         * @memberof Controllers.TrainerProfileController
+         */
+		function activate() {
+			// Promises that need to be resolved to activate
+			var promises = [
+				setMapMarkers(),
+				setProfilePanes()
+			];
+
+			return $q.all(promises)
+				.then(activateSuccess)
+				.catch(activateFail);
+
+			/* Functions */
+
+			function activateSuccess() {
+				logger.success('Activated trainer profile view and ctrl');
+			}
+
+			function activateFail(error) {
+				logger.error('Failed to activate trainer profile view and ctrl', error);
+			}
+		}
+
+		/**
+         * @name setProfilePanes
+         * @desc Sets the panes for profile editing
+         * @memberof Controllers.TrainerProfileController
+         */
+        function setProfilePanes() {
+			var deferred = $q.defer();
+
             // Set profile panes
             vm.panes = {
                 summary: 'summary',
@@ -194,7 +236,34 @@
                 credentials: 'credentials',
                 services: 'services'
             };
+
+			// No matter what, this promise is resolved
+			deferred.resolve();
+
+			return deferred.promise;
         }
+
+		/**
+         * @name setMapMarkers
+         * @desc Sets the markers on the map
+         * @memberof Controllers.TrainerProfileController
+         */
+		function setMapMarkers() {
+			var deferred = $q.defer();
+
+			if (vm.model && vm.model.trainerInfo.locations) {
+				vm.model.trainerInfo.locations.forEach(function(location) {
+					vm.mapMarkers += '&markers=color:0xffce49';
+					vm.mapMarkers += '|label:' + location.priority;
+					vm.mapMarkers += '|' + location.geometry.coordinates[1] + ',' + location.geometry.coordinates[0];
+				});
+				deferred.resolve();
+			} else {
+				deferred.reject('Error getting trainer locations');
+			}
+
+			return deferred.promise;
+		}
 
         function openModal(pane, data) {
             var templateUrl;
