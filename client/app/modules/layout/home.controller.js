@@ -9,20 +9,24 @@
         .module('app.layout')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$q', '$window', 'authentication', 'searchService', 'geolocationService'];
+    HomeController.$inject = ['$q', '$window', 'authentication', 'searchService', 'location', 'logger'];
 
     /**
      * @namespace HomeController
      * @desc Home controller
      * @memberof Controllers
      */
-    function HomeController($q, $window, authentication, searchService, geolocationService) {
+    function HomeController($q, $window, authentication, searchService, location, logger) {
         var vm = this;
 
         vm.isLoggedIn = authentication.isLoggedIn;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
         vm.params = {};
-        vm.autocompleteOptions = {};
+		// Set our autocomplete options for this page
+		vm.autocompleteOptions = {
+			types: ['geocode'],
+			componentRestrictions: {country: 'US'}
+		};
 
         vm.search = search;
         vm.redirectTo = redirectTo;
@@ -31,32 +35,80 @@
 
         /* Functions */
 
-        /**
+		/**
          * @name activate
-         * @desc Activates the controller
+         * @desc Activates the view and controller
          * @memberof Controllers.HomeController
          */
-        function activate() {
-            // Set our autocomplete options for this page
-            vm.autocompleteOptions = {
-                types: ['geocode'],
-                componentRestrictions: {country: 'US'}
-            };
+		 function activate() {
+ 			// Promises that need to be resolved to activate
+ 			var promises = [
+				setSearchLocation()
+			];
 
-            geolocationService.getCurrentLocation()
-                .then(applyCurrentLocation)
-                .catch(applyClientLocation);
+ 			return $q.all(promises)
+ 				.then(activateSuccess)
+ 				.catch(activateFail);
 
-            function applyCurrentLocation(location) {
-                vm.params.lat = location.coords.latitude;
-                vm.params.long = location.coords.longitude;
-            }
+			/* Functions */
 
-            function applyClientLocation(e) {
-                // if (vm.isLoggedIn()) {
-                //     vm.params.location = authentication.currentUser().clientInfo.zipcode;
-                // }
-            }
+ 			function activateSuccess() {
+ 				logger.success('Activated home view and ctrl');
+ 			}
+
+ 			function activateFail(error) {
+ 				logger.error('Failed to activate home view and ctrl', error);
+ 			}
+ 		}
+
+        /**
+         * @name setSearchLocation
+         * @desc Attempts to set search location
+         * @memberof Controllers.HomeController
+         */
+        function setSearchLocation() {
+			var deferred = $q.defer();
+
+			tryBrowserLocation()
+				.catch(tryClientLocation);
+
+			return deferred.promise;
+        }
+
+		function tryBrowserLocation() {
+			var deferred = $q.defer();
+
+			console.log('trying browser location');
+			location.getBrowserLocation()
+                .then(reverseGeocodeLocation)
+				.catch(function(error) {
+					deferred.reject(error);
+				});
+
+			console.log('finished browser location');
+			return deferred.promise;
+
+			function reverseGeocodeLocation(loc) {
+				var lat = loc.coords.latitude;
+				var long = loc.coords.longitude;
+
+				// Set search params (change this later)
+				vm.params.lat = lat;
+				vm.params.long = long;
+
+				location.reverseGeocode(lat, long)
+					.then(function(loc) {
+						vm.params.location = loc;
+						deferred.resolve(loc);
+					});
+			}
+		}
+
+        function tryClientLocation() {
+			console.log('trying client location');
+            // if (vm.isLoggedIn()) {
+            //     vm.params.location = authentication.currentUser().clientInfo.zipcode;
+            // }
         }
 
         /**

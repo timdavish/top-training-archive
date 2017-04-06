@@ -15,6 +15,7 @@
 
 	"globals": {
 		"angular": false,
+		"google": false,
 		"inject": false,
 		"compileRouteTemplateWithController": false
 	}
