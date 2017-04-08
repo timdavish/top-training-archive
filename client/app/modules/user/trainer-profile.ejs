@@ -83,18 +83,12 @@
                         </div>
 
                         <div class="pane-content">
-                            <div class="map-wrap">
-                                <map zoom-to-include-markers="true">
-                                    <marker ng-repeat="location in vm.model.trainerInfo.locations"
-                                        position="{{location.coordinates[1]}},{{location.coordinates[0]}}">
-                                        <!-- title="{{location.title}}"> -->
-                                    </marker>
-                                </map>
-                            </div>
+                            <!-- <div class="map-wrap"> -->
+							<img src="https://maps.googleapis.com/maps/api/staticmap?size=318x318&maptype=roadmap&{{ vm.mapMarkers }}"
+								 alt="Staticmap?size=300x300&maptype=roadmap&zoom=13&{{ vm.mapMarkers }}">
 
-                            <div ng-repeat="location in vm.model.trainerInfo.locations">
-                                <span>{{ location }}</span>
-                                <span google-reverse-geocode ng-model="location" lat="location.coordinates[1]" long="location.coordinates[0]"></span>
+                            <div ng-repeat="location in vm.model.trainerInfo.locations | orderBy: '+priority'">
+                                <p>{{ location.priority }}: {{ location.formatted_address }}</p>
                             </div>
                         </div>
 

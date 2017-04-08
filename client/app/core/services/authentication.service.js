@@ -68,6 +68,7 @@
          * @namespace getPayload
          * @desc Retrieves the payload from the session token
          * @param {token} token The token to retrieve the payload from
+		 * @return {object} Payload object
          * @memberof Services.authentication
          */
         function getPayload(token) {
@@ -78,24 +79,38 @@
          * @namespace signUp
          * @desc Signs up a new user
          * @param {user} user The user info to sign up with
+		 * @return {Promise} Resolved/rejected promise with token data
          * @memberof Services.authentication
          */
         function signUp(user) {
-            return $http.post('/users/signUp', user).success(function(data) {
-                service.saveToken(data.token);
-            });
+            return $http.post('/users/signUp', user)
+				.then(signUpSuccess);
+
+			/* Functions */
+
+			function signUpSuccess(data) {
+				// Save user token
+				service.saveToken(data.data.token);
+			}
         }
 
         /**
          * @namespace logIn
          * @desc Logs in an existing user
          * @param {user} user The user to log in
+		 * @return {Promise} Resolved/rejected promise with token data
          * @memberof Services.authentication
          */
         function logIn(user) {
-            return $http.post('/users/login', user).success(function(data) {
-                service.saveToken(data.token);
-            });
+            return $http.post('/users/login', user)
+				.then(logInSuccess);
+
+			/* Functions */
+
+			function logInSuccess(data) {
+				// Save user token
+				service.saveToken(data.data.token);
+			}
         }
 
         /**
@@ -110,6 +125,7 @@
         /**
          * @namespace isLoggedIn
          * @desc Checks if a user is logged in
+		 * @return {boolean} Returns true if user is logged in, else false
          * @memberof Services.authentication
          */
         function isLoggedIn() {
@@ -127,21 +143,22 @@
         /**
          * @namespace currentUser
          * @desc Retrieve the logged in user's data from session token payload
-         * @return {object} object with all user data
+         * @return {object} Object with all user data
          * @memberof Services.authentication
          */
         function currentUser() {
             if (service.isLoggedIn()) {
                 var token = service.getToken();
                 var payload = service.getPayload(token);
-
-                return {
-                    id: payload._id,
+				var currentUser = {
+					id: payload._id,
                     usertype: payload.usertype,
                     contact: payload.contact,
                     data: payload.data,
                     info: payload.usertype === 'client' ? payload.clientInfo : payload.trainerInfo
-                };
+				};
+
+                return currentUser;
             }
         }
     }

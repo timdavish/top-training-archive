@@ -34,45 +34,63 @@
         /**
          * @name addEvent
          * @desc Create a new event
-         * @memberof Services.eventService
-         * @param {number} userId The id of the trainer who created the event
-         * @param {event} event The event data
-         * @return Success status
+         * @param {object} event The event data
+		 * @return {Promise} Resolved/rejected promise
+		 * @memberof Services.eventService
          */
         function addEvent(event) {
             var userId = event.trainer;
-            return $http.post('/events/addEvent/' + userId, event, {
-                headers: { Authorization: 'Bearer ' + authentication.getToken() }
-            }).success(function(data) {
-                service.events.push(data);
-            });
+			var headers = {
+                headers: {
+					Authorization: 'Bearer ' + authentication.getToken()
+				}
+            };
+
+            return $http.post('/events/addEvent/' + userId, event, headers)
+				.then(addEventSuccess);
+
+			/* Functions */
+
+			function addEventSuccess(data) {
+				service.events.push(data);
+			}
         }
 
         /**
          * @name getEvents
          * @desc Get all events regardless of archived status (unsorted)
-         * @memberof Services.eventService
-         * @return Success status
+		 * @return {Promise} Resolved/rejected promise with event data
+		 * @memberof Services.eventService
          */
         function getEvents() {
-            return $http.get('/events/getEvents').success(function(events) {
-                // Translate JSON'd dates back to moment dates for the calendar's sake
-                translateDates(events);
+            return $http.get('/events/getEvents')
+				.then(getEventsSuccess);
+
+			/* Functions */
+
+			function getEventsSuccess(data) {
+				// Translate JSON'd dates back to moment dates for the calendar's sake
+                translateDates(data);
 
                 // Keep angular copy of data updated
-                angular.copy(events, service.events);
-            });
+                angular.copy(data, service.events);
+			}
         }
 
         /**
          * @name getEventsBySport
          * @desc Get all events grouped and sorted by sport
-         * @memberof Services.eventService
-         * @return Success status
+		 * @return {Promise} Resolved/rejected promise with event data
+		 * @memberof Services.eventService
          */
         function getEventsBySport() {
-            return $http.get('/events/getEventsBySport').success(function(data) {
-                // Translate JSON'd dates back to moment dates for the calendar's sake
+            return $http.get('/events/getEventsBySport')
+				.then(getEventsBySportSuccess);
+
+			/* Functions */
+
+			function getEventsBySportSuccess(data) {
+				// Translate JSON'd dates back to moment dates for the calendar's sake
                 data[0].personal.forEach(function(sport) {
                     translateDates(sport.events);
                 });
@@ -82,15 +100,14 @@
 
                 // Keep angular copy of data updated
                 angular.copy(data[0], service.eventsBySport);
-            });
+			}
         }
 
         /**
          * @name translateDates
-         * @desc Translate JSON'd dates back to moment dates for the calendar's sake
-         * @memberof Services.eventService
+         * @desc Helper function to translate JSON'd dates back to moment dates for the calendar
          * @param {events} events The events to translate dates for
-         * @return Success status
+		 * @memberof Services.eventService
          */
         function translateDates(events) {
             events.forEach(function(event) {
@@ -102,31 +119,37 @@
         /**
          * @name getEvent
          * @desc Get a single event by id
-         * @memberof Services.eventService
          * @param {number} eventId The id of the event to get
-         * @return Success status
+		 * @return {Promise} Resolved/rejected promise with event data
+		 * @memberof Services.eventService
          */
         function getEvent(eventId) {
-            return $http.get('/events/getEvent/' + eventId).then(function(res) {
-                // Translate JSON'd moment date into readable format
-                res.data.startsAt = moment(res.data.startsAt).format('h:mm a, MMMM Do, YYYY');
-                res.data.endsAt = moment(res.data.endsAt).format('h:mm a, MMMM Do, YYYY');
-                return res.data;
-            });
+            return $http.get('/events/getEvent/' + eventId)
+				.then(getEventSuccess);
+
+			/* Functions */
+
+			function getEventSuccess(data) {
+				// Translate JSON'd moment date into readable format
+                data.data.startsAt = moment(data.data.startsAt).format('h:mm a, MMMM Do, YYYY');
+                data.data.endsAt = moment(data.data.endsAt).format('h:mm a, MMMM Do, YYYY');
+                return data.data;
+			}
         }
 
         /**
          * @name signUpEvent
          * @desc Sign a student up for an event
-         * @memberof Services.eventService
          * @param {event} event The event being signed up for
-         * @return Success status
+		 * @return {Promise} Resolved/rejected promise with event data
+		 * @memberof Services.eventService
          */
         function signUpEvent(event) {
             var userId = authentication.currentUser()._id;
-            return $http.put('/events/signUpEvent/' + event._id + '/' + userId, null, {
+			var headers = {
                 headers: { Authorization: 'Bearer ' + authentication.getToken() }
-            });
+            };
+            return $http.put('/events/signUpEvent/' + event._id + '/' + userId, null, headers);
         }
     }
 })();

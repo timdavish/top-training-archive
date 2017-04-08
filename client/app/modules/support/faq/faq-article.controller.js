@@ -40,6 +40,8 @@
  				.then(activateSuccess)
  				.catch(activateFail);
 
+			/* Functions */
+
  			function activateSuccess() {
  				logger.success('Activated FAQ article view and ctrl');
  			}

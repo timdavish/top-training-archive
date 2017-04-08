@@ -98,7 +98,7 @@
 					.catch(sendRequestFail);
 			// Set an error message
 			} else {
-				logger.warning('Form didn\'t pass validation');
+				sendRequestFail('Form didn\'t pass validation');
 			}
 
 			/* Functions */

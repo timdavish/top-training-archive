@@ -42,6 +42,8 @@
 				.then(activateSuccess)
 				.catch(activateFail);
 
+			/* Functions */
+
 			function activateSuccess() {
 				logger.success('Activated FAQ view and ctrl');
 			}
