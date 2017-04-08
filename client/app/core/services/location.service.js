@@ -31,25 +31,32 @@
         /**
          * @namespace getCurrentLocation
          * @desc Attempts to get the user's location from their browser
-         * @return {promise} Promise with location object or error
+         * @return {promise} Resolved/rejected promise with location object or error
          * @memberof Services.location
          */
         function getBrowserLocation() {
-            var deferred = $q.defer();
+			var deferred = $q.defer();
 
             if (!$window.navigator.geolocation) {
                 deferred.reject('Geolocation not supported.');
             } else {
                 $window.navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        deferred.resolve(position);
-                    },
-                    function(error) {
-                        deferred.reject(error);
-                    });
+					getBrowserLocationSuccess, // Success
+					getBrowserLocationFail // Fail
+				);
             }
 
             return deferred.promise;
+
+			/* Functions */
+
+			function getBrowserLocationSuccess(position) {
+				deferred.resolve(position);
+			}
+
+			function getBrowserLocationFail(error) {
+				deferred.reject(error);
+			}
         }
 
 		/**
@@ -57,14 +64,13 @@
          * @desc Turns a lat/long into a formatted address
 		 * @param {double} lat Latitude of location to reverse geocode
 		 * @param {double} long Longitude of location to reverse geocode
-         * @return {promise} Promise with formatted address or error
+         * @return {promise} Resolved/rejected promise with formatted address or error
          * @memberof Services.location
          */
         function reverseGeocode(lat, long) {
 			var deferred = $q.defer();
 
 			if (!geocoder) {
-				console.log('geocoder created');
 				geocoder = new google.maps.Geocoder();
 			}
 

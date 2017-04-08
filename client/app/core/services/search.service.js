@@ -9,14 +9,14 @@
         .module('app.core')
         .factory('searchService', searchService);
 
-    searchService.$inject = ['$http', 'authentication'];
+    searchService.$inject = ['$http'];
 
     /**
      * @namespace searchService
      * @desc Service factory for searching
      * @memberof Services
      */
-    function searchService($http, authentication) {
+    function searchService($http) {
         var service = {
             searchResults: {},
             trainer: {},
@@ -33,17 +33,22 @@
         /**
          * @name searchTrainers
          * @desc Searches for trainers by sport and location
-         * @memberof Services.searchService
          * @param {Object} params The params to search with
-         * @return Success status
+		 * @return {promise} Resolved/rejected promise
+		 * @memberof Services.searchService
          */
         function searchTrainers(params) {
-            return $http.post('/users/getTrainers', params).success(function(searchResults) {
-                // Keep angular copy of data updated
-                service.sport = params.sport.toLowerCase();
-                service.location = params.location;
-                angular.copy(searchResults[0], service.searchResults);
-            });
+            return $http.post('/users/getTrainers', params)
+				.then(searchTrainersSuccess);
+
+			/* Functions */
+
+			function searchTrainersSuccess(data) {
+				// Keep angular copy of data updated
+				service.sport = params.sport.toLowerCase();
+				service.location = params.location;
+				angular.copy(data[0], service.searchResults);
+			}
         }
     }
 })();
