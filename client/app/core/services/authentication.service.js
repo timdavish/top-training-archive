@@ -90,7 +90,7 @@
 
 			function signUpSuccess(data) {
 				// Save user token
-				service.saveToken(data.token);
+				service.saveToken(data.data.token);
 			}
         }
 
@@ -109,7 +109,7 @@
 
 			function logInSuccess(data) {
 				// Save user token
-				service.saveToken(data.token);
+				service.saveToken(data.data.token);
 			}
         }
 

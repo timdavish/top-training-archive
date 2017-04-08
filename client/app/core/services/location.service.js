@@ -78,7 +78,6 @@
 
 			geocoder.geocode({ 'latLng': latlng }, function (results, status) {
 				if (status === google.maps.GeocoderStatus.OK && results && results[1]) {
-					console.log(results);
 					deferred.resolve(results[1].formatted_address);
 				} else {
 					deferred.reject(status);

@@ -32,11 +32,19 @@
          */
         function signUpTrainer() {
             vm.user.usertype = "trainer";
-            authentication.signUp(vm.user).error(function(error) {
-                vm.error = error;
-            }).then(function() {
-                $state.go('home');
-            });
+            authentication.signUp(vm.user)
+				.then(signUpTrainerSuccess)
+				.catch(signUpTrainerFail);
+
+			/* Functions */
+
+			function signUpTrainerSuccess() {
+				$state.go('home');
+			}
+
+			function signUpTrainerFail(error) {
+				vm.error = error;
+			}
         }
     }
 })();

@@ -29,10 +29,14 @@
          * @memberof Controllers.LogInController
          */
         function logIn() {
-            authentication.logIn(vm.user).error(function(error) {
-                vm.error = error;
-            }).then(function() {
-                // If we have return state
+            authentication.logIn(vm.user)
+				.then(logInSuccess)
+				.catch(logInFail);
+
+			/* Functions */
+
+			function logInSuccess() {
+				// If we have return state
                 if ($rootScope.returnState && $rootScope.returnStateParams) {
                     // Go to return state
                     $state.go($rootScope.returnState.name, $rootScope.returnStateParams);
@@ -44,7 +48,11 @@
                 } else {
                     $state.go('home');
                 }
-            });
+			}
+
+			function logInFail(error) {
+				vm.error = error;
+			}
         }
     }
 })();

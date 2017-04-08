@@ -32,10 +32,14 @@
          */
         function signUpClient() {
             vm.user.usertype = "client";
-            authentication.signUp(vm.user).error(function(error) {
-                vm.error = error;
-            }).then(function() {
-                // If we have return state
+            authentication.signUp(vm.user)
+				.then(signUpClientSuccess)
+				.catch(signUpClientFail);
+
+			/* Functions */
+
+			function signUpClientSuccess() {
+				// If we have return state
                 if ($rootScope.returnState && $rootScope.returnStateParams) {
                     // Go to return state
                     $state.go($rootScope.returnState.name, $rootScope.returnStateParams);
@@ -47,7 +51,11 @@
                 } else {
                     $state.go('home');
                 }
-            });
+			}
+
+			function signUpClientFail(error) {
+				vm.error = error;
+			}
         }
     }
 })();

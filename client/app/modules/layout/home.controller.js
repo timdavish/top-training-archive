@@ -78,14 +78,12 @@
 		function tryBrowserLocation() {
 			var deferred = $q.defer();
 
-			console.log('trying browser location');
 			location.getBrowserLocation()
                 .then(reverseGeocodeLocation)
 				.catch(function(error) {
 					deferred.reject(error);
 				});
 
-			console.log('finished browser location');
 			return deferred.promise;
 
 			function reverseGeocodeLocation(loc) {
