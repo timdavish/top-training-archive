@@ -12,12 +12,12 @@
 		beforeEach(module('app'));
 
 		// Suite block
-		describe('State: log-in', function() {
+		describe('State: login', function() {
 			// Global variables inside this block
 			var $state,
 				$rootScope,
-				$httpBackend
-				state = 'log-in';
+				$httpBackend,
+				state = 'login';
 
 			// Inject dependencies
 			beforeEach(inject(function(_$state_, _$rootScope_, _$httpBackend_) {
@@ -37,16 +37,16 @@
 
 			// Test
 			it('should respond to URL', function() {
-				expect($state.href(state)).toEqual('#/log-in');
+				expect($state.href(state)).toEqual('#/login');
 			});
 		});
 
 		// Suite block
-		describe('State: sign-up-client', function() {
+		describe('State: signup-client', function() {
 			// Global variables inside this block
 			var $state,
 				$rootScope,
-				state = 'sign-up-client';
+				state = 'signup-client';
 
 			// Inject dependencies
 			beforeEach(inject(function(_$state_, _$rootScope_) {
@@ -65,16 +65,16 @@
 
 			// Test
 			it('should respond to URL', function() {
-				expect($state.href(state)).toEqual('#/sign-up-client');
+				expect($state.href(state)).toEqual('#/signup-client');
 			});
 		});
 
 		// Suite block
-		describe('State: sign-up-trainer', function() {
+		describe('State: signup-trainer', function() {
 			// Global variables inside this block
 			var $state,
 				$rootScope,
-				state = 'sign-up-trainer';
+				state = 'signup-trainer';
 
 			// Inject dependencies
 			beforeEach(inject(function(_$state_, _$rootScope_) {
@@ -93,7 +93,7 @@
 
 			// Test
 			it('should respond to URL', function() {
-				expect($state.href(state)).toEqual('#/sign-up-trainer');
+				expect($state.href(state)).toEqual('#/signup-trainer');
 			});
 		});
 

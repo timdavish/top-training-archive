@@ -1,5 +1,5 @@
 /**
- * Controller for sign-up-trainer.ejs
+ * Controller for signup-trainer.html
  * @namespace Controllers
  */
 (function() { // IIFE structure
