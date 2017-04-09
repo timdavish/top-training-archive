@@ -71,6 +71,16 @@
         <!-- Core Module -->
         <script src="/client/app/core/core.module.js"></script>
         <script src="/client/app/core/core.constants.js"></script>
+        <!-- Directives -->
+        <script src="/client/app/core/directives/collapse.directive.js"></script>
+        <script src="/client/app/core/directives/edit-pane.directive.js"></script>
+        <script src="/client/app/core/directives/equals.directive.js"></script>
+        <script src="/client/app/core/directives/google-auto-complete.directive.js"></script>
+        <script src="/client/app/core/directives/ng-enter.directive.js"></script>
+        <script src="/client/app/core/directives/star-rating.directive.js"></script>
+        <!-- Filters -->
+        <script src="/client/app/core/filters/capitalize-first.filter.js"></script>
+        <script src="/client/app/core/filters/number-round.filter.js"></script>
         <!-- Services -->
         <script src="/client/app/core/services/authentication.service.js"></script>
 		<script src="/client/app/core/services/event.service.js"></script>
@@ -78,16 +88,6 @@
         <script src="/client/app/core/services/posts.service.js"></script>
 		<script src="/client/app/core/services/search.service.js"></script>
 		<script src="/client/app/core/services/support.service.js"></script>
-        <!-- Directives -->
-        <script src="/client/app/core/directives/edit-pane.directive.js"></script>
-        <script src="/client/app/core/directives/collapse.directive.js"></script>
-        <script src="/client/app/core/directives/equals.directive.js"></script>
-        <script src="/client/app/core/directives/google-auto-complete.directive.js"></script>
-        <script src="/client/app/core/directives/ng-enter.directive.js"></script>
-        <script src="/client/app/core/directives/star-rating.directive.js"></script>
-        <!-- Filters -->
-        <script src="/client/app/core/filters/number-round.filter.js"></script>
-        <script src="/client/app/core/filters/capitalize-first.filter.js"></script>
 
         <!-- Blocks Module -->
         <script src="/client/app/blocks/blocks.module.js"></script>
@@ -139,31 +139,37 @@
 
         <!-- Support Module -->
         <script src="/client/app/modules/support/support.module.js"></script>
-        <!-- About Module -->
+        <!-- Support.about Module -->
         <script src="/client/app/modules/support/about/about.module.js"></script>
-        <!-- Contact Module -->
+        <!-- Support.contact Module -->
         <script src="/client/app/modules/support/contact/contact.module.js"></script>
 		<script src="/client/app/modules/support/contact/contact.routes.js"></script>
         <script src="/client/app/modules/support/contact/contact.controller.js"></script>
-        <!-- FAQ Module -->
+        <!-- Support.faq Module -->
         <script src="/client/app/modules/support/faq/faq.module.js"></script>
 		<script src="/client/app/modules/support/faq/faq.routes.js"></script>
         <script src="/client/app/modules/support/faq/faq.controller.js"></script>
         <script src="/client/app/modules/support/faq/faq-article.controller.js"></script>
-		<!-- Legal Module -->
+		<!-- Support.legal Module -->
 		<script src="/client/app/modules/support/legal/legal.module.js"></script>
 		<script src="/client/app/modules/support/legal/legal.routes.js"></script>
 
         <!-- User Module -->
         <script src="/client/app/modules/user/user.module.js"></script>
-        <script src="/client/app/modules/user/user.routes.js"></script>
-        <script src="/client/app/modules/user/log-in.controller.js"></script>
-        <script src="/client/app/modules/user/sign-up-client.controller.js"></script>
-        <script src="/client/app/modules/user/sign-up-trainer.controller.js"></script>
-        <script src="/client/app/modules/user/trainer-profile.controller.js"></script>
-        <script src="/client/app/modules/user/modals/summary-modal.controller.js"></script>
-        <script src="/client/app/modules/user/modals/credentials-modal.controller.js"></script>
-        <script src="/client/app/modules/user/modals/services-modal.controller.js"></script>
+        <!-- User.authentication Module -->
+		<script src="/client/app/modules/user/authentication/authentication.module.js"></script>
+		<script src="/client/app/modules/user/authentication/authentication.routes.js"></script>
+		<script src="/client/app/modules/user/authentication/login.js"></script>
+		<script src="/client/app/modules/user/authentication/signup-client.js"></script>
+		<script src="/client/app/modules/user/authentication/signup-trainer.js"></script>
+		<!-- User.profile Module -->
+		<script src="/client/app/modules/user/profile/profile.module.js"></script>
+		<script src="/client/app/modules/user/profile/profile.routes.js"></script>
+        <script src="/client/app/modules/user/profile/trainer-profile.js"></script>
+		<!-- User.profile edit -->
+		<script src="/client/app/modules/user/profile/modals/credentials-modal.js"></script>
+		<script src="/client/app/modules/user/profile/modals/services-modal.js"></script>
+        <script src="/client/app/modules/user/profile/modals/summary-modal.js"></script>
         <!-- endinject -->
     </head>
     <body ng-app="app" class="ng-cloak" ng-cloak>

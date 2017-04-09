@@ -1,5 +1,5 @@
 /**
- * Controller for trainer-profile.ejs
+ * Controller for trainer-profile.html
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -272,7 +272,7 @@
             var error;
 
             if (pane === vm.panes.summary) {
-                templateUrl = 'client/app/modules/user/modals/summary-modal.html';
+                templateUrl = 'client/app/modules/user/profile/modals/summary-modal.html';
                 controller = 'SummaryModalController';
                 inputs = {
                     summary: data.summary
@@ -282,14 +282,14 @@
             } else if (pane === vm.panes.packages) {
                 error = 'TODO: edit packages';
             } else if (pane === vm.panes.credentials) {
-                templateUrl = 'client/app/modules/user/modals/credentials-modal.html';
+                templateUrl = 'client/app/modules/user/profile/modals/credentials-modal.html';
                 controller = 'CredentialsModalController';
                 inputs = {
                     experience: data.credentials.experience,
                     school: data.credentials.school
                 };
             } else if (pane === vm.panes.services) {
-                templateUrl = 'client/app/modules/user/modals/services-modal.html';
+                templateUrl = 'client/app/modules/user/profile/modals/services-modal.html';
                 controller = 'ServicesModalController';
                 inputs = {
                     ages: data.services.ages,
