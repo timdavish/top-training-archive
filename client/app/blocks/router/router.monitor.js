@@ -49,13 +49,13 @@
 
 				// Prevent any state change events before manually changing state to login
 				event.preventDefault();
-                $state.go('log-in');
+                $state.go('login');
 				$rootScope.returning = false;
             }
 
 			// If we aren't already returning somewhere and
 			// If state is changing to login and we want to return to our fromState
-			if (!$rootScope.returning && toState.name === 'log-in' && fromState.wantToReturn) {
+			if (!$rootScope.returning && toState.name === 'login' && fromState.wantToReturn) {
 				// Save toState and its params
                 $rootScope.returnState = fromState;
                 $rootScope.returnStateParams = fromParams;

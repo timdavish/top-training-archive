@@ -1,19 +1,19 @@
 /**
- * User routes
+ * User.authentication routes
  * @namespace Configurations
  */
 (function() { // IIFE structure
     'use strict'; // Strict mode
 
     angular
-        .module('app.user')
+        .module('user.authentication')
         .run(configureStates);
 
     configureStates.$inject = ['router'];
 
     /**
      * @namespace configureStates
-     * @desc Begins configuration for user routes
+     * @desc Begins configuration for user.authentication routes
      * @memberof Configurations
      */
     function configureStates(router) {
@@ -28,10 +28,10 @@
     function getStates() {
         return [
             {
-                state: 'log-in',
+                state: 'login',
                 config: {
-                    url: '/log-in',
-                    templateUrl: 'client/app/modules/user/log-in.ejs',
+                    url: '/login',
+                    templateUrl: 'client/app/modules/user/authentication/login.html',
                     controller: 'LogInController',
                     controllerAs: 'vm',
                     title: 'Log In',
@@ -45,10 +45,10 @@
                 }
             },
             {
-                state: 'sign-up-client',
+                state: 'signup-client',
                 config: {
-                    url: '/sign-up-client',
-                    templateUrl: 'client/app/modules/user/sign-up-client.ejs',
+                    url: '/signup-client',
+                    templateUrl: 'client/app/modules/user/authentication/signup-client.html',
                     controller: 'SignUpClientController',
                     controllerAs: 'vm',
                     title: 'Client Sign Up',
@@ -62,10 +62,10 @@
                 }
             },
             {
-                state: 'sign-up-trainer',
+                state: 'signup-trainer',
                 config: {
-                    url: '/sign-up-trainer',
-                    templateUrl: 'client/app/modules/user/sign-up-trainer.ejs',
+                    url: '/signup-trainer',
+                    templateUrl: 'client/app/modules/user/authentication/signup-trainer.html',
                     controller: 'SignUpTrainerController',
                     controllerAs: 'vm',
                     title: 'Trainer Sign Up',
@@ -76,23 +76,6 @@
                             $state.go('home');
                         }
                     }]
-                }
-            },
-            {
-                state: 'trainer-profile',
-                config: {
-                    url: '/profile/trainer',
-                    templateUrl: 'client/app/modules/user/trainer-profile.ejs',
-                    controller: 'TrainerProfileController',
-                    controllerAs: 'vm',
-                    title: 'Profile',
-                    wantToReturn: true, // Return to this state after login
-                    requiresLoggedIn: true // Require login at this state
-                    // onEnter: ['$state', 'authentication', function($state, authentication) {
-                    //     if (!authentication.isLoggedIn()) {
-                    //         $state.go('home');
-                    //     }
-                    // }]
                 }
             }
         ];

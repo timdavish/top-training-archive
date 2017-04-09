@@ -1,5 +1,5 @@
 /**
- * Controller for log-in.ejs
+ * Controller for signup-client.html
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -7,35 +7,38 @@
 
     angular
         .module('app.user')
-        .controller('LogInController', LogInController);
+        .controller('SignUpClientController', SignUpClientController);
 
-    LogInController.$inject = ['$rootScope', '$state', 'authentication'];
+    SignUpClientController.$inject = ['$rootScope', '$state', 'authentication'];
 
     /**
-     * @namespace LogInController
-     * @desc LogIn controller
+     * @namespace SignUpClientController
+     * @desc SignUpClient controller
      * @memberof Controllers
      */
-    function LogInController($rootScope, $state, authentication) {
+    function SignUpClientController($rootScope, $state, authentication) {
         var vm = this;
 
-        vm.logIn = logIn;
+        vm.emailFormat = "/[^@]+@[^@]+/";
+
+        vm.signUpClient = signUpClient;
 
         /* Functions */
 
         /**
-         * @name logIn
-         * @desc Attempts to log in a user
-         * @memberof Controllers.LogInController
+         * @name signUpClient
+         * @desc Attempts to sign up a new client
+         * @memberof Controllers.SignUpClientController
          */
-        function logIn() {
-            authentication.logIn(vm.user)
-				.then(logInSuccess)
-				.catch(logInFail);
+        function signUpClient() {
+            vm.user.usertype = "client";
+            authentication.signUp(vm.user)
+				.then(signUpClientSuccess)
+				.catch(signUpClientFail);
 
 			/* Functions */
 
-			function logInSuccess() {
+			function signUpClientSuccess() {
 				// If we have return state
                 if ($rootScope.returnState && $rootScope.returnStateParams) {
                     // Go to return state
@@ -50,7 +53,7 @@
                 }
 			}
 
-			function logInFail(error) {
+			function signUpClientFail(error) {
 				vm.error = error;
 			}
         }
