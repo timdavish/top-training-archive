@@ -31,7 +31,7 @@
                 state: 'calendar',
                 config: {
                     url: '/calendar',
-                    templateUrl: 'client/app/modules/calendar/calendar.ejs',
+                    templateUrl: 'client/app/modules/calendar/calendar.html',
                     controller: 'CalendarController',
                     controllerAs: 'vm',
                     title: 'Calendar',
