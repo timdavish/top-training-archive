@@ -18,10 +18,7 @@
      */
     function searchService($http) {
         var service = {
-            searchResults: {},
             trainer: {},
-            sport: "",
-            location: "",
 
             searchTrainers: searchTrainers
         };
@@ -33,22 +30,12 @@
         /**
          * @name searchTrainers
          * @desc Searches for trainers by sport and location
-         * @param {Object} params The params to search with
+         * @param {Object} searchParams The searchParams to search with
 		 * @return {promise} Resolved/rejected promise
 		 * @memberof Services.searchService
          */
-        function searchTrainers(params) {
-            return $http.post('/users/getTrainers', params)
-				.then(searchTrainersSuccess);
-
-			/* Functions */
-
-			function searchTrainersSuccess(data) {
-				// Keep angular copy of data updated
-				service.sport = params.sport.toLowerCase();
-				service.location = params.location;
-				angular.copy(data[0], service.searchResults);
-			}
+        function searchTrainers(searchParams) {
+            return $http.post('/users/getTrainers', searchParams);
         }
     }
 })();

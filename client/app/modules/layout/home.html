@@ -48,14 +48,14 @@
                             <!-- /Back button -->
                             <!-- Sport -->
                             <li><input class="form-control input-lg input-search"
-                                    ng-model="vm.params.sport"
+                                    ng-model="vm.searchParams.sport"
                                     uib-typeahead="sport for sport in vm.sports | filter:$viewValue | limitTo:5"
                                     typeahead-min-length="0"
                                     type="text" placeholder="Sport" /></li>
                             <!-- /Sport -->
                             <!-- Location -->
                             <li><input class="form-control input-lg input-search" id="results"
-                                    ng-model="vm.params.location"
+                                    ng-model="vm.searchParams.location"
                                     google-auto-complete
                                     type="text" placeholder="Location" /></li>
                             <!-- /Location -->

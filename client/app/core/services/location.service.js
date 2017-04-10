@@ -18,9 +18,13 @@
      */
     function location($q, $window) {
 		var geocoder = null;
+		var geocoderOptions = {
+			componentRestrictions: {country: 'US'}
+		};
 
         var service = {
             getBrowserLocation: getBrowserLocation,
+			geocode: geocode,
 			reverseGeocode: reverseGeocode
         };
 
@@ -58,6 +62,42 @@
 				deferred.reject(error);
 			}
         }
+
+		/**
+         * @namespace geocode
+         * @desc Turns a lat/long into a formatted address
+		 * @param {String} address The address to geocode
+         * @return {promise} Resolved/rejected promise with lat/long or error
+         * @memberof Services.location
+         */
+        function geocode(address) {
+			var deferred = $q.defer();
+
+			if (!geocoder) {
+				geocoder = new google.maps.Geocoder();
+			}
+
+			geocoder.geocode({
+				'address': address.toString(),
+				componentRestrictions: {
+					country: 'US'
+				}
+			}, function (results, status) {
+				if (status === google.maps.GeocoderStatus.OK && results && results[0]) {
+					var location = results[0].geometry.location;
+					var coordinates = {
+						lat: location.lat(),
+						long: location.lng()
+					};
+					console.log(results);
+					deferred.resolve(coordinates);
+				} else {
+					deferred.reject(status);
+				}
+			});
+
+			return deferred.promise;
+		}
 
 		/**
          * @namespace reverseGeocode

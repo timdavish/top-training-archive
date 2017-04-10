@@ -25,13 +25,6 @@
 
                 google.maps.event.addListener(googleAutoComplete, 'place_changed', function() {
                     scope.$apply(function() {
-                        var location = googleAutoComplete.getPlace().geometry.location;
-						var lat = location.lat();
-						var long = location.lng();
-
-                        scope.vm.params.lat = lat;
-                        scope.vm.params.long = long;
-
                         model.$setViewValue(element.val());
                     });
                 });
