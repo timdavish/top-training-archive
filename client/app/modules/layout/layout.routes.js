@@ -31,7 +31,7 @@
                 state: 'home',
                 config: {
                     url: '/home',
-                    templateUrl: 'client/app/modules/layout/home.ejs',
+                    templateUrl: 'client/app/modules/layout/home.html',
                     controller: 'HomeController',
                     controllerAs: 'vm',
                     title: 'Home',

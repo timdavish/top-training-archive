@@ -71,16 +71,6 @@
         <!-- Core Module -->
         <script src="/client/app/core/core.module.js"></script>
         <script src="/client/app/core/core.constants.js"></script>
-        <!-- Directives -->
-        <script src="/client/app/core/directives/collapse.directive.js"></script>
-        <script src="/client/app/core/directives/edit-pane.directive.js"></script>
-        <script src="/client/app/core/directives/equals.directive.js"></script>
-        <script src="/client/app/core/directives/google-auto-complete.directive.js"></script>
-        <script src="/client/app/core/directives/ng-enter.directive.js"></script>
-        <script src="/client/app/core/directives/star-rating.directive.js"></script>
-        <!-- Filters -->
-        <script src="/client/app/core/filters/capitalize-first.filter.js"></script>
-        <script src="/client/app/core/filters/number-round.filter.js"></script>
         <!-- Services -->
         <script src="/client/app/core/services/authentication.service.js"></script>
 		<script src="/client/app/core/services/event.service.js"></script>
@@ -88,6 +78,16 @@
         <script src="/client/app/core/services/posts.service.js"></script>
 		<script src="/client/app/core/services/search.service.js"></script>
 		<script src="/client/app/core/services/support.service.js"></script>
+        <!-- Directives -->
+        <script src="/client/app/core/directives/edit-pane.directive.js"></script>
+        <script src="/client/app/core/directives/collapse.directive.js"></script>
+        <script src="/client/app/core/directives/equals.directive.js"></script>
+        <script src="/client/app/core/directives/google-auto-complete.directive.js"></script>
+        <script src="/client/app/core/directives/ng-enter.directive.js"></script>
+        <script src="/client/app/core/directives/star-rating.directive.js"></script>
+        <!-- Filters -->
+        <script src="/client/app/core/filters/number-round.filter.js"></script>
+        <script src="/client/app/core/filters/capitalize-first.filter.js"></script>
 
         <!-- Blocks Module -->
         <script src="/client/app/blocks/blocks.module.js"></script>
@@ -106,55 +106,55 @@
         <script src="/client/app/modules/calendar/calendar.module.js"></script>
         <script src="/client/app/modules/calendar/calendar.config.js"></script>
         <script src="/client/app/modules/calendar/calendar.routes.js"></script>
-        <script src="/client/app/modules/calendar/calendar.controller.js"></script>
+        <script src="/client/app/modules/calendar/calendar.js"></script>
 
         <!-- Checkout Module -->
         <script src="/client/app/modules/checkout/checkout.module.js"></script>
         <script src="/client/app/modules/checkout/checkout.routes.js"></script>
-        <script src="/client/app/modules/checkout/checkout.controller.js"></script>
+        <script src="/client/app/modules/checkout/checkout.js"></script>
 
         <!-- Event Module -->
         <script src="/client/app/modules/event/event.module.js"></script>
         <script src="/client/app/modules/event/event.routes.js"></script>
-        <script src="/client/app/modules/event/event-detail.controller.js"></script>
-        <script src="/client/app/modules/event/event-list.controller.js"></script>
+        <script src="/client/app/modules/event/event-detail.js"></script>
+        <script src="/client/app/modules/event/event-list.js"></script>
 
         <!-- Layout Module -->
         <script src="/client/app/modules/layout/layout.module.js"></script>
         <script src="/client/app/modules/layout/layout.routes.js"></script>
-        <script src="/client/app/modules/layout/home.controller.js"></script>
-        <script src="/client/app/modules/layout/navigation.controller.js"></script>
+        <script src="/client/app/modules/layout/home.js"></script>
+        <script src="/client/app/modules/layout/navigation.js"></script>
 
         <!-- Post Module -->
         <script src="/client/app/modules/post/post.module.js"></script>
         <script src="/client/app/modules/post/post.routes.js"></script>
-        <script src="/client/app/modules/post/post-detail.controller.js"></script>
-        <script src="/client/app/modules/post/post-list.controller.js"></script>
+        <script src="/client/app/modules/post/post-detail.js"></script>
+        <script src="/client/app/modules/post/post-list.js"></script>
 
         <!-- Search Module -->
         <script src="/client/app/modules/search/search.module.js"></script>
         <script src="/client/app/modules/search/search.routes.js"></script>
-        <script src="/client/app/modules/search/search-list.controller.js"></script>
-        <script src="/client/app/modules/search/trainer-search-profile.controller.js"></script>
+        <script src="/client/app/modules/search/search-list.js"></script>
+        <script src="/client/app/modules/search/trainer-search-profile.js"></script>
 
         <!-- Support Module -->
         <script src="/client/app/modules/support/support.module.js"></script>
-        <!-- Support.about Module -->
+		<!-- Support.about Module -->
         <script src="/client/app/modules/support/about/about.module.js"></script>
-        <!-- Support.contact Module -->
+		<!-- Support.contact Module -->
         <script src="/client/app/modules/support/contact/contact.module.js"></script>
 		<script src="/client/app/modules/support/contact/contact.routes.js"></script>
-        <script src="/client/app/modules/support/contact/contact.controller.js"></script>
-        <!-- Support.faq Module -->
+        <script src="/client/app/modules/support/contact/contact.js"></script>
+		<!-- Support.faq Module -->
         <script src="/client/app/modules/support/faq/faq.module.js"></script>
 		<script src="/client/app/modules/support/faq/faq.routes.js"></script>
-        <script src="/client/app/modules/support/faq/faq.controller.js"></script>
-        <script src="/client/app/modules/support/faq/faq-article.controller.js"></script>
+        <script src="/client/app/modules/support/faq/faq.js"></script>
+        <script src="/client/app/modules/support/faq/faq-article.js"></script>
 		<!-- Support.legal Module -->
 		<script src="/client/app/modules/support/legal/legal.module.js"></script>
 		<script src="/client/app/modules/support/legal/legal.routes.js"></script>
 
-        <!-- User Module -->
+		<!-- User Module -->
         <script src="/client/app/modules/user/user.module.js"></script>
         <!-- User.authentication Module -->
 		<script src="/client/app/modules/user/authentication/authentication.module.js"></script>
@@ -174,12 +174,12 @@
     </head>
     <body ng-app="app" class="ng-cloak" ng-cloak>
         <!-- Include top navigation bar -->
-        <ng-include src="'client/app/modules/layout/navigation.ejs'" class="ng-cloak" ng-cloak></ng-include>
+        <ng-include src="'client/app/modules/layout/navigation.html'" class="ng-cloak" ng-cloak></ng-include>
 
         <!-- Main view -->
         <ui-view></ui-view>
 
         <!-- Include footer -->
-        <ng-include src="'client/app/modules/layout/footer.ejs'" class="ng-cloak" ng-cloak></ng-include>
+        <ng-include src="'client/app/modules/layout/footer.html'" class="ng-cloak" ng-cloak></ng-include>
     </body>
 </html>

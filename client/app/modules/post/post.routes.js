@@ -31,7 +31,7 @@
                 state: 'posts',
                 config: {
                     url: '/posts',
-                    templateUrl: 'client/app/modules/post/post-list.ejs',
+                    templateUrl: 'client/app/modules/post/post-list.html',
                     controller: 'PostListController',
                     controllerAs: 'vm',
                     title: 'Posts',
@@ -48,7 +48,7 @@
                 state: 'post',
                 config: {
                     url: '/posts/{id}',
-                    templateUrl: 'client/app/modules/post/post-detail.ejs',
+                    templateUrl: 'client/app/modules/post/post-detail.html',
                     controller: 'PostDetailController',
                     controllerAs: 'vm',
                     title: 'Post',
