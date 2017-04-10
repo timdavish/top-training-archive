@@ -1,16 +1,16 @@
 /**
- * user.authentication.login.spec
+ * checkout.spec
  * @namespace Tests
  */
 
 // Suite block
-describe('Unit: user.authentication.login', function() {
+describe('Unit: checkout', function() {
 
 	// Include modules before each describe or it in this block
 	beforeEach(module('app'));
 
 	// Suite block
-	describe('Page: login', function() {
+	describe('Page: checkout', function() {
 		// Global variables inside this block
 		var render,
 			element,
@@ -19,7 +19,7 @@ describe('Unit: user.authentication.login', function() {
 
 		// Inject dependencies
 		beforeEach(inject(function($injector) {
-			var routeDetails = compileRouteTemplateWithController($injector, 'login', 'LogInController');
+			var routeDetails = compileRouteTemplateWithController($injector, 'checkout', 'CheckoutController');
 
 			ctrl = routeDetails.controller;
 			scope = routeDetails.scope;

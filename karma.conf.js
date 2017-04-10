@@ -35,7 +35,7 @@ module.exports = function(config) {
 			'client/app/**/*.html', // App html
 
 			'client/test/test-helpers.js', // Test helper functions
-			'client/test/**/*.spec.js' // Tests
+			'client/app/**/*.spec.js' // Tests
         ],
 
         // List of files to exclude

@@ -1,25 +1,27 @@
 /**
- * user.profile.routes.spec
+ * checkout.routes.spec
  * @namespace Tests
  */
 
 // Suite block
-describe('Unit: user.profile routes', function() {
+describe('Unit: checkout routes', function() {
 
 	// Include modules before each describe or it in this block
 	beforeEach(module('app'));
 
 	// Suite block
-	describe('State: trainer-profile', function() {
+	describe('State: checkout', function() {
 		// Global variables inside this block
 		var $state,
 			$rootScope,
-			state = 'trainer-profile';
+			$httpBackend,
+			state = 'checkout';
 
 		// Inject dependencies
-		beforeEach(inject(function(_$state_, _$rootScope_) {
+		beforeEach(inject(function(_$state_, _$rootScope_, _$httpBackend_) {
 			$state = _$state_;
 			$rootScope = _$rootScope_;
+			$httpBackend = _$httpBackend_;
 		}));
 
 		// Test
@@ -33,7 +35,7 @@ describe('Unit: user.profile routes', function() {
 
 		// Test
 		it('should respond to URL', function() {
-			expect($state.href(state)).toEqual('#/profile/trainer');
+			expect($state.href(state)).toEqual('#/checkout/packages/');
 		});
 	});
 });
