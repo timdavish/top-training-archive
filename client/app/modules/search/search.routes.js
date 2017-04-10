@@ -31,7 +31,7 @@
                 state: 'search',
                 config: {
                     url: '/search',
-                    templateUrl: 'client/app/modules/search/search-list.ejs',
+                    templateUrl: 'client/app/modules/search/search-list.html',
                     controller: 'SearchController',
                     controllerAs: 'vm',
                     title: 'Search',
@@ -43,7 +43,7 @@
                 state: 'search/trainer',
                 config: {
                     url: '/search/trainer/{id}',
-                    templateUrl: 'client/app/modules/user/trainer-profile.ejs',
+                    templateUrl: 'client/app/modules/user/trainer-profile.html',
                     controller: 'TrainerSearchProfileController',
                     controllerAs: 'vm',
                     title: 'Trainer',

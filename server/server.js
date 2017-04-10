@@ -26,6 +26,7 @@ var app = express();
 
 // View engine setup
 app.set('views', path.join(__dirname, './../client'));
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 // Other app setup
@@ -59,7 +60,7 @@ app.use(function(err, req, res, next) {
 
     // Render the error page
     res.status(err.status || 500);
-    res.render('app/modules/layout/error.ejs');
+    res.render('app/modules/layout/error.html');
 });
 
 module.exports = app;
