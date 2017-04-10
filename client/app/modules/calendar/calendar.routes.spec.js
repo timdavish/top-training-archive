@@ -1,25 +1,27 @@
 /**
- * user.profile.routes.spec
+ * calendar.routes.spec
  * @namespace Tests
  */
 
 // Suite block
-describe('Unit: user.profile routes', function() {
+describe('Unit: calendar routes', function() {
 
 	// Include modules before each describe or it in this block
 	beforeEach(module('app'));
 
 	// Suite block
-	describe('State: trainer-profile', function() {
+	describe('State: calendar', function() {
 		// Global variables inside this block
 		var $state,
 			$rootScope,
-			state = 'trainer-profile';
+			$httpBackend,
+			state = 'calendar';
 
 		// Inject dependencies
-		beforeEach(inject(function(_$state_, _$rootScope_) {
+		beforeEach(inject(function(_$state_, _$rootScope_, _$httpBackend_) {
 			$state = _$state_;
 			$rootScope = _$rootScope_;
+			$httpBackend = _$httpBackend_;
 		}));
 
 		// Test
@@ -28,12 +30,12 @@ describe('Unit: user.profile routes', function() {
 
 			expect(config.url).toBeDefined();
 			expect(config.wantToReturn).toBeTruthy();
-			expect(config.requiresLoggedIn).toBeTruthy();
+			expect(config.requiresLoggedIn).toBeFalsy();
 		});
 
 		// Test
 		it('should respond to URL', function() {
-			expect($state.href(state)).toEqual('#/profile/trainer');
+			expect($state.href(state)).toEqual('#/calendar');
 		});
 	});
 });
