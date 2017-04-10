@@ -73,21 +73,25 @@ router.post('/login', function(req, res, next) {
 
 // (GET) Get trainers
 router.post('/getTrainers', function(req, res, next) {
-    var params = req.body;
-    params.sport = params.sport.toLowerCase();
-    params.searchDistance = 100;
+    var searchParams = req.body;
+
+	// Edit our search params
+	searchParams.sport = searchParams.sport.toLowerCase();
+	searchParams.lat = parseFloat(searchParams.lat);
+	searchParams.long = parseFloat(searchParams.long);
+    searchParams.searchDistance = 100; // miles
 
     User.aggregate([
         { $geoNear: { // calculates and sorts by distance
             query: {
                 usertype: 'trainer', // trainers only
-                'trainerInfo.sports.sport': params.sport // trainers who train this sport only
+                'trainerInfo.sports.sport': searchParams.sport // trainers who train this sport only
             },
             near: {
                 type: 'Point', // 2dsphere
-                coordinates: [params.long, params.lat] // long, lat coordinates to start search at
+                coordinates: [ searchParams.long, searchParams.lat ] // long, lat coordinates to start search at
             },
-            maxDistance: params.searchDistance * 1.609 * 1000, // m = miles * 1.609 km/mile * 1000 m/km
+            maxDistance: searchParams.searchDistance * 1.609 * 1000, // m = miles * 1.609 km/mile * 1000 m/km
             distanceMultiplier: 1 * 0.621 * 0.001, // miles = m * 0.621 mile/km * 0.001 km/m
             distanceField: 'dist.calculated', // field to assign distance result
             includeLocs: 'dist.location', // field to assign location result

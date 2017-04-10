@@ -36,12 +36,12 @@
                     controllerAs: 'vm',
                     title: 'Profile',
                     wantToReturn: true, // Return to this state after login
-                    requiresLoggedIn: true // Require login at this state
-                    // onEnter: ['$state', 'authentication', function($state, authentication) {
-                    //     if (!authentication.isLoggedIn()) {
-                    //         $state.go('home');
-                    //     }
-                    // }]
+                    requiresLoggedIn: true, // Require login at this state
+                    onEnter: ['$state', 'authentication', function($state, authentication) {
+                        if (!authentication.isLoggedIn()) {
+                            $state.go('home');
+                        }
+                    }]
                 }
             }
         ];

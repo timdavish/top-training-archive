@@ -30,7 +30,7 @@
             {
                 state: 'search',
                 config: {
-                    url: '/search',
+                    url: '/search?{sport}&{location}&{lat}&{long}',
                     templateUrl: 'client/app/modules/search/search-list.html',
                     controller: 'SearchController',
                     controllerAs: 'vm',
@@ -43,7 +43,7 @@
                 state: 'search/trainer',
                 config: {
                     url: '/search/trainer/{id}',
-                    templateUrl: 'client/app/modules/user/trainer-profile.html',
+                    templateUrl: 'client/app/modules/user/profile/trainer-profile.html',
                     controller: 'TrainerSearchProfileController',
                     controllerAs: 'vm',
                     title: 'Trainer',

@@ -9,19 +9,20 @@
         .module('app.layout')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$q', '$window', 'authentication', 'searchService', 'location', 'logger'];
+    HomeController.$inject = ['$q', '$state', '$window', 'authentication', 'location', 'logger'];
 
     /**
      * @namespace HomeController
      * @desc Home controller
      * @memberof Controllers
      */
-    function HomeController($q, $window, authentication, searchService, location, logger) {
+    function HomeController($q, $state, $window, authentication, location, logger) {
         var vm = this;
 
         vm.isLoggedIn = authentication.isLoggedIn;
+		vm.currentUser = authentication.currentUser;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
-        vm.params = {};
+        vm.searchParams = {};
 		// Set our autocomplete options for this page
 		vm.autocompleteOptions = {
 			types: ['geocode'],
@@ -90,23 +91,18 @@
 				var lat = loc.coords.latitude;
 				var long = loc.coords.longitude;
 
-				// Set search params (change this later)
-				vm.params.lat = lat;
-				vm.params.long = long;
-
 				location.reverseGeocode(lat, long)
 					.then(function(loc) {
-						vm.params.location = loc;
+						vm.searchParams.location = loc;
 						deferred.resolve(loc);
 					});
 			}
 		}
 
         function tryClientLocation() {
-			console.log('trying client location');
-            // if (vm.isLoggedIn()) {
-            //     vm.params.location = authentication.currentUser().clientInfo.zipcode;
-            // }
+            if (vm.isLoggedIn() && vm.currentUser().info.zipcode) {
+                vm.searchParams.location = authentication.currentUser().info.zipcode;
+            }
         }
 
         /**
@@ -116,25 +112,32 @@
          */
         function search() {
             // Ensure form is properly filled out
-            if (!vm.params.sport || vm.params.sport === '' ||
-                vm.sports.indexOf(vm.params.sport) === -1 ||
-                !vm.params.lat || !vm.params.long) {
+            if (!vm.searchParams.sport || vm.searchParams.sport === '' ||
+                vm.sports.indexOf(vm.searchParams.sport) === -1 ||
+				!vm.searchParams.location || vm.searchParams.location === '') {
 
                 // vm.error = 'Please fill the form out properly.'; // Display an error
                 return;
             }
 
-            searchService.searchTrainers(vm.params)
-                .then(redirectToSearchResults)
-                .catch(redirectToSearchResultsFailed);
+			// Geocode search location
+			location.geocode(vm.searchParams.location)
+				.then(geocodeSuccess)
+				.then(searchContinue)
+				.catch(searchFail);
 
-            function redirectToSearchResults() {
-                redirectTo('search');
+            function geocodeSuccess(data) {
+				// Define our lat/long
+				vm.searchParams.lat = data.lat;
+				vm.searchParams.long = data.long;
             }
 
-            function redirectToSearchResultsFailed(error) {
+			function searchContinue() {
+				$state.go('search', vm.searchParams);
+			}
+
+            function searchFail(error) {
                 vm.error = error;
-                return $q.reject(error);
             }
         }
 

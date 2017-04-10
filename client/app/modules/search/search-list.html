@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-1 col-md-10">
-                <h3>{{ vm.count }} {{ vm.sport }} Trainers near {{ vm.location }}</h3>
+                <h3>{{ vm.count }} {{ vm.searchParams.sport }} Trainers near {{ vm.searchParams.location }}</h3>
 
                 <div ng-repeat="trainer in vm.trainers"
                      class="content">
@@ -16,7 +16,7 @@
                     <br />
                     <span>{{ trainer.dist.calculated | numberRound:1 }} miles from {{ vm.location }}</span>
                     <br />
-                    <span><a ng-click="vm.viewProfile(trainer)" href="#/search/trainer/{{ trainer._id }}">View Profile</a></span>
+                    <span><a href="#/search/trainer/{{ trainer._id }}">View Profile</a></span>
                     <br />
                 </div>
             </div>
