@@ -28,7 +28,7 @@
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
                                ng-click="vm.openModal(vm.panes.summary, set)"
-                               ng-if="vm.editable">
+                               ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -74,7 +74,7 @@
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
                                ng-click="vm.openModal(vm.panes.locations, set)"
-                               ng-if="vm.editable">
+                               ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -105,7 +105,7 @@
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
                                ng-click="vm.openModal(vm.panes.packages, set)"
-                               ng-if="vm.editable">
+                               ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -136,7 +136,7 @@
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
                                ng-click="vm.openModal(vm.panes.credentials, set)"
-                               ng-if="vm.editable">
+                               ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->
@@ -177,7 +177,7 @@
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
                                ng-click="vm.openModal(vm.panes.services, set)"
-                               ng-if="vm.editable">
+                               ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             <!-- /Edit button -->

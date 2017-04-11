@@ -44,11 +44,12 @@
                 config: {
                     url: '/search/trainer/{id}',
                     templateUrl: 'client/app/modules/user/profile/trainer-profile.html',
-                    controller: 'TrainerSearchProfileController',
+                    controller: 'TrainerProfileController',
                     controllerAs: 'vm',
                     title: 'Trainer',
                     wantToReturn: true, // Return to this state after login
-                    requiresLoggedIn: false // Require login at this state
+                    requiresLoggedIn: false, // Require login at this state
+					search: true
                 }
             }
         ];

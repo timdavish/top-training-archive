@@ -19,173 +19,15 @@
     function TrainerProfileController($q, $state, authentication, location, ModalService, logger) {
         var vm = this;
 
-        // vm.model = authentication.currentUser();
-        vm.model = {
-            usertype: "trainer",
-            trainerInfo: {
-                rating: 4.34,
-				locations: [
-					{
-						priority: 1,
-						formatted_address: "E Yesler Way, Seattle, WA",
-						geometry: {
-							type: "Point",
-							coordinates: [
-								-122.3,
-								47.62
-							]
-						}
-					},
-					{
-						priority: 2,
-						formatted_address: "Atlantic Ave, Seattle, WA",
-						geometry: {
-							type: "Point",
-							coordinates: [
-								-122.32,
-								47.6
-							]
-						}
-					}
-				],
-                reviews: [
-                    {
-                        author: "Tom Riddle",
-                        type: "Verified Client",
-                        rating: 5,
-                        title: "Highly Recommend",
-                        content: "This is the best trainer I've ever had. Blah blah blah blah blah blah blah blah",
-                        date: "February 21, 2017"
-                    },
-                    {
-                        author: "Bill Cosby",
-                        type: "Testimonial",
-                        rating: 4,
-                        title: "An Alright Trainer",
-                        content: "Wasn't the greatest or the worst trainer I've ever had. Blah blah blah blah blah blah blah blah",
-                        date: "January 2, 2017"
-                    }
-                ],
-                sports: [
-                    {
-                        sport: "basketball",
-                        packages: [
-                            {
-                                _id: 1,
-                                count: 1,
-                                size: 1,
-                                price: 30
-                            },
-                            {
-                                _id: 2,
-                                count: 2,
-                                size: 1,
-                                price: 25
-                            },
-                            {
-                                _id: 3,
-                                count: 5,
-                                size: 1,
-                                price: 22
-                            }
-                        ],
-                        events: [],
-                        summary: "NBA, College, High School; I've worked at every level. As a clinician for Converse for 7 years I specialized in teaching skills and prepping athletes. Learn fundamentals!",
-                        credentials: {
-                            experience: 7,
-                            school: "University of Washington"
-                        },
-                        services: {
-                            ages: [
-                                "Middle School",
-                                "High School"
-                            ],
-                            positions: [
-                                "Guard",
-                                "Forward",
-                                "Center"
-                            ],
-                            specialties: [
-                                "Shooting",
-                                "Defense"
-                            ]
-                        }
-                    },
-                    {
-                        sport: "baseball",
-                        packages: [
-                            {
-                                _id: 4,
-                                count: 1,
-                                size: 1,
-                                price: 30
-                            },
-                            {
-                                _id: 5,
-                                count: 2,
-                                size: 1,
-                                price: 25
-                            },
-                            {
-                                _id: 6,
-                                count: 5,
-                                size: 1,
-                                price: 22
-                            }
-                        ],
-                        events: [],
-                        summary: "A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus.",
-                        credentials: {
-                            experience: 5,
-                            school: "University of Washington"
-                        },
-                        services: {
-                            ages: [
-                                "Middle School",
-                                "High School"
-                            ],
-                            positions: [
-                                "Infield",
-                                "Outfield"
-                            ],
-                            specialties: [
-                                "Fielding",
-                                "Hitting",
-                                "Base running"
-                            ]
-                        }
-                    }
-                ]
-            },
-            clientInfo: {
-                events: [],
-                savedTrainers: [],
-                activeTrainers: [],
-                activeEvents: [],
-                activeSessions: []
-            },
-            data: {
-                lastActive: "2017-02-20T23:05:59.460Z",
-                created: "2017-02-20T23:05:59.460Z"
-            },
-            accounts: {
-                local: {
-                    hash: "b2df4a52b92180b8b9b67e6df2218692c27c154d89f7c35cc665dfe494990baf3b6e9981cf055c98154c994c3ea833fa8b5dec18a4bc19fe29a26ef00f6597b0",
-                    salt: "c524e64db380a8b44674ee7a6decc54c"
-                }
-            },
-            contact: {
-                lastname: "Builder",
-                firstname: "Bob",
-                email: "bob@asdf.com"
-            }
-        };
-        vm.sport = vm.model.trainerInfo.sports[0].sport;
-        vm.search = false; // Don't want to show back button
-        vm.editable = true; // Want to show edit buttons
+		// Search determines whether this profile is viewed from search or not
+		// True = get trainer model from api
+		// True = show back button, don't show edit buttons
+		// False = get trainer model from authentication
+		// False = don't show back button, show edit buttons
+		vm.search = $state.current.search;
+        vm.model = {};
+		vm.sport = '';
         vm.panes = {}; // For edit modals
-
-        // console.log(vm.model.trainerInfo.locations);
 
         vm.openModal = openModal;
 
@@ -201,6 +43,8 @@
 		function activate() {
 			// Promises that need to be resolved to activate
 			var promises = [
+				setModel(),
+				setSport(),
 				setMapMarkers(),
 				setProfilePanes()
 			];
@@ -221,6 +65,191 @@
 		}
 
 		/**
+         * @name setModel
+         * @desc Sets the profile model
+         * @memberof Controllers.TrainerProfileController
+         */
+        function setModel() {
+			if (vm.search) {
+				// Get our model from api
+				// var id = $state.params.id;
+			} else {
+				// Get our model from authentication
+				// vm.model = authentication.currentUser();
+			}
+			vm.model = {
+	            usertype: "trainer",
+	            trainerInfo: {
+	                rating: 4.34,
+					locations: [
+						{
+							priority: 1,
+							formatted_address: "E Yesler Way, Seattle, WA",
+							geometry: {
+								type: "Point",
+								coordinates: [
+									-122.3,
+									47.62
+								]
+							}
+						},
+						{
+							priority: 2,
+							formatted_address: "Atlantic Ave, Seattle, WA",
+							geometry: {
+								type: "Point",
+								coordinates: [
+									-122.32,
+									47.6
+								]
+							}
+						}
+					],
+	                reviews: [
+	                    {
+	                        author: "Tom Riddle",
+	                        type: "Verified Client",
+	                        rating: 5,
+	                        title: "Highly Recommend",
+	                        content: "This is the best trainer I've ever had. Blah blah blah blah blah blah blah blah",
+	                        date: "February 21, 2017"
+	                    },
+	                    {
+	                        author: "Bill Cosby",
+	                        type: "Testimonial",
+	                        rating: 4,
+	                        title: "An Alright Trainer",
+	                        content: "Wasn't the greatest or the worst trainer I've ever had. Blah blah blah blah blah blah blah blah",
+	                        date: "January 2, 2017"
+	                    }
+	                ],
+	                sports: [
+	                    {
+	                        sport: "basketball",
+	                        packages: [
+	                            {
+	                                _id: 1,
+	                                count: 1,
+	                                size: 1,
+	                                price: 30
+	                            },
+	                            {
+	                                _id: 2,
+	                                count: 2,
+	                                size: 1,
+	                                price: 25
+	                            },
+	                            {
+	                                _id: 3,
+	                                count: 5,
+	                                size: 1,
+	                                price: 22
+	                            }
+	                        ],
+	                        events: [],
+	                        summary: "NBA, College, High School; I've worked at every level. As a clinician for Converse for 7 years I specialized in teaching skills and prepping athletes. Learn fundamentals!",
+	                        credentials: {
+	                            experience: 7,
+	                            school: "University of Washington"
+	                        },
+	                        services: {
+	                            ages: [
+	                                "Middle School",
+	                                "High School"
+	                            ],
+	                            positions: [
+	                                "Guard",
+	                                "Forward",
+	                                "Center"
+	                            ],
+	                            specialties: [
+	                                "Shooting",
+	                                "Defense"
+	                            ]
+	                        }
+	                    },
+	                    {
+	                        sport: "baseball",
+	                        packages: [
+	                            {
+	                                _id: 4,
+	                                count: 1,
+	                                size: 1,
+	                                price: 30
+	                            },
+	                            {
+	                                _id: 5,
+	                                count: 2,
+	                                size: 1,
+	                                price: 25
+	                            },
+	                            {
+	                                _id: 6,
+	                                count: 5,
+	                                size: 1,
+	                                price: 22
+	                            }
+	                        ],
+	                        events: [],
+	                        summary: "A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus.",
+	                        credentials: {
+	                            experience: 5,
+	                            school: "University of Washington"
+	                        },
+	                        services: {
+	                            ages: [
+	                                "Middle School",
+	                                "High School"
+	                            ],
+	                            positions: [
+	                                "Infield",
+	                                "Outfield"
+	                            ],
+	                            specialties: [
+	                                "Fielding",
+	                                "Hitting",
+	                                "Base running"
+	                            ]
+	                        }
+	                    }
+	                ]
+	            },
+	            clientInfo: {
+	                events: [],
+	                savedTrainers: [],
+	                activeTrainers: [],
+	                activeEvents: [],
+	                activeSessions: []
+	            },
+	            data: {
+	                lastActive: "2017-02-20T23:05:59.460Z",
+	                created: "2017-02-20T23:05:59.460Z"
+	            },
+	            accounts: {
+	                local: {
+	                    hash: "b2df4a52b92180b8b9b67e6df2218692c27c154d89f7c35cc665dfe494990baf3b6e9981cf055c98154c994c3ea833fa8b5dec18a4bc19fe29a26ef00f6597b0",
+	                    salt: "c524e64db380a8b44674ee7a6decc54c"
+	                }
+	            },
+	            contact: {
+	                lastname: "Builder",
+	                firstname: "Bob",
+	                email: "bob@asdf.com"
+	            }
+	        };
+		}
+
+		/**
+         * @name setSport
+         * @desc Sets the profile sport
+         * @memberof Controllers.TrainerProfileController
+         */
+        function setSport() {
+			vm.sport = vm.model.trainerInfo.sports[0].sport;
+		}
+
+
+		/**
          * @name setProfilePanes
          * @desc Sets the panes for profile editing
          * @memberof Controllers.TrainerProfileController
@@ -228,14 +257,16 @@
         function setProfilePanes() {
 			var deferred = $q.defer();
 
-            // Set profile panes
-            vm.panes = {
-                summary: 'summary',
-                locations: 'locations',
-                packages: 'packages',
-                credentials: 'credentials',
-                services: 'services'
-            };
+			if (!vm.search) {
+	            // Set profile panes
+	            vm.panes = {
+	                summary: 'summary',
+	                locations: 'locations',
+	                packages: 'packages',
+	                credentials: 'credentials',
+	                services: 'services'
+	            };
+			}
 
 			// No matter what, this promise is resolved
 			deferred.resolve();
