@@ -73,6 +73,9 @@
 			tryBrowserLocation()
 				.catch(tryClientLocation);
 
+			// No matter what, this promise is resolved
+			deferred.resolve();
+
 			return deferred.promise;
         }
 
@@ -81,21 +84,33 @@
 
 			location.getBrowserLocation()
                 .then(reverseGeocodeLocation)
+				.then(parseAddressComponents)
+				.then(fillSearchLocation)
 				.catch(function(error) {
 					deferred.reject(error);
 				});
 
 			return deferred.promise;
 
+			/* Functions */
+
 			function reverseGeocodeLocation(loc) {
 				var lat = loc.coords.latitude;
 				var long = loc.coords.longitude;
 
-				location.reverseGeocode(lat, long)
-					.then(function(loc) {
-						vm.searchParams.location = loc;
-						deferred.resolve(loc);
-					});
+				return location.reverseGeocode(lat, long);
+			}
+
+			function parseAddressComponents(locations) {
+				return location.parseAddressComponents(locations[0]);
+			}
+
+			function fillSearchLocation(parsed_components) {
+				var formatted = parsed_components.locality + ', ' +
+								parsed_components.administrative_area_level_1 + ' ' +
+								parsed_components.postal_code;
+				vm.searchParams.location = formatted;
+				deferred.resolve();
 			}
 		}
 

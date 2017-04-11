@@ -18,14 +18,13 @@
      */
     function location($q, $window) {
 		var geocoder = null;
-		var geocoderOptions = {
-			componentRestrictions: {country: 'US'}
-		};
+		var componentRestrictions = { country: 'US' };
 
         var service = {
             getBrowserLocation: getBrowserLocation,
 			geocode: geocode,
-			reverseGeocode: reverseGeocode
+			reverseGeocode: reverseGeocode,
+			parseAddressComponents: parseAddressComponents
         };
 
         return service;
@@ -65,7 +64,7 @@
 
 		/**
          * @namespace geocode
-         * @desc Turns a lat/long into a formatted address
+         * @desc Turns an address into a lat/long
 		 * @param {String} address The address to geocode
          * @return {promise} Resolved/rejected promise with lat/long or error
          * @memberof Services.location
@@ -77,11 +76,11 @@
 				geocoder = new google.maps.Geocoder();
 			}
 
+			address = address.toString();
+
 			geocoder.geocode({
-				'address': address.toString(),
-				componentRestrictions: {
-					country: 'US'
-				}
+				'address': address,
+				componentRestrictions: componentRestrictions
 			}, function (results, status) {
 				if (status === google.maps.GeocoderStatus.OK && results && results[0]) {
 					var location = results[0].geometry.location;
@@ -89,7 +88,6 @@
 						lat: location.lat(),
 						long: location.lng()
 					};
-					console.log(results);
 					deferred.resolve(coordinates);
 				} else {
 					deferred.reject(status);
@@ -101,10 +99,10 @@
 
 		/**
          * @namespace reverseGeocode
-         * @desc Turns a lat/long into a formatted address
+         * @desc Turns a lat/long into addresses
 		 * @param {double} lat Latitude of location to reverse geocode
 		 * @param {double} long Longitude of location to reverse geocode
-         * @return {promise} Resolved/rejected promise with formatted address or error
+         * @return {promise} Resolved/rejected promise with geocode results or error
          * @memberof Services.location
          */
         function reverseGeocode(lat, long) {
@@ -114,15 +112,45 @@
 				geocoder = new google.maps.Geocoder();
 			}
 
+			lat = 47.6992;
+			long = -122.3334;
+
 			var latlng = new google.maps.LatLng(lat, long);
 
-			geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-				if (status === google.maps.GeocoderStatus.OK && results && results[1]) {
-					deferred.resolve(results[1].formatted_address);
+			geocoder.geocode({
+				'latLng': latlng
+			}, function (results, status) {
+				if (status === google.maps.GeocoderStatus.OK && results) {
+					deferred.resolve(results);
 				} else {
 					deferred.reject(status);
 				}
 			});
+
+			return deferred.promise;
+		}
+
+		/**
+         * @namespace parseAddressComponents
+         * @desc Turns a lat/long into a formatted address
+		 * @param {Array} location The location to parse components from
+         * @return {promise} Resolved/rejected promise with parsed_components or error
+         * @memberof Services.location
+         */
+        function parseAddressComponents(location) {
+			var deferred = $q.defer();
+			if (location) {
+				var address_components = location.address_components;
+				var parsed_components = {};
+				address_components.forEach(function(component) {
+					component.types.forEach(function(type) {
+						parsed_components[type] = component.short_name;
+					});
+				});
+				deferred.resolve(parsed_components);
+			} else {
+				deferred.reject('No location was supplied');
+			}
 
 			return deferred.promise;
 		}
