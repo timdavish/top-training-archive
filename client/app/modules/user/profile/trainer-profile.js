@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('TrainerProfileController', TrainerProfileController);
 
-    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'location', 'ModalService', 'logger'];
+    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'location', 'modal', 'logger'];
 
     /**
      * @namespace TrainerProfileController
      * @desc Trainer profile controller
      * @memberof Controllers
      */
-    function TrainerProfileController($q, $state, authentication, location, ModalService, logger) {
+    function TrainerProfileController($q, $state, authentication, location, modal, logger) {
         var vm = this;
 
 		// Search determines whether this profile is viewed from search or not
@@ -333,12 +333,13 @@
             if (templateUrl && controller && inputs) {
                 inputs.title = pane;
 
-                ModalService.showModal({
+                modal.showModal({
                     templateUrl: templateUrl,
                     controller: controller,
                     controllerAs: 'vm',
                     inputs: inputs,
                 }).then(function(modal) {
+					console.log('hi');
                     modalOnClose(modal, pane);
                 });
             } else if (error) {

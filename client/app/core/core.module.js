@@ -7,7 +7,6 @@
 
     angular.module('app.core', [
         /* Angular & 3rd Party modules */
-        'angularModalService',
         'mwl.calendar',
         'ngAnimate',
         'ngMap',
