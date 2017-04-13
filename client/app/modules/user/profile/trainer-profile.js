@@ -296,79 +296,111 @@
 			return deferred.promise;
 		}
 
+		/**
+         * @name openModal
+         * @desc Opens an edit modal for the given pane, supplied with the given data
+		 * @param {String} pane The pane to open an edit modal for
+		 * @param {Object} data The data related to the pane
+         * @memberof Controllers.TrainerProfileController
+         */
         function openModal(pane, data) {
             var templateUrl;
             var controller;
             var inputs;
             var error;
 
-            if (pane === vm.panes.summary) {
-                templateUrl = 'client/app/modules/user/profile/modals/summary-modal.html';
-                controller = 'SummaryModalController';
-                inputs = {
-                    summary: data.summary
-                };
-            } else if (pane === vm.panes.locations) {
-                error = 'TODO: edit training locations';
-            } else if (pane === vm.panes.packages) {
-                error = 'TODO: edit packages';
-            } else if (pane === vm.panes.credentials) {
-                templateUrl = 'client/app/modules/user/profile/modals/credentials-modal.html';
-                controller = 'CredentialsModalController';
-                inputs = {
-                    experience: data.credentials.experience,
-                    school: data.credentials.school
-                };
-            } else if (pane === vm.panes.services) {
-                templateUrl = 'client/app/modules/user/profile/modals/services-modal.html';
-                controller = 'ServicesModalController';
-                inputs = {
-                    ages: data.services.ages,
-                    positions: data.services.positions,
-                    specialties: data.services.specialties
-                };
-            }
+			if (pane) {
+				if (pane === vm.panes.summary) {
+	                templateUrl = 'client/app/modules/user/profile/modals/summary-modal.html';
+	                controller = 'SummaryModalController';
+	                inputs = {
+	                    summary: data.summary
+	                };
+	            } else if (pane === vm.panes.locations) {
+	                error = 'TODO: edit training locations';
+					inputs = {};
+	            } else if (pane === vm.panes.packages) {
+	                error = 'TODO: edit packages';
+					inputs = {};
+	            } else if (pane === vm.panes.credentials) {
+	                templateUrl = 'client/app/modules/user/profile/modals/credentials-modal.html';
+	                controller = 'CredentialsModalController';
+	                inputs = {
+	                    experience: data.credentials.experience,
+	                    school: data.credentials.school
+	                };
+	            } else if (pane === vm.panes.services) {
+	                templateUrl = 'client/app/modules/user/profile/modals/services-modal.html';
+	                controller = 'ServicesModalController';
+	                inputs = {
+	                    ages: data.services.ages,
+	                    positions: data.services.positions,
+	                    specialties: data.services.specialties
+	                };
+	            }
+
+				inputs.title = pane;
+			}
 
             // Make sure everything is set
             if (templateUrl && controller && inputs) {
-                inputs.title = pane;
-
-                modal.showModal({
-                    templateUrl: templateUrl,
+				var modalOptions = {
+					templateUrl: templateUrl,
                     controller: controller,
                     controllerAs: 'vm',
-                    inputs: inputs,
-                }).then(function(modal) {
-					console.log('hi');
-                    modalOnClose(modal, pane);
-                });
+                    inputs: inputs
+				};
+
+                modal.showModal(modalOptions)
+					.then(showModalSuccess)
+					.catch(showModalFail);
             } else if (error) {
                 console.log(error);
             }
 
-            function modalOnClose(modal, pane) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    if (result.status.save) {
+			/* Functions */
 
-                        if (pane === vm.panes.summary) {
-                            data.summary = result.summary;
-                        } else if (pane === vm.panes.locations) {
+			function showModalSuccess(modal) {
+				closeModalHandler(modal, pane, data);
+			}
 
-                        } else if (pane === vm.panes.packages) {
-
-                        } else if (pane === vm.panes.credentials) {
-                            data.credentials.experience = result.experience;
-                            data.credentials.school = result.school;
-                        } else if (pane === vm.panes.services) {
-                            data.services.ages = result.ages;
-                            data.services.positions = result.positions;
-                            data.services.specialties = result.specialties;
-                        }
-
-                    }
-                });
-            }
+			function showModalFail(error) {
+				logger.error(error);
+			}
         }
+
+		/**
+         * @name closeModalHandler
+         * @desc Handles closing the given modal
+		 * @param {modal} modal The modal to handle
+		 * @param {String} pane The pane this modal is handling
+		 * @param {Object} data The data the pane is handling
+         * @memberof Controllers.TrainerProfileController
+         */
+		function closeModalHandler(modal, pane, data) {
+			modal.close.then(function(result) {
+				if (result.status.save) {
+
+					if (pane === vm.panes.summary) {
+						data.summary = result.summary;
+					} else if (pane === vm.panes.locations) {
+
+					} else if (pane === vm.panes.packages) {
+
+					} else if (pane === vm.panes.credentials) {
+						data.credentials.experience = result.experience;
+						data.credentials.school = result.school;
+					} else if (pane === vm.panes.services) {
+						data.services.ages = result.ages;
+						data.services.positions = result.positions;
+						data.services.specialties = result.specialties;
+					}
+
+				}
+			})
+			.catch(function(error) {
+				logger.error(error);
+			});
+		}
     }
 })();

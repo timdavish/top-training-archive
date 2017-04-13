@@ -17,172 +17,197 @@
      * @memberof Services
      */
     function modal($animate, $document, $compile, $controller, $http, $rootScope, $q, $templateRequest, $timeout) {
-		function ModalService() {
+		var service = {
+            showModal: showModal
+        };
 
-		    var self = this;
+        return service;
 
-		    //  Returns a promise which gets the template, either
-		    //  from the template parameter or via a request to the
-		    //  template url parameter.
-		    var getTemplate = function(template, templateUrl) {
-		      var deferred = $q.defer();
-		      if (template) {
-		        deferred.resolve(template);
-		      } else if (templateUrl) {
-		        $templateRequest(templateUrl, true)
-		          .then(function(template) {
-		            deferred.resolve(template);
-		          }, function(error) {
-		            deferred.reject(error);
-		          });
-		      } else {
-		        deferred.reject("No template or templateUrl has been specified.");
-		      }
-		      return deferred.promise;
-		    };
+		/* Functions */
 
-		    //  Adds an element to the DOM as the last child of its container
-		    //  like append, but uses $animate to handle animations. Returns a
-		    //  promise that is resolved once all animation is complete.
-		    var appendChild = function(parent, child) {
-		      var children = parent.children();
-		      if (children.length > 0) {
-		        return $animate.enter(child, parent, children[children.length - 1]);
-		      }
-		      return $animate.enter(child, parent);
-		    };
+		/**
+         * @namespace showModal
+         * @desc Handles all logic related to showing a modal
+         * @param {Object} options Modal options
+		 * @return {Promise} Resolved/rejected promise with modal or error
+         * @memberof Services.modal
+         */
+		function showModal(options) {
+			//  Get the body of the document, we'll add the modal to this.
+			var body = angular.element($document[0].body);
 
-		    self.showModal = function(options) {
+			//  Create a deferred we'll resolve when the modal is ready.
+			var deferred = $q.defer();
 
-		      //  Get the body of the document, we'll add the modal to this.
-		      var body = angular.element($document[0].body);
+			//  Validate the input parameters.
+			var controllerName = options.controller;
+			if (!controllerName) {
+				deferred.reject("No controller has been specified.");
+				return deferred.promise;
+			}
 
-		      //  Create a deferred we'll resolve when the modal is ready.
-		      var deferred = $q.defer();
+			//  Get the actual html of the template.
+			getTemplate(options.template, options.templateUrl)
+				.then(function(template) {
 
-		      //  Validate the input parameters.
-		      var controllerName = options.controller;
-		      if (!controllerName) {
-		        deferred.reject("No controller has been specified.");
-		        return deferred.promise;
-		      }
+					//  Create a new scope for the modal.
+					var modalScope = (options.scope || $rootScope).$new();
+					var rootScopeOnClose = $rootScope.$on('$locationChangeSuccess', cleanUpClose);
 
-		      //  Get the actual html of the template.
-		      getTemplate(options.template, options.templateUrl)
-		        .then(function(template) {
+					//  Create the inputs object to the controller - this will include
+					//  the scope, as well as all inputs provided.
+					//  We will also create a deferred that is resolved with a provided
+					//  close function. The controller can then call 'close(result)'.
+					//  The controller can also provide a delay for closing - this is
+					//  helpful if there are closing animations which must finish first.
+					var closeDeferred = $q.defer();
+					var closedDeferred = $q.defer();
+					var inputs = {
+						$scope: modalScope,
+						close: function(result, delay) {
+							if (delay === undefined || delay === null) {
+								delay = 0;
+							}
 
-		          //  Create a new scope for the modal.
-		          var modalScope = (options.scope || $rootScope).$new();
-		          var rootScopeOnClose = $rootScope.$on('$locationChangeSuccess', cleanUpClose);
+							$timeout(function() {
+								cleanUpClose(result);
+							}, delay);
+						}
+					};
 
-		          //  Create the inputs object to the controller - this will include
-		          //  the scope, as well as all inputs provided.
-		          //  We will also create a deferred that is resolved with a provided
-		          //  close function. The controller can then call 'close(result)'.
-		          //  The controller can also provide a delay for closing - this is
-		          //  helpful if there are closing animations which must finish first.
-		          var closeDeferred = $q.defer();
-		          var closedDeferred = $q.defer();
-		          var inputs = {
-		            $scope: modalScope,
-		            close: function(result, delay) {
-		              if (delay === undefined || delay === null) { delay = 0; }
-		              $timeout(function() {
+					//  If we have provided any inputs, pass them to the controller.
+					if (options.inputs) {
+						angular.extend(inputs, options.inputs);
+					}
 
-		                cleanUpClose(result);
+					//  Compile then link the template element, building the actual element.
+					//  Set the $element on the inputs so that it can be injected if required.
+					var linkFn = $compile(template);
+					var modalElement = linkFn(modalScope);
+					inputs.$element = modalElement;
 
-		              }, delay);
-		            }
-		          };
+					//  Create the controller, explicitly specifying the scope to use.
+					var controllerObjBefore = modalScope[options.controllerAs];
+					var modalController = $controller(options.controller, inputs, false, options.controllerAs);
 
-		          //  If we have provided any inputs, pass them to the controller.
-		          if (options.inputs) { angular.extend(inputs, options.inputs); }
+					if (options.controllerAs && controllerObjBefore) {
+						angular.extend(modalController, controllerObjBefore);
+					}
 
-		          //  Compile then link the template element, building the actual element.
-		          //  Set the $element on the inputs so that it can be injected if required.
-		          var linkFn = $compile(template);
-		          var modalElement = linkFn(modalScope);
-		          inputs.$element = modalElement;
+					//  Then, append the modal to the dom.
+					if (options.appendElement) {
+						// append to custom append element
+						appendChild(options.appendElement, modalElement);
+					} else {
+						// append to body when no custom append element is specified
+						appendChild(body, modalElement);
+					}
 
-		          //  Create the controller, explicitly specifying the scope to use.
-		          var controllerObjBefore = modalScope[options.controllerAs];
-		          var modalController = $controller(options.controller, inputs, false, options.controllerAs);
+					// Finally, append any custom classes to the body
+					if (options.bodyClass) {
+						body[0].classList.add(options.bodyClass);
+					}
 
-		          if (options.controllerAs && controllerObjBefore) {
-		            angular.extend(modalController, controllerObjBefore);
-		          }
+					//  We now have a modal object...
+					var modal = {
+						controller: modalController,
+						scope: modalScope,
+						element: modalElement,
+						close: closeDeferred.promise,
+						closed: closedDeferred.promise
+					};
 
-		          //  Then, append the modal to the dom.
-		          if (options.appendElement) {
-		            // append to custom append element
-		            appendChild(options.appendElement, modalElement);
-		          } else {
-		            // append to body when no custom append element is specified
-		            appendChild(body, modalElement);
-		          }
+					//  ...which is passed to the caller via the promise.
+					deferred.resolve(modal);
 
-		          // Finally, append any custom classes to the body
-		          if(options.bodyClass) {
-		            body[0].classList.add(options.bodyClass);
-		          }
+					function cleanUpClose(result) {
 
-		          //  We now have a modal object...
-		          var modal = {
-		            controller: modalController,
-		            scope: modalScope,
-		            element: modalElement,
-		            close: closeDeferred.promise,
-		            closed: closedDeferred.promise
-		          };
+						//  Resolve the 'close' promise.
+						closeDeferred.resolve(result);
 
-		          //  ...which is passed to the caller via the promise.
-		          deferred.resolve(modal);
+						//  Remove the custom class from the body
+						if (options.bodyClass) {
+							body[0].classList.remove(options.bodyClass);
+						}
 
-		          function cleanUpClose(result) {
+						//  Let angular remove the element and wait for animations to finish.
+						$animate.leave(modalElement)
+							.then(function () {
+								//  Resolve the 'closed' promise.
+								closedDeferred.resolve(result);
 
-		            //  Resolve the 'close' promise.
-		            closeDeferred.resolve(result);
+								//  We can now clean up the scope
+								modalScope.$destroy();
 
-		            //  Remove the custom class from the body
-		            if(options.bodyClass) {
-		                body[0].classList.remove(options.bodyClass);
-		            }
+								//  Unless we null out all of these objects we seem to suffer
+								//  from memory leaks, if anyone can explain why then I'd
+								//  be very interested to know.
+								inputs.close = null;
+								deferred = null;
+								closeDeferred = null;
+								modal = null;
+								inputs = null;
+								modalElement = null;
+								modalScope = null;
+							});
 
-		            //  Let angular remove the element and wait for animations to finish.
-		            $animate.leave(modalElement)
-		                    .then(function () {
-		                      //  Resolve the 'closed' promise.
-		                      closedDeferred.resolve(result);
+						// remove event watcher
+						rootScopeOnClose && rootScopeOnClose();
+					}
 
-		                      //  We can now clean up the scope
-		                      modalScope.$destroy();
-
-		                      //  Unless we null out all of these objects we seem to suffer
-		                      //  from memory leaks, if anyone can explain why then I'd
-		                      //  be very interested to know.
-		                      inputs.close = null;
-		                      deferred = null;
-		                      closeDeferred = null;
-		                      modal = null;
-		                      inputs = null;
-		                      modalElement = null;
-		                      modalScope = null;
-		                    });
-
-		            // remove event watcher
-		            rootScopeOnClose && rootScopeOnClose();
-		          }
-
-		        })
-		        .then(null, function(error) { // 'catch' doesn't work in IE8.
-		          deferred.reject(error);
+	        	})
+	        	.then(null, function(error) { // 'catch' doesn't work in IE8.
+					deferred.reject(error);
 		        });
 
-		      return deferred.promise;
-		    };
+			return deferred.promise;
+	    }
 
-		  }
+		/**
+         * @namespace getTemplate
+         * @desc Gets template either from supplied template string, or via templateUrl
+         * @param {String} template Actual html template
+		 * @param {String} templateUrl Url to an html template
+		 * @return {Promise} Resolved/rejected promise with template retrieved
+		 * from template or templateUrl
+         * @memberof Services.modal
+         */
+	    function getTemplate(template, templateUrl) {
+			var deferred = $q.defer();
 
-		  return new ModalService();
+			if (template) {
+				deferred.resolve(template);
+			} else if (templateUrl) {
+				$templateRequest(templateUrl, true)
+					.then(function(template) {
+						deferred.resolve(template);
+					}, function(error) {
+						deferred.reject(error);
+					});
+			} else {
+				deferred.reject("No template or templateUrl has been specified.");
+			}
+
+			return deferred.promise;
+	    }
+
+		/**
+         * @namespace appendChild
+         * @desc Adds an element to the DOM as the last child of its container
+		 * like append, but uses $animate to handle animations.
+         * @param {Element} parent The parent element
+		 * @param {Element} child The child element
+		 * @return {Promise} Resolved promise once all animation is complete
+         * @memberof Services.modal
+         */
+	    function appendChild(parent, child) {
+			var children = parent.children();
+
+			if (children.length > 0) {
+				return $animate.enter(child, parent, children[children.length - 1]);
+			} else {
+				return $animate.enter(child, parent);
+			}
+	    }
     }
 })();

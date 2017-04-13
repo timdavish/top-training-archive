@@ -37,7 +37,7 @@
                 ages: vm.ages.split(','),
                 positions: vm.positions.split(','),
                 specialties: vm.specialties.split(',')
-            }, 500);
+            }, 0);
         }
 
         function cancel() {
@@ -46,7 +46,7 @@
                 status: {
                     save: false
                 }
-            }, 500);
+            }, 0);
         }
     }
 })();

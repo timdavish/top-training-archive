@@ -33,7 +33,7 @@
                     save: true
                 },
                 summary: vm.summary
-            }, 500);
+            }, 0);
         }
 
         function cancel() {
@@ -42,7 +42,7 @@
                 status: {
                     save: false
                 }
-            }, 500);
+            }, 0);
         }
     }
 })();
