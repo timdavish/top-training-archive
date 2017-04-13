@@ -60,7 +60,7 @@ module.exports = function(config) {
         autoWatch: false,
 
         // Start these browsers
-        browsers: ['Chrome'],
+        browsers: ['Chrome', 'Firefox', 'Safari'],
 
         // Continuous integration mode
         // If true, Karma captures browsers, runs the tests and exits
