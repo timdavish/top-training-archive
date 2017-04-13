@@ -1,12 +1,10 @@
-/*.modal-dialog {
+.overlay {
     position: fixed;
-    left: 25%;
+    left: 12.5%;
     top: 25%;
     padding: 25px;
-    border: 2px solid black;
-    background-color: #ffffff;
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: auto;
     z-index: 100;
 }
 .fade {
@@ -19,20 +17,19 @@
     filter: alpha(opacity=70);
     width: 100%;
     height: 100%;
-    z-index: 90;
+    z-index: 99;
 }
-
-.modal.ng-enter {
-  transition: opacity .2s ease-out;
+.custom-modal.ng-enter {
+  transition: opacity .5s ease-out;
   opacity: 0;
 }
-.modal.ng-enter.ng-enter-active {
+.custom-modal.ng-enter.ng-enter-active {
   opacity: 1;
 }
-.modal.ng-leave {
-  transition: opacity .2s ease-out;
+.custom-modal.ng-leave {
+  transition: opacity .5s ease-out;
   opacity: 1;
 }
-.modal.ng-leave.ng-leave-active {
+.custom-modal.ng-leave.ng-leave-active {
   opacity: 0;
-}*/
+}

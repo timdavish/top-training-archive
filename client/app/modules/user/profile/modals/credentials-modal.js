@@ -35,7 +35,7 @@
                 },
                 experience: vm.experience,
                 school: vm.school
-            }, 500);
+            }, 0);
         }
 
         function cancel() {
@@ -44,7 +44,7 @@
                 status: {
                     save: false
                 }
-            }, 500);
+            }, 0);
         }
     }
 })();
