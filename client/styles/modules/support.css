@@ -1,4 +1,6 @@
-
+/**
+ * Support module css
+ */
 .textarea {
     resize: vertical;
     min-height: 150px;
