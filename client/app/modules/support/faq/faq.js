@@ -69,13 +69,12 @@
 
 			/* Functions */
 
-			function getArticlesSuccess(data) {
+			function getArticlesSuccess(res) {
 				// Set our articles
-				vm.generalArticles = data.general;
-				vm.clientArticles = data.client;
-				vm.trainerArticles = data.trainer;
+				vm.generalArticles = res.data.general;
+				vm.clientArticles = res.data.client;
+				vm.trainerArticles = res.data.trainer;
 				deferred.resolve();
-
 			}
 
 			function getArticlesFail(error) {
