@@ -31,8 +31,8 @@
                 state: 'contact',
                 config: {
                     url: '/support/contact',
-                    templateUrl: 'client/app/modules/support/contact/contact.html',
-                    controller: 'ContactController',
+                    templateUrl: 'client/app/modules/support/contact/contact-us.html',
+                    controller: 'ContactUsController',
                     controllerAs: 'vm',
                     title: 'Contact',
                     wantToReturn: true, // Return to this state after login

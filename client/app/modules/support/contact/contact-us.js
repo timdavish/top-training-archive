@@ -1,5 +1,5 @@
 /**
- * Controller for contact.html
+ * Controller for contact-us.html
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -7,16 +7,16 @@
 
     angular
         .module('support.contact')
-        .controller('ContactController', ContactController);
+        .controller('ContactUsController', ContactUsController);
 
-    ContactController.$inject = ['$q', 'authentication', 'support', 'logger'];
+    ContactUsController.$inject = ['$q', 'authentication', 'support', 'logger'];
 
     /**
-     * @namespace ContactController
+     * @namespace ContactUsController
      * @desc Contact controller
      * @memberof Controllers
      */
-    function ContactController($q, authentication, support, logger) {
+    function ContactUsController($q, authentication, support, logger) {
         var vm = this;
 
 		vm.sendRequest = sendRequest;
@@ -28,7 +28,7 @@
 		/**
          * @name activate
          * @desc Activates the view and controller
-         * @memberof Controllers.ContactController
+         * @memberof Controllers.ContactUsController
          */
 		 function activate() {
  			// Promises that need to be resolved to activate
@@ -47,14 +47,14 @@
  			}
 
  			function activateFail(error) {
- 				logger.error('Failed to activate contact view and ctrl', error);
+ 				logger.error('Failed to activate contact-us view and ctrl', error);
  			}
  		}
 
 		/**
          * @name setRequestParams
          * @desc Sets params for the support request form
-         * @memberof Controllers.ContactController
+         * @memberof Controllers.ContactUsController
          */
 		function setRequestParams() {
 			var deferred = $q.defer();
@@ -86,7 +86,7 @@
 		/**
          * @name sendRequest
          * @desc Attempts to send support request
-         * @memberof Controllers.ContactController
+         * @memberof Controllers.ContactUsController
          */
 		function sendRequest(isValid) {
 			var params = getRequestParams();
@@ -117,7 +117,7 @@
 		/**
          * @name getRequestParams
          * @desc Gets params for the support request from the form
-         * @memberof Controllers.ContactController
+         * @memberof Controllers.ContactUsController
          */
 		function getRequestParams() {
 			return {
@@ -133,7 +133,7 @@
 		/**
          * @name nullifyRequestParams
          * @desc Reset contact form
-         * @memberof Controllers.ContactController
+         * @memberof Controllers.ContactUsController
          */
 		function nullifyRequestParams() {
 			vm.firstname = null;
