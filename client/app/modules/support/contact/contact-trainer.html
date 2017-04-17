@@ -1,0 +1,83 @@
+
+<!-- Contact trainer template -->
+
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+
+            <!-- Contact form -->
+            <form name="contactForm" ng-submit="vm.sendRequest(contactForm.$valid)"
+				  class="col-md-9 row fix-form">
+
+                <div class="col-md-12 page-header">
+                    <h3>Contact Trainer</h3>
+                </div>
+
+                <!-- Name -->
+                <div class="col-md-6 form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="form[firstname]" required="required"
+                        id="firstname" class="form-control" placeholder="Jane"
+                        ng-model="vm.firstname" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="form[lastname]" required="required"
+                        id="lastname" class="form-control" placeholder="Doe"
+                        ng-model="vm.lastname" />
+                </div>
+
+                <!-- Contact -->
+                <div class="col-md-6 form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="form[email]" required="required"
+                        id="email" class="form-control" placeholder="jane@email.com"
+                        ng-model="vm.email" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" pattern="^\d{3}-?\d{3}-?\d{4}$" name="form[phone]"
+                        title="Phone number (e.g. 123-456-7890)"
+						id="phone" class="form-control" placeholder="123-456-7890"
+                        ng-model="vm.phone" />
+                </div>
+
+                <!-- Subject -->
+                <div class="col-md-12 form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" name="form[subject]" required="required"
+                        id="subject" class="form-control" placeholder="I need help with the website"
+                        ng-model="vm.subject" />
+                </div>
+
+                <!-- Content -->
+                <div class="col-md-12 form-group">
+                    <label for="content">How can we help?</label>
+                    <textarea name="form[content]" required="required"
+                        id="content" class="form-control textarea" placeholder="Please describe exactly what you're trying to accomplish."
+                        ng-model="vm.content">
+                    </textarea>
+                </div>
+
+                <!-- Submit -->
+                <!-- <div class="col-md-8">
+                    <p class="form-text text-muted"><small>TopTraining will do our best to help you.</small></p>
+                </div> -->
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-md"
+                            value="Send request" ng-disabled="">
+                    </input>
+                </div>
+            </form>
+            <!-- /Contact form -->
+
+			<!-- Back -->
+			<a href="/#/search" title="Back to Trainers"
+			   class="floatL" ng-click="">
+			   <i class="glyphicon glyphicon-chevron-left"></i>
+			   Back to previous page
+		   </a>
+			<!-- /Back -->
+        </div>
+    </div>
+</div>
