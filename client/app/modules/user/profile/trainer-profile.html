@@ -7,9 +7,8 @@
         <div class="row">
 
             <!-- Back -->
-            <a href="/#/search" title="Back to Trainers"
-               class="col-xs-offset-1 col-xs-11" ng-click=""
-               ng-if="vm.search">
+            <a href back-button ng-if="vm.search"
+               class="col-xs-offset-1 col-xs-11">
                 <i class="glyphicon glyphicon-chevron-left"></i>
                 Back to {{ vm.sport | capitalizeFirst }} Trainers
            </a>
