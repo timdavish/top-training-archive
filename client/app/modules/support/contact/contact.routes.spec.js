@@ -10,12 +10,12 @@
  	beforeEach(module('app'));
 
  	// Suite block
- 	describe('State: contact', function() {
+ 	describe('State: contact-us', function() {
  		// Global variables inside this block
  		var $state,
  			$rootScope,
  			$httpBackend,
- 			state = 'contact';
+ 			state = 'contact-us';
 
  		// Inject dependencies
  		beforeEach(inject(function(_$state_, _$rootScope_, _$httpBackend_) {
