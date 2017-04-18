@@ -9,14 +9,14 @@
         .module('app.user')
         .controller('TrainerProfileController', TrainerProfileController);
 
-    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'location', 'modal', 'logger'];
+    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'searchService', 'location', 'modal', 'logger'];
 
     /**
      * @namespace TrainerProfileController
      * @desc Trainer profile controller
      * @memberof Controllers
      */
-    function TrainerProfileController($q, $state, authentication, location, modal, logger) {
+    function TrainerProfileController($q, $state, authentication, searchService, location, modal, logger) {
         var vm = this;
 
 		// Search determines whether this profile is viewed from search or not
@@ -26,7 +26,8 @@
 		// False = don't show back button, show edit buttons
 		vm.search = $state.current.search;
         vm.model = {};
-		vm.sport = '';
+		vm.sport = ''; // For option select
+		vm.sportBack = ''; // For back button
         vm.panes = {}; // For edit modals
 
         vm.openModal = openModal;
@@ -78,6 +79,7 @@
 				// vm.model = authentication.currentUser();
 			}
 			vm.model = {
+				_id: '58ab7657852b192f54ef44d9',
 	            usertype: "trainer",
 	            trainerInfo: {
 	                rating: 4.34,
@@ -245,7 +247,8 @@
          * @memberof Controllers.TrainerProfileController
          */
         function setSport() {
-			vm.sport = vm.model.trainerInfo.sports[0].sport;
+			vm.sport = searchService.sport || vm.model.trainerInfo.sports[0].sport;
+			vm.sportBack = vm.sport;
 		}
 
 

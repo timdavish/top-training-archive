@@ -40,9 +40,9 @@
                 }
             },
             {
-                state: 'search/trainer',
+                state: 'search/trainers',
                 config: {
-                    url: '/search/trainer/{id}',
+                    url: '/search/trainers/{id}',
                     templateUrl: 'client/app/modules/user/profile/trainer-profile.html',
                     controller: 'TrainerProfileController',
                     controllerAs: 'vm',

@@ -58,7 +58,7 @@
                         ng-model="vm.email" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="phone">Phone Number</label>
+                    <label for="phone">Phone Number (Optional)</label>
                     <input type="tel" pattern="^\d{3}-?\d{3}-?\d{4}$" name="form[phone]"
                         title="Phone number (e.g. 123-456-7890)"
 						id="phone" class="form-control" placeholder="123-456-7890"
@@ -95,11 +95,11 @@
             <!-- /Contact form -->
 
 			<!-- Back -->
-			<a href="/#/search" title="Back to Trainers"
-			   class="floatL" ng-click="">
-			   <i class="glyphicon glyphicon-chevron-left"></i>
-			   Back to previous page
-		   </a>
+			<a href back-button
+               class="floatL">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+				Back to previous page
+           </a>
 			<!-- /Back -->
         </div>
     </div>

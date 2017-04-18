@@ -13,13 +13,13 @@
 
     /**
      * @namespace ContactTrainerController
-     * @desc Contact controller
+     * @desc Contact trainer controller
      * @memberof Controllers
      */
     function ContactTrainerController($q, authentication, support, logger) {
         var vm = this;
 
-		vm.sendRequest = sendRequest;
+		vm.sendMessage = sendMessage;
 
 		activate();
 
@@ -62,6 +62,7 @@
 			// If a user is logged in and their data exists
 			if (authentication.isLoggedIn() && authentication.currentUser()) {
 				var contact = authentication.currentUser().contact;
+				console.log(contact);
 
 				if (contact.firstname) {
 					vm.firstname = contact.firstname;
@@ -84,34 +85,43 @@
 		}
 
 		/**
-         * @name sendRequest
+         * @name sendMessage
          * @desc Attempts to send support request
          * @memberof Controllers.ContactTrainerController
          */
-		function sendRequest(isValid) {
+		function sendMessage(isValid) {
 			var params = getRequestParams();
 
-			// Validate form
-			if (isValid) {
+			// Validate form and params
+			if (isValid && paramsValid(params)) {
 				support.sendRequest(params)
-					.then(sendRequestSuccess)
-					.catch(sendRequestFail);
+					.then(sendMessageSuccess)
+					.catch(sendMessageFail);
 			// Set an error message
 			} else {
-				sendRequestFail('Form didn\'t pass validation');
+				sendMessageFail('Form didn\'t pass validation');
 			}
 
 			/* Functions */
 
-			function sendRequestSuccess(data) {
+			function sendMessageSuccess(data) {
 				// Reset contact form
 				nullifyRequestParams();
 				logger.info('Finished sending support request', data);
 			}
 
-			function sendRequestFail(error) {
+			function sendMessageFail(error) {
 				logger.error('Failed to send support request', error);
 			}
+		}
+
+		/**
+         * @name paramsValid
+         * @desc Validates params for the support request
+         * @memberof Controllers.ContactTrainerController
+         */
+		function paramsValid(params) {
+			return params.firstname && params.lastname && params.email && params.subject && params.content;
 		}
 
 		/**
@@ -121,11 +131,12 @@
          */
 		function getRequestParams() {
 			return {
+				to: 'timdavish@gmail.com',
 				firstname: vm.firstname,
 				lastname: vm.lastname,
 				email: vm.email,
 				phone: vm.phone,
-				subject: vm.subject,
+				subject: 'TopTraining: A potential client, ' + vm.firstname + ' has contacted you!',
 				content: vm.content
 			};
 		}
@@ -136,11 +147,7 @@
          * @memberof Controllers.ContactTrainerController
          */
 		function nullifyRequestParams() {
-			vm.firstname = null;
-			vm.lastname = null;
-			vm.email = null;
 			vm.phone = null;
-			vm.subject = null;
 			vm.content = null;
 		}
     }

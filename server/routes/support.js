@@ -16,14 +16,14 @@ var transporter = nodemailer.createTransport({
 var router = express.Router();
 
 // (POST) Send a contact request
-router.post('/sendRequest', function(req, res, next) {
+router.post('/sendMail', function(req, res, next) {
 	var data = req.body;
 
 	transporter.sendMail({
 		from: data.email,
-		to: 'timdavish@gmail.com',
+		to: data.to,
 		replyTo: data.email,
-		subject: 'Support message: ' + data.subject,
+		subject: data.subject,
 		text: data.content
 	}, function(err) {
 		if (err) { return next(err); }

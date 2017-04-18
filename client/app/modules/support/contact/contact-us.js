@@ -121,11 +121,12 @@
          */
 		function getRequestParams() {
 			return {
+				to: 'timdavish@gmail.com',
 				firstname: vm.firstname,
 				lastname: vm.lastname,
 				email: vm.email,
 				phone: vm.phone,
-				subject: vm.subject,
+				subject: 'TopTraining Support: ' + vm.subject,
 				content: vm.content
 			};
 		}
