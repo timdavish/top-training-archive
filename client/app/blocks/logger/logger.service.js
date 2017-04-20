@@ -43,7 +43,7 @@
          */
         function info(message, data) {
 			if (service.showLogs && service.showInfoLogs) {
-				$log.info('Info: ' + message, data ? 'Data: ' + data : '');
+				$log.info('Info: ' + message, data ? data : '(No data)');
 			}
         }
 
@@ -56,7 +56,7 @@
          */
         function success(message, data) {
 			if (service.showLogs) {
-	            $log.info('Success: ' + message, data ? 'Data: ' + data : '');
+	            $log.info('Success: ' + message, data ? data : '(No data)');
 			}
         }
 
@@ -69,7 +69,7 @@
          */
         function warning(message, data) {
 			if (service.showLogs) {
-	            $log.warn('Warning: ' + message, data ? 'Data: ' + data : '');
+	            $log.warn('Warning: ' + message, data ? data : '(No data)');
 			}
         }
 
@@ -82,7 +82,7 @@
          */
         function error(message, data) {
 			if (service.showLogs) {
-	            $log.error('Error: ' + message, data ? 'Data: ' + data : '');
+	            $log.error('Error: ' + message, data ? data : '(No data)');
 			}
         }
     }
