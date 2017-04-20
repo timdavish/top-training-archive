@@ -121,7 +121,7 @@
          */
 		function getRequestParams() {
 			return {
-				to: 'timdavish@gmail.com',
+				to: 'toptrainingpro@gmail.com',
 				firstname: vm.firstname,
 				lastname: vm.lastname,
 				email: vm.email,
