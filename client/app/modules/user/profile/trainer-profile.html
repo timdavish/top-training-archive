@@ -114,10 +114,10 @@
 
                         <div class="pane-content">
                             <div ng-repeat="package in set.packages">
-                                <p>Training group size: {{ package.size }}</p>
-                                <p>Number of sessions: {{ package.count }}</p>
-                                <p>Price: {{ package.price * package.count }}</p>
-                                <p>Price per session: {{ package.price }}</p>
+                                <p>Training group size: {{ package.slots }}</p>
+                                <p>Number of sessions: {{ package.sessions }}</p>
+                                <p>Price: {{ package.price }}</p>
+                                <p>Price per session: {{ package.price / package.sessions }}</p>
                                 <a href="/#/checkout/packages/{{ package._id }}"><button class="btn btn-primary">Book Now</button></a>
                             </div>
                         </div>

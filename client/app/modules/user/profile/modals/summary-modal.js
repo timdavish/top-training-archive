@@ -20,7 +20,7 @@
         var vm = this;
 
         vm.title = title;
-        vm.summary = summary;
+        vm.tempSummary = angular.copy(summary);
 
         vm.save = save;
         vm.cancel = cancel;
@@ -32,12 +32,11 @@
                 status: {
                     save: true
                 },
-                summary: vm.summary
+                summary: vm.tempSummary
             }, 0);
         }
 
         function cancel() {
-            $element.modal('hide');
             close({
                 status: {
                     save: false
