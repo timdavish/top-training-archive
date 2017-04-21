@@ -6,17 +6,17 @@
     'use strict'; // Strict mode
 
     angular
-        .module('app.user')
+        .module('user.profile')
         .controller('TrainerProfileController', TrainerProfileController);
 
-    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'location', 'modal', 'logger'];
+    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'searchService', 'location', 'modal', 'logger'];
 
     /**
      * @namespace TrainerProfileController
      * @desc Trainer profile controller
      * @memberof Controllers
      */
-    function TrainerProfileController($q, $state, authentication, location, modal, logger) {
+    function TrainerProfileController($q, $state, authentication, searchService, location, modal, logger) {
         var vm = this;
 
 		// Search determines whether this profile is viewed from search or not
@@ -26,7 +26,8 @@
 		// False = don't show back button, show edit buttons
 		vm.search = $state.current.search;
         vm.model = {};
-		vm.sport = '';
+		vm.sport = ''; // For option select
+		vm.sportBack = ''; // For back button
         vm.panes = {}; // For edit modals
 
         vm.openModal = openModal;
@@ -78,6 +79,7 @@
 				// vm.model = authentication.currentUser();
 			}
 			vm.model = {
+				_id: '58ab7657852b192f54ef44d9',
 	            usertype: "trainer",
 	            trainerInfo: {
 	                rating: 4.34,
@@ -129,21 +131,15 @@
 	                        packages: [
 	                            {
 	                                _id: 1,
-	                                count: 1,
-	                                size: 1,
+	                                sessions: 1,
+	                                slots: 1,
 	                                price: 30
 	                            },
 	                            {
 	                                _id: 2,
-	                                count: 2,
-	                                size: 1,
-	                                price: 25
-	                            },
-	                            {
-	                                _id: 3,
-	                                count: 5,
-	                                size: 1,
-	                                price: 22
+	                                sessions: 2,
+	                                slots: 1,
+	                                price: 50
 	                            }
 	                        ],
 	                        events: [],
@@ -173,21 +169,21 @@
 	                        packages: [
 	                            {
 	                                _id: 4,
-	                                count: 1,
-	                                size: 1,
+	                                sessions: 1,
+	                                slots: 1,
 	                                price: 30
 	                            },
 	                            {
 	                                _id: 5,
-	                                count: 2,
-	                                size: 1,
-	                                price: 25
+	                                sessions: 2,
+	                                slots: 1,
+	                                price: 50
 	                            },
 	                            {
 	                                _id: 6,
-	                                count: 5,
-	                                size: 1,
-	                                price: 22
+	                                sessions: 5,
+	                                slots: 1,
+	                                price: 110
 	                            }
 	                        ],
 	                        events: [],
@@ -245,7 +241,8 @@
          * @memberof Controllers.TrainerProfileController
          */
         function setSport() {
-			vm.sport = vm.model.trainerInfo.sports[0].sport;
+			vm.sport = searchService.sport || vm.model.trainerInfo.sports[0].sport;
+			vm.sportBack = vm.sport;
 		}
 
 
@@ -320,14 +317,16 @@
 	                error = 'TODO: edit training locations';
 					inputs = {};
 	            } else if (pane === vm.panes.packages) {
-	                error = 'TODO: edit packages';
-					inputs = {};
+					templateUrl = 'client/app/modules/user/profile/modals/packages-modal.html';
+					controller = 'PackagesModalController';
+					inputs = {
+						packages: data.packages
+					};
 	            } else if (pane === vm.panes.credentials) {
 	                templateUrl = 'client/app/modules/user/profile/modals/credentials-modal.html';
 	                controller = 'CredentialsModalController';
 	                inputs = {
-	                    experience: data.credentials.experience,
-	                    school: data.credentials.school
+	                    credentials: data.credentials
 	                };
 	            } else if (pane === vm.panes.services) {
 	                templateUrl = 'client/app/modules/user/profile/modals/services-modal.html';
@@ -348,7 +347,8 @@
 					templateUrl: templateUrl,
                     controller: controller,
                     controllerAs: 'vm',
-                    inputs: inputs
+                    inputs: inputs,
+					bodyClass: 'modal-open'
 				};
 
                 modal.showModal(modalOptions)
@@ -382,14 +382,13 @@
 				if (result.status.save) {
 
 					if (pane === vm.panes.summary) {
-						data.summary = result.summary;
+						data[pane] = result[pane];
 					} else if (pane === vm.panes.locations) {
 
 					} else if (pane === vm.panes.packages) {
-
+						data[pane] = result[pane];
 					} else if (pane === vm.panes.credentials) {
-						data.credentials.experience = result.experience;
-						data.credentials.school = result.school;
+						data[pane] = result[pane];
 					} else if (pane === vm.panes.services) {
 						data.services.ages = result.ages;
 						data.services.positions = result.positions;

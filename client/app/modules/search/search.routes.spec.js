@@ -40,11 +40,11 @@ describe('Unit: search routes', function() {
 	});
 
 	// Suite block
-	describe('State: search/trainer', function() {
+	describe('State: search/trainers', function() {
 		// Global variables inside this block
 		var $state,
 			$rootScope,
-			state = 'search/trainer';
+			state = 'search/trainers';
 
 		// Inject dependencies
 		beforeEach(inject(function(_$state_, _$rootScope_) {
@@ -63,7 +63,7 @@ describe('Unit: search routes', function() {
 
 		// Test
 		it('should respond to URL', function() {
-			expect($state.href(state)).toEqual('#/search/trainer/');
+			expect($state.href(state)).toEqual('#/search/trainers/');
 		});
 	});
 

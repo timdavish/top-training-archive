@@ -1,5 +1,5 @@
 /**
- * Controller for summary-modal.html
+ * Controller for packages-modal.html
  * @namespace Controllers
  */
 (function() { // IIFE structure
@@ -7,23 +7,24 @@
 
     angular
         .module('app.user')
-        .controller('SummaryModalController', SummaryModalController);
+        .controller('PackagesModalController', PackagesModalController);
 
-    SummaryModalController.$inject = ['$element', 'close', 'title', 'summary'];
+    PackagesModalController.$inject = ['$element', 'close', 'title', 'packages'];
 
     /**
-     * @namespace SummaryModalController
-     * @desc Summary Edit Modal Controller
+     * @namespace PackagesModalController
+     * @desc Credentials Edit Modal Controller
      * @memberof Controllers
      */
-    function SummaryModalController($element, close, title, summary) {
+    function PackagesModalController($element, close, title, packages) {
         var vm = this;
 
         vm.title = title;
-        vm.tempSummary = angular.copy(summary);
+        vm.tempPackages = angular.copy(packages);
 
         vm.save = save;
         vm.cancel = cancel;
+		vm.addPackage = addPackage;
 
         /* Functions */
 
@@ -32,7 +33,7 @@
                 status: {
                     save: true
                 },
-                summary: vm.tempSummary
+                packages: vm.tempPackages
             }, 0);
         }
 
@@ -43,5 +44,9 @@
                 }
             }, 0);
         }
+
+		function addPackage() {
+			vm.tempPackages.push({});
+		}
     }
 })();

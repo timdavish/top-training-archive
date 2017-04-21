@@ -41,7 +41,6 @@
         }
 
         function cancel() {
-            $element.modal('hide');
             close({
                 status: {
                     save: false

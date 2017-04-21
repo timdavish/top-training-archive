@@ -1,0 +1,69 @@
+
+<div class="custom-modal">
+    <div class="overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Editing your {{ vm.title | capitalizeFirst }}</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group row" ng-repeat="package in vm.tempPackages">
+						<hr />
+
+						<!-- # of sessions -->
+						<label for="sessions" class="col-sm-2 control-label"># of Sessions:</label>
+                        <div class="col-sm-4">
+							<select class="form-control select" id="sessions"
+									ng-model="package.sessions">
+								<option value="1" ng-selected="package.sessions == 1">1</option>
+								<option value="2" ng-selected="package.sessions == 2">2</option>
+								<option value="5" ng-selected="package.sessions == 5">5</option>
+								<option value="10" ng-selected="package.sessions == 10">10</option>
+							</select>
+                        </div>
+
+						<!-- # of slots -->
+						<label for="slots" class="col-sm-2 control-label"># of Slots:</label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control"
+                                   id="slots" placeholder="# of slots"
+                                   ng-model="package.slots">
+                            </input>
+                        </div>
+
+						<!-- price/package -->
+						<label for="sessionprice" class="col-sm-2 control-label">Price/Session:</label>
+						<div class="col-sm-4">
+							<p id="sessionprice">
+								{{ package.price / package.sessions }}
+							</p>
+						</div>
+
+						<!-- Total price -->
+						<label for="price" class="col-sm-2 control-label">Total Price:</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control"
+								   id="price" placeholder="Total price"
+								   ng-model="package.price">
+							</input>
+						</div>
+
+						<hr />
+                    </div>
+                </form>
+
+				<button class="btn btn-primary" ng-click="vm.addPackage()">Add new package</button>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" ng-click="vm.save()" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
+                <button type="button" ng-click="vm.cancel()" class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+	<div class="fade"></div>
+</div>

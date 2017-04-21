@@ -1,0 +1,50 @@
+
+<!-- Contact trainer template -->
+
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+
+			<h1>Contact Trainer</h1>
+
+            <!-- Contact form -->
+            <form name="contactForm" ng-submit="vm.sendMessage(contactForm.$valid)"
+				  class="col-md-12 row fix-form">
+
+				  <div class="col-md-6 form-group">
+                      <label for="phone">Phone Number (Optional)</label>
+                      <input type="tel" pattern="^\d{3}-?\d{3}-?\d{4}$" name="form[phone]"
+                          title="Phone number (e.g. 123-456-7890)"
+  						  id="phone" class="form-control" placeholder="123-456-7890"
+                          ng-model="vm.phone" />
+                  </div>
+
+				  <!-- Content -->
+                  <div class="col-md-12 form-group">
+                      <label for="content">What questions do you have for this trainer?</label>
+                      <textarea name="form[content]" required="required"
+                          id="content" class="form-control textarea"
+						  placeholder="Example: My 13 year old son is trying our for his school team and needs to improve his speed.  Do you offer services for this?  Thanks!"
+                          ng-model="vm.content">
+                      </textarea>
+                  </div>
+
+				  <!-- Submit -->
+                  <div class="col-md-12">
+                      <input type="submit" class="btn btn-primary btn-md"
+                              value="Send message" ng-disabled="">
+                      </input>
+                  </div>
+            </form>
+            <!-- /Contact form -->
+
+			<!-- Back -->
+			<a href back-button
+               class="floatL">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+				Back to trainer
+           </a>
+			<!-- /Back -->
+        </div>
+    </div>
+</div>

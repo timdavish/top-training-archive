@@ -77,6 +77,23 @@
                         }
                     }]
                 }
+            },
+			{
+                state: 'forgot-password',
+                config: {
+                    url: '/forgot-password',
+                    templateUrl: 'client/app/modules/user/authentication/forgot-password.html',
+                    controller: 'ForgotPasswordController',
+                    controllerAs: 'vm',
+                    title: 'Forgot Password',
+                    wantToReturn: false, // Return to this state after login
+                    requiresLoggedIn: false, // Require login at this state
+                    onEnter: ['$state', 'authentication', function($state, authentication) {
+                        if (authentication.isLoggedIn()) {
+                            $state.go('home');
+                        }
+                    }]
+                }
             }
         ];
     }

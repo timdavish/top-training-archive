@@ -36,7 +36,7 @@
          * @memberof Services.support
          */
         function sendRequest(params) {
-			return $http.post('/support/sendRequest', params);
+			return $http.post('/support/sendMail', params);
         }
 
 		/**

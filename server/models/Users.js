@@ -170,6 +170,11 @@ var UserSchema = new mongoose.Schema({
 // Index our searchable locations
 UserSchema.index({"trainerInfo.locations": "2dsphere"});
 
+// Find a user by email
+UserSchema.statics.findByEmail = function(email) {
+	return this.find({ 'contact.email': new RegExp(email, 'i') });
+};
+
 // Set a hashed password using a crypto salt
 UserSchema.methods.setPassword = function(password) {
     this.accounts.local.salt = crypto.randomBytes(16).toString('hex');

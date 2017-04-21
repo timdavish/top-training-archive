@@ -18,7 +18,7 @@
      */
     function searchService($http) {
         var service = {
-            trainer: {},
+            sport: '',
 
             searchTrainers: searchTrainers
         };
@@ -35,6 +35,8 @@
 		 * @memberof Services.searchService
          */
         function searchTrainers(searchParams) {
+			service.sport = searchParams.sport.toLowerCase();
+
             return $http.post('/users/getTrainers', searchParams);
         }
     }

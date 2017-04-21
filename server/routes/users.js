@@ -23,6 +23,19 @@ router.param('user', function(req, res, next, id) {
     });
 });
 
+// (PARAM) Route for preloading user objects
+router.param('email', function(req, res, next, email) {
+    var query = User.findByEmail(email);
+
+    query.exec(function(err, user) {
+        if (err) { return next(err); }
+        if (!user) { return next(new Error('Can\'t find the user you are looking for.')); }
+
+        req.user = user;
+        return next();
+    });
+});
+
 // (POST) New user sign up
 router.post('/signUp', function(req, res, next) {
     // Ensure all fields are filled out
@@ -117,6 +130,11 @@ router.post('/getTrainers', function(req, res, next) {
 // (GET) Get a single user by id
 router.get('/:user', function(req, res) {
     res.json(req.user);
+});
+
+// (GET) Get a single user by id
+router.get('/getByEmail/:email', function(req, res) {
+	res.json(req.user);
 });
 
 // Export the router

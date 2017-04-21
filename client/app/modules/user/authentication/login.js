@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('app.user')
+        .module('user.authentication')
         .controller('LogInController', LogInController);
 
     LogInController.$inject = ['$rootScope', '$state', 'authentication'];

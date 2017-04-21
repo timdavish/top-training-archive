@@ -9,19 +9,18 @@
         .module('app.user')
         .controller('CredentialsModalController', CredentialsModalController);
 
-    CredentialsModalController.$inject = ['$element', 'close', 'title', 'experience', 'school'];
+    CredentialsModalController.$inject = ['$element', 'close', 'title', 'credentials'];
 
     /**
      * @namespace CredentialsModalController
      * @desc Credentials Edit Modal Controller
      * @memberof Controllers
      */
-    function CredentialsModalController($element, close, title, experience, school) {
+    function CredentialsModalController($element, close, title, credentials) {
         var vm = this;
 
         vm.title = title;
-        vm.experience = experience;
-        vm.school = school;
+        vm.tempCredentials = angular.copy(credentials);
 
         vm.save = save;
         vm.cancel = cancel;
@@ -33,13 +32,11 @@
                 status: {
                     save: true
                 },
-                experience: vm.experience,
-                school: vm.school
+                credentials: vm.tempCredentials
             }, 0);
         }
 
         function cancel() {
-            $element.modal('hide');
             close({
                 status: {
                     save: false
