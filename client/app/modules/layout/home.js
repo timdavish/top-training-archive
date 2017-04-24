@@ -23,11 +23,6 @@
 		vm.currentUser = authentication.currentUser;
         vm.sports = ["Basketball", "Baseball", "Cross Training"];
         vm.searchParams = {};
-		// Set our autocomplete options for this page
-		vm.autocompleteOptions = {
-			types: ['geocode'],
-			componentRestrictions: {country: 'US'}
-		};
 
         vm.search = search;
         vm.redirectTo = redirectTo;
