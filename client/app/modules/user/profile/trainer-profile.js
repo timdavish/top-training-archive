@@ -314,8 +314,11 @@
 	                    summary: data.summary
 	                };
 	            } else if (pane === vm.panes.locations) {
-	                error = 'TODO: edit training locations';
-					inputs = {};
+                    templateUrl = 'client/app/modules/user/profile/modals/locations-modal.html';
+                    controller = 'LocationsModalController';
+					inputs = {
+						locations: data.locations
+					};
 	            } else if (pane === vm.panes.packages) {
 					templateUrl = 'client/app/modules/user/profile/modals/packages-modal.html';
 					controller = 'PackagesModalController';
@@ -384,7 +387,8 @@
 					if (pane === vm.panes.summary) {
 						data[pane] = result[pane];
 					} else if (pane === vm.panes.locations) {
-
+						data[pane] = result[pane];
+						setMapMarkers();
 					} else if (pane === vm.panes.packages) {
 						data[pane] = result[pane];
 					} else if (pane === vm.panes.credentials) {

@@ -1,0 +1,56 @@
+
+<div class="custom-modal">
+    <div class="overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Editing your {{ vm.title | capitalizeFirst }}</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+					<div class="form-group row" ng-repeat="location in vm.tempLocations | orderBy: '+priority'">
+						<hr />
+
+						<!-- Priority -->
+						<label for="priority" class="col-sm-2 control-label">Priority:</label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control"
+                                   id="priority" placeholder=""
+                                   ng-model="location.priority">
+                            </input>
+                        </div>
+
+						<!-- Priority -->
+						<label for="location" class="col-sm-2 control-label">Location:</label>
+                        <div class="col-sm-4">
+							<input class="form-control input-lg input-search" id="location"
+								ng-model="location.formatted_address"
+								google-auto-complete
+								type="text" placeholder="Location">
+							</input>
+                        </div>
+
+						<hr />
+                    </div>
+
+					<input class="form-control input-lg input-search" id="location"
+						ng-model="vm.newLocation"
+						google-auto-complete
+						type="text" placeholder="Location">
+					</input>
+
+					<button class="btn btn-primary" ng-click="vm.addLocation()">Add new location</button>
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" ng-click="vm.save()" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
+                <button type="button" ng-click="vm.cancel()" class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+	<div class="fade"></div>
+</div>

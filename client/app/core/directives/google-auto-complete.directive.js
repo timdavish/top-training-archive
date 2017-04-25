@@ -21,7 +21,6 @@
             link: function(scope, element, attributes, model) {
                 var input = element[0];
                 var options = {
-					types: ['geocode'],
 					componentRestrictions: {country: 'US'}
 				};
 
