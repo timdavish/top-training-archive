@@ -1,6 +1,12 @@
+/**
+ * Sports mongoose model
+ */
+'use strict';
 
+// Dependencies
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var SportSchema = new Schema({
     sport: {
@@ -15,7 +21,7 @@ var SportSchema = new Schema({
 	},
 	/* This is just an idea */
 	trainers: [{
-		type: mongoose.Schema.Types.ObjectId,
+		type: ObjectId,
 		ref: 'User'
 	}]
 });
