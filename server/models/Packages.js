@@ -3,7 +3,7 @@
  */
 'use strict';
 
-// Dependencies
+// Module dependencies
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

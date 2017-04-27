@@ -3,7 +3,7 @@
  */
 'use strict';
 
-// Dependencies
+// Module dependencies
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
@@ -13,7 +13,8 @@ var SportSchema = new Schema({
         type: String,
 		enum: ['Basketball', 'Baseball', 'Cross Training'],
         ref: 'User',
-        required: true
+        required: true,
+		unique: true
     },
 	date: {
 		type: Date,
