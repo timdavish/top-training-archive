@@ -28,12 +28,10 @@ var server = https.createServer(httpsOptions, function(req, res) {
 // Listen on provided port, on all network interfaces
 server.listen(port);
 
-// Create HTTP server
-// var server = http.createServer(app);
-
-// server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/* Functions */
 
 /**
  * Normalize a port into a number, string, or false.
