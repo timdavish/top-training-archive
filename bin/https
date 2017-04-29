@@ -6,9 +6,9 @@ var debug = require('debug')('top-training:server');
 var fs = require('fs');
 var https = require('https');
 var httpsOptions = {
-	key: fs.readFileSync('server/server-key.pem'),
-    cert: fs.readFileSync('server/server-crt.pem'),
-    ca: fs.readFileSync('server/ca-crt.pem')
+	key: fs.readFileSync('server/security/server-key.pem'),
+    cert: fs.readFileSync('server/security/server-crt.pem'),
+    ca: fs.readFileSync('server/security/ca-crt.pem')
 };
 
 // Get port from environment and store in Express
@@ -16,14 +16,7 @@ var defaultPort = 443; // If environment port unavailable, use default
 var port = normalizePort(process.env.PORT || defaultPort);
 app.set('port', port);
 
-var server = https.createServer(httpsOptions, function(req, res) {
-	console.log(new Date() + ' ' +
-		req.connection.remoteAddress + ' ' +
-		req.method + ' ' + req.url);
-
-	res.writeHead(200);
-	res.end('Hello world');
-});
+var server = https.createServer(httpsOptions, app);
 
 // Listen on provided port, on all network interfaces
 server.listen(port);
@@ -86,8 +79,6 @@ function onError(error) {
  */
 function onListening() {
     var addr = server.address();
-    var bind = typeof addr === 'string' ?
-		'pipe ' + addr : 'port ' + addr.port;
-    debug('Listening on ' + bind);
-    console.log('Listening on ' + bind);
+    debug('Listening on', addr);
+    console.log('Listening on', addr);
 }
