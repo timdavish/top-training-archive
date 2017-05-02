@@ -1,5 +1,6 @@
 /**
- * Packages mongoose model
+ * Packages mongoose models
+ * @member {Package} Uses PackageSchema
  */
 'use strict';
 
@@ -20,7 +21,7 @@ var PackageSchema = new Schema({
 		default: 1,
 		required: true
 	},
-	price: {
+	price: { // Total
 		type: Number,
 		default: 0,
 		required: true

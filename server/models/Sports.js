@@ -1,5 +1,6 @@
 /**
- * Sports mongoose model
+ * Sports mongoose models
+ * @member {Sport} Uses SportSchema
  */
 'use strict';
 
@@ -12,13 +13,14 @@ var SportSchema = new Schema({
     sport: {
         type: String,
 		enum: ['Basketball', 'Baseball', 'Cross Training'],
-        ref: 'User',
         required: true,
 		unique: true
     },
-	date: {
-		type: Date,
-		default: Date.now
+	data: {
+		created: { // Sport creation date
+            type: Date,
+            default: Date.now
+        },
 	},
 	/* This is just an idea */
 	trainers: [{

@@ -1,5 +1,6 @@
 /**
- * Reviews mongoose model
+ * Reviews mongoose models
+ * @member {Review} Uses ReviewSchema
  */
 'use strict';
 

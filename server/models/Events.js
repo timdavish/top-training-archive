@@ -1,7 +1,15 @@
+/**
+ * Events mongoose models
+ * @member {Event} Uses EventSchema
+ */
+'use strict';
 
+// Module dependencies
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
-var EventSchema = new mongoose.Schema({
+var EventSchema = new Schema({
     title: String,
     sport: String,
     description: String,
@@ -9,8 +17,8 @@ var EventSchema = new mongoose.Schema({
     slotsTaken: { type: Number, default: 0 },
     startsAt: Date,
     endsAt: Date,
-    trainer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    trainer: { type: ObjectId, ref: 'User' },
+    clients: [{ type: ObjectId, ref: 'User' }],
     archived: { type: Boolean, default: false }
 });
 
