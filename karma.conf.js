@@ -28,14 +28,12 @@ module.exports = function(config) {
 			'bower_components/rrule/lib/rrule.js',
 			'https://maps.googleapis.com/maps/api/js?libraries=places,visualization&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA',
 			'bower_components/ngmap/build/scripts/ng-map.min.js',
-			'bower_components/angular-modal-service/dst/angular-modal-service.min.js',
 
 			'client/app/**/*.module.js', // Load modules first
-			'client/app/**/*.js', // All other app js
+			'client/app/**/*.js', // All other app js, including specs
 			'client/app/**/*.html', // App html
 
 			'client/test/test-helpers.js', // Test helper functions
-			'client/app/**/*.spec.js' // Tests
         ],
 
         // List of files to exclude
@@ -48,7 +46,7 @@ module.exports = function(config) {
         reporters: ['progress'],
 
         // Web server port
-        port: 3000,
+        port: 443,
 
         // Enable/disable colors in the output (reporters and logs)
         colors: true,
