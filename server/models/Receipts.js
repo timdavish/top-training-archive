@@ -1,6 +1,6 @@
 /**
- * Reciepts mongoose models
- * @member {Reciept} Uses RecieptSchema
+ * Receipts mongoose models
+ * @member {Receipt} Uses ReceiptSchema
  */
 'use strict';
 
@@ -10,10 +10,10 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 /**
- * @name RecieptSchema
- * @desc Defines reciept schema
+ * @name ReceiptSchema
+ * @desc Defines receipt schema
  */
-var RecieptSchema = new Schema({
+var ReceiptSchema = new Schema({
 	client: {
 		type: ObjectId,
 		ref: 'Client',
@@ -37,4 +37,4 @@ var RecieptSchema = new Schema({
     }
 });
 
-mongoose.model('Reciept', RecieptSchema);
+mongoose.model('Receipt', ReceiptSchema);
