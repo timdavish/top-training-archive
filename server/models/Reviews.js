@@ -9,6 +9,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
+/**
+ * @name ReviewSchema
+ * @desc Defines review schema
+ */
 var ReviewSchema = new Schema({
 	trainer: {
 		type: ObjectId,

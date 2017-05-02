@@ -9,6 +9,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
+/**
+ * @name CommentSchema
+ * @desc Defines comment schema
+ */
 var CommentSchema = new Schema({
     body: String,
     author: String,

@@ -9,6 +9,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
+/**
+ * @name PostSchema
+ * @desc Defines post schema
+ */
 var PostSchema = new Schema({
     title: String,
     link: String,

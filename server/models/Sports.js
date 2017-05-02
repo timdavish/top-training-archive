@@ -9,6 +9,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
+/**
+ * @name SportSchema
+ * @desc Defines sport schema
+ */
 var SportSchema = new Schema({
     sport: {
         type: String,

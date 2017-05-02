@@ -8,10 +8,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+/**
+ * @name PackageSchema
+ * @desc Defines package schema
+ */
 var PackageSchema = new Schema({
     type: {
         type: String,
-		enum: ['individual', 'small', 'group'],
+		enum: ['private', 'small', 'group'],
         required: true,
 		lowercase: true
     },
