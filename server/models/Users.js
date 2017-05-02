@@ -1,18 +1,31 @@
+/**
+ * Users mongoose models
+ * @member {User} Uses UserSchema
+ * @member {Client} Uses ClientSchema, built on UserSchema
+ * @member {Trainer} Uses TrainerSchema, built on UserSchema
+ */
+'use strict';
 
 // Module dependencies
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 var crypto = require('crypto'); // Used for generating password hash
 var jwt = require('jsonwebtoken'); // Used for generating tokens
+var options = { discriminatorKey: 'kind' }; // Used for different user types
 
-// Define the User schema
-var UserSchema = new mongoose.Schema({
-    usertype: { // All users have this data
+/**
+ * @name UserSchema
+ * @desc Defines general user schema, all users have this data
+ */
+var UserSchema = new Schema({
+    usertype: {
         type: String,
-        enum: ['client', 'trainer', 'admin'],
+        enum: ['admin', 'client', 'trainer'],
         required: true,
         lowercase: true
     },
-    contact: { // All users have this data
+    contact: {
         email: { // Email
             type: String,
             required: true,
@@ -29,16 +42,14 @@ var UserSchema = new mongoose.Schema({
             type: String
         }
     },
-    accounts: { // All users have this data
+    accounts: {
         local: { // Local login
             hash: String,
             salt: String
         },
-        facebook: { // Facebook login
-
-        }
+        facebook: { } // Facebook login
     },
-    data: { // All users have this data
+    data: {
         created: { // Account creation date
             type: Date,
             default: Date.now
@@ -47,128 +58,93 @@ var UserSchema = new mongoose.Schema({
             type: Date,
             default: Date.now
         }
-    },
-
-    clientInfo: { // Client specific data
-        activeSessions: [{
-            trainer: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
-            },
-            sport: {
-                type: String
-            },
-            count: {
-                type: Number,
-                enum: [1, 2, 5, 10],
-                default: 1
-            },
-            price: {
-                type: Number
-            },
-            purchaseDate: {
-                type: Date,
-                default: Date.now
-            },
-            expireDate: {
-                type: Date
-            }
-        }],
-        activeEvents: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Event'
-        }],
-        activeTrainers: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }],
-        savedTrainers: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }],
-        zipcode: Number,
-        events: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Event'
-        }]
-        // profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
-    },
-
-    trainerInfo: { // Trainer specific data
-        sports: [{ // Each sport requires seperate data set
-            sport: { // The sport
-                type: String,
-                default: 'Basketball',
-                required: true
-            },
-            packages: [{ // Packages for this sport
-                count: { // Number of sessions in a package
-                    type: Number,
-                    enum: [1, 2, 5, 10],
-                    default: 1
-                },
-                size: { // Number of clients in each session
-                    type: Number,
-                    default: 1
-                },
-                price: { // Price
-                    type: Number,
-                    default: 30
-                }
-            }],
-            events: [{ // Events for this sport
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Event'
-            }],
-            summary: { // Page fluff
-                type: String,
-                default: 'Trainer summary'
-            },
-            credentials: { // Page fluff
-                experience: {
-                    type: Number,
-                    default: 0
-                },
-                school: {
-                    type: String,
-                    default: 'College/University'
-                }
-            },
-            services: { // Page fluff
-                ages: [{
-                    type: String,
-                    default: 'Kids'
-                }],
-                positions: [{
-                    type: String,
-                    default: 'Position'
-                }],
-                specialties: [{
-                    type: String,
-                    default: 'Specialty'
-                }]
-            }
-        }],
-        locations: [{ // Training locations
-            type: {
-                type: String,
-                enum: 'Point',
-                default: 'Point'
-            },
-            coordinates: {
-                type: [Number],
-                default: [-122.3, 47.6]
-            }
-        }],
-        reviews: [{ // Trainer reviews
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Review'
-        }]
     }
+}, options);
+
+/**
+ * @name ClientSchema
+ * @desc Defines client user schema, only clients have this data
+ */
+var ClientSchema = new Schema({
+	activeSessions: [{
+		trainer: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		},
+		sport: {
+			type: String
+		},
+		count: {
+			type: Number,
+			enum: [1, 2, 5, 10],
+			default: 1
+		},
+		price: {
+			type: Number
+		},
+		purchaseDate: {
+			type: Date,
+			default: Date.now
+		},
+		expireDate: {
+			type: Date
+		}
+	}],
+	activeEvents: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Event'
+	}],
+	activeTrainers: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	}],
+	savedTrainers: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	}],
+	zipcode: Number,
+	events: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Event'
+	}]
+	// profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }]
+});
+
+/**
+ * @name TrainerSchema
+ * @desc Defines trainer user schema, only trainers have this data
+ */
+var TrainerSchema = new Schema({
+	sports: [{ // Each sport requires seperate data set
+		sport: { // The sport
+			type: ObjectId,
+			ref: 'Sport'
+		},
+		locations: [{ // Training locations
+			type: ObjectId,
+			ref: 'Location'
+		}],
+		packages: [{ // Packages for this sport
+			type: ObjectId,
+			ref: 'Package'
+		}],
+		events: [{ // Events for this sport
+			type: ObjectId,
+			ref: 'Event'
+		}],
+		profile: {
+			type: ObjectId,
+			ref: 'TrainerProfile'
+		}
+	}],
+	reviews: [{ // Trainer reviews, not sport specific
+		type: ObjectId,
+		ref: 'Review'
+	}]
 });
 
 // Index our searchable locations
-UserSchema.index({"trainerInfo.locations": "2dsphere"});
+TrainerSchema.index({"sports.locations": "2dsphere"});
 
 // Find a user by email
 UserSchema.statics.findByEmail = function(email) {
@@ -208,5 +184,7 @@ UserSchema.methods.generateJWT = function() {
     }, secret);
 };
 
-// Set mongoose model
-mongoose.model('User', UserSchema);
+// Set mongoose models
+var User = mongoose.model('User', UserSchema);
+User.discriminator('Client', ClientSchema);
+User.discriminator('Trainer', TrainerSchema);

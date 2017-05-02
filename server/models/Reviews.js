@@ -1,21 +1,27 @@
+/**
+ * Reviews mongoose models
+ * @member {Review} Uses ReviewSchema
+ */
+'use strict';
 
+// Module dependencies
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
-var ReviewSchema = new mongoose.Schema({
+/**
+ * @name ReviewSchema
+ * @desc Defines review schema
+ */
+var ReviewSchema = new Schema({
+	trainer: {
+		type: ObjectId,
+		ref: 'User',
+		required: true
+	},
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    trainer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now,
-        required: true
+        type: String,
+		required: true
     },
     rating: {
         type: Number,
@@ -23,15 +29,20 @@ var ReviewSchema = new mongoose.Schema({
         default: 5,
         required: true
     },
-    content: {
-        type: String,
-        default: '',
+    date: {
+        type: Date,
+        default: Date.now,
         required: true
     },
     type: {
         type: String,
         enum: ['Verified Purchase', 'Client', 'Testimonial'],
         default: 'Client',
+        required: true
+    },
+    content: {
+        type: String,
+        default: '',
         required: true
     }
 });
