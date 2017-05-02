@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "npm install && bower install",
-    "start": "node ./bin/start",
+    "start": "node ./bin/https",
     "stop": "taskkill /im node.exe /F"
   },
   "devDependencies": {

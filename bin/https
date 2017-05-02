@@ -6,9 +6,9 @@ var debug = require('debug')('top-training:server');
 var fs = require('fs');
 var https = require('https');
 var httpsOptions = {
-	key: fs.readFileSync('server/security/server-key.pem'),
-    cert: fs.readFileSync('server/security/server-crt.pem'),
-    ca: fs.readFileSync('server/security/ca-crt.pem')
+	key: fs.readFileSync('server/encryption/server-key.pem'),
+    cert: fs.readFileSync('server/encryption/server-crt.pem'),
+    ca: fs.readFileSync('server/encryption/ca-crt.pem')
 };
 
 // Get port from environment and store in Express
