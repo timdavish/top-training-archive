@@ -12,7 +12,7 @@ var httpsOptions = {
 };
 
 // Get port from environment and store in Express
-var defaultPort = 443; // If environment port unavailable, use default
+var defaultPort = 3000; // If environment port unavailable, use default
 var port = normalizePort(process.env.PORT || defaultPort);
 app.set('port', port);
 
