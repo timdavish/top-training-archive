@@ -1,6 +1,5 @@
 /**
- * Packages mongoose models
- * @member {Package} Uses PackageSchema
+ * Package mongoose schema
  */
 'use strict';
 
@@ -32,5 +31,5 @@ var PackageSchema = new Schema({
 	}
 });
 
-// Set mongoose model
-mongoose.model('Package', PackageSchema);
+// Export the schema
+module.exports = PackageSchema;

@@ -16,7 +16,6 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var SportSchema = new Schema({
     sport: {
         type: String,
-		enum: ['Basketball', 'Baseball', 'Cross Training'],
         required: true,
 		unique: true
     },
@@ -26,12 +25,16 @@ var SportSchema = new Schema({
             default: Date.now
         },
 	},
-	/* This is just an idea */
 	trainers: [{
 		type: ObjectId,
 		ref: 'User'
 	}]
 });
+
+// Find a sport by name
+SportSchema.statics.findByName = function(name) {
+	return this.find({ 'sport': new RegExp(name, 'i') });
+};
 
 // Set mongoose model
 mongoose.model('Sport', SportSchema);

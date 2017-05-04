@@ -1,6 +1,5 @@
 /**
- * Reviews mongoose models
- * @member {Review} Uses ReviewSchema
+ * Review mongoose schema
  */
 'use strict';
 
@@ -47,5 +46,5 @@ var ReviewSchema = new Schema({
     }
 });
 
-// Set mongoose model
-mongoose.model('Review', ReviewSchema);
+// Export the schema
+module.exports = ReviewSchema;
