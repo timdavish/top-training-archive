@@ -5,10 +5,20 @@ var passport = require('passport'); // Password authentication
 
 // Database interaction
 var mongoose = require('mongoose');
-var User = mongoose.model('User'); // Users model
+var User = mongoose.model('User'); // User model
+var Client = mongoose.model('Client'); // Client model
+var Trainer = mongoose.model('Trainer'); // Trainer model
+var Sport = mongoose.model('Sport'); // Sport model
 
 // Router initialization
 var router = express.Router();
+
+// Constants
+var USER_TYPES = {
+	ADMIN: 'admin',
+	CLIENT: 'client',
+	TRAINER: 'trainer'
+};
 
 // (PARAM) Route for preloading user objects
 router.param('user', function(req, res, next, id) {
@@ -38,25 +48,39 @@ router.param('email', function(req, res, next, email) {
 
 // (POST) New user sign up
 router.post('/signUp', function(req, res, next) {
+	var userData = req.body;
+
     // Ensure all fields are filled out
-    if (!req.body.email || !req.body.password || !req.body.usertype) {
+    if (!userData.email || !userData.password || !userData.usertype) {
         return res.status(400).json({ message: 'Please fill out all fields.' });
     }
 
-    // Create a new user and set their initial properties
-    var user = new User();
-    user.usertype = req.body.usertype;
-    user.contact.email = req.body.email;
-    user.contact.firstname = req.body.firstname;
-    user.contact.lastname = req.body.lastname;
-    user.setPassword(req.body.password);
+	var user;
 
-    // Fill in specific usertype info
-    if (user.usertype === 'client') {
-        user.clientInfo.zipcode = req.body.zipcode;
-    } else if (user.usertype === 'trainer') {
+	// Create new user depending on type
+	if (userData.usertype === USER_TYPES.ADMIN) {
+		// Admin user
+		// handleNewAdmin();
+	} else if (userData.usertype === USER_TYPES.CLIENT) {
+		// Client user
+		// handleNewClient();
+		user = new Client();
 
-    }
+		user.zipcode = userData.zipcode ? userData.zipcode : null;
+
+	} else if (userData.usertype === USER_TYPES.TRAINER) {
+		// Trainer user
+		handleNewTrainer();
+	} else {
+		// Unknown user
+		return res.status(400).json({ message: 'Something went wrong.' });
+	}
+
+    // Set general user initial properties
+    user.contact.email = userData.email;
+    user.contact.firstname = userData.firstname;
+    user.contact.lastname = userData.lastname;
+    user.setPassword(userData.password);
 
     // Save the user in the database
     user.save(function(err) {
@@ -64,6 +88,38 @@ router.post('/signUp', function(req, res, next) {
 
         return res.json({ token: user.generateJWT() });
     });
+
+	function handleNewTrainer() {
+		user = new Trainer();
+
+		var sportData = userData.sportData;
+		if (sportData) {
+			var newSportData = {};
+
+			// Find sport, push trainer on trainers
+			Sport.update(
+				{ 'sport': sportData.sport },
+				{ '$push': {
+					"trainers": user
+				}},
+				function(err, res) {
+					if (err) { return next(err); }
+					console.log('Sport.update res:', res);
+				}
+			);
+
+			// Set trainer profile
+			var profile = new TrainerProfile(sportData.profile);
+			profile.save(function(err, profile) {
+				if (err) { return next(err); }
+				newSportData.profile = profile;
+			});
+
+			user.sports.push(newSportData);
+			console.log(user);
+			user.save();
+		}
+	}
 });
 
 // (POST) User login
@@ -94,11 +150,11 @@ router.post('/getTrainers', function(req, res, next) {
 	searchParams.long = parseFloat(searchParams.long);
     searchParams.searchDistance = 100; // miles
 
-    User.aggregate([
+    Trainer.aggregate([
         { $geoNear: { // calculates and sorts by distance
             query: {
                 usertype: 'trainer', // trainers only
-                'trainerInfo.sports.sport': searchParams.sport // trainers who train this sport only
+                'sports.sport': searchParams.sport // trainers who train this sport only
             },
             near: {
                 type: 'Point', // 2dsphere
@@ -112,8 +168,7 @@ router.post('/getTrainers', function(req, res, next) {
             spherical: true // 2dsphere calculations
         }},
         { $project: { // Choose which data fields make it through
-            accounts: 0, // we don't want account (login) info
-            clientInfo: 0 // we don't want client info
+            accounts: 0 // we don't want account (login) info
         }},
         { $group: { // Group
             _id: null, // Don't group by anything
