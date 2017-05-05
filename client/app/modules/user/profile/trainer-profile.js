@@ -9,14 +9,14 @@
         .module('user.profile')
         .controller('TrainerProfileController', TrainerProfileController);
 
-    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'searchService', 'location', 'modal', 'logger'];
+    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'model', 'searchService', 'location', 'modal', 'moment', 'logger'];
 
     /**
      * @namespace TrainerProfileController
      * @desc Trainer profile controller
      * @memberof Controllers
      */
-    function TrainerProfileController($q, $state, authentication, searchService, location, modal, logger) {
+    function TrainerProfileController($q, $state, authentication, model, searchService, location, modal, moment, logger) {
         var vm = this;
 
 		// Search determines whether this profile is viewed from search or not
@@ -46,7 +46,6 @@
 			var promises = [
 				setModel(),
 				setSport(),
-				setMapMarkers(),
 				setProfilePanes()
 			];
 
@@ -71,168 +70,14 @@
          * @memberof Controllers.TrainerProfileController
          */
         function setModel() {
-			if (vm.search) {
-				// Get our model from api
-				// var id = $state.params.id;
-			} else {
-				// Get our model from authentication
-				// vm.model = authentication.currentUser();
+			vm.model = model;
+
+			// Translate review dates
+			if (vm.model) {
+				vm.model.rating.reviews.forEach(function(review) {
+					review.date_formatted = moment(review.date).format('MMMM Do, YYYY');
+				});
 			}
-			vm.model = {
-				_id: '58ab7657852b192f54ef44d9',
-	            usertype: "trainer",
-	            trainerInfo: {
-	                rating: 4.34,
-					locations: [
-						{
-							priority: 1,
-							formatted_address: "E Yesler Way, Seattle, WA",
-							geometry: {
-								type: "Point",
-								coordinates: [
-									-122.3,
-									47.62
-								]
-							}
-						},
-						{
-							priority: 2,
-							formatted_address: "Atlantic Ave, Seattle, WA",
-							geometry: {
-								type: "Point",
-								coordinates: [
-									-122.32,
-									47.6
-								]
-							}
-						}
-					],
-	                reviews: [
-	                    {
-	                        author: "Tom Riddle",
-	                        type: "Verified Client",
-	                        rating: 5,
-	                        title: "Highly Recommend",
-	                        content: "This is the best trainer I've ever had. Blah blah blah blah blah blah blah blah",
-	                        date: "February 21, 2017"
-	                    },
-	                    {
-	                        author: "Bill Cosby",
-	                        type: "Testimonial",
-	                        rating: 4,
-	                        title: "An Alright Trainer",
-	                        content: "Wasn't the greatest or the worst trainer I've ever had. Blah blah blah blah blah blah blah blah",
-	                        date: "January 2, 2017"
-	                    }
-	                ],
-	                sports: [
-	                    {
-	                        sport: "basketball",
-	                        packages: [
-	                            {
-	                                _id: 1,
-	                                sessions: 1,
-	                                slots: 1,
-	                                price: 30
-	                            },
-	                            {
-	                                _id: 2,
-	                                sessions: 2,
-	                                slots: 1,
-	                                price: 50
-	                            }
-	                        ],
-	                        events: [],
-	                        summary: "NBA, College, High School; I've worked at every level. As a clinician for Converse for 7 years I specialized in teaching skills and prepping athletes. Learn fundamentals!",
-	                        credentials: {
-	                            experience: 7,
-	                            school: "University of Washington"
-	                        },
-	                        services: {
-	                            ages: [
-	                                "Middle School",
-	                                "High School"
-	                            ],
-	                            positions: [
-	                                "Guard",
-	                                "Forward",
-	                                "Center"
-	                            ],
-	                            specialties: [
-	                                "Shooting",
-	                                "Defense"
-	                            ]
-	                        }
-	                    },
-	                    {
-	                        sport: "baseball",
-	                        packages: [
-	                            {
-	                                _id: 4,
-	                                sessions: 1,
-	                                slots: 1,
-	                                price: 30
-	                            },
-	                            {
-	                                _id: 5,
-	                                sessions: 2,
-	                                slots: 1,
-	                                price: 50
-	                            },
-	                            {
-	                                _id: 6,
-	                                sessions: 5,
-	                                slots: 1,
-	                                price: 110
-	                            }
-	                        ],
-	                        events: [],
-	                        summary: "A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus.",
-	                        credentials: {
-	                            experience: 5,
-	                            school: "University of Washington"
-	                        },
-	                        services: {
-	                            ages: [
-	                                "Middle School",
-	                                "High School"
-	                            ],
-	                            positions: [
-	                                "Infield",
-	                                "Outfield"
-	                            ],
-	                            specialties: [
-	                                "Fielding",
-	                                "Hitting",
-	                                "Base running"
-	                            ]
-	                        }
-	                    }
-	                ]
-	            },
-	            clientInfo: {
-	                events: [],
-	                savedTrainers: [],
-	                activeTrainers: [],
-	                activeEvents: [],
-	                activeSessions: []
-	            },
-	            data: {
-	                lastActive: "2017-02-20T23:05:59.460Z",
-	                created: "2017-02-20T23:05:59.460Z"
-	            },
-	            accounts: {
-	                local: {
-	                    hash: "b2df4a52b92180b8b9b67e6df2218692c27c154d89f7c35cc665dfe494990baf3b6e9981cf055c98154c994c3ea833fa8b5dec18a4bc19fe29a26ef00f6597b0",
-	                    salt: "c524e64db380a8b44674ee7a6decc54c"
-	                }
-	            },
-	            contact: {
-	                lastname: "Builder",
-	                firstname: "Bob",
-	                email: "bob@asdf.com"
-	            }
-	        };
 		}
 
 		/**
@@ -241,7 +86,7 @@
          * @memberof Controllers.TrainerProfileController
          */
         function setSport() {
-			vm.sport = searchService.sport || vm.model.trainerInfo.sports[0].sport;
+			vm.sport = searchService.sport || vm.model.sports[0].sport;
 			vm.sportBack = vm.sport;
 		}
 
@@ -270,28 +115,6 @@
 
 			return deferred.promise;
         }
-
-		/**
-         * @name setMapMarkers
-         * @desc Sets the markers on the map
-         * @memberof Controllers.TrainerProfileController
-         */
-		function setMapMarkers() {
-			var deferred = $q.defer();
-
-			if (vm.model && vm.model.trainerInfo.locations) {
-				vm.model.trainerInfo.locations.forEach(function(location) {
-					vm.mapMarkers += '&markers=color:0xffce49';
-					vm.mapMarkers += '|label:' + location.priority;
-					vm.mapMarkers += '|' + location.geometry.coordinates[1] + ',' + location.geometry.coordinates[0];
-				});
-				deferred.resolve();
-			} else {
-				deferred.reject('Error getting trainer locations');
-			}
-
-			return deferred.promise;
-		}
 
 		/**
          * @name openModal
@@ -388,7 +211,6 @@
 						data[pane] = result[pane];
 					} else if (pane === vm.panes.locations) {
 						data[pane] = result[pane];
-						setMapMarkers();
 					} else if (pane === vm.panes.packages) {
 						data[pane] = result[pane];
 					} else if (pane === vm.panes.credentials) {

@@ -37,7 +37,21 @@
                     title: 'Profile',
                     wantToReturn: true, // Return to this state after login
                     requiresLoggedIn: true, // Require login at this state
-					search: false
+					search: false,
+					resolve: {
+                        model: ['$state', 'authentication', 'user', function($state, authentication, user) {
+                            var search = $state.current.search;
+							if (search) {
+								var id = $state.params.id;
+								user.getById(id)
+									.then(function(trainer) {
+										return trainer;
+									});
+							} else {
+								return authentication.currentUser();
+							}
+                        }]
+                    }
                 }
             }
         ];

@@ -150,15 +150,10 @@
             if (service.isLoggedIn()) {
                 var token = service.getToken();
                 var payload = service.getPayload(token);
-				var currentUser = {
-					id: payload._id,
-                    usertype: payload.usertype,
-                    contact: payload.contact,
-                    data: payload.data,
-                    info: payload.usertype === 'client' ? payload.clientInfo : payload.trainerInfo
-				};
 
-                return currentUser;
+				payload.user.accounts = undefined;
+
+                return payload.user;
             }
         }
     }

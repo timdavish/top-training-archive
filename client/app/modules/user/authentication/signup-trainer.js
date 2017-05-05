@@ -60,22 +60,19 @@
 				],
 				packages: [
 					{
-						_id: 4,
+						type: 'private',
 						sessions: 1,
-						slots: 1,
-						price: 30
-					},
-					{
-						_id: 5,
-						sessions: 2,
-						slots: 1,
 						price: 50
 					},
 					{
-						_id: 6,
-						sessions: 5,
-						slots: 1,
-						price: 110
+						type: 'small',
+						sessions: 1,
+						price: 25
+					},
+					{
+						type: 'group',
+						sessions: 1,
+						price: 20
 					}
 				],
 				events: [],

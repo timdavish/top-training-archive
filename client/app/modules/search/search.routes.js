@@ -49,7 +49,13 @@
                     title: 'Trainer',
                     wantToReturn: true, // Return to this state after login
                     requiresLoggedIn: false, // Require login at this state
-					search: true
+					search: true,
+					resolve: {
+                        model: ['$stateParams', 'user', function($stateParams, user) {
+							var id = $stateParams.id;
+							return user.getById(id);
+                        }]
+                    }
                 }
             }
         ];
