@@ -9,11 +9,12 @@ var bodyParser = require('body-parser');
 
 // Database setup and connection
 var mongoose = require('mongoose');
-require('./models/Users'); // Users model
-require('./models/Reviews'); // Reviews model
-require('./models/Events'); // Events model
-require('./models/Posts'); // Posts model
-require('./models/Comments'); // Comments model
+require('./models/event/Event'); // Event model
+require('./models/misc/Comment'); // Comment model
+require('./models/misc/Post'); // Post model
+require('./models/order/Receipt'); // Receipt model
+require('./models/sport/Sport'); // Sport model
+require('./models/user/User'); // User model
 mongoose.Promise = global.Promise; // Adjust mongoose promise
 mongoose.connect('mongodb://localhost/TT');
 
@@ -39,11 +40,11 @@ app.use(express.static(path.join(__dirname, '/../'))); // Set our public folder
 app.use(passport.initialize()); // Use passport in our app
 
 // API routes
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
-app.use('/events', require('./routes/events'));
-app.use('/posts', require('./routes/posts'));
-app.use('/support', require('./routes/support'));
+app.use('/', require('./api/routes/index'));
+app.use('/users', require('./api/routes/users'));
+app.use('/events', require('./api/routes/events'));
+app.use('/posts', require('./api/routes/posts'));
+app.use('/support', require('./api/routes/support'));
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,7 +54,7 @@ app.use(function(req, res, next) {
 });
 
 // Error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
     // Set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

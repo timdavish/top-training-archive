@@ -5,50 +5,43 @@ var app = require('../server/server');
 var debug = require('debug')('top-training:server');
 var fs = require('fs');
 var https = require('https');
+var http = require('http');
+
+// Https options
+var sslPath = '/etc/letsencrypt/live/www.toptraining.pro/';
 var httpsOptions = {
-	key: fs.readFileSync('server/encryption/server-key.pem'),
-    cert: fs.readFileSync('server/encryption/server-crt.pem'),
-    ca: fs.readFileSync('server/encryption/ca-crt.pem')
+    key: fs.readFileSync(sslPath + 'privkey.pem'),
+    cert: fs.readFileSync(sslPath + 'fullchain.pem')
 };
 
-// Get port from environment and store in Express
-var defaultPort = 3000; // If environment port unavailable, use default
-var port = normalizePort(process.env.PORT || defaultPort);
-app.set('port', port);
+// Spin up https server
+var httpsPort = 443;
+var httpsServer = https.createServer(httpsOptions, app);
+httpsServer.listen(httpsPort);
+httpsServer.on('error', onError);
+httpsServer.on('listening', onListening);
 
-var server = https.createServer(httpsOptions, app);
-
-// Listen on provided port, on all network interfaces
-server.listen(port);
-
-server.on('error', onError);
-server.on('listening', onListening);
+// Spin up http server (redirects to https server)
+var httpPort = 3000;
+var httpServer = http.createServer(handleRedirect);
+httpServer.listen(httpPort);
+httpServer.on('error', onError);
+httpServer.on('listening', onListening);
 
 /* Functions */
 
 /**
- * Normalize a port into a number, string, or false.
- * @param {value} val The port value to normalize
- * @return port or false
+ * @name handleRedirect
+ * @desc Handles redirecting http server to https server
  */
-function normalizePort(val) {
-    var port = parseInt(val, 10);
-
-    if (isNaN(port)) {
-        // named pipe
-        return val;
-    }
-
-    if (port >= 0) {
-        // port number
-        return port;
-    }
-
-    return false;
+function handleRedirect(req, res) {
+	res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
+	res.end();
 }
 
 /**
- * Event listener for HTTP server "error" event.
+ * @name onError
+ * @desc Event listener for server "error" event.
  * @param {event} error The error to address
  */
 function onError(error) {
@@ -56,17 +49,16 @@ function onError(error) {
         throw error;
     }
 
-    var bind = typeof port === 'string' ?
-		'Pipe ' + port : 'Port ' + port;
+	var addr = this.address();
 
     // handle specific listen errors with friendly messages
     switch (error.code) {
         case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
+            console.error(addr, 'requires elevated privileges');
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
+            console.error(addr, 'is already in use');
             process.exit(1);
             break;
         default:
@@ -75,10 +67,12 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * @name onListening
+ * @desc Event listener for server "listening" event.
  */
 function onListening() {
-    var addr = server.address();
+    var addr = this.address();
+
     debug('Listening on', addr);
     console.log('Listening on', addr);
 }
