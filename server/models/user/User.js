@@ -12,19 +12,20 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var crypto = require('crypto'); // Used for generating password hash
 var jwt = require('jsonwebtoken'); // Used for generating tokens
-var options = { discriminatorKey: 'kind' }; // Used for different user types
+
+// Embedded documents
+var Location = require('./lib/Location');
+var Package = require('./lib/Package');
+var Review = require('./lib/Review');
+var TrainerProfile = require('./lib/TrainerProfile');
+
+var UserSchemaOptions = { discriminatorKey: 'usertype' }; // Used for different user types
 
 /**
  * @name UserSchema
  * @desc Defines general user schema, all users have this data
  */
 var UserSchema = new Schema({
-    usertype: {
-        type: String,
-        enum: ['admin', 'client', 'trainer'],
-        required: true,
-        lowercase: true
-    },
     contact: {
         email: { // Email
             type: String,
@@ -59,7 +60,7 @@ var UserSchema = new Schema({
             default: Date.now
         }
     }
-}, options);
+}, UserSchemaOptions);
 
 /**
  * @name ClientSchema
@@ -115,36 +116,28 @@ var ClientSchema = new Schema({
  * @desc Defines trainer user schema, only trainers have this data
  */
 var TrainerSchema = new Schema({
-	sports: [{ // Each sport requires seperate data set
-		sport: { // The sport
-			type: ObjectId,
-			ref: 'Sport'
+	approved: {
+		type: Boolean,
+		required: true,
+		default: true
+	},
+	sports: [{
+		_id: false,
+		sport: {
+			type: String,
+			required: true,
+			lowercase: true
 		},
-		locations: [{ // Training locations
-			type: ObjectId,
-			ref: 'Location'
-		}],
-		packages: [{ // Packages for this sport
-			type: ObjectId,
-			ref: 'Package'
-		}],
-		events: [{ // Events for this sport
-			type: ObjectId,
-			ref: 'Event'
-		}],
-		profile: {
-			type: ObjectId,
-			ref: 'TrainerProfile'
-		}
+		profile: TrainerProfile,
+		locations: [Location],
+		packages: [Package],
+		events: [{ type: ObjectId, ref: 'Event' }]
 	}],
-	reviews: [{ // Trainer reviews, not sport specific
-		type: ObjectId,
-		ref: 'Review'
-	}]
+	reviews: [Review]
 });
 
 // Index our searchable locations
-TrainerSchema.index({"sports.locations": "2dsphere"});
+TrainerSchema.index({"sports.locations.geometry": "2dsphere"});
 
 // Find a user by email
 UserSchema.statics.findByEmail = function(email) {

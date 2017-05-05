@@ -1,12 +1,13 @@
 /**
- * Packages mongoose models
- * @member {Package} Uses PackageSchema
+ * Package mongoose schema
  */
 'use strict';
 
 // Module dependencies
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+
+var PackageSchemaOptions = { _id : false };
 
 /**
  * @name PackageSchema
@@ -30,7 +31,7 @@ var PackageSchema = new Schema({
 		default: 0,
 		required: true
 	}
-});
+}, PackageSchemaOptions);
 
-// Set mongoose model
-mongoose.model('Package', PackageSchema);
+// Export the schema
+module.exports = PackageSchema;

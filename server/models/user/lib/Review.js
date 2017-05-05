@@ -1,6 +1,5 @@
 /**
- * Reviews mongoose models
- * @member {Review} Uses ReviewSchema
+ * Review mongoose schema
  */
 'use strict';
 
@@ -8,6 +7,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
+
+var ReviewSchemaOptions = { _id : false };
 
 /**
  * @name ReviewSchema
@@ -45,7 +46,7 @@ var ReviewSchema = new Schema({
         default: '',
         required: true
     }
-});
+}, ReviewSchemaOptions);
 
-// Set mongoose model
-mongoose.model('Review', ReviewSchema);
+// Export the schema
+module.exports = ReviewSchema;

@@ -1,6 +1,5 @@
 /**
- * Profiles mongoose models
- * @member {TrainerProfile} Uses TrainerProfileSchema
+ * TrainerProfile mongoose schema
  */
 'use strict';
 
@@ -8,11 +7,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var TrainerProfileSchemaOptions = { _id : false };
+
 /**
  * @name TrainerProfileSchema
  * @desc Defines trainer profile schema
  */
 var TrainerProfileSchema = new Schema({
+	rating: {
+		type: Number,
+		default: 0
+	},
 	summary: {
 		type: String,
 		default: 'Trainer summary'
@@ -41,6 +46,7 @@ var TrainerProfileSchema = new Schema({
 			default: 'Specialty'
 		}]
 	}
-});
+}, TrainerProfileSchemaOptions);
 
-mongoose.model('TrainerProfile', TrainerProfileSchema);
+// Export the schema
+module.exports = TrainerProfileSchema;
