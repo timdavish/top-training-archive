@@ -60,64 +60,59 @@ router.post('/signUp', function(req, res, next) {
 	// Create new user depending on type
 	if (userData.usertype === USER_TYPES.ADMIN) {
 		// Admin user
-		// handleNewAdmin();
+		handleAdminUser();
 	} else if (userData.usertype === USER_TYPES.CLIENT) {
 		// Client user
-		// handleNewClient();
-		user = new Client();
-
-		user.zipcode = userData.zipcode ? userData.zipcode : null;
-
+		handleClientUser();
 	} else if (userData.usertype === USER_TYPES.TRAINER) {
-		// Trainer user
-		handleNewTrainer();
+		// Trainer user properties
+		handleTrainerUser();
 	} else {
 		// Unknown user
 		return res.status(400).json({ message: 'Something went wrong.' });
 	}
 
-    // Set general user initial properties
-    user.contact.email = userData.email;
-    user.contact.firstname = userData.firstname;
-    user.contact.lastname = userData.lastname;
-    user.setPassword(userData.password);
+    // General user properties
+	handleGeneralUser();
 
-    // Save the user in the database
+    // Save the user in the database, set their session token
     user.save(function(err) {
         if (err) { return next(err); }
 
         return res.json({ token: user.generateJWT() });
     });
 
-	function handleNewTrainer() {
-		user = new Trainer();
+	/* Function */
 
-		var sportData = userData.sportData;
-		if (sportData) {
-			var newSportData = {};
+	function handleGeneralUser() {
+		user.contact.email = userData.email;
+		user.contact.firstname = userData.firstname;
+		user.contact.lastname = userData.lastname;
+		user.setPassword(userData.password);
+	}
 
-			// Find sport, push trainer on trainers
+	function handleAdminUser() {}
+
+	function handleClientUser() {
+		user = new Client();
+
+		user.zipcode = userData.zipcode ? userData.zipcode : null;
+	}
+
+	function handleTrainerUser() {
+		if (userData.sportData) {
+			user = new Trainer();
+			user.sports.push(userData.sportData);
+
 			Sport.update(
-				{ 'sport': sportData.sport },
+				{ 'sport': userData.sportData.sport },
 				{ '$push': {
 					"trainers": user
 				}},
-				function(err, res) {
+				function(err) {
 					if (err) { return next(err); }
-					console.log('Sport.update res:', res);
 				}
 			);
-
-			// Set trainer profile
-			var profile = new TrainerProfile(sportData.profile);
-			profile.save(function(err, profile) {
-				if (err) { return next(err); }
-				newSportData.profile = profile;
-			});
-
-			user.sports.push(newSportData);
-			console.log(user);
-			user.save();
 		}
 	}
 });
@@ -153,7 +148,7 @@ router.post('/getTrainers', function(req, res, next) {
     Trainer.aggregate([
         { $geoNear: { // calculates and sorts by distance
             query: {
-                usertype: 'trainer', // trainers only
+                usertype: 'Trainer', // trainers only
                 'sports.sport': searchParams.sport // trainers who train this sport only
             },
             near: {

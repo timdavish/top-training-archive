@@ -12,13 +12,14 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var crypto = require('crypto'); // Used for generating password hash
 var jwt = require('jsonwebtoken'); // Used for generating tokens
-var options = { discriminatorKey: 'usertype' }; // Used for different user types
 
 // Embedded documents
 var Location = require('./lib/Location');
 var Package = require('./lib/Package');
 var Review = require('./lib/Review');
 var TrainerProfile = require('./lib/TrainerProfile');
+
+var UserSchemaOptions = { discriminatorKey: 'usertype' }; // Used for different user types
 
 /**
  * @name UserSchema
@@ -59,7 +60,7 @@ var UserSchema = new Schema({
             default: Date.now
         }
     }
-}, options);
+}, UserSchemaOptions);
 
 /**
  * @name ClientSchema
@@ -115,8 +116,18 @@ var ClientSchema = new Schema({
  * @desc Defines trainer user schema, only trainers have this data
  */
 var TrainerSchema = new Schema({
+	approved: {
+		type: Boolean,
+		required: true,
+		default: true
+	},
 	sports: [{
-		sport: { type: ObjectId, ref: 'Sport' },
+		_id: false,
+		sport: {
+			type: String,
+			required: true,
+			lowercase: true
+		},
 		profile: TrainerProfile,
 		locations: [Location],
 		packages: [Package],
