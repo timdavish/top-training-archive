@@ -133,7 +133,19 @@ var TrainerSchema = new Schema({
 		packages: [Package],
 		events: [{ type: ObjectId, ref: 'Event' }]
 	}],
-	reviews: [Review]
+	rating: {
+		average: {
+			type: Number,
+			default: 0,
+			required: true
+		},
+		count: {
+			type: Number,
+			default: 0,
+			required: true
+		},
+		reviews: [Review]
+	}
 });
 
 // Index our searchable locations
@@ -167,12 +179,7 @@ UserSchema.methods.generateJWT = function() {
     // CHANGE THIS TO REFERENCE AN ENVIRONMENT VARIABLE OUTSIDE OF CODEBASE
 
     return jwt.sign({
-        _id: this._id,
-        usertype: this.usertype,
-        contact: this.contact,
-        data: this.data,
-        clientInfo: this.clientInfo,
-        trainerInfo: this.trainerInfo,
+        user: this,
         exp: parseInt(exp.getTime() / 1000)
     }, secret);
 };

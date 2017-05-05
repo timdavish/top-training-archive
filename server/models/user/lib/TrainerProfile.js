@@ -14,10 +14,6 @@ var TrainerProfileSchemaOptions = { _id : false };
  * @desc Defines trainer profile schema
  */
 var TrainerProfileSchema = new Schema({
-	rating: {
-		type: Number,
-		default: 0
-	},
 	summary: {
 		type: String,
 		default: 'Trainer summary'
