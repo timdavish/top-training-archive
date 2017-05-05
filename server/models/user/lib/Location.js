@@ -7,6 +7,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var LocationSchemaOptions = { _id : false };
+
 /**
  * @name LocationSchema
  * @desc Defines location schema
@@ -32,7 +34,7 @@ var LocationSchema = new Schema({
 			required: true
 		}
 	}
-});
+}, LocationSchemaOptions);
 
 // Export the schema
 module.exports = LocationSchema;

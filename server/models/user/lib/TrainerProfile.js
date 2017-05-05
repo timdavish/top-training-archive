@@ -7,6 +7,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var TrainerProfileSchemaOptions = { _id : false };
+
 /**
  * @name TrainerProfileSchema
  * @desc Defines trainer profile schema
@@ -44,7 +46,7 @@ var TrainerProfileSchema = new Schema({
 			default: 'Specialty'
 		}]
 	}
-});
+}, TrainerProfileSchemaOptions);
 
 // Export the schema
 module.exports = TrainerProfileSchema;

@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
+var ReviewSchemaOptions = { _id : false };
+
 /**
  * @name ReviewSchema
  * @desc Defines review schema
@@ -44,7 +46,7 @@ var ReviewSchema = new Schema({
         default: '',
         required: true
     }
-});
+}, ReviewSchemaOptions);
 
 // Export the schema
 module.exports = ReviewSchema;
