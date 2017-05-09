@@ -7,7 +7,7 @@
 
             <!-- Header -->
             <div class="page-header">
-                <h2>Sign Up</h2>
+                <h2>Trainer Application</h2>
                 <small>* indicates required field.</small>
             </div>
 
@@ -29,52 +29,257 @@
             </div>
 
             <!-- Registration form -->
-            <form name="registrationForm" ng-submit="vm.signUpTrainer()"
-                style="margin-top: 30px;">
+            <form name="registrationForm" ng-submit="vm.continueSignUp()"
+				  ng-if="!vm.continued"
+                  class="col-md-12 row fix-form">
 
-                <!-- First name -->
-                <div class="form-group">
-                    <input type="text" name="firstname" class="form-control" placeholder="First name *"
-                        ng-model="vm.user.firstname" required />
+				<!-- Name -->
+                <div class="col-md-6 form-group">
+                    <label for="firstname">First Name *</label>
+                    <input type="text" name="form[firstname]" required="required"
+                        id="firstname" class="form-control" placeholder="John"
+                        ng-model="vm.user.firstname" />
                 </div>
-                <!-- /First name -->
+                <div class="col-md-6 form-group">
+                    <label for="lastname">Last Name *</label>
+                    <input type="text" name="form[lastname]" required="required"
+                        id="lastname" class="form-control" placeholder="Smith"
+                        ng-model="vm.user.lastname" />
+                </div>
 
-                <!-- Last name -->
-                <div class="form-group">
-                    <input type="text" name="lastname" class="form-control" placeholder="Last name *"
-                        ng-model="vm.user.lastname" required />
+                <!-- Contact -->
+                <div class="col-md-6 form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" name="form[email]" required="required"
+                        id="email" class="form-control" placeholder="John@email.com"
+                        ng-model="vm.user.email" />
                 </div>
-                <!-- /Last name -->
-
-                <!-- Email -->
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Email *"
-                        ng-model="vm.user.email" required />
+                <div class="col-md-6 form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" name="form[phone]" required="required"
+                        pattern="^\d{3}-?\d{3}-?\d{4}$" title="Phone number (e.g. 123-456-7890)"
+						id="phone" class="form-control" placeholder="123-456-7890"
+                        ng-model="vm.user.phone" />
                 </div>
-                <!-- /Email -->
 
                 <!-- Password -->
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password *"
-                        ng-model="vm.user.password" equals="{{vm.user.password_verify}}" required />
+				<div class="col-md-12 form-group">
+					<div class="col-md-6 no-padding-left">
+						<label for="email">Password *</label>
+						<input type="password" name="password" class="form-control" placeholder="Password"
+	                        ng-model="vm.user.password" equals="{{vm.user.password_verify}}" required="required" />
+					</div>
                 </div>
-
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Re-enter password *"
-                        ng-model="vm.user.password_verify" equals="{{vm.user.password}}" required />
-                </div>
+				<div class="col-md-12 form-group">
+					<div class="col-md-6 no-padding-left">
+	                    <label for="email">Re-enter Password *</label>
+						<input type="password" class="form-control" placeholder="Re-enter password"
+	                        ng-model="vm.user.password_verify" equals="{{vm.user.password}}" required="required" />
+                	</div>
+				</div>
                 <!-- /Password -->
 
-                <!-- Zip code -->
-                <div class="form-group">
-                    <input type="text" name="zipcode" class="form-control" placeholder="Zip code *"
-                        ng-model="vm.user.zipcode" required />
+				<!-- Continue (Submit) -->
+				<div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-md"
+                            value="Continue" ng-disabled="">
+                    </input>
                 </div>
-                <!-- /Zip code -->
-
-                <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
 
+			<!-- Continued registration form -->
+            <form name="continuedRegistrationForm" ng-submit="vm.finishSignUp()"
+				ng-if="vm.continued"
+				class="col-md-12 row fix-form">
+
+				<!-- Sport -->
+				<div class="col-md-12 form-group">
+					<div class="col-md-6 no-padding-left">
+	                    <label for="sport">What Sport Do You Want To Train? *</label>
+						<select class="form-control" id="sport"
+							ng-model="vm.user.sportData.sport">
+							<option ng-repeat="sport in vm.sports"
+									value="{{ sport }}">
+								{{ sport | capitalizeFirstAll }}
+							</option>
+						</select>
+					</div>
+                </div>
+				<div class="col-md-12">
+					<div class="col-md-6">
+						<span>
+							Don't see the sport you'd like to train here? <a href>Learn why</a>.
+						</span>
+					</div>
+				</div>
+
+				<!-- Summary -->
+				<div class="col-md-12 form-group">
+                    <label for="summary">Summary *</label>
+					<textarea class="form-control" rows="3"
+						id="summary" placeholder="A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus."
+						ng-model="vm.user.sportData.profile.summary">
+					</textarea>
+                </div>
+
+				<!-- Credentials -->
+				<div class="form-group">
+					<div class="col-md-6">
+						<label for="experience">Experience *</label>
+						<input type="number" class="form-control"
+							id="experience" placeholder="# of years of experience"
+							ng-model="vm.user.sportData.profile.credentials.experience">
+						</input>
+					</div>
+
+					<div class="col-md-6">
+						<label for="school">School *</label>
+						<input type="text" class="form-control"
+							id="school" placeholder="College / University"
+							ng-model="vm.user.sportData.profile.credentials.school">
+						</input>
+					</div>
+				</div>
+
+				<!-- Services -->
+				<div class="form-group">
+					<div class="col-md-6">
+						<label for="ages">Ages *</label>
+						<input type="text" class="form-control"
+							id="ages" placeholder="Age groups, separated by commas"
+							ng-model="vm.user.sportData.profile.services.ages">
+						</input>
+					</div>
+
+					<div class="col-md-6">
+						<label for="positions">Positions *</label>
+						<input type="text" class="form-control"
+							id="positions" placeholder="Positions, separated by commas"
+							ng-model="vm.user.sportData.profile.services.positions">
+						</input>
+					</div>
+
+					<div class="col-md-6">
+						<label for="specialties">Specialties *</label>
+						<input type="text" class="form-control"
+							id="specialties" placeholder="Specialties, separated by commas"
+							ng-model="vm.user.sportData.profile.services.specialties">
+						</input>
+					</div>
+				</div>
+
+				<!-- Packages -->
+				<div class="row">
+					<div class="col-md-12">
+						<br />
+						<h2>Set Up Your Training Packages</h2>
+						<br />
+					</div>
+				</div>
+
+				<div class="col-md-12 form-group">
+					<div class="col-md-6 no-padding-left">
+	                    <label for="privateSessionLength">Private Training Session Length *</label>
+						<select class="form-control" id="privateSessionLength"
+							ng-model="vm.session.private.length">
+							<option style="display:none"></option>
+							<option value="30 minutes">30 minutes</option>
+							<option value="35 minutes">35 minutes</option>
+							<option value="40 minutes">40 minutes</option>
+							<option value="45 minutes">45 minutes</option>
+							<option value="50 minutes">50 minutes</option>
+							<option value="55 minutes">55 minutes</option>
+							<option value="1 hour" ng-selected="true">1 hour</option>
+						</select>
+					</div>
+
+					<div class="col-md-6 no-padding-left">
+	                    <label for="privateSessionRate">Private Training Session Rate *</label>
+						<select class="form-control" id="privateSessionRate"
+							ng-model="vm.session.private.rate">
+							<option style="display:none"></option>
+							<option value="20">$20</option>
+							<option value="25">$25</option>
+							<option value="30">$30</option>
+							<option value="35">$35</option>
+							<option value="40">$40</option>
+							<option value="45">$45</option>
+							<option value="50" ng-selected="true">$50</option>
+						</select>
+					</div>
+                </div>
+
+				<div class="col-md-12 form-group">
+					<div class="col-md-6 no-padding-left">
+	                    <label for="smallSessionLength">Small Group Training Session Length *</label>
+						<select class="form-control" id="smallSessionLength"
+							ng-model="vm.session.small.length">
+							<option style="display:none"></option>
+							<option value="30 minutes">30 minutes</option>
+							<option value="35 minutes">35 minutes</option>
+							<option value="40 minutes">40 minutes</option>
+							<option value="45 minutes">45 minutes</option>
+							<option value="50 minutes">50 minutes</option>
+							<option value="55 minutes">55 minutes</option>
+							<option value="1 hour" ng-selected="true">1 hour</option>
+						</select>
+					</div>
+
+					<div class="col-md-6 no-padding-left">
+	                    <label for="smallSessionRate">Small Group Training Session Rate *</label>
+						<select class="form-control" id="smallSessionRate"
+							ng-model="vm.session.small.rate">
+							<option style="display:none"></option>
+							<option value="20">$20</option>
+							<option value="25">$25</option>
+							<option value="30" ng-selected="true">$30</option>
+							<option value="35">$35</option>
+							<option value="40">$40</option>
+							<option value="45">$45</option>
+							<option value="50">$50</option>
+						</select>
+					</div>
+                </div>
+
+				<div class="col-md-12 form-group">
+					<div class="col-md-6 no-padding-left">
+	                    <label for="largeSessionLength">Large Group Training Session Length *</label>
+						<select class="form-control" id="largeSessionLength"
+							ng-model="vm.session.large.length">
+							<option style="display:none"></option>
+							<option value="30 minutes">30 minutes</option>
+							<option value="35 minutes">35 minutes</option>
+							<option value="40 minutes">40 minutes</option>
+							<option value="45 minutes">45 minutes</option>
+							<option value="50 minutes">50 minutes</option>
+							<option value="55 minutes">55 minutes</option>
+							<option value="1 hour" ng-selected="true">1 hour</option>
+						</select>
+					</div>
+
+					<div class="col-md-6 no-padding-left">
+	                    <label for="largeSessionRate">Large Group Training Session Rate *</label>
+						<select class="form-control" id="largeSessionRate"
+							ng-model="vm.session.large.rate">
+							<option style="display:none"></option>
+							<option value="20" ng-selected="true">$20</option>
+							<option value="25">$25</option>
+							<option value="30">$30</option>
+							<option value="35">$35</option>
+							<option value="40">$40</option>
+							<option value="45">$45</option>
+							<option value="50">$50</option>
+						</select>
+					</div>
+                </div>
+
+				<!-- Apply (Submit) -->
+				<div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-md"
+                            value="Apply" ng-disabled="">
+                    </input>
+                </div>
+			</form>
         </div>
     </div>
 </div>

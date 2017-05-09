@@ -19,87 +19,63 @@
     function SignUpTrainerController($state, authentication) {
         var vm = this;
 
+		vm.continued = false;
+		vm.sports = [
+			"basketball",
+			"baseball",
+			"cross training"
+		];
         vm.emailFormat = "/[^@]+@[^@]+/";
 
-        vm.signUpTrainer = signUpTrainer;
+		vm.continueSignUp = continueSignUp;
+        vm.finishSignUp = finishSignUp;
 
         /* Functions */
 
+		/**
+         * @name continueSignUp
+         * @desc Continues to the next part of sign up
+         * @memberof Controllers.SignUpTrainerController
+         */
+		 function continueSignUp() {
+			 // Switch to next form
+			 vm.continued = true;
+
+			 // Add user data
+			 vm.user.usertype = "trainer";
+		 }
+
         /**
-         * @name signUpTrainer
+         * @name finishSignUp
          * @desc Attempts to sign up a new trainer
          * @memberof Controllers.SignUpTrainerController
          */
-        function signUpTrainer() {
-            vm.user.usertype = "trainer";
-			vm.user.sportData = {
-				sport: 'basketball',
-				locations: [
-					{
-						priority: 1,
-						formatted_address: "E Yesler Way, Seattle, WA",
-						geometry: {
-							type: "Point",
-							coordinates: [
-								-122.3,
-								47.62
-							]
-						}
-					},
-					{
-						priority: 2,
-						formatted_address: "Atlantic Ave, Seattle, WA",
-						geometry: {
-							type: "Point",
-							coordinates: [
-								-122.32,
-								47.6
-							]
-						}
-					}
-				],
-				packages: [
-					{
-						type: 'private',
-						sessions: 1,
-						price: 50
-					},
-					{
-						type: 'small',
-						sessions: 1,
-						price: 25
-					},
-					{
-						type: 'group',
-						sessions: 1,
-						price: 20
-					}
-				],
-				events: [],
-				profile: {
-					rating: 0,
-					summary: "A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus.",
-					credentials: {
-						experience: 5,
-						school: "University of Washington"
-					},
-					services: {
-						ages: [
-							"Middle School",
-							"High School"
-						],
-						positions: [
-							"Infield",
-							"Outfield"
-						],
-						specialties: [
-							"Fielding",
-							"Hitting",
-							"Base running"
-						]
+        function finishSignUp() {
+			// Convert services into arrays
+			if (vm.user && vm.user.sportData.profile.services) {
+				var services = vm.user.sportData.profile.services;
+				services.ages = services.ages.split(',');
+				services.positions = services.positions.split(',');
+				services.specialties = services.specialties.split(',');
+			}
+
+			// Create packages from session input
+			if (vm.session) {
+				var packages = [];
+				for (var type in vm.session) {
+					var counts = [1, 2, 5, 10];
+					for (var i = 0; i < counts.length; i++) {
+						var next = {
+							type: type,
+							sessions: counts[i],
+							price: vm.session[type].rate * counts[i]
+						};
+						packages.push(next);
 					}
 				}
-			};
+				vm.user.sportData.packages = packages;
+			}
+
             authentication.signUp(vm.user)
 				.then(signUpTrainerSuccess)
 				.catch(signUpTrainerFail);
