@@ -15,8 +15,8 @@
      * @memberof Filters
      */
     function capitalizeFirst() {
-        return function(token) {
-            return token.charAt(0).toUpperCase() + token.slice(1);
+        return function(input) {
+            return input.charAt(0).toUpperCase() + input.slice(1);
         };
     }
 })();
