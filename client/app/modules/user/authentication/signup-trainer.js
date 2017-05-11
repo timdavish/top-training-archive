@@ -19,12 +19,30 @@
     function SignUpTrainerController($state, authentication) {
         var vm = this;
 
-		vm.continued = false;
+		vm.continued = true;
 		vm.sports = [
 			"basketball",
 			"baseball",
 			"cross training"
 		];
+		vm.packageOptions = {
+			lengths: ['30', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90'],
+			rates: ['10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100']
+		};
+		vm.session = {
+			private: {
+				length: '55',
+				rate: '50'
+			},
+			small: {
+				length: '60',
+				rate: '30'
+			},
+			large: {
+				length: '65',
+				rate: '25'
+			}
+		};
         vm.emailFormat = "/[^@]+@[^@]+/";
 
 		vm.continueSignUp = continueSignUp;

@@ -181,15 +181,12 @@
 					<div class="col-md-6 no-padding-left">
 	                    <label for="privateSessionLength">Private Training Session Length *</label>
 						<select class="form-control" id="privateSessionLength"
-							ng-model="vm.session.private.length">
+								ng-model="vm.session.private.length">
 							<option style="display:none"></option>
-							<option value="30 minutes">30 minutes</option>
-							<option value="35 minutes">35 minutes</option>
-							<option value="40 minutes">40 minutes</option>
-							<option value="45 minutes">45 minutes</option>
-							<option value="50 minutes">50 minutes</option>
-							<option value="55 minutes">55 minutes</option>
-							<option value="1 hour" ng-selected="true">1 hour</option>
+							<option ng-repeat="length in vm.packageOptions.lengths"
+									value="{{ length }}">
+								{{ length | intoTimeFormat }}
+							</option>
 						</select>
 					</div>
 
@@ -198,13 +195,10 @@
 						<select class="form-control" id="privateSessionRate"
 							ng-model="vm.session.private.rate">
 							<option style="display:none"></option>
-							<option value="20">$20</option>
-							<option value="25">$25</option>
-							<option value="30">$30</option>
-							<option value="35">$35</option>
-							<option value="40">$40</option>
-							<option value="45">$45</option>
-							<option value="50" ng-selected="true">$50</option>
+							<option ng-repeat="rate in vm.packageOptions.rates"
+									value="{{ rate }}">
+								${{ rate }}
+							</option>
 						</select>
 					</div>
                 </div>
@@ -213,15 +207,12 @@
 					<div class="col-md-6 no-padding-left">
 	                    <label for="smallSessionLength">Small Group Training Session Length *</label>
 						<select class="form-control" id="smallSessionLength"
-							ng-model="vm.session.small.length">
+								ng-model="vm.session.small.length">
 							<option style="display:none"></option>
-							<option value="30 minutes">30 minutes</option>
-							<option value="35 minutes">35 minutes</option>
-							<option value="40 minutes">40 minutes</option>
-							<option value="45 minutes">45 minutes</option>
-							<option value="50 minutes">50 minutes</option>
-							<option value="55 minutes">55 minutes</option>
-							<option value="1 hour" ng-selected="true">1 hour</option>
+							<option ng-repeat="length in vm.packageOptions.lengths"
+									value="{{ length }}">
+								{{ length | intoTimeFormat }}
+							</option>
 						</select>
 					</div>
 
@@ -230,13 +221,10 @@
 						<select class="form-control" id="smallSessionRate"
 							ng-model="vm.session.small.rate">
 							<option style="display:none"></option>
-							<option value="20">$20</option>
-							<option value="25">$25</option>
-							<option value="30" ng-selected="true">$30</option>
-							<option value="35">$35</option>
-							<option value="40">$40</option>
-							<option value="45">$45</option>
-							<option value="50">$50</option>
+							<option ng-repeat="rate in vm.packageOptions.rates"
+									value="{{ rate }}">
+								${{ rate }}
+							</option>
 						</select>
 					</div>
                 </div>
@@ -245,15 +233,12 @@
 					<div class="col-md-6 no-padding-left">
 	                    <label for="largeSessionLength">Large Group Training Session Length *</label>
 						<select class="form-control" id="largeSessionLength"
-							ng-model="vm.session.large.length">
+								ng-model="vm.session.large.length">
 							<option style="display:none"></option>
-							<option value="30 minutes">30 minutes</option>
-							<option value="35 minutes">35 minutes</option>
-							<option value="40 minutes">40 minutes</option>
-							<option value="45 minutes">45 minutes</option>
-							<option value="50 minutes">50 minutes</option>
-							<option value="55 minutes">55 minutes</option>
-							<option value="1 hour" ng-selected="true">1 hour</option>
+							<option ng-repeat="length in vm.packageOptions.lengths"
+									value="{{ length }}">
+								{{ length | intoTimeFormat }}
+							</option>
 						</select>
 					</div>
 
@@ -262,16 +247,24 @@
 						<select class="form-control" id="largeSessionRate"
 							ng-model="vm.session.large.rate">
 							<option style="display:none"></option>
-							<option value="20" ng-selected="true">$20</option>
-							<option value="25">$25</option>
-							<option value="30">$30</option>
-							<option value="35">$35</option>
-							<option value="40">$40</option>
-							<option value="45">$45</option>
-							<option value="50">$50</option>
+							<option ng-repeat="rate in vm.packageOptions.rates"
+									value="{{ rate }}">
+								${{ rate }}
+							</option>
 						</select>
 					</div>
                 </div>
+				<!-- End Packages -->
+
+				<!-- Locations -->
+				<div class="row">
+					<div class="col-md-12">
+						<br />
+						<h2>Enter Your Training Locations</h2>
+						<br />
+					</div>
+				</div>
+				<!-- End Locations -->
 
 				<!-- Apply (Submit) -->
 				<div class="col-md-12">
