@@ -26,6 +26,12 @@ var PackageSchema = new Schema({
 		default: 1,
 		required: true
 	},
+	length: {
+		type: String,
+		default: '1 hour',
+		required: true,
+		lowercase: true
+	},
 	price: { // Total
 		type: Number,
 		default: 0,
