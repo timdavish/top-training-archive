@@ -78,6 +78,7 @@
 					review.date_formatted = moment(review.date).format('MMMM Do, YYYY');
 				});
 			}
+			console.log(vm.model);
 		}
 
 		/**
