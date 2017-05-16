@@ -25,6 +25,7 @@
         vm.save = save;
         vm.cancel = cancel;
 		vm.addLocation = addLocation;
+		vm.removeLocation = removeLocation;
 
         /* Functions */
 
@@ -66,6 +67,16 @@
 				// Null out the field
 				vm.newLocation = null;
 			}
+		}
+
+		function removeLocation(priority) {
+			// Remove the location
+			vm.tempLocations.splice(priority - 1, 1);
+
+			// Reset priorities
+			vm.tempLocations.forEach(function(location, index) {
+				location.priority = index + 1;
+			});
 		}
     }
 })();
