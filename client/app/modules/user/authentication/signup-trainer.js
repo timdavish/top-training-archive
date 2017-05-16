@@ -9,14 +9,14 @@
         .module('user.authentication')
         .controller('SignUpTrainerController', SignUpTrainerController);
 
-    SignUpTrainerController.$inject = ['$state', 'authentication'];
+    SignUpTrainerController.$inject = ['$state', 'authentication', 'location'];
 
     /**
      * @namespace SignUpTrainerController
      * @desc SignUpTrainer controller
      * @memberof Controllers
      */
-    function SignUpTrainerController($state, authentication) {
+    function SignUpTrainerController($state, authentication, location) {
         var vm = this;
 
 		vm.continued = true;
@@ -29,9 +29,10 @@
 			lengths: ['30', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90'],
 			rates: ['10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100']
 		};
+
 		vm.session = {
 			private: {
-				length: '55',
+				length: '60',
 				rate: '50'
 			},
 			small: {
@@ -39,14 +40,18 @@
 				rate: '30'
 			},
 			large: {
-				length: '65',
+				length: '60',
 				rate: '25'
 			}
 		};
+
+        vm.locations = [];
         vm.emailFormat = "/[^@]+@[^@]+/";
 
 		vm.continueSignUp = continueSignUp;
         vm.finishSignUp = finishSignUp;
+		vm.addLocation = addLocation;
+		vm.removeLocation = removeLocation;
 
         /* Functions */
 
@@ -94,6 +99,10 @@
 				vm.user.sportData.packages = packages;
 			}
 
+			vm.user.sportData.locations = vm.locations;
+
+			console.log(vm.user);
+
             authentication.signUp(vm.user)
 				.then(signUpTrainerSuccess)
 				.catch(signUpTrainerFail);
@@ -108,5 +117,38 @@
 				vm.error = error;
 			}
         }
+
+		function addLocation() {
+			if (vm.newLocation) {
+				location.geocode(vm.newLocation)
+					.then(geocodeSuccess);
+			}
+
+			function geocodeSuccess(data) {
+				var newLocation = {
+					priority: vm.locations.length + 1,
+					formatted_address: vm.newLocation,
+					geometry: {
+						type: "Point",
+						coordinates: [data.long, data.lat]
+					}
+				};
+
+				vm.locations.push(newLocation);
+
+				// Null out the field
+				vm.newLocation = null;
+			}
+		}
+
+		function removeLocation(priority) {
+			// Remove the location
+			vm.locations.splice(priority - 1, 1);
+
+			// Reset priorities
+			vm.locations.forEach(function(location, index) {
+				location.priority = index + 1;
+			});
+		}
     }
 })();

@@ -97,7 +97,8 @@
 					<div class="col-md-6 no-padding-left">
 	                    <label for="sport">What Sport Do You Want To Train? *</label>
 						<select class="form-control" id="sport"
-							ng-model="vm.user.sportData.sport">
+							ng-model="vm.user.sportData.sport"
+							required="required">
 							<option ng-repeat="sport in vm.sports"
 									value="{{ sport }}">
 								{{ sport | capitalizeFirstAll }}
@@ -118,7 +119,8 @@
                     <label for="summary">Summary *</label>
 					<textarea class="form-control" rows="3"
 						id="summary" placeholder="A passionate coach with a true love for baseball. Specializing in hitting, fielding, fundamental drills, and mental focus."
-						ng-model="vm.user.sportData.profile.summary">
+						ng-model="vm.user.sportData.profile.summary"
+						required="required">
 					</textarea>
                 </div>
 
@@ -126,7 +128,7 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<label for="experience">Experience *</label>
-						<input type="number" class="form-control"
+						<input type="number" class="form-control" required="required"
 							id="experience" placeholder="# of years of experience"
 							ng-model="vm.user.sportData.profile.credentials.experience">
 						</input>
@@ -134,7 +136,7 @@
 
 					<div class="col-md-6">
 						<label for="school">School *</label>
-						<input type="text" class="form-control"
+						<input type="text" class="form-control" required="required"
 							id="school" placeholder="College / University"
 							ng-model="vm.user.sportData.profile.credentials.school">
 						</input>
@@ -145,7 +147,7 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<label for="ages">Ages *</label>
-						<input type="text" class="form-control"
+						<input type="text" class="form-control" required="required"
 							id="ages" placeholder="Age groups, separated by commas"
 							ng-model="vm.user.sportData.profile.services.ages">
 						</input>
@@ -153,7 +155,7 @@
 
 					<div class="col-md-6">
 						<label for="positions">Positions *</label>
-						<input type="text" class="form-control"
+						<input type="text" class="form-control" required="required"
 							id="positions" placeholder="Positions, separated by commas"
 							ng-model="vm.user.sportData.profile.services.positions">
 						</input>
@@ -161,7 +163,7 @@
 
 					<div class="col-md-6">
 						<label for="specialties">Specialties *</label>
-						<input type="text" class="form-control"
+						<input type="text" class="form-control" required="required"
 							id="specialties" placeholder="Specialties, separated by commas"
 							ng-model="vm.user.sportData.profile.services.specialties">
 						</input>
@@ -262,6 +264,35 @@
 						<br />
 						<h2>Enter Your Training Locations</h2>
 						<br />
+						<map zoom-to-include-markers="auto"
+							 center="[37.0902, -95.7129]" zoom="3"
+							 maximum-zoom="12" minimum-zoom="3">
+							<marker ng-repeat="location in vm.locations"
+								position="{{location.geometry.coordinates[1]}},{{location.geometry.coordinates[0]}}"
+								title="{{location.formatted_address}}"
+								label="'{{location.priority}}'">
+							</marker>
+						</map>
+						<div ng-repeat="location in vm.locations | orderBy: '+priority'">
+							<p>
+								{{ location.priority }}: {{ location.formatted_address }}
+								<a ng-click="vm.removeLocation(location.priority)">
+						            <i class="glyphicon glyphicon-remove"></i>
+						        </a>
+							</p>
+						</div>
+
+						<h4>Add New Location</h4>
+						<input class="form-control input-lg input-search" id="location"
+							ng-model="vm.newLocation"
+							google-auto-complete
+							type="text" placeholder="Location">
+						</input>
+
+						<input type="button" class="btn btn-primary"
+							   value="Add new location"
+							   ng-click="vm.addLocation()">
+						</input>
 					</div>
 				</div>
 				<!-- End Locations -->
