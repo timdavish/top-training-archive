@@ -16,7 +16,7 @@ var PackageSchemaOptions = { _id : false };
 var PackageSchema = new Schema({
     type: {
         type: String,
-		enum: ['private', 'small', 'group'],
+		enum: ['private', 'small', 'large'],
         required: true,
 		lowercase: true
     },

@@ -72,15 +72,17 @@ router.post('/signUp', function(req, res, next) {
 		return res.status(400).json({ message: 'Something went wrong.' });
 	}
 
-    // General user properties
-	handleGeneralUser();
+	if (user) {
+	    // General user properties
+		handleGeneralUser();
 
-    // Save the user in the database, set their session token
-    user.save(function(err) {
-        if (err) { return next(err); }
+	    // Save the user in the database, set their session token
+	    user.save(function(err) {
+	        if (err) { return next(err); }
 
-        return res.json({ token: user.generateJWT() });
-    });
+	        return res.json({ token: user.generateJWT() });
+	    });
+	}
 
 	/* Function */
 
