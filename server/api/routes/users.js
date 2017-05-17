@@ -182,6 +182,30 @@ router.post('/getTrainers', function(req, res, next) {
 // (GET) Get a single user by id
 router.get('/:user', function(req, res) {
     res.json(req.user);
+
+
+});
+
+// (PUT) Update a single user by id
+router.put('/:user', function(req, res, next) {
+	var user = req.user;
+	var updatedUser = req.body;
+
+	// Update all fields
+	user.contact = updatedUser.contact;
+	user.data = updatedUser.data;
+
+	if (user.usertype === 'Trainer') {
+		user.sports = updatedUser.sports;
+		user.rating = updatedUser.rating;
+	}
+
+	user.save(function(err) {
+		if (err) { return next(err); }
+
+		// Re-generate the user's JWT
+		res.json({ token: user.generateJWT() });
+	});
 });
 
 // (GET) Get a single user by id

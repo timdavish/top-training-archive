@@ -19,7 +19,7 @@
     function SignUpTrainerController($state, authentication, location) {
         var vm = this;
 
-		vm.continued = true;
+		vm.continued = false;
 		vm.sports = [
 			"basketball",
 			"baseball",

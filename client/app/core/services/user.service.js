@@ -70,7 +70,7 @@
 
 		/**
          * @namespace create
-         * @desc Gets a user by email
+         * @desc Creates a user
 		 * @param {Object} user The data to create a user with
 		 * @return {Promise} Resolved/rejected promise
          * @memberof Services.user
@@ -83,20 +83,20 @@
 
 		/**
          * @namespace update
-         * @desc Gets a user by email
+         * @desc Updates a user
 		 * @param {Object} user The data to update a user with
 		 * @return {Promise} Resolved/rejected promise
          * @memberof Services.user
          */
         function update(user) {
-			return $http.put('/users/' + user.id, user)
+			return $http.put('/users/' + user._id, user)
 				.then(handleSuccess)
 				.catch(handleError);
         }
 
 		/**
-         * @namespace delete
-         * @desc Gets a user by email
+         * @namespace remove
+         * @desc Deletes a user
 		 * @param {Integer} id The id of user to delete
 		 * @return {Promise} Resolved/rejected promise
          * @memberof Services.user
