@@ -46,6 +46,16 @@ router.param('email', function(req, res, next, email) {
     });
 });
 
+// (GET) Get all users
+router.get('/', function(req, res, next) {
+	User.find(function(err, users) {
+		if (err) { return next(err); }
+		if (!users) {}
+
+		res.json(users);
+	});
+});
+
 // (POST) New user sign up
 router.post('/signUp', function(req, res, next) {
 	var userData = req.body;
@@ -182,8 +192,6 @@ router.post('/getTrainers', function(req, res, next) {
 // (GET) Get a single user by id
 router.get('/:user', function(req, res) {
     res.json(req.user);
-
-
 });
 
 // (PUT) Update a single user by id
@@ -208,7 +216,16 @@ router.put('/:user', function(req, res, next) {
 	});
 });
 
-// (GET) Get a single user by id
+// (PUT) Flip a trainer's approved status
+router.put('/flipApproved/:user', function(req, res, next) {
+	req.user.flipApproved(function(err, user) {
+		if (err) { return next(err); }
+
+		res.json(user);
+	});
+});
+
+// (GET) Get a single user by email
 router.get('/getByEmail/:email', function(req, res) {
 	res.json(req.user);
 });

@@ -194,6 +194,12 @@ UserSchema.methods.generateJWT = function() {
     }, secret);
 };
 
+// Switch a trainer's approval
+TrainerSchema.methods.flipApproved = function(callback) {
+	this.approved = !this.approved;
+	this.save(callback);
+};
+
 // Set mongoose models
 var User = mongoose.model('User', UserSchema);
 User.discriminator('Admin', AdminSchema);

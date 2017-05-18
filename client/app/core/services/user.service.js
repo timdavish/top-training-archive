@@ -23,6 +23,7 @@
 			getByEmail: getByEmail,
 			create: create,
 			update: update,
+			flipApproved: flipApproved,
 			remove: remove
         };
 
@@ -93,6 +94,19 @@
 				.then(handleSuccess)
 				.catch(handleError);
         }
+
+		/**
+         * @namespace flipApproved
+         * @desc Flips a trainer's approved status
+		 * @param {String} id The user id to flip approved status for
+		 * @return {Promise} Resolved/rejected promise
+         * @memberof Services.user
+         */
+		 function flipApproved(id) {
+			 return $http.put('/users/flipApproved/' + id)
+			 	.then(handleSuccess)
+				.catch(handleError);
+		 }
 
 		/**
          * @namespace remove

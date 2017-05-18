@@ -1,0 +1,149 @@
+<div class="container">
+
+	<h1>Admin Dashboard</h1>
+
+	<!-- Admins -->
+	<h2>Admins</h2>
+	<div class="row">
+		<div class="col-md-3">
+			<h4>Contact</h4>
+		</div>
+		<div class="col-md-5">
+			<h4>Action Log</h4>
+		</div>
+		<div class="col-md-4">
+			<h4>Data</h4>
+		</div>
+	</div>
+	<div ng-repeat="admin in vm.admins"
+		 class="row">
+		<hr />
+
+		<!-- Contact -->
+		<div class="col-md-3">
+	 		<span>{{ admin.contact.firstname }} {{ admin.contact.lastname }}</span>
+			<br />
+			<span>{{ admin.contact.email }}</span>
+	 	</div>
+		<!-- End Contact -->
+
+		<!-- Action Log -->
+		<div class="col-md-5">
+			<span>Actions: {{ admin.actions.length }}</span>
+			<br />
+			<span><a href>View Log</a></span>
+		</div>
+		<!-- End Action Log -->
+
+		<!-- Data -->
+		<div class="col-md-4">
+			<span>Last active: {{ vm.formatDate(admin.data.lastActive) }}</span>
+			<br />
+			<span>Created: {{ vm.formatDate(admin.data.created) }}</span>
+		</div>
+		<!-- End Data -->
+
+		<hr />
+	</div>
+	<!-- End Admins -->
+
+	<!-- Trainers -->
+	<h2>Trainers ({{ vm.trainers.length }} users)</h2>
+	<div class="row">
+		<div class="col-md-3">
+			<h4>Contact</h4>
+		</div>
+		<div class="col-md-3">
+			<h4>Approved Status</h4>
+		</div>
+		<div class="col-md-2">
+			<h4>Rating</h4>
+		</div>
+		<div class="col-md-4">
+			<h4>Data</h4>
+		</div>
+	</div>
+	<div ng-repeat="trainer in vm.trainers"
+		 class="row">
+		<hr />
+
+		<!-- Contact -->
+		<div class="col-md-3">
+	 		<span>{{ trainer.contact.firstname }} {{ trainer.contact.lastname }}</span>
+			<br />
+			<span>{{ trainer.contact.email }}</span>
+	 	</div>
+		<!-- End Contact -->
+
+		<!-- Approval Status -->
+		<div class="col-md-3">
+			<span>{{ trainer.approved ? 'Approved' : 'Not approved' }}</span>
+			<br />
+			<span><a href ng-click="vm.flipApproved(trainer)">Change</a></span>
+		</div>
+		<!-- End Approval Status -->
+
+		<!-- Rating -->
+		<div class="col-md-2">
+			<span>Average: {{ trainer.rating.average }}</span>
+			<br />
+			<span>Review count: {{ trainer.rating.count }}</span>
+		</div>
+		<!-- End Rating -->
+
+		<!-- Data -->
+		<div class="col-md-4">
+			<span>Last active: {{ vm.formatDate(trainer.data.lastActive) }}</span>
+			<br />
+			<span>Created: {{ vm.formatDate(trainer.data.created) }}</span>
+		</div>
+		<!-- End Data -->
+
+		<hr />
+	</div>
+	<!-- End Trainers -->
+
+	<!-- Clients -->
+	<h2>Clients ({{ vm.clients.length }} users)</h2>
+	<div class="row">
+		<div class="col-md-3">
+			<h4>Contact</h4>
+		</div>
+		<div class="col-md-5">
+
+		</div>
+		<div class="col-md-4">
+			<h4>Data</h4>
+		</div>
+	</div>
+	<div ng-repeat="client in vm.clients"
+		 class="row">
+		<hr />
+
+		<!-- Contact -->
+		<div class="col-md-3">
+	 		<span>{{ client.contact.firstname }} {{ client.contact.lastname }}</span>
+			<br />
+			<span>{{ client.contact.email }}</span>
+	 	</div>
+		<!-- End Contact -->
+
+		<!-- Data -->
+		<div class="col-md-5">
+
+		</div>
+		<!-- End Data -->
+
+		<!-- Data -->
+		<div class="col-md-4">
+			<span>Last active: {{ vm.formatDate(client.data.lastActive) }}</span>
+			<br />
+			<span>Created: {{ vm.formatDate(client.data.created) }}</span>
+		</div>
+		<!-- End Data -->
+
+		<hr />
+	</div>
+	<!-- End Clients -->
+
+</div>
