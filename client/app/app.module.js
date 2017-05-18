@@ -15,6 +15,7 @@
         'app.core',
 
         /* Feature Areas */
+		'app.admin',
         'app.calendar',
         'app.checkout',
         'app.event',

@@ -10,38 +10,31 @@
             <div class="modal-body">
 
                 <form class="form-horizontal" role="form">
-					<div class="form-group row" ng-repeat="location in vm.tempLocations | orderBy: '+priority'">
-						<hr />
 
-						<!-- Priority -->
-						<label for="priority" class="col-sm-2 control-label">Priority:</label>
-                        <div class="col-sm-4">
-                            <input type="number" class="form-control"
-                                   id="priority" placeholder=""
-                                   ng-model="location.priority">
-                            </input>
-                        </div>
+					<br />
+					<h2>Enter Your Training Locations</h2>
+					<br />
+					<div ng-repeat="location in vm.tempLocations | orderBy: '+priority'">
+						<p>
+							{{ location.priority }}: {{ location.formatted_address }}
+							<a ng-click="vm.removeLocation(location.priority)">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</p>
+					</div>
 
-						<!-- Priority -->
-						<label for="location" class="col-sm-2 control-label">Location:</label>
-                        <div class="col-sm-4">
-							<input class="form-control input-lg input-search" id="location"
-								ng-model="location.formatted_address"
-								google-auto-complete
-								type="text" placeholder="Location">
-							</input>
-                        </div>
-
-						<hr />
-                    </div>
-
+					<h4>Add New Location</h4>
 					<input class="form-control input-lg input-search" id="location"
 						ng-model="vm.newLocation"
 						google-auto-complete
 						type="text" placeholder="Location">
 					</input>
 
-					<button class="btn btn-primary" ng-click="vm.addLocation()">Add new location</button>
+					<input type="button" class="btn btn-primary"
+						   value="Add new location"
+						   ng-click="vm.addLocation()">
+					</input>
+
                 </form>
 
             </div>

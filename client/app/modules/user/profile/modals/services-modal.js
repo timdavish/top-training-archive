@@ -34,9 +34,11 @@
                 status: {
                     save: true
                 },
-                ages: vm.ages.split(','),
-                positions: vm.positions.split(','),
-                specialties: vm.specialties.split(',')
+				services: {
+	                ages: vm.ages.split(','),
+	                positions: vm.positions.split(','),
+	                specialties: vm.specialties.split(',')
+				}
             }, 0);
         }
 

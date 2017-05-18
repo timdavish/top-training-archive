@@ -16,7 +16,8 @@ require('./models/order/Receipt'); // Receipt model
 require('./models/sport/Sport'); // Sport model
 require('./models/user/User'); // User model
 mongoose.Promise = global.Promise; // Adjust mongoose promise
-mongoose.connect('mongodb://localhost/TT');
+mongoose.connect('mongodb://ttremote:ttremote@ec2-52-37-23-14.us-west-2.compute.amazonaws.com:27017/TT');
+// mongoose.connect('mongodb://localhost/TT');
 
 // Password authentication
 var passport = require('passport');

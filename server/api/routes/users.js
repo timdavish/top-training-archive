@@ -46,6 +46,16 @@ router.param('email', function(req, res, next, email) {
     });
 });
 
+// (GET) Get all users
+router.get('/', function(req, res, next) {
+	User.find(function(err, users) {
+		if (err) { return next(err); }
+		if (!users) {}
+
+		res.json(users);
+	});
+});
+
 // (POST) New user sign up
 router.post('/signUp', function(req, res, next) {
 	var userData = req.body;
@@ -72,15 +82,17 @@ router.post('/signUp', function(req, res, next) {
 		return res.status(400).json({ message: 'Something went wrong.' });
 	}
 
-    // General user properties
-	handleGeneralUser();
+	if (user) {
+	    // General user properties
+		handleGeneralUser();
 
-    // Save the user in the database, set their session token
-    user.save(function(err) {
-        if (err) { return next(err); }
+	    // Save the user in the database, set their session token
+	    user.save(function(err) {
+	        if (err) { return next(err); }
 
-        return res.json({ token: user.generateJWT() });
-    });
+	        return res.json({ token: user.generateJWT() });
+	    });
+	}
 
 	/* Function */
 
@@ -182,7 +194,38 @@ router.get('/:user', function(req, res) {
     res.json(req.user);
 });
 
-// (GET) Get a single user by id
+// (PUT) Update a single user by id
+router.put('/:user', function(req, res, next) {
+	var user = req.user;
+	var updatedUser = req.body;
+
+	// Update all fields
+	user.contact = updatedUser.contact;
+	user.data = updatedUser.data;
+
+	if (user.usertype === 'Trainer') {
+		user.sports = updatedUser.sports;
+		user.rating = updatedUser.rating;
+	}
+
+	user.save(function(err) {
+		if (err) { return next(err); }
+
+		// Re-generate the user's JWT
+		res.json({ token: user.generateJWT() });
+	});
+});
+
+// (PUT) Flip a trainer's approved status
+router.put('/flipApproved/:user', function(req, res, next) {
+	req.user.flipApproved(function(err, user) {
+		if (err) { return next(err); }
+
+		res.json(user);
+	});
+});
+
+// (GET) Get a single user by email
 router.get('/getByEmail/:email', function(req, res) {
 	res.json(req.user);
 });

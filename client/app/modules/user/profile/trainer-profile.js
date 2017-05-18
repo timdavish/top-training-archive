@@ -9,14 +9,14 @@
         .module('user.profile')
         .controller('TrainerProfileController', TrainerProfileController);
 
-    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'model', 'searchService', 'location', 'modal', 'moment', 'logger'];
+    TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'user', 'model', 'searchService', 'location', 'modal', 'moment', 'logger'];
 
     /**
      * @namespace TrainerProfileController
      * @desc Trainer profile controller
      * @memberof Controllers
      */
-    function TrainerProfileController($q, $state, authentication, model, searchService, location, modal, moment, logger) {
+    function TrainerProfileController($q, $state, authentication, user, model, searchService, location, modal, moment, logger) {
         var vm = this;
 
 		// Search determines whether this profile is viewed from search or not
@@ -73,7 +73,7 @@
 			vm.model = model;
 
 			// Translate review dates
-			if (vm.model) {
+			if (vm.model.rating) {
 				vm.model.rating.reviews.forEach(function(review) {
 					review.date_formatted = moment(review.date).format('MMMM Do, YYYY');
 				});
@@ -207,19 +207,17 @@
 			modal.close.then(function(result) {
 				if (result.status.save) {
 
-					if (pane === vm.panes.summary) {
-						data[pane] = result[pane];
-					} else if (pane === vm.panes.locations) {
-						data[pane] = result[pane];
-					} else if (pane === vm.panes.packages) {
-						data[pane] = result[pane];
-					} else if (pane === vm.panes.credentials) {
-						data[pane] = result[pane];
-					} else if (pane === vm.panes.services) {
-						data.services.ages = result.ages;
-						data.services.positions = result.positions;
-						data.services.specialties = result.specialties;
-					}
+					data[pane] = result[pane];
+
+					user.update(vm.model)
+						.then(function(result) {
+							// Save user's token with new data
+							authentication.saveToken(result.token);
+						})
+						.catch(function(error) {
+							console.log('Error updating user', error);
+						});
+
 
 				}
 			})

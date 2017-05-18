@@ -16,7 +16,7 @@ var PackageSchemaOptions = { _id : false };
 var PackageSchema = new Schema({
     type: {
         type: String,
-		enum: ['private', 'small', 'group'],
+		enum: ['private', 'small', 'large'],
         required: true,
 		lowercase: true
     },
@@ -25,6 +25,12 @@ var PackageSchema = new Schema({
 		enum: [1, 2, 5, 10],
 		default: 1,
 		required: true
+	},
+	length: {
+		type: String,
+		default: '1 hour',
+		required: true,
+		lowercase: true
 	},
 	price: { // Total
 		type: Number,

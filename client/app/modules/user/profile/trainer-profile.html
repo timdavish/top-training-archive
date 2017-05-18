@@ -26,7 +26,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
-                               ng-click="vm.openModal(vm.panes.summary, set)"
+                               ng-click="vm.openModal(vm.panes.summary, set.profile)"
                                ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
@@ -73,7 +73,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
-                               ng-click="vm.openModal(vm.panes.locations, vm.model.trainerInfo)"
+                               ng-click="vm.openModal(vm.panes.locations, set)"
                                ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
@@ -83,7 +83,9 @@
                         </div>
 
                         <div class="pane-content">
-							<map zoom-to-include-markers="true">
+							<map zoom-to-include-markers="auto"
+								 center="[37.0902, -95.7129]" zoom="3"
+								 maximum-zoom="12" minimum-zoom="3">
 								<marker ng-repeat="location in set.locations"
 									position="{{location.geometry.coordinates[1]}},{{location.geometry.coordinates[0]}}"
 									title="{{location.formatted_address}}"
@@ -138,7 +140,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
-                               ng-click="vm.openModal(vm.panes.credentials, set)"
+                               ng-click="vm.openModal(vm.panes.credentials, set.profile)"
                                ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
@@ -179,7 +181,7 @@
                         <div class="pane-header">
                             <!-- Edit button -->
                             <a href class="floatR" title="Edit this pane"
-                               ng-click="vm.openModal(vm.panes.services, set)"
+                               ng-click="vm.openModal(vm.panes.services, set.profile)"
                                ng-if="!vm.search">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>

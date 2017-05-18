@@ -1,6 +1,7 @@
 /**
  * Users mongoose models
  * @member {User} Uses UserSchema
+ * @member {Admin} Uses AdminSchema, built on UserSchema
  * @member {Client} Uses ClientSchema, built on UserSchema
  * @member {Trainer} Uses TrainerSchema, built on UserSchema
  */
@@ -14,6 +15,7 @@ var crypto = require('crypto'); // Used for generating password hash
 var jwt = require('jsonwebtoken'); // Used for generating tokens
 
 // Embedded documents
+var Action = require('./lib/Action');
 var Location = require('./lib/Location');
 var Package = require('./lib/Package');
 var Review = require('./lib/Review');
@@ -61,6 +63,14 @@ var UserSchema = new Schema({
         }
     }
 }, UserSchemaOptions);
+
+/**
+ * @name AdminSchema
+ * @desc Defines admin user schema, only admins have this data
+ */
+var AdminSchema = new Schema({
+	actions: [Action]
+});
 
 /**
  * @name ClientSchema
@@ -184,7 +194,14 @@ UserSchema.methods.generateJWT = function() {
     }, secret);
 };
 
+// Switch a trainer's approval
+TrainerSchema.methods.flipApproved = function(callback) {
+	this.approved = !this.approved;
+	this.save(callback);
+};
+
 // Set mongoose models
 var User = mongoose.model('User', UserSchema);
+User.discriminator('Admin', AdminSchema);
 User.discriminator('Client', ClientSchema);
 User.discriminator('Trainer', TrainerSchema);

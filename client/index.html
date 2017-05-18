@@ -52,7 +52,7 @@
         <script src="/bower_components/rrule/lib/rrule.js"></script>
 
         <!-- Google Maps -->
-        <script src="https://maps.googleapis.com/maps/api/js?libraries=places,visualization&key=AIzaSyAyLamwtoSIwmfGd1xXJpH3MOpWTancJpA"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places,visualization&key=AIzaSyC9Z9C7BKbBVCQutt_kAJ9nlQsqNykCT_M"></script>
         <script src="/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
         <!-- endinject -->
 
@@ -82,8 +82,10 @@
         <script src="/client/app/core/directives/ng-enter.directive.js"></script>
         <script src="/client/app/core/directives/star-rating.directive.js"></script>
         <!-- Filters -->
-        <script src="/client/app/core/filters/number-round.filter.js"></script>
         <script src="/client/app/core/filters/capitalize-first.filter.js"></script>
+		<script src="/client/app/core/filters/capitalize-first-all.filter.js"></script>
+        <script src="/client/app/core/filters/into-time-format.filter.js"></script>
+        <script src="/client/app/core/filters/number-round.filter.js"></script>
 
         <!-- Blocks Module -->
         <script src="/client/app/blocks/blocks.module.js"></script>
@@ -98,6 +100,11 @@
         <script src="/client/app/blocks/router/router.monitor.js"></script>
 
         <!-- Feature Modules -->
+		<!-- Admin Module -->
+        <script src="/client/app/modules/admin/admin.module.js"></script>
+        <script src="/client/app/modules/admin/admin.routes.js"></script>
+        <script src="/client/app/modules/admin/dashboard.js"></script>
+
         <!-- Calendar Module -->
         <script src="/client/app/modules/calendar/calendar.module.js"></script>
         <script src="/client/app/modules/calendar/calendar.config.js"></script>
