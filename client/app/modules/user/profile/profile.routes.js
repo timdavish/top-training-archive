@@ -39,8 +39,14 @@
                     requiresLoggedIn: true, // Require login at this state
 					search: false,
 					resolve: {
-                        model: ['authentication', function(authentication) {
-							return authentication.currentUser();
+                        model: ['$state', 'authentication', function($state, authentication) {
+							var currentUser = authentication.currentUser();
+
+							if (currentUser.usertype === 'Trainer') {
+								return authentication.currentUser();
+							} else {
+								$state.go('home');
+							}
                         }]
                     }
                 }

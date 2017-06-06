@@ -129,7 +129,7 @@ var TrainerSchema = new Schema({
 	approved: {
 		type: Boolean,
 		required: true,
-		default: true
+		default: false
 	},
 	sports: [{
 		_id: false,

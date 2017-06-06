@@ -37,7 +37,7 @@ module.exports = function(config) {
         ],
 
         // List of files to exclude
-        exclude: [],
+        exclude: ['client/app/modules/calendar/*.js'],
 
         // Preprocess matching files before serving them to the browser
         preprocessors: {},

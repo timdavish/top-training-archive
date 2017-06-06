@@ -7,8 +7,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var PackageSchemaOptions = { _id : false };
-
 /**
  * @name PackageSchema
  * @desc Defines package schema
@@ -37,7 +35,7 @@ var PackageSchema = new Schema({
 		default: 0,
 		required: true
 	}
-}, PackageSchemaOptions);
+});
 
 // Export the schema
 module.exports = PackageSchema;
