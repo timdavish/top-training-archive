@@ -16,7 +16,7 @@
 
         /* Feature Areas */
 		'app.admin',
-        'app.calendar',
+        // 'app.calendar',
         'app.checkout',
         'app.event',
         'app.layout',

@@ -19,7 +19,8 @@
                 <!-- Logged in -->
 				<li ng-show="vm.isLoggedIn() && vm.currentUser().usertype === 'Admin'"><a href="/#/admin/dashboard">Dashboard</a></li>
                 <li ng-show="vm.isLoggedIn()"><a>Welcome, {{ vm.currentUser().contact.firstname }}</a></li>
-                <li ng-show="vm.isLoggedIn()"><a href="/#/profile/trainer">Profile</a></li>
+				<li ng-show="vm.isLoggedIn() && vm.currentUser().usertype === 'Trainer'"><a href="/#/profile/trainer">Profile</a></li>
+				<!-- <li ng-show="vm.isLoggedIn() && vm.currentUser().usertype === 'Client'"><a href="/#/profile/client">Profile</a></li> -->
                 <li ng-show="vm.isLoggedIn()"><a href="" ng-click="vm.logOut()">Log Out</a></li>
                 <!-- /Logged in -->
 
