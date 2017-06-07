@@ -29,7 +29,7 @@
             </div>
 
             <!-- Registration form -->
-            <form name="registrationForm" ng-submit="vm.continueSignUp()"
+            <form name="registrationForm" ng-submit="vm.changeContinued()"
 				  ng-if="!vm.continued"
                   class="col-md-12 row fix-form">
 
@@ -296,6 +296,13 @@
 					</div>
 				</div>
 				<!-- End Locations -->
+
+				<!-- Go Back -->
+				<div class="col-md-12">
+                    <input type="button" class="btn btn-primary btn-md"
+                            value="Go Back" ng-click="vm.changeContinued()" ng-disabled="">
+                    </input>
+                </div>
 
 				<!-- Apply (Submit) -->
 				<div class="col-md-12">

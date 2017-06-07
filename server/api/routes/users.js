@@ -114,6 +114,7 @@ router.post('/signUp', function(req, res, next) {
 	function handleTrainerUser() {
 		if (userData.sportData) {
 			user = new Trainer();
+			user.approved = false;
 			user.sports.push(userData.sportData);
 
 			Sport.update(

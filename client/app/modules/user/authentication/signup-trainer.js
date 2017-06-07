@@ -48,7 +48,7 @@
         vm.locations = [];
         vm.emailFormat = "/[^@]+@[^@]+/";
 
-		vm.continueSignUp = continueSignUp;
+		vm.changeContinued = changeContinued;
         vm.finishSignUp = finishSignUp;
 		vm.addLocation = addLocation;
 		vm.removeLocation = removeLocation;
@@ -60,9 +60,9 @@
          * @desc Continues to the next part of sign up
          * @memberof Controllers.SignUpTrainerController
          */
-		 function continueSignUp() {
+		 function changeContinued() {
 			 // Switch to next form
-			 vm.continued = true;
+			 vm.continued = !vm.continued;
 
 			 // Add user data
 			 vm.user.usertype = "trainer";
