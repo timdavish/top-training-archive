@@ -6,7 +6,7 @@
     'use strict'; // Strict mode
 
     angular
-        .module('user.profile')
+        .module('profile.trainer')
         .controller('TrainerProfileController', TrainerProfileController);
 
     TrainerProfileController.$inject = ['$q', '$state', 'authentication', 'user', 'model', 'searchService', 'location', 'modal', 'moment', 'logger'];

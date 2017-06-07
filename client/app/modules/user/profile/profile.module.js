@@ -5,5 +5,8 @@
 (function() { // IIFE structure
     'use strict'; // Strict mode
 
-    angular.module('user.profile', []);
+    angular.module('user.profile', [
+		'profile.client',
+		'profile.trainer'
+	]);
 })();
