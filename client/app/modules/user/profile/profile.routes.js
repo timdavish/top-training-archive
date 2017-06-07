@@ -50,6 +50,29 @@
                         }]
                     }
                 }
+            },
+			{
+                state: 'client-profile',
+                config: {
+                    url: '/profile/client',
+                    templateUrl: 'client/app/modules/user/profile/client-profile.html',
+                    controller: 'ClientProfileController',
+                    controllerAs: 'vm',
+                    title: 'Profile',
+                    wantToReturn: true, // Return to this state after login
+                    requiresLoggedIn: true, // Require login at this state
+					resolve: {
+                        model: ['$state', 'authentication', function($state, authentication) {
+							var currentUser = authentication.currentUser();
+
+							if (currentUser.usertype === 'Client') {
+								return authentication.currentUser();
+							} else {
+								$state.go('home');
+							}
+                        }]
+                    }
+                }
             }
         ];
     }
