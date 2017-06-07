@@ -162,6 +162,7 @@ router.post('/getTrainers', function(req, res, next) {
         { $geoNear: { // calculates and sorts by distance
             query: {
                 usertype: 'Trainer', // trainers only
+				approved: true, // Approved only
                 'sports.sport': searchParams.sport // trainers who train this sport only
             },
             near: {
