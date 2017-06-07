@@ -7,7 +7,7 @@
             <div ng-repeat="(filterKey, properties) in vm.filter"
                  class="filters">
                 <div ng-class="vm.filter[filterKey]['active'] ? 'filterActive' : 'filterInactive'"
-                     ng-style="{'background-image': 'url(public/images/filters/{{filterKey}}.svg)'}"
+                     ng-style="{'background-image': 'url(client/images/filters/{{filterKey}}.svg)'}"
                      ng-click="vm.updateFilter(filterKey)"
                      class="filterImage">
                 </div>
